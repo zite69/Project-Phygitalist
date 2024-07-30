@@ -1,0 +1,32 @@
+{% load static %}
+{% load category_tags %}
+
+<div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="header-wrap">
+                    {% include "oscar/partials/brand.html" %}
+                    <div class="header-right">
+                        <div class="search-style-2">
+                                <select class="select-active">
+                                    {% category_tree as tree_categories %}
+                                    {% for category, info in tree_categories %}
+                                    <option>{{ category.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% include "oscar/partials/search.html" %}
+                        </div>
+                        <div class="header-action-right">
+                            <div class="header-action-2">
+                                <div class="header-action-icon-2">
+                                    <a href="shop-wishlist.html">
+                                        <img class="svgInject" alt="Evara" src="{% static 'imgs/theme/icons/icon-heart.svg' %}">
+                                        <span class="pro-count blue">{% if request.user.is_authenticated %}{{ wishlists.count }}{% endif %}</span>
+                                    </a>
+                                </div>
+                                {% include "oscar/partials/mini_basket.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>

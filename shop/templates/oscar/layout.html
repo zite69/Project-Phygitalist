@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% load compress %}
+{% load cms_tags %}
+
+{% block styles %}
+    {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
+    {% endcompress %}
+{% endblock %}
+
+{% block favicon %}
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/theme/favicon.svg' %}" />
+{% endblock %}
+
+{% block layout %}
+        
+    {# Top-horizontal bar with account, notifictions, dashboard links #}
+    {# include "oscar/partials/nav_accounts.html" #}
+
+    {# Site logo/title, mini-basket, browse dropdown and searchbox #}
+    <header class="header-area header-style-1 header-height-2">
+        {% include "oscar/partials/header_top.html" %}
+        {% include "oscar/partials/header_middle.html" %}
+        {% include "oscar/partials/header_bottom.html" %}
+    </header>
+    {# Main content of page - other layout templates may override this block #}
+    {% block content_wrapper %}
+        <div class="container page">
+            <div class="page_inner">
+                {% block breadcrumbs %}{% endblock %}
+                {% block header %}
+                    <div class="page-header">
+                        <h1>{% block headertext %}{% endblock %}</h1>
+                    </div>
+                {% endblock %}
+                {% include "oscar/partials/alert_messages.html" %}
+                {% block subnavigation %}{% endblock %}
+                <div class="content">
+                    {% block subheader %}{% endblock subheader %}
+
+                    {# Div exists for AJAX updates to entire content section #}
+                    <div id="content_inner">{% block content %}{% endblock %}</div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% include "oscar/partials/footer.html" %}
+{% endblock %}
+
+{# Local scripts #}
+{% block scripts %}
+    {{ block.super }}
+    <!-- Twitter Bootstrap -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <!-- Oscar -->
+    <script src="{% static 'oscar/js/oscar/ui.js' %}"></script>
+
+    <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-migrate-3.3.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/plugins/slick.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.syotimer.min.js' %}"></script>
+    <script src="{% static 'js/plugins/wow.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/plugins/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'js/plugins/magnific-popup.js' %}"></script>
+    <script src="{% static 'js/plugins/select2.min.js' %}"></script>
+    <script src="{% static 'js/plugins/waypoints.js' %}"></script>
+    <script src="{% static 'js/plugins/counterup.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/plugins/images-loaded.js' %}"></script>
+    <script src="{% static 'js/plugins/isotope.js' %}"></script>
+    <script src="{% static 'js/plugins/scrollup.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.vticker-min.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.theia.sticky.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.elevatezoom.js' %}"></script>
+    <!-- Template  JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/shop.js' %}"></script>
+
+{% endblock %}
+
+{% block extrascripts %}
+    {% include "oscar/partials/extrascripts.html" %}
+    {{ block.super }}
+{% endblock %}
+
+{% block onbodyload %}
+    {{ block.super }}
+    oscar.init();
+{% endblock %}

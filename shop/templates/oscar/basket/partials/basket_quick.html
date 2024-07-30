@@ -1,0 +1,44 @@
+{% load history_tags %}
+{% load basket_tags %}
+{% load currency_filters %}
+{% load image_tags %}
+{% load i18n %}
+
+<ul class="basket-mini-item list-unstyled">
+    {% if request.basket.num_lines %}
+        {% for line in request.basket.all_lines %}
+            <li>
+                    <div class="shopping-cart-img">
+                            {% with image=line.product.primary_image %}
+                                {% oscar_thumbnail image.original "100x100" upscale=False as thumb %}
+                                <a href="{{ line.product.get_absolute_url }}">
+                                    <img src="{{ thumb.url }}" alt="{{ line.product.get_title }}" class="img-thumbnail w-auto mx-auto my-0">
+                                </a>
+                            {% endwith %}
+                    </div>
+                    <div class="shopping-cart-title">
+                        <h4><a href="{{ line.product.get_absolute_url }}">{{ line.description }}</a></h4>
+                        <h4> <span>{{ line.quantity }}</span>
+                            {{ line.unit_price_excl_tax|currency:request.basket.currency }}
+                        </h4>
+                    </div>
+                    <div class="shopping-cart-delete">
+                        <a href=""><i class="fi-rs-cross-small"></i></a>
+                    </div>
+            </li>
+        {% endfor %}
+</ul>
+            <div class="shopping-cart-footer">
+                {% if request.basket.is_tax_known %}
+                    <small>{% trans "Total:" %} {{ request.basket.total_incl_tax|currency:request.basket.currency }}</small>
+                {% else %}
+                    <small>{% trans "Total:" %} {{ request.basket.total_excl_tax|currency:request.basket.currency }}</small>
+                {% endif %}
+            </div>
+            <div class="shopping-cart-button">
+                <a href="{% url 'basket:summary' %}" class="btn btn-info btn-sm">{% trans "View basket" %}</a>
+                <a href="{% url 'checkout:index' %}" class="btn btn-primary btn-sm float-right"><i class="fas fa-shopping-cart"></i> {% trans "Checkout" %}</a>
+            </div>
+    {% else %}
+        <p>{% trans "Your basket is empty." %}</p>
+    {% endif %}

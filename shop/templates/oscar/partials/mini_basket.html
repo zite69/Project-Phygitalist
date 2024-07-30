@@ -1,0 +1,13 @@
+{% load currency_filters %}
+{% load i18n %}
+{% load static %}
+
+<div class="header-action-icon-2">
+    <a class="mini-cart-icon" href="{% url 'basket:summary' %}">
+        <img alt="Evara" src="{% static 'imgs/theme/icons/icon-cart.svg' %}">
+        <span class="pro-count blue">{{ request.basket.num_lines }}</span>
+    </a>
+    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+        {% include "oscar/basket/partials/basket_quick.html" %}
+    </div>
+</div>

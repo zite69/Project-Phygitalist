@@ -1,0 +1,7 @@
+{% load static %}
+<div class="logo logo-width-1">
+    <a href="{{ homepage_url }}"><img src="{% static 'imgs/theme/logo.svg' %}" alt="logo"></a>
+    <div class="offset-sm-2 col-sm-3 h1 brand-title"><a href="{{ homepage_url }}">{% block brand_title %}{{ shop_name }}{% endblock %}</a><small> {{ shop_tagline }}</small></div>
+</div>
+
+
