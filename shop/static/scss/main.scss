@@ -36,6 +36,10 @@ TABLE CONTENT
   'abstracts/functions',
   'abstracts/mixins';
 
+// 1.5 - Bootstrap
+@import
+  'bootstrap/bootstrap';
+
 // 2. Vendors
 @import
   'vendors/vendors-import';
@@ -46,6 +50,7 @@ TABLE CONTENT
   'base/animation',
   'base/typography';
 
+  
 // 4. Components
 @import
   'components/buttons',
