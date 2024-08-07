@@ -1,0 +1,46 @@
+{% load static %}
+<div class="mobile-header-active mobile-header-wrapper-style">
+    <div class="mobile-header-wrapper-inner">
+        <div class="mobile-header-top">
+            <div class="mobile-header-logo">
+                <a href="/"><img src="{% static 'img/zite69_shop.png' %}" alt="Zite69"></a>
+            </div>
+            <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                <button class="close-style search-close">
+                    <i class="icon-top"></i>
+                    <i class="icon-bottom"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mobile-header-content-area">
+
+            <div class="mobile-menu-wrap mobile-header-border">
+
+                <!-- mobile menu start -->
+
+                <!-- mobile menu end -->
+            </div>
+            <div class="mobile-header-info-wrap mobile-header-border">
+                <div class="single-mobile-header-info mt-30">
+                    <a  href="https://forms.gle/oY5kSZV7tMD5F7TX7"> Start Selling </a>
+                </div>
+                <div class="single-mobile-header-info">
+                    <a href="{% url 'customer:login' %}">Log In / Sign Up </a>
+                </div>
+                <!--
+                <div class="single-mobile-header-info">
+                    <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">{{ settings.WHATSAPP_NUMBER }}</a>
+                </div>
+                -->
+            </div>
+            <div class="mobile-social-icon">
+                <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                <a href="https://www.facebook.com/ZITE69"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt="Zite69Facebook"></a>
+                <a href="https://x.com/ZITE69_"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt="Zite69 X"></a>
+                <a href="https://www.instagram.com/zite69_live/"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt="Zite69Instagram"></a>
+                <a href="https://www.linkedin.com/company/zite69/"><img src="{% static 'img/icons/icon-linkedin.svg' %}" alt="Zite69Linkein"></a>
+                <a href="https://www.youtube.com/@ZITE69_"><img src="{% static 'img/icons/icon-youtube.svg' %}" alt="Zite69Youtube"></a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block favicon %}
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'imgs/theme/favicon.svg' %}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.svg' %}" />
 {% endblock %}
 
 {% block layout %}
@@ -24,6 +24,8 @@
         {% include "oscar/partials/header_middle.html" %}
         {% include "oscar/partials/header_bottom.html" %}
     </header>
+    {% include "oscar/partials/header_mobile.html" %}
+
     {# Main content of page - other layout templates may override this block #}
     {% block content_wrapper %}
         <div class="container page">

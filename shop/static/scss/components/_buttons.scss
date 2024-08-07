@@ -129,7 +129,9 @@ button.submit, button[type='submit'] {
 	}
 	&.btn-brush {
 		background-color: transparent;
-		color: $color-brand;
+		//color: $color-brand;
+		color: $color-grey-4;
+		font-size: 20px;
 		border: 0;
 		padding: 14px 80px 14px 65px;
 		background-repeat: no-repeat;
