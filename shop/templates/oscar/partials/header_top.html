@@ -7,8 +7,8 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
                             <ul>
-                                <li><i class="fi-rs-smartphone"></i> <a href="#">(+01) - 2345 - 6789</a></li>
-                                <li><i class="fi-rs-marker"></i><a  href="page-contact.html">Our location</a></li>
+                                <li><i class=""></i> <a href="#">{{ settings.WHATSAPP_NUMBER }}</a></li>
+                                <li><i class=""></i><a  href="https://forms.gle/oY5kSZV7tMD5F7TX7" target="_blank">Start Selling</a></li>
                             </ul>
                         </div>
                     </div>
@@ -17,9 +17,9 @@
                             <div id="news-flash" class="d-inline-block">
                                 {% static_alias "flashnews" %}
                                 <ul>
-                                    <li>Get great devices up to 50% off <a href="shop-grid-right.html">View details</a></li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
-                                    <li>Trendy 25silver jewelry, save up 35% off today <a href="shop-grid-right.html">Shop now</a></li>
+                                    <li>Launching on August 15th! <a href="https://forms.gle/ww2nk3DiejtoQZds6" style="color:#28343d;" target="_blank"> Know more</a></li>
+                                    <li>Work around home & earn up to 70k/m!<a href="https://forms.gle/62F9C7zH3HovrWB26" style="color:#28343d;" target="_blank"> Join now</a></li>
+                                    <li>We are hiring! <a href="https://forms.gle/62F9C7zH3HovrWB26" style="color:#28343d;" target="_blank">Apply now </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -28,25 +28,24 @@
                         <div class="header-info header-info-right">
                             <ul>
                                 <li>
-                                    <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                    <ul class="language-dropdown">
-                                        <li><a href="#"><img src="{% static 'imgs/theme/flag-fr.png' %}" alt="">FranΓö£┬║ais</a></li>
-                                        <li><a href="#"><img src="{% static 'imgs/theme/flag-dt.png' %}" alt="">Deutsch</a></li>
-                                        <li><a href="#"><img src="{% static 'imgs/theme/flag-ru.png' %}" alt="">PΓòñ├óΓòñ├╝Γòñ├╝Γò¿ΓòæΓò¿ΓòòΓò¿Γòú</a></li>
-                                    </ul>
-                                </li>
-                                <li>
+                                    <li>
+                                        <a class="language-dropdown-active" href="#"> <i class=""></i> Become a Member </a>
+                                    </li>
+                                    
                                     {% if user.is_authenticated %}
                                     {% block nav_account_navbar_authenticated %}
-                                        
-                                    <i class="fi-rs-user"></i>
-                                    <a href="{% url 'customer:logout' %}">
-                                        Logout
-                                    </a>
+                                    <li>   
+                                        <i class="fi-rs-user"></i>
+                                        <a href="{% url 'customer:logout' %}">
+                                            Logout
+                                        </a>
+                                    </li>
                                     {% endblock %}
                                     {% else %}
-                                    <i class="fi-rs-use"></i>
-                                    <a href="{% url 'customer:login' %}">Log In/Sign Up</a>
+                                    <li>
+                                        <i class="fi-rs-user"></i>
+                                        <a href="{% url 'customer:login' %}">Sign In</a>
+                                    </li>
                                     {% endif %}
                                 </li>
                             </ul>

@@ -3,22 +3,27 @@
 .header-top-ptb-1 {
 	padding: 10px 0;
 	border-bottom: 1px solid #e2e9e1;
-	background-color: #f2f3f8;
+	background-color: $color-brand;
 	font-size: 14px;
 	background-image: url(../imgs/theme/topbar-bg.jpg);
 	line-height: 1;
 	#news-flash {
 		min-width: 400px;
 		font-size: 14px;
-		line-height: 10px;
+		line-height: 16px;
 		font-weight: 600;
 		li {
 			min-height: 14px;
+
+			a {
+				color: $color-top-strip-link;
+			}
 		}
 		i {
 			line-height: 6px;
 			margin-right: 5px;
 		}
+		color: $color-top-strip-text;
 	}
 }
 
@@ -75,7 +80,7 @@
 			}
 
 			a {
-				color: #1a1a1a;
+				color: $color-top-strip-text;
 				font-weight: 500;
 
 				i {
@@ -1577,8 +1582,8 @@
 	}
 	.header-top-ptb-1 {
 		padding: 13px 0;
-		border-bottom: 3px solid #39b4ac;
-		background-color: #d8f4e2;
+		//border-bottom: 3px solid #39b4ac;
+		background-color: $color-brand;
 		background-image: none;
 	}
 }

@@ -45,7 +45,9 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=[])
 
 # Application definition
 
+
 INSTALLED_APPS = [
+    'shop.apps.user',
     'djangocms_admin_style',
 
     'django.contrib.admin',
@@ -94,10 +96,10 @@ INSTALLED_APPS = [
     'oscar.apps.checkout.apps.CheckoutConfig',
     'oscar.apps.address.apps.AddressConfig',
     'oscar.apps.shipping.apps.ShippingConfig',
-    'oscar.apps.catalogue.apps.CatalogueConfig',
+    #'oscar.apps.catalogue.apps.CatalogueConfig',
     'oscar.apps.catalogue.reviews.apps.CatalogueReviewsConfig',
     'oscar.apps.communication.apps.CommunicationConfig',
-    'oscar.apps.partner.apps.PartnerConfig',
+    #'oscar.apps.partner.apps.PartnerConfig',
     'oscar.apps.basket.apps.BasketConfig',
     'oscar.apps.payment.apps.PaymentConfig',
     'oscar.apps.offer.apps.OfferConfig',
@@ -127,7 +129,11 @@ INSTALLED_APPS = [
     'sorl.thumbnail',   # Default thumbnail backend, can be replaced
     'django_tables2',
     'compressor', 
+    'django_extensions',
     'shop.apps.main',
+    'shop.apps.wishlist',
+    'shop.apps.catalogue.apps.CatalogueConfig',
+    'shop.apps.partner.apps.PartnerConfig',
 ]
 
 MIDDLEWARE = [
@@ -152,6 +158,8 @@ if DEBUG:
     INSTALLED_APPS += ("debug_toolbar",)
 
 INSTALLED_APPS += env("INSTALLED_APPS", default=[])
+
+AUTH_USER_MODEL = 'user.User'
 
 if DEBUG:
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
@@ -178,6 +186,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
+                'shop.apps.wishlist.context_processors.wishlists',
+                'shop.apps.main.context_processors.settings',
+                'oscar.core.context_processors.metadata',
             ],
         },
     },
@@ -214,13 +225,16 @@ HAYSTACK_CONNECTIONS = {
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
 
+DATABASES = {
+    'default': env.db(default='sqlite:///db.sqlite3')
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -333,3 +347,9 @@ MEDIA_ROOT = env("MEDIA_ROOT", default=BASE_DIR.parent)
     # Add your apphook here
     #'shop.apps.main.cms_apphook_pool',
 #)
+
+WHATSAPP_NUMBER = '+918547299569'
+
+LIVE = env("LIVE", default=False)
+OSCAR_SHOP_NAME = "Zite69.com"
+OSCAR_SHOP_TAGLINE = "Where buyers and sellers become a community"

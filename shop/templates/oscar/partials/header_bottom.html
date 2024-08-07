@@ -6,6 +6,7 @@
                     <div class="logo logo-width-1 d-block d-lg-none">
                         <a href="index.html"><img src="{% static 'imgs/theme/logo.svg' %}" alt="logo"></a>
                     </div>
+                    {% if settings.LIVE %}
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categori-button-active" href="#">
@@ -314,8 +315,12 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-headset"></i><span>Hotline</span> 1900 - 888 </p>
+                    {% endif %}
+                  <!--   <div class="hotline d-none d-lg-block">
+                        
+                    </div> -->
+                    <div class="hotline">
+                        <p><i class="fab fa-whatsapp"></i><span>Whatsapp</span>{{ settings.WHATSAPP_NUMBER }}</p>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">

@@ -1,9 +1,11 @@
 //1.FONT
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;500;600;700&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
-$font-heading: 'Spartan', sans-serif;
-$font-text: 'Lato', sans-serif;
+$font-heading: 'EB Garamond', serif;
+$font-text: 'Urbanist', sans-serif;
 
 //Fontawesome path
 $fa-font-path: '../webfonts';
@@ -17,7 +19,7 @@ $font-xl: 19px;
 $font-xxl: 58px;
 
 //2.COLOR
-$color-brand: #088178;
+$color-brand: #f66569;
 $color-brand-dark: #046963;
 $color-primary: #3f81eb;
 $color-secondary: #41506b;
@@ -33,6 +35,8 @@ $color-grey-4: #90908e;
 $color-grey-9: #f4f5f9;
 $color-muted: #8e8e90;
 $color-body: #161c27;
+$color-top-strip-text: #ffffff;
+$color-top-strip-link: #28343d;
 
 $color-1: #fddde4;
 $color-2: #cdebbc;

@@ -1,6 +1,16 @@
 {% extends "oscar/layout.html" %}
 {% load cms_tags %}
+{% load static %}
 
 {% block content %}
-    {% placeholder "content" %}
+    <main class="main">
+        <section class="home-slider position-relative mb-30">
+            {% placeholder "carousel" %}
+        </section>
+        {% placeholder "content" %}
+        <section>
+            <a aria-label="Chat on WhatsApp" href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}"> <img alt="Chat on WhatsApp" src="{% static 'img/WhatsAppButtonGreenMedium.png' %}" />
+            </a> 
+        </section>
+    </main>
 {% endblock %}

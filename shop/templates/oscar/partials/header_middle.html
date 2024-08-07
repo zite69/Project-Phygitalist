@@ -5,6 +5,7 @@
             <div class="container">
                 <div class="header-wrap">
                     {% include "oscar/partials/brand.html" %}
+                    {% if settings.LIVE %}
                     <div class="header-right">
                         <div class="search-style-2">
                                 <select class="select-active">
@@ -27,6 +28,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
