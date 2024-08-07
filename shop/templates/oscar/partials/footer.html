@@ -1,10 +1,50 @@
+{% load static %}
 <footer class="container">
     {% block footer %}
-    <div class="col-md-2 offset-md-4">
-        &copy; 2023-2024
-    </div>
+        <section class="section-padding footer-mid">
+            <div class="container pt-15 pb-20">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="widget-about font-md mb-md-5 mb-lg-0">
+                            <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Follow Us</h5>
+                            <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                                <a href="https://www.facebook.com/ZITE69" target="_blank"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt=""></a>
+                                <a href="https://x.com/ZITE69_" target="_blank"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt=""></a>
+                                <a href="https://www.instagram.com/zite69_live/" target="_blank"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt=""></a>
+                                <a href="https://www.linkedin.com/company/zite69/" target="_blank"><img src="{% static 'img/icons/icon-linkedin.svg' %}" alt=""></a>
+                                <a href="https://www.youtube.com/@ZITE69_" target="_blank"><img src="{% static 'img/icons/icon-youtube.svg' %}" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3">
+
+                    </div>
+                    <div class="col-lg-2  col-md-3">
+
+                    </div>
+                    <div class="col-lg-4">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="container pb-20 wow fadeIn animated">
+            <div class="row">
+                <div class="col-12 mb-20">
+                    <div class="footer-bottom"></div>
+                </div>
+                <div class="col-lg-6">
+                    <p class="float-md-left font-sm text-muted mb-0">&copy; 2024 All rights reserved to 69Mutual Media & iCommerce LLP </p>
+                </div>
+                <div class="col-lg-6">
+                    <p class="text-lg-end text-start font-sm text-muted mb-0">
+                      <a href="mailto:hello@zite69.com">E-mail hello@zite69.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
         {% comment %}
             Could be used for displaying links to privacy policy, terms of service, etc.
-         {% endcomment %}
-    {% endblock %}
+        {% endcomment %}
+{% endblock %}
 </footer>
