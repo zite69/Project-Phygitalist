@@ -12,6 +12,7 @@ django-compressor==4.5.1
 django-debug-toolbar==4.4.6
 django-entangled==0.5.4
 django-environ==0.11.2
+django-extensions==3.2.3
 django-extra-views==0.14.0
 django-filer==3.1.4
 django-formtools==2.5.1
@@ -41,8 +42,10 @@ libsass==0.23.0
 lxml==5.2.2
 packaging==24.1
 phonenumbers==8.13.40
+phonenumberslite==8.13.42
 pillow==10.4.0
 purl==1.6
+pygraphviz==1.13
 pysolr==3.9.0
 python-dateutil==2.9.0.post0
 rcssmin==1.1.2
