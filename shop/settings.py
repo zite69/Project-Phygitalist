@@ -351,8 +351,8 @@ MEDIA_ROOT = env("MEDIA_ROOT", default=BASE_DIR.parent)
 WHATSAPP_NUMBER = '+918547299569'
 
 LIVE = env("LIVE", default=False)
-OSCAR_SHOP_NAME = "zite69.com"
-OSCAR_SHOP_TAGLINE = "Where buyers and sellers become a community"
+OSCAR_SHOP_NAME = "ZITE69"
+OSCAR_SHOP_TAGLINE = "Super Social Marketplace"
 
 OSCAR_DEFAULT_CURRENCY = 'INR'
 
@@ -366,3 +366,5 @@ if RAZORPAY_TEST:
 else:
     RAZORPAY_KEY = env("RAZORPAY_KEY")
     RAZORPAY_SECRET = env("RAZORPAY_SECRET")
+
+PHONENUMBER_DEFAULT_REGION = 'IN'
