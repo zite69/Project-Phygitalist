@@ -9,6 +9,15 @@
     {% endcompress %}
 {% endblock %}
 
+{% block description %}
+    {% page_attribute "meta_description" as page_meta %}
+    {% if page_meta and page_meta.strip %}
+        {{ page_meta.strip }}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
+{% endblock %}
+
 {% block favicon %}
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.svg' %}" />
 {% endblock %}
