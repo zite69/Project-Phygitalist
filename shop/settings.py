@@ -363,6 +363,7 @@ OSCAR_SHOP_TAGLINE = "Super Social Marketplace"
 OSCAR_DEFAULT_CURRENCY = 'INR'
 
 #LOGGING = env.json("LOGGING", default={})
+LOGGING_ENV = env.json("LOGGING", default={})
 
 RAZORPAY_TEST = env("RAZORPAY_TEST", default=True)
 
@@ -525,7 +526,7 @@ from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")
 ADMINS = tuple(parseaddr(email) for email in ADMINS_ENV.split(","))
 
-MANAGERS_ENV = env("MAANGERS", default="")
+MANAGERS_ENV = env("MANAGERS", default="")
 MANAGERS = tuple(parseaddr(email) for email in MANAGERS_ENV.split(","))
 
 SERVER_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
@@ -544,7 +545,7 @@ if DEBUG == False:
     }
     for module in ['django.request', 'oscar.checkout', 'shop', 'shop.apps.main', 'django.db.backends']:
         LOGGING['loggers'][module]['handlers'] = ['file']
-        LOGGING['loggers'][module]['level'] = env("LOG_LEVEL", default="WARNING")
+        LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
 
     #Setup production email
     EMAIL_HOST = env("EMAIL_HOST", default="email-smtp.ap-south-1.amazonaws.com")
