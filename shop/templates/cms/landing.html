@@ -22,6 +22,10 @@
             input#EMAIL {
                 background-color: #fff;
             }
+            .messages {
+                width: 100%;
+                color: var(--bs-primary);
+            }
         </style>
         {% render_block "css" %}
     </head>
@@ -33,6 +37,13 @@
 
         <!-- ========================= main-wrapper start ========================= -->
         <main class="main-14">
+            {% if messages %}
+            <ul class="text-center messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
             <div class="main-wrapper demo-14">
                 <!-- shapes start  -->
                 <img src="{% static 'img/shape-1.svg' %}" alt="" class="shape shape-1">
