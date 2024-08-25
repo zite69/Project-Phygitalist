@@ -512,21 +512,26 @@ LOGGING = {
         },
         'shop.apps.main': {
             'handlers': ['console'],
-            'propagate': True,
+            'propagate': False,
             'level': 'DEBUG',
+        },
+        'shop': {
+            'handlers': ['console'],
+            'level': 'WARNING'
         }
     }
 }
+from email.utils import parseaddr
+ADMINS_ENV = env("ADMINS", default="")
+ADMINS = tuple(parseaddr(email) for email in ADMINS_ENV.split(","))
 
-ADMINS = [
-    ('Arun', 'arunkakorp@gmail.com'),
-    ('Abhillash', 'abhilla.sh@zite69.com'),
-]
+MANAGERS_ENV = env("MAANGERS", default="")
+MANAGERS = tuple(parseaddr(email) for email in MANAGERS_ENV.split(","))
 
-SERVER_EMAIL = "system@zite69.com"
-DEFAULT_FROM_EMAIL = "system@zite69.com"
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_SUBJECT_PREFIX = "[Zite69 System]"
+SERVER_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
+DEFAULT_FROM_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
+EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
+EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX")
 
 if DEBUG == False:
     #Setup production logging
@@ -536,7 +541,7 @@ if DEBUG == False:
             'formatter': 'verbose',
             'filename': env("LOG_FILE", default="logs/all.log")
     }
-    for module in ['django.request', 'oscar.checkout', 'shop']:
+    for module in ['django.request', 'oscar.checkout', 'shop', 'shop.apps.main', 'django.db.backends']:
         LOGGING['loggers'][module]['handlers'] = ['file']
         LOGGING['loggers'][module]['level'] = env("LOG_LEVEL", default="WARNING")
 
@@ -546,4 +551,4 @@ if DEBUG == False:
     EMAIL_HOST_USER = env("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
     EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
