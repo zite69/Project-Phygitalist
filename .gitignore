@@ -3,17 +3,20 @@
 *.pyc
 __pycache__
 db.sqlite3
-media/
 .DS_Store
 
 *.py[cod]
 *$py.class
 
 .env
+.env.test
+.env.production
 venv/
 
 CACHE/
 *Zone.Identifier
 
 Makefile
-
+static/
+media/
+logs/
