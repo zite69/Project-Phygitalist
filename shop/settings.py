@@ -362,7 +362,7 @@ OSCAR_SHOP_TAGLINE = "Super Social Marketplace"
 
 OSCAR_DEFAULT_CURRENCY = 'INR'
 
-LOGGING = env.json("LOGGING", default={})
+#LOGGING = env.json("LOGGING", default={})
 
 RAZORPAY_TEST = env("RAZORPAY_TEST", default=True)
 
@@ -455,3 +455,95 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DJANGOCMS_FRONTEND_THEME = "shop.apps.themezite69bs5"
 #DJANGOCMS_FRONTEND_FRAMEWORK = "shop.apps.themezite69bs5"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{asctime}: {levelname} [{name}.{module}.{funcName}] {process:d} {thread:d} {message}',
+            'style': '{'
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{'
+        },
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+    },
+    'loggers': {
+        '': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'django': {
+            'handlers': ['null'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'oscar.checkout': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'WARNING',
+        },
+        'shop.apps.main': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        }
+    }
+}
+
+ADMINS = [
+    ('Arun', 'arunkakorp@gmail.com'),
+    ('Abhillash', 'abhilla.sh@zite69.com'),
+]
+
+SERVER_EMAIL = "system@zite69.com"
+DEFAULT_FROM_EMAIL = "system@zite69.com"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_SUBJECT_PREFIX = "[Zite69 System]"
+
+if DEBUG == False:
+    #Setup production logging
+    LOGGING['handlers']['file'] = {
+            'level': env("LOG_LEVEL", default="WARNING"),
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': env("LOG_FILE", default="logs/all.log")
+    }
+    for module in ['django.request', 'oscar.checkout', 'shop']:
+        LOGGING['loggers'][module]['handlers'] = ['file']
+        LOGGING['loggers'][module]['level'] = env("LOG_LEVEL", default="WARNING")
+
+    #Setup production email
+    EMAIL_HOST = env("EMAIL_HOST", default="email-smtp.ap-south-1.amazonaws.com")
+    EMAIL_PORT = env("EMAIL_PORT", default=587)
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
