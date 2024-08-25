@@ -2,6 +2,7 @@ from django.urls import path
 from oscar import config
 import logging
 from django.utils.translation import gettext_lazy as _
+from django.contrib import messages
 
 logger = logging.getLogger("shop.apps.main")
 
@@ -21,6 +22,7 @@ class MainShop(config.Shop):
                 logger.warn("Called from Add to mailing list FormAction")
                 logger.warn(form)
                 logger.debug(request)
+                messages.success(request, "You have been added to the waiting list. Please expect an email from us soon!")
 
         logger.warn("Inside FormAction execute")
         logger.debug(actions._action_registry)
