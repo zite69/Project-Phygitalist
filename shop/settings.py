@@ -123,6 +123,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
 
     # 3rd-party apps that oscar depends on
+    #'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
     'widget_tweaks',
     'haystack',
     #'treebeard',
@@ -130,10 +131,14 @@ INSTALLED_APPS = [
     'django_tables2',
     'compressor', 
     'django_extensions',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'shop.apps.main',
     'shop.apps.wishlist',
     'shop.apps.catalogue.apps.CatalogueConfig',
     'shop.apps.partner.apps.PartnerConfig',
+    'shop.apps.themezite69bs5',
+    'djangocms_form_builder',
 ]
 
 MIDDLEWARE = [
@@ -299,6 +304,7 @@ SITE_ID = 1
 
 CMS_TEMPLATES = (
     ("cms/home.html", _("Home")),
+    ("cms/landing.html", _("Landing")),
 )
 
 # Enable permissions
@@ -368,3 +374,84 @@ else:
     RAZORPAY_SECRET = env("RAZORPAY_SECRET")
 
 PHONENUMBER_DEFAULT_REGION = 'IN'
+
+# Elasticsearch Configuration
+OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
+OSCAR_ELASTICSEARCH_FACETS = [
+    {
+        "name": "price",
+        "label": "Price",
+        "type": "range",
+        "formatter": "oscar_elasticsearch.search.format.currency",
+        "ranges": [
+            25,
+            100,
+            500,
+            1000
+        ]
+    },
+    {
+        "name": "attrs.gewicht",
+        "label": "Gewicht",
+        "type": "term",
+        "ranges": []
+    },
+    {
+        "name": "attrs.googleshopping",
+        "label": "Google product",
+        "type": "term",
+        "ranges": []
+    },
+    {
+        "name": "attrs.size",
+        "label": "Maat",
+        "type": "term",
+        "ranges": []
+    },
+    {
+        "name": "attrs.height",
+        "label": "Hoogte",
+        "type": "term",
+        "ranges": []
+    },
+    {
+        "name": "attrs.zult",
+        "label": "Datum",
+        "type": "term",
+        "ranges": []
+    },
+    {
+        "name": "attrs.stroomverbruik",
+        "label": "Stroomverbruik",
+        "type": "term",
+        "ranges": []
+    },
+    {
+        "name": "attrs.bijzonderheden",
+        "label": "Bijzonderheden",
+        "type": "term",
+        "ranges": []
+    }
+]
+
+WAGTAILSEARCH_BACKENDS = {
+    "default": {
+        "BACKEND": "oscar_elasticsearch.search.backend",
+        "URLS": ["http://127.0.0.1:9200"],
+        "INDEX": "zite69",
+        "TIMEOUT": 120,
+        "OPTIONS": {},
+        "INDEX_SETTINGS": {},
+        "ATOMIC_REBUILD": True,
+        "AUTO_UPDATE": True,
+    }
+}
+
+HAYSTACK_CONNECTIONS = {"default": {}}
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+DJANGOCMS_FRONTEND_THEME = "shop.apps.themezite69bs5"
+#DJANGOCMS_FRONTEND_FRAMEWORK = "shop.apps.themezite69bs5"
