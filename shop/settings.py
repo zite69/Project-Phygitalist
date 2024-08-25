@@ -532,6 +532,7 @@ SERVER_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
 DEFAULT_FROM_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX")
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 if DEBUG == False:
     #Setup production logging
@@ -552,3 +553,4 @@ if DEBUG == False:
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
     EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
     EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
+    MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
