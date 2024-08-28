@@ -52,6 +52,7 @@ urlpatterns = i18n_patterns(
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('admin/', admin.site.urls),
     path('filer/', include('filer.urls')),
+    path('accounts/', include('allauth.urls')),
     #path('', home, name='home'),
     path('shop/', include(apps.get_app_config('main').urls[0])),
     path('', include('cms.urls')),

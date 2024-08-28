@@ -70,6 +70,14 @@ INSTALLED_APPS = [
     'treebeard',
     'parler',
 
+    #allauth apps
+    'allauth',
+    'allauth.account',
+
+    # Optional -- requires install using `django-allauth[socialaccount]`.
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'filer',
     'easy_thumbnails',
     'djangocms_frontend',
@@ -157,6 +165,7 @@ MIDDLEWARE = [
     'oscar.apps.basket.middleware.BasketMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'cms.middleware.utils.ApphookReloadMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 if DEBUG:
@@ -211,6 +220,7 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 AUTHENTICATION_BACKENDS = (
     'oscar.apps.customer.auth_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 HAYSTACK_CONNECTIONS = {
@@ -522,6 +532,21 @@ LOGGING = {
         }
     }
 }
+
+#allauth settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    }
+}
+
 from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")
 ADMINS = tuple(parseaddr(email) for email in ADMINS_ENV.split(","))
@@ -534,6 +559,15 @@ DEFAULT_FROM_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX")
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = env("EMAIL_HOST", default="email-smtp.ap-south-1.amazonaws.com")
+EMAIL_PORT = env("EMAIL_PORT", default=587)
+EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
+
+SMS_AUTH_KEY = env("SMS_AUTH_KEY", default="")
+SMS_AUTH_TOKEN = env("SMS_AUTH_TOKEN", default="")
+SMS_SENDER_ID = env("SMS_SENDER_ID", default="")
 
 if DEBUG == False:
     #Setup production logging
