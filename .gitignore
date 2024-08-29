@@ -17,6 +17,6 @@ CACHE/
 *Zone.Identifier
 
 Makefile
-static/
-media/
-logs/
+/static
+/media
+/logs
