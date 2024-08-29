@@ -218,7 +218,7 @@ THUMBNAIL_PROCESSORS = (
 WSGI_APPLICATION = 'shop.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
-    'oscar.apps.customer.auth_backends.EmailBackend',
+    #'oscar.apps.customer.auth_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
@@ -385,6 +385,8 @@ else:
     RAZORPAY_SECRET = env("RAZORPAY_SECRET")
 
 PHONENUMBER_DEFAULT_REGION = 'IN'
+PHONENUMBER_DB_FORMAT = "RFC3966"
+PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
 # Elasticsearch Configuration
 OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
