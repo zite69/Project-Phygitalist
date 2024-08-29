@@ -11,7 +11,9 @@ from email.mime.image import MIMEImage
 
 from django.contrib.staticfiles import finders
 from functools import lru_cache
+import logging
 
+logger = logging.getLogger('shop.apps.main.utils')
 
 @lru_cache()
 def logo_data():
@@ -22,6 +24,7 @@ def logo_data():
     return logo
 
 def send_waitlist_welcome(email):
+    logger.debug(f"Called to send waitlist email to {email}")
     html_content = render_to_string("email/waitlist.html")
     text_content = strip_tags(html_content)
 
