@@ -1,18 +1,56 @@
 from typing import Any
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth import models as auth_models
 from django.db import models
 from oscar.apps.customer.abstract_models import AbstractUser
 from oscar.core.loading import get_class, get_model
 from phonenumber_field.modelfields import PhoneNumberField
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
+from django.db.models import Q
+from django.utils import timezone
 
 import re
 
 #Address = get_model("address", "Address")
 
 REX_UPI = re.compile(r"^.+@.+$")
+
+class UserManager(auth_models.BaseUserManager):
+    def create_user(self, username, password=None, **extra_fields):
+        """
+        Creates and saves a User with the given email and
+        password.
+        """
+        now = timezone.now()
+        email = None
+        if '@' in username:
+            email = username
+            email = UserManager.normalize_email(email)
+
+        user = self.model(
+            username=username,
+            email=email,
+            is_staff=False,
+            is_active=True,
+            is_superuser=False,
+            last_login=now,
+            date_joined=now,
+            **extra_fields
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, username, password, **extra_fields):
+        u = self.create_user(username, password, **extra_fields)
+        u.is_staff = True
+        u.is_active = True
+        u.is_superuser = True
+        u.save(using=self._db)
+        return u
 
 @deconstructible
 class validate_length:
@@ -31,11 +69,32 @@ def validate_upi(value):
         raise ValidationError(_("UPI ID %(value)s does not appear to be valid"))
     
 class User(AbstractUser, PermissionsMixin):
+    email = models.EmailField(_("Email Address"), unique=True, blank=True, null=True)
     username = models.CharField(_("Username"), max_length=64, unique=True, blank=False)
-    phone = PhoneNumberField(_("Phone Number"), unique=True, region='IN')
+    phone = PhoneNumberField(_("Phone Number"), unique=True, region='IN', blank=True, null=True)
     email_verified = models.BooleanField(_("Verified Email"), default=False)
     phone_verified = models.BooleanField(_("Verified Phonenumber"), default=False)
 
+    USERNAME_FIELD = "username"
+
+    objects = UserManager()
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=Q(email__isnull=False) | Q(username__isnull=False) | Q(phone__isnull=False),
+                name='not_all_null'
+            )
+        ]
+
+    def save(self, *args, **kwargs):
+        if self.username == "":
+            if self.email == "":
+                self.username = f"phone-{self.phone.national}"
+            else:
+                self.username = self.email
+
+        super().save(*args, **kwargs)
 
 class ProfileAddesses(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE)
