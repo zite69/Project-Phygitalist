@@ -24,9 +24,13 @@ class MainShop(config.Shop):
             def execute(self, form, request):
                 email = form.cleaned_data['email']
                 logger.debug(f"In AddToMailingList execute got email: {email}")
-                getonwaitlist = FormEntry.objects.filter(form_name__iexact='getonwaitlist').filter(entry_data__email=email)
-                if getonwaitlist:
+                getonwaitlist = FormEntry.objects.filter(form_name__iexact='getonwaitlist').filter(entry_data__email=email).order_by('entry_created_at')
+
+                if getonwaitlist.count() > 1:
                     logger.debug("User already in the waitlist")
+                    ids = getonwaitlist.values_list("id", flat=True)
+                    logger.debug(f"Deleting duplicate entries with ids: {ids}")
+                    getonwaitlist.exclude(pk__in=list(ids[:1])).delete()
                     messages.error(request, "You have already added your name to the waitlist. Please wait for your confirmation email")
                 else:
                     count = send_waitlist_welcome(form.cleaned_data['email'])
