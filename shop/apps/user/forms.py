@@ -5,13 +5,13 @@ from phonenumber_field.formfields import PhoneNumberField
 
 
 class Zite69UserCreationForm(UserCreationForm):
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(required=False)
     class Meta:
         model = get_user_model()
         fields = '__all__'
 
 class Zite69UserChangeForm(UserChangeForm):
-    phone = PhoneNumberField()
+    phone = PhoneNumberField(required=False)
 
     class Meta:
         model = get_user_model()
