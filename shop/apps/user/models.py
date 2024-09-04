@@ -15,7 +15,7 @@ import re
 
 #Address = get_model("address", "Address")
 
-REX_UPI = re.compile(r"^.+@.+$")
+REX_UPI = re.compile(r"^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$")
 
 class UserManager(auth_models.BaseUserManager):
     def create_user(self, username, password=None, **extra_fields):
