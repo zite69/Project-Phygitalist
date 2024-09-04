@@ -55,6 +55,7 @@ urlpatterns = i18n_patterns(
     path('accounts/', include('allauth.urls')),
     #path('', home, name='home'),
     path('shop/', include(apps.get_app_config('main').urls[0])),
+    path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('', include('cms.urls')),
     #path('', oscar_cms_resolver),
 )

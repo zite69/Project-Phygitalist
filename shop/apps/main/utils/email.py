@@ -41,3 +41,19 @@ def send_waitlist_welcome(email):
 
     #returns the number of messages sent. in this case should be either 1 or 0
     return message.send(fail_silently=False)
+
+def send_email_otp(email, otp):
+    html_content = render_to_string("email/otp.html")
+    text_content = strip_tags(html_content)
+
+    message = EmailMultiAlternatives(
+        subject="Your OTP to login to our site",
+        body=text_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=[email]
+    )
+
+    message.mixed_subtype = 'related'
+    message.attach_alternative(html_content, "text/html")
+
+    return message.send(fail_silently=False)

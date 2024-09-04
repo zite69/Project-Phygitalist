@@ -146,6 +146,7 @@ INSTALLED_APPS = [
     'shop.apps.catalogue.apps.CatalogueConfig',
     'shop.apps.partner.apps.PartnerConfig',
     'shop.apps.themezite69bs5',
+    'shop.apps.otp.apps.OtpConfig',
     'djangocms_form_builder',
 ]
 
@@ -221,6 +222,7 @@ AUTHENTICATION_BACKENDS = (
     #'oscar.apps.customer.auth_backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'shop.apps.otp.auth.OtpBackend',
 )
 
 HAYSTACK_CONNECTIONS = {
@@ -530,7 +532,8 @@ LOGGING = {
         },
         'shop': {
             'handlers': ['console'],
-            'level': 'WARNING'
+            'level': 'DEBUG',
+            'propogate': True,
         }
     }
 }
@@ -570,6 +573,8 @@ EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
 SMS_AUTH_KEY = env("SMS_AUTH_KEY", default="")
 SMS_AUTH_TOKEN = env("SMS_AUTH_TOKEN", default="")
 SMS_SENDER_ID = env("SMS_SENDER_ID", default="")
+SMS_LOGIN_OTP_TEMPLATE = env("SMS_LOGIN_OTP_TEMPLATE", default="Your OTP to login is {otp}")
+SMS_LIVE=env("SMS_LIVE", default=False)
 
 if DEBUG == False:
     #Setup production logging
