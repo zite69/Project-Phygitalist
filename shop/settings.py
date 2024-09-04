@@ -534,6 +534,11 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propogate': True,
+        },
+        'shop.apps.otp': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propogate': False,
         }
     }
 }
@@ -584,7 +589,7 @@ if DEBUG == False:
             'formatter': 'verbose',
             'filename': env("LOG_FILE", default="logs/all.log")
     }
-    for module in ['django.request', 'oscar.checkout', 'shop', 'shop.apps.main', 'django.db.backends']:
+    for module in ['django.request', 'oscar.checkout', 'shop', 'shop.apps.main', 'django.db.backends', 'shop.apps.otp']:
         LOGGING['loggers'][module]['handlers'] = ['file']
         LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
 

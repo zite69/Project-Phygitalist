@@ -24,8 +24,8 @@ class RequestOtpFormMixin(object):
         try:
             logger.debug("Inside request_otp")
             if 'email' in self.cleaned_data:
-                #logger.debug(f"we have email: {self.email}")
                 email = self.cleaned_data['email']
+                logger.debug(f"In RequestOtpFormMixin we have email: {email}")
                 user = User.objects.get(email=email)
                 otp = generate_otp(user, email=True)
                 logger.debug(f"Generated OTP: {otp}")
@@ -34,6 +34,7 @@ class RequestOtpFormMixin(object):
                     logger.debug(f"Got response from sending email otp: {resp}")
             elif 'phone' in self.fields:
                 phone = self.cleaned_data['phone']
+                logger.debug(f"In RequestOtpFormMixin we have phone: {phone}")
                 user = User.objects.get(phone=phone)
                 otp = generate_otp(user, phone=True)
                 logger.debug(f"Generated phone OTP: {otp}")
@@ -44,6 +45,7 @@ class RequestOtpFormMixin(object):
                 raise ValueError(_("Badly configured either email or phone field must be defined"))
             return True
         except User.DoesNotExist:
+            logger.warn(f"FAILED LOGIN ATTEMPT by email: {email}, phone: {phone}")
             return False
             
 class EmailOtpRequestForm(forms.Form, RequestOtpFormMixin):
