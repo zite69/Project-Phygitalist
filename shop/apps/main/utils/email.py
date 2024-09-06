@@ -43,7 +43,8 @@ def send_waitlist_welcome(email):
     return message.send(fail_silently=False)
 
 def send_email_otp(email, otp):
-    html_content = render_to_string("email/otp.html")
+    context = {"otp": otp}
+    html_content = render_to_string("email/otp.html", context=context)
     text_content = strip_tags(html_content)
 
     message = EmailMultiAlternatives(
@@ -55,5 +56,6 @@ def send_email_otp(email, otp):
 
     message.mixed_subtype = 'related'
     message.attach_alternative(html_content, "text/html")
+    message.attach(logo_data())
 
     return message.send(fail_silently=False)
