@@ -5,6 +5,7 @@ from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.http import HttpRequest
 from phonenumber_field.phonenumber import PhoneNumber
+from django.conf import settings
 import pyotp
 import logging
 
@@ -38,12 +39,13 @@ class OtpBackend(ModelBackend):
 
         if user is None or otp_code is None:
             return None
-        
+
         try:
             otp_obj = Otp.objects.filter(user=user, **extra_args).latest('creation_date')
             otp = pyotp.TOTP(otp_obj.otp_secret)
             logger.debug(f"Found otp_obj: {otp_obj} and TOTP object: {otp}")
-            if otp.verify(otp_code, valid_window=10):
+            otp_window = getattr(settings, 'OTP_WINDOW', 10)
+            if otp.verify(otp_code, valid_window=otp_window):
                 otp_obj.is_verified = True
                 otp_obj.save()
                 logger.debug(f"OTP verified")
