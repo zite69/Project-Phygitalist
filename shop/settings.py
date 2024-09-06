@@ -137,7 +137,7 @@ INSTALLED_APPS = [
     #'treebeard',
     'sorl.thumbnail',   # Default thumbnail backend, can be replaced
     'django_tables2',
-    'compressor', 
+    'compressor',
     'django_extensions',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -476,12 +476,20 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'verbose': {
-            'format': '{asctime}: {levelname} [{name}.{module}.{funcName}] {process:d} {thread:d} {message}',
+            'format': '{asctime}: {levelname} [{name}.{module}.{funcName}:{lineno}] {process:d} {thread:d} {message}',
             'style': '{'
         },
         'simple': {
-            'format': '{levelname} {message}',
+            'format': '{levelname} [{name}.{module}.{funcName}:{lineno}] {message}',
             'style': '{'
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
         },
     },
     'handlers': {
@@ -491,19 +499,22 @@ LOGGING = {
         },
         'console': {
             'level': 'DEBUG',
+            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose'
+            'formatter': 'simple'
         },
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler',
+            "include_html": True,
         },
     },
     'loggers': {
         '': {
             'handlers': ['console'],
             'propagate': True,
-            'level': 'DEBUG',
+            'level': 'ERROR',
         },
         'django': {
             'handlers': ['null'],
@@ -512,7 +523,7 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'propagate': False,
         },
         'oscar.checkout': {
@@ -532,13 +543,13 @@ LOGGING = {
         },
         'shop': {
             'handlers': ['console'],
-            'level': 'DEBUG',
-            'propogate': True,
+            'level': 'WARNING',
+            'propagate': False,
         },
         'shop.apps.otp': {
             'handlers': ['console'],
             'level': 'DEBUG',
-            'propogate': False,
+            'propagate': False,
         }
     }
 }
@@ -589,13 +600,11 @@ if DEBUG == False:
             'formatter': 'verbose',
             'filename': env("LOG_FILE", default="logs/all.log")
     }
-    for module in ['django.request', 'oscar.checkout', 'shop', 'shop.apps.main', 'django.db.backends', 'shop.apps.otp']:
+    for module in LOGGING_ENV.keys():
         LOGGING['loggers'][module]['handlers'] = ['file']
         LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
 
     #Setup production email
-    EMAIL_HOST = env("EMAIL_HOST", default="email-smtp.ap-south-1.amazonaws.com")
-    EMAIL_PORT = env("EMAIL_PORT", default=587)
     EMAIL_HOST_USER = env("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
     EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
