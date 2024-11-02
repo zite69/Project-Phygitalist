@@ -4,6 +4,9 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
+# def check_seller(apps, schema_editor):
+#     from shop.apps.seller.models import Seller
+#     print(Seller.objects.all())
 
 class Migration(migrations.Migration):
 
@@ -27,4 +30,5 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
+        # migrations.RunPython(check_seller)
     ]

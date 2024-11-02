@@ -18,7 +18,7 @@ class RequestOtpView(FormView):
     form_class = EmailPhoneOtpRequestForm
     success_url = reverse_lazy("otp:login")
 
-    def form_valid(self, form: Any) -> HttpResponse:
+    def form_valid(self, form: Any) -> HttpResponseRedirect:
         form.request_otp()
         valid_email = getattr(form, 'valid_email', False)
         valid_phone = getattr(form, 'valid_phone', False)
@@ -81,8 +81,6 @@ class OtpLoginView(FormView):
 
         return kw
 
-    def form_valid(self, form: Any) -> HttpResponse:
+    def form_valid(self, form: Any) -> HttpResponseRedirect:
         login(self.request, form.get_user())
         return HttpResponseRedirect(self.get_success_url())
-
-

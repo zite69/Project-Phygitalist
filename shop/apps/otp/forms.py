@@ -15,7 +15,8 @@ from shop.apps.main.utils.common import dump
 import logging
 from shop.apps.main.utils.common import dump
 from django.core.validators import validate_email
-from phonenumber_field.validators import validate_phonenumber
+#from phonenumber_field.validators import validate_phonenumber
+from phonenumber_field.validators import validate_international_phonenumber
 
 logger = logging.getLogger('shop.apps.otp')
 
@@ -110,7 +111,7 @@ class EmailPhoneOtpRequestForm(forms.Form):
 
         if not valid_email:
             try:
-                validate_phonenumber(email_phone)
+                validate_international_phonenumber(email_phone)
                 valid_phone = True
                 self.valid_phone = True
             except ValidationError:
@@ -139,7 +140,7 @@ class EmailPhoneOtpRequestForm(forms.Form):
             generate_kw_args["phone"] = True
             logger.debug(f"Got valid phonenumber, requesting otp for {data}")
         else:
-            raise ValueError(_("Fatal warning this should never happen. If neither email or phone is valid then the validation should fail"))
+            raise ValueError(_("Fatal error this should never happen. If neither email or phone is valid then the validation should fail"))
 
         try:
             user = User.objects.get(**user_kw_args)
@@ -202,5 +203,3 @@ class OtpVerificationForm(forms.Form):
 
     def get_user(self):
         return self.user_cache
-
-
