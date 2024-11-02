@@ -23,7 +23,7 @@ def load_initial_data(apps, schema_editor):
     for k, v in STATE_CHOICES:
         State.objects.create(code=k, name=v)
 
-    with gzip.open(settings.BASE_DIR / 'data/Pincode_30052019.csv.gz', 'r', encoding='windows-1252') as f:
+    with gzip.open(settings.BASE_DIR / 'data/Pincode_30052019.csv.gz', 'rt', encoding='windows-1252') as f:
         reader = csv.reader(f)
         next(reader)
         for row in reader:
