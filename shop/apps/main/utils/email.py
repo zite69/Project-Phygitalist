@@ -42,13 +42,17 @@ def send_waitlist_welcome(email):
     #returns the number of messages sent. in this case should be either 1 or 0
     return message.send(fail_silently=False)
 
-def send_email_otp(email, otp):
-    context = {"otp": otp}
-    html_content = render_to_string("email/otp.html", context=context)
+def send_email(email, **kwargs):
+    template = kwargs.get("template", "email/otp.html")
+    logo = kwargs.get("logo", True)
+    from_email = kwargs.get("from_email", settings.DEFAULT_FROM_EMAIL)
+    subject = kwargs.get("subject", "Your OTP to login to our site")
+
+    html_content = render_to_string(template, context=kwargs)
     text_content = strip_tags(html_content)
 
     message = EmailMultiAlternatives(
-        subject="Your OTP to login to our site",
+        subject=subject,
         body=text_content,
         from_email=settings.DEFAULT_FROM_EMAIL,
         to=[email]
@@ -56,6 +60,24 @@ def send_email_otp(email, otp):
 
     message.mixed_subtype = 'related'
     message.attach_alternative(html_content, "text/html")
-    message.attach(logo_data())
+    if logo:
+        message.attach(logo_data())
 
     return message.send(fail_silently=False)
+
+def send_email_otp(email, otp):
+    return send_email(email, otp=otp, template="email/otp.html", subject="Your OTP to login to our site")
+
+def send_email_invite(email, ctx):
+    #Default context values
+    def_ctx = {
+        'template': 'email/invitation.html',
+        'subject': 'You have been invited to join our site',
+        'expiry': '7 days'
+    }
+
+    #Set defaults for context if they don't exist'
+    for k in def_ctx:
+        ctx.setdefault(k, def_ctx[k])
+
+    return send_email(email, **ctx)
