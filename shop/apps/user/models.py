@@ -10,8 +10,12 @@ from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
 from django.db.models import Q
 from django.utils import timezone
-
+from localflavor.in_.forms import INPANCardNumberFormField
+from localflavor.in_.models import INPANCardNumberField
+import logging
 import re
+
+logger = logging.getLogger("shop.apps.user.models")
 
 #Address = get_model("address", "Address")
 
@@ -60,18 +64,18 @@ class validate_length:
     def __call__(self, value, **kwds: Any) -> Any:
         if len(str(value)) != self.length:
             raise ValidationError(_("Value %(value)s is not of %(length)s"), params={"value": value, "length": self.length})
-        
+
     def __eq__(self, other):
         return self.length == other.length
-    
+
 def validate_upi(value):
     if not REX_UPI.match(value):
         raise ValidationError(_("UPI ID %(value)s does not appear to be valid"))
-    
-class User(AbstractUser, PermissionsMixin):
+
+class User(AbstractUser):
     email = models.EmailField(_("Email Address"), unique=True, blank=True, null=True)
     username = models.CharField(_("Username"), max_length=64, unique=True, blank=False)
-    phone = PhoneNumberField(_("Phone Number"), unique=True, region='IN', blank=True, null=True)
+    phone = PhoneNumberField(_("Phone Number"), unique=True, region='IN', blank=False, null=True)
     email_verified = models.BooleanField(_("Verified Email"), default=False)
     phone_verified = models.BooleanField(_("Verified Phonenumber"), default=False)
 
@@ -87,10 +91,16 @@ class User(AbstractUser, PermissionsMixin):
             )
         ]
 
+    # def __init__(self, *args, **kwargs):
+    #     logger.debug(f"We are being called to create a User object: {args} {kwargs}")
+    #     super().__init__(*args, **kwargs)
+
     def save(self, *args, **kwargs):
+        logger.debug(f"user: {self.username}")
         if self.username == "":
             if self.email == "":
-                self.username = f"phone-{self.phone.national}"
+                logger.debug(f"number: {self.phone.national_number}")
+                self.username = f"p-{self.phone.national_number}"
             else:
                 self.username = self.email
 
@@ -103,23 +113,30 @@ class ProfileAddesses(models.Model):
     shipping = models.BooleanField(_("Shipping Address?"), default=False)
     pickup = models.BooleanField(_("Pickup Address for Sellers"), default=False)
 
+def upload_profile_photo_path(instance, filename):
+    user = getattr(instance, 'user', None)
+    if user == None:
+        raise ValueError(_("Profile must be linked to existing user"))
+
+    return f"profiles/users/{user.username}/{filename}"
+
 class Profile(models.Model):
     TYPE_BUYER = 'B'
     TYPE_SELLER = 'S'
-    TYPE_BOTH = 'O'
     TYPE_CEO = 'C'
     TYPE_CHOICES = (
         (TYPE_BUYER, _("Buyer")),
         (TYPE_SELLER, _("Seller")),
-        (TYPE_BOTH, _("Both")),
         (TYPE_CEO, _("CEO")),
     )
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, blank=False, null=False)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True, blank=False, null=False, related_name='profile')
     type = models.CharField(_("User Profile Type"), name="type", max_length=4, db_index=True, choices=TYPE_CHOICES)
+    level = models.PositiveSmallIntegerField(_("Seller or CEO level"), default=1)
 
+    photo = models.ImageField(_("Profile Photo"), null=True, upload_to=upload_profile_photo_path)
     gstin = models.CharField(_("GSTIN Number"), name="gstin", max_length=15, db_index=True, blank=True, null=True, unique=True, validators=[validate_length(15)])
-    pan = models.CharField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=True, null=True, unique=True, validators=[validate_length(10)])
+    pan = INPANCardNumberField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=True, null=True, unique=True)
     upi = models.CharField(_("UPI ID"), name="upi", max_length=45, db_index=True, blank=True, null=True, unique=True, validators=[validate_upi])
     tin = models.CharField(_("TIN Number"), name="tin", max_length=11, db_index=True, blank=True, null=True, unique=True, validators=[validate_length(11)])
 
@@ -127,6 +144,5 @@ class Profile(models.Model):
         for k, v in self.TYPE_CHOICES:
             if k == self.type:
                 return v
-        
+
         return ""
-    

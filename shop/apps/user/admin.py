@@ -22,11 +22,11 @@ class CustomUserAdmin(UserAdmin):
         'phone'
     ]
 
-    add_fieldsets = UserAdmin.add_fieldsets +(
+    add_fieldsets = UserAdmin.add_fieldsets + (
         (None,{'fields':('phone',),}),
     )
     
-    fieldsets = UserAdmin.fieldsets +(
+    fieldsets = UserAdmin.fieldsets + (
         (None,{'fields':('phone',),}),
     )
     
