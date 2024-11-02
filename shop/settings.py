@@ -58,10 +58,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'dynamic_preferences',
+    'dynamic_preferences.users.apps.UserPreferencesConfig',
+    'djmoney',
+    'localflavor',
+    'formtools',
      # CMS base apps
     'cms',
     'menus',
-
+    'django.forms',
     'djangocms_text_ckeditor',
     'djangocms_alias',
     'djangocms_versioning',
@@ -141,23 +146,39 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_messages',
+    'corsheaders',
+    #'pinax.referrals',
+    #'pinax.invitations',
+    #'account',
     'shop.apps.main',
     'shop.apps.wishlist',
     'shop.apps.catalogue.apps.CatalogueConfig',
     'shop.apps.partner.apps.PartnerConfig',
+    'shop.apps.seller.apps.SellerConfig',
+    'shop.apps.registration.apps.RegistrationConfig',
+    'shop.apps.invitation',
     'shop.apps.themezite69bs5',
     'shop.apps.otp.apps.OtpConfig',
+    'shop.apps.membership.apps.MembershipConfig',
     'djangocms_form_builder',
 ]
+
+if DEBUG:
+    INSTALLED_APPS.insert(7, 'whitenoise.runserver_nostatic')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'shop.apps.main.middleware.DynamicSiteMiddleware',
+    'shop.apps.main.middleware.Zite69Middleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'pinax.referrals.middleware.SessionJumpingMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -171,6 +192,7 @@ MIDDLEWARE = [
 
 if DEBUG:
     INSTALLED_APPS += ("debug_toolbar",)
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 INSTALLED_APPS += env("INSTALLED_APPS", default=[])
 
@@ -182,6 +204,10 @@ if DEBUG:
 INTERNAL_IPS = [
     "127.0.0.1",
     ]
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda _req: DEBUG
+}
 
 ROOT_URLCONF = 'shop.urls'
 
@@ -204,10 +230,14 @@ TEMPLATES = [
                 'shop.apps.wishlist.context_processors.wishlists',
                 'shop.apps.main.context_processors.settings',
                 'oscar.core.context_processors.metadata',
+                'dynamic_preferences.processors.global_preferences',
             ],
         },
     },
 ]
+
+#FORM_RENDERER = "django.forms.renderers.Jinja2DivFormRenderer"
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
@@ -279,7 +309,11 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
     ("en", _("English")),
-    # Add additional languages here
+    ("ml", _("Malayalam")),
+    ("ka", _("Kannada")),
+    ("ta", _("Tamil")),
+    ("te", _("Telugu")),
+    ("hi", _("Hindi"))
 ]
 
 TIME_ZONE = 'UTC'
@@ -310,6 +344,13 @@ CMS_CONFIRM_VERSION4 = True
 # https://docs.django-cms.org/en/release-4.1.x/how_to/multi-site.html
 
 SITE_ID = 1
+
+SELLER_SITE_ID = 2
+DEFAULT_SITE_ID = 1
+
+#SELLER_DOMAIN = env("SELLER_DOMAIN", default="seller.local")
+#DEFAULT_DOMAIN = env("DEFAULT_DOMAIN", default="localhost")
+SESSION_COOKIE_DOMAIN = env("ROOT_DOMAIN", default=".zite69.com")
 
 # A base template is part of this setup
 # https://docs.django-cms.org/en/release-4.1.x/reference/configuration.html#cms-templates
@@ -391,7 +432,7 @@ PHONENUMBER_DB_FORMAT = "RFC3966"
 PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
 # Elasticsearch Configuration
-OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
+#OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
 OSCAR_ELASTICSEARCH_FACETS = [
     {
         "name": "price",
@@ -550,6 +591,21 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False,
+        },
+        'shop.apps.user': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'shop.apps.registration': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.seller': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
         }
     }
 }
@@ -567,6 +623,48 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+#Dynamic preferences
+DYNAMIC_PREFERENCES = {
+
+    # a python attribute that will be added to model instances with preferences
+    # override this if the default collide with one of your models attributes/fields
+    'MANAGER_ATTRIBUTE': 'preferences',
+
+    # The python module in which registered preferences will be searched within each app
+    'REGISTRY_MODULE': 'dynamic_preferences_registry',
+
+    # Allow quick editing of preferences directly in admin list view
+    # WARNING: enabling this feature can cause data corruption if multiple users
+    # use the same list view at the same time, see https://code.djangoproject.com/ticket/11313
+    'ADMIN_ENABLE_CHANGELIST_FORM': False,
+
+    # Customize how you can access preferences from managers. The default is to
+    # separate sections and keys with two underscores. This is probably not a settings you'll
+    # want to change, but it's here just in case
+    'SECTION_KEY_SEPARATOR': '__',
+
+    # Use this to disable auto registration of the GlobalPreferenceModel.
+    # This can be useful to register your own model in the global_preferences_registry.
+    'ENABLE_GLOBAL_MODEL_AUTO_REGISTRATION': True,
+
+    # Use this to disable caching of preference. This can be useful to debug things
+    'ENABLE_CACHE': True,
+
+    # Use this to select which chache should be used to cache preferences. Defaults to default.
+    'CACHE_NAME': 'default',
+
+    # Use this to disable checking preferences names. This can be useful to debug things
+    'VALIDATE_NAMES': True,
+}
+PORT = env("PORT", default=8000)
+
+CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS", default=[])
+if not CORS_ALLOWED_ORIGINS:
+   for host in ALLOWED_HOSTS:
+       CORS_ALLOWED_ORIGINS.append(f"http://{host}:{PORT}")
+
+CORS_ALLOW_ALL_ORIGINS = env("CORS_ALLOW_ALL_ORIGINS", default=False)
 
 from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")
@@ -591,6 +689,23 @@ SMS_AUTH_TOKEN = env("SMS_AUTH_TOKEN", default="")
 SMS_SENDER_ID = env("SMS_SENDER_ID", default="")
 SMS_LOGIN_OTP_TEMPLATE = env("SMS_LOGIN_OTP_TEMPLATE", default="Your OTP to login is {otp}")
 SMS_LIVE=env("SMS_LIVE", default=False)
+
+USE_HTTPS=env("USE_HTTPS", default=False)
+IP_ADDRESS_META_FIELD=env("IP_ADDRESS_META_FIELD", default="REMOTE_ADDR")
+
+ZITE69_MAIN_SELLER = env("ZITE69_MAIN_SELLER", default="Zite69 Main Seller")
+ZITE69_MAIN_SELLER_ID = env("ZITE69_MAIN_SELLER_ID", default=1)
+ZITE69_MAIN_USER_ID = env("ZITE69_MAIN_USER_ID", default=1)
+ZITE69_MAIN_USERNAME = env("ZITE69_MAIN_USERNAME", default="system")
+
+ZITE69_MAIN_DOMAIN = env("ZITE69_MAIN_DOMAIN", default="www.zite69.com")
+ZITE69_SELLER_DOMAIN = env("ZITE69_SELLER_DOMAIN", default="seller.zite69.com")
+
+if ZITE69_MAIN_DOMAIN not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(ZITE69_MAIN_DOMAIN)
+
+if ZITE69_SELLER_DOMAIN not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(ZITE69_SELLER_DOMAIN)
 
 if DEBUG == False:
     #Setup production logging
