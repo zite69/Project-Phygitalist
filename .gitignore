@@ -12,7 +12,7 @@ db.sqlite3
 .env
 .env.test
 .env.production
-venv/
+venv*/
 
 CACHE/
 *Zone.Identifier
