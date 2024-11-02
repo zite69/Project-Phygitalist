@@ -12,7 +12,7 @@
         <meta name="author" content="SoonLaunch">
 		<link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.svg' %}">
         <!-- Place favicon.ico in the root directory -->
-
+        {{ settings.PLAUSIBLE_TAG | safe }}
 		<!-- ========================= CSS here ========================= -->
 		<link rel="stylesheet" href="{% static 'css/bootstrap-5.0.2.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/lineicons.css' %}">
@@ -88,6 +88,7 @@
                 </div> <!-- end container -->
             </div>
         </main>
+        {{ settings.ZITE69_TAG|safe}}
         <!-- ========================= main-wrapper end ========================= -->
 
 		<!-- ========================= JS here ========================= -->

@@ -707,6 +707,8 @@ if ZITE69_MAIN_DOMAIN not in ALLOWED_HOSTS:
 if ZITE69_SELLER_DOMAIN not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(ZITE69_SELLER_DOMAIN)
 
+PLAUSIBLE_TAG = env.str("PLAUSIBLE_TAG", default="", multiline=True)
+
 if DEBUG == False:
     #Setup production logging
     LOGGING['handlers']['file'] = {
