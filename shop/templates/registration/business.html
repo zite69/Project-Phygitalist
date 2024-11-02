@@ -1,0 +1,13 @@
+{% extends 'registration/seller-wizard.html' %}
+{% load static %}
+
+{% block form %}
+    <div class="verified">
+        <img src="{% static 'img/verified_icon.png' %}" class="img-verified" alt="Zite69">
+        <span class="verify_text">Nice! Your account is verified.</span>
+    </div>
+
+    <button class="btn action-btn" type="submit" name="submit">
+        Add Business
+    </button>
+{% endblock %}

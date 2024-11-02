@@ -1,0 +1,25 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+    {{ wizard.form.media }}
+{% endblock %}
+
+{% block registration-form %}
+<h2>Register Quick</h2>
+<p>List your first product to try new market!</p>
+<form id="seller-registration" action="" method="POST" data-step="{{ wizard.steps.current }}" {% if wizard.form.upload_files %}enctype="multipart/form-data"{% endif %}>
+    {% csrf_token %}
+    {{ wizard.management_form }}
+    {% if wizard.form.forms %}
+        {{ wizard.form.management_form }}
+        {% for form in wizard.form.forms %}
+            {% crispy form %}
+        {% endfor %}
+    {% else %}
+        {% block form %}
+        {% endblock %}
+    {% endif %}
+</form>
+{% endblock %}

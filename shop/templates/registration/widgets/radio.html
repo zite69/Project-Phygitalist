@@ -1,0 +1,7 @@
+{%  load crispy_forms_field %}
+{% for choice in field %}
+<div class="radio-option">
+    {{ choice.tag }}
+    <label id="{{ choice.id_for_label }}">{{ choice.choice_label}}</label>
+</div>
+{% endfor %}

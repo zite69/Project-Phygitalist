@@ -1,0 +1,43 @@
+{% extends 'registration/seller-wizard.html' %}
+
+{% block form %}
+    {% if wizard.form.errors %}
+        <div class="error">
+            {{ wizard.form.errors }}
+        </div>
+    {% endif %}
+    <div id="div_id_gst-gstin" class="mb-3">
+        <label class="gst-label" for="id-gst">Enter GST Number</label>
+        <input id="id_gst-gstin" type="text" name="gst-gstin" class="gst-input" placeholder="Pincode should match your registered GST pincode">
+    </div>
+    <div id="div_id_gst-pan" class="mb-3 hide">
+        <label for="id_gst-pan" class="pan-label">PAN Number</label>
+        <input id="id_gst-pan" type="text" class="pan-input" name="gst-pan" placeholder="Please enter your PAN number">
+    </div>
+    <div class="radio-group">
+        <div class="radio-option">
+            <input id="id_gst-gst_status_0" type="radio" name="gst-gst_status" value="Y"
+                class="gst-status-choice" checked>
+            <label for="id_gst-gst_status_0">I have GST</label>
+        </div>
+        <div class="radio-option">
+            <input id="id_gst-gst_status_1" type="radio" name="gst-gst_status" value="N"
+                class="gst-status-choice">
+            <label for="id_gst-gst_status_1">I don&apos;t have GST</label>
+        </div>
+        <div class="radio-option">
+            <input id="id_gst-gst_status_2" type="radio" name="gst-gst_status" value="E"
+                class="gst-status-choice">
+            <label for="id_gst-gst_status_2">I am exempted</label>
+        </div>
+        <div class="radio-option">
+            <input id="id_gst-gst_status_3" type="radio" name="gst-gst_status" value="L"
+                class="gst-status-choice">
+            <label for="id_gst-gst_status_3">I will add later</label>
+        </div>
+    </div>
+    <p class="legal-support">
+        <a href="/legal/">Click here</a> to consult with legal support team
+    </p>
+    <button id="btn_submit" type="submit" name="submit" class="action-btn">Sell Now</a></button>
+{% endblock %}

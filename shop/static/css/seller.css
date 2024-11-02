@@ -1,0 +1,99 @@
+input.error {
+    border: 2px solid red;
+}
+
+input.success {
+    border: 2px solid green;
+}
+
+span.error {
+    color: red;
+}
+
+.input-link {
+    width: 100%;
+    padding: 5px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-link:focus-within {
+    outline: -webkit-focus-ring-color auto 1px;
+    outline: -moz-focus-ring-color auto 1px;
+}
+
+.registration-form .input-link input {
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+    box-sizing: border-box;
+}
+
+.registration-form .input-link input:focus-visible {
+    outline: none;
+}
+
+.input-link > input {
+    width: 80%;
+}
+
+.input-link > button {
+    width: 20%;
+    font-size: 0.8rem;
+}
+
+/*
+.control {
+    cursor: text;
+}
+
+.control:empty + .zplaceholder {
+    display: inline;
+    flex: 1 1 auto;
+}
+
+.input-link > .zplaceholder {
+    display: inline;
+    color: #6b7885;
+}
+
+.input-link:focus > .zplaceholder {
+    display: none !important;
+    flex: 0 1 auto;
+}
+
+.input-link > .control {
+    display: inline;
+}
+
+.input-link > .get-link {
+    color: blue;
+    cursor: pointer;
+}
+
+.control:empty {
+    display: none;
+    position: absolute;
+}
+
+.input-link:focus > .zplaceholder {
+   display: none !important;
+   flex: 0 1 auto;
+}
+
+.control:not(:empty) + .zplaceholder {
+    display: none !important;
+    flex: 0 1 auto;
+}
+
+
+
+.unselectable {
+    user-select: none; // Standard syntax
+    -webkit-user-select: none; // Safari
+    -moz-user-select: none; // Firefox
+    -ms-user-select: none; // IE 10+
+}
+*/

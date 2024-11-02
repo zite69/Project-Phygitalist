@@ -1,0 +1,11 @@
+.error {
+    color: red;
+}
+
+.registration-form input.success {
+    border: 3px solid green;
+}
+
+label.requiredField {
+    color: red;
+}
