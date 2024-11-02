@@ -14,6 +14,8 @@
         {% endblock %}" />
         <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}" />
     
+        {{ settings.PLAUSIBLE_TAG | safe }}
+
         {% block favicon %}
             <link rel="shortcut icon" href="{% static "oscar/favicon.ico" %}" />
         {% endblock %}
