@@ -12,7 +12,7 @@ def load_data(apps, schema_editor):
     user = User.objects.get(id = user_id)
     Seller.objects.create(
         name = name,
-        handle = slugify(name),
+        handle = slugify(name)[:20],
         user = user
     )
 
