@@ -41,7 +41,7 @@ django-messages @ git+https://github.com/zite69/django-messages.git@ca7f095ac03e
 django-modelcluster==6.3
 django-money==3.5.3
 django-oscar==3.2.5
-django-oscar-elasticsearch==2.0.14
+#django-oscar-elasticsearch==2.0.14
 django-parler==2.3
 django-permissionedforms==0.1
 #django-phonenumber-field==8.0.0
@@ -139,8 +139,8 @@ typing_extensions==4.12.2
 urllib3==2.2.2
 uwsgidecorators==1.1.0
 uwsgidecorators-fallback==0.0.5
-wagtail==6.2
-wagtail-extendedsearch==1.0.7
+#wagtail==6.2
+#wagtail-extendedsearch==1.0.7
 wcwidth==0.2.13
 webencodings==0.5.1
 whitenoise==6.7.0
