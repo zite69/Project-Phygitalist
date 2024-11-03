@@ -89,8 +89,8 @@ persisting-theory==1.0
 pexpect==4.9.0
 phonenumbers==8.13.40
 phonenumberslite==8.13.42
-pillow==10.4.0
-pillow_heif==0.18.0
+pillow==11.0.0
+pillow_heif==0.20.0
 pinax-referrals==4.3.0
 platformdirs==4.2.2
 prompt_toolkit==3.0.47
