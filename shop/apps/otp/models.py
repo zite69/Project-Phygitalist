@@ -6,7 +6,7 @@ User = get_user_model()
 
 class Otp(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    otp_secret = models.CharField(_("OTP Secret"), max_length=16)
+    otp_secret = models.CharField(_("OTP Secret"), max_length=32)
     is_verified = models.BooleanField(_("Verified"), default=False)
     to_email = models.BooleanField(_("To Email"), default=False)
     to_phone = models.BooleanField(_("To Phone"), default=False)
