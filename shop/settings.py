@@ -557,6 +557,11 @@ LOGGING = {
             'propagate': True,
             'level': 'ERROR',
         },
+        'root': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'ERROR',
+        },
         'django': {
             'handlers': ['null'],
             'propagate': True,
