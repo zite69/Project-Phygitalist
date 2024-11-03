@@ -665,6 +665,7 @@ if not CORS_ALLOWED_ORIGINS:
        CORS_ALLOWED_ORIGINS.append(f"http://{host}:{PORT}")
 
 CORS_ALLOW_ALL_ORIGINS = env("CORS_ALLOW_ALL_ORIGINS", default=False)
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")
