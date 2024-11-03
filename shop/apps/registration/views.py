@@ -149,7 +149,7 @@ class SendPhoneOtpJson(View, JsonRequestResponseMixin):
         otp = generate_otp(user, phone=True)
         logger.debug(f"created user: {user} sending phone: {user.phone} an otp: {otp}")
 
-        resp = send_phone_otp(user.phone, otp)
+        resp = send_phone_otp(user.phone, otp, sms_template=settings.SMS_VALIDATE_PHONE_OTP)
         #logger.debug(f"Got response after sending phone otp: {resp}")
 
         return JsonResponse({"status": "success", "id": user.id})

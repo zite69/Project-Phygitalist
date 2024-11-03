@@ -689,6 +689,7 @@ SMS_AUTH_KEY = env("SMS_AUTH_KEY", default="")
 SMS_AUTH_TOKEN = env("SMS_AUTH_TOKEN", default="")
 SMS_SENDER_ID = env("SMS_SENDER_ID", default="")
 SMS_LOGIN_OTP_TEMPLATE = env("SMS_LOGIN_OTP_TEMPLATE", default="Your OTP to login is {otp}")
+SMS_VALIDATE_PHONE_OTP = env("SMS_VALIDATE_PHONE_OTP", default="Your ZITE69 account verification OTP code is {otp}. Code is valid for 10 minutes only, one time use. Please DO NOT share this OTP with anyone-ZITE69.com")
 SMS_LIVE=env("SMS_LIVE", default=False)
 
 USE_HTTPS=env("USE_HTTPS", default=False)
