@@ -356,7 +356,8 @@ SESSION_COOKIE_DOMAIN = env("ROOT_DOMAIN", default=".zite69.com")
 # https://docs.django-cms.org/en/release-4.1.x/reference/configuration.html#cms-templates
 
 CMS_TEMPLATES = (
-    ("cms/home.html", _("Home")),
+    #("cms/home.html", _("Home")),
+    ("cms/live_soon.html", _("Livesoon")),
     ("cms/landing.html", _("Landing")),
 )
 
