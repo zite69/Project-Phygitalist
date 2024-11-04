@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color:#ffffff;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    max-width: 200px;
+    margin: 10px 0;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    font-size: 3.5rem;
+    margin: 1rem 0;
+    font-weight: 800;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.promo-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: center; /* Center the text */
+}
+
+/* Desktop view styles */
+.desktop-view {
+    display: block; /* Display as block by default */
+}
+
+.mobile-view {
+    display: none; /* Hide mobile view by default */
+}
+
+.email-form {
+    display: flex;
+    gap: 6px; /* Adds space between input and button */
+    margin: 20px 0;
+    width: 100%;
+    max-width: 600px; /* Adjust max-width to fit both elements */
+}
+
+.email-input {
+    flex: 1; /* This will make the input field take the remaining available space */
+    padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+
+    transition: border-color 0.3s ease;
+}
+
+.notify-button {
+    padding: 1rem 2rem; /* Ensures the button has enough padding */
+    font-size: 1rem;
+    background-color: #f5767b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.notify-button:hover {
+    background-color: #f66569;
+}
+
+.email-input:focus {
+    outline: none;
+    border-color: #f66569;
+}
+
+/* Base styles for the footer and footer links */
+.footer {
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #c1bdbd;
+    align-items: center;
+}
+
+.footer-links a {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 11px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ff1a1a;
+}
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .desktop-view {
+      display: none; /* Hide desktop view on mobile */
+}
+
+  .mobile-view {
+      display: block; /* Show mobile view */
+      line-height: 1.5; /* Optional: Adjust line height for readability */
+  }
+    .email-form {
+        flex-direction: column;
+        gap: 10px; /* Space between stacked elements */
+        max-width: 100%; /* Ensure it fits the smaller screen */
+    }
+
+    .notify-button {
+        width: 100%; /* Button spans full width on small screens */
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .footer-links {
+        gap: 8px; /* Adjust the gap for better spacing */
+    }
+
+    .footer-links a {
+        font-size: 11px; /* Slightly increase font size for better readability on small screens */
+    }
+}
