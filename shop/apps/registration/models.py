@@ -4,10 +4,12 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 from django.utils.deconstruct import deconstructible
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
 from shop.apps.user.models import validate_length, Profile, User
 from typing import Any, Self
 from shop.apps.main.models import Pincode
+import os
 
 @deconstructible
 class unique_in_db(object):
@@ -19,9 +21,9 @@ class unique_in_db(object):
         q = Q(**{f"{self.field}": value})
         ps = self.model.objects.filter(q)
         if ps:
-            raise ValidationError(_("%(field)s with value %(value)s already exists in our User databases! Please check the number or login with your registered ID"),
-                params={"value": value, "field": self.field}
-            )
+            raise ValidationError(_("%(field)s with value %(value)s already exists in our %(model)s databases! Please check the number or login with your registered ID"),
+                                  params={"value": value, "field": self.field, "model": self.model}
+                  )
 
     def __eq__(self, other: Self) -> bool:
         return self.field == other.field
@@ -45,7 +47,7 @@ class SellerRegistration(models.Model):
     phone = PhoneNumberField(_("Phone Number"), db_index=True, blank=False, validators=[unique_in_db(User, 'phone')])
     email = models.EmailField(_("Email Adderss"), db_index=True, blank=False, validators=[unique_in_db(User, 'email')])
     gstin = models.CharField(_("GSTIN Number"), name="gstin", max_length=15, blank=False,
-        db_index=True, null=True, unique=True,
+        db_index=True, null=True,
         validators=[validate_length(15), unique_in_db(Profile, 'gstin')])
     pan = models.CharField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=False,
         null=True, unique=True, validators=[validate_length(10), unique_in_db(Profile, 'pan')])
@@ -62,7 +64,18 @@ class SellerRegistration(models.Model):
     def approved(self):
         return self.approval_status == self.__class__.STATUS_APPROVED
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['gstin'],
+                condition=(~models.Q(gstin='') & models.Q(gstin__isnull=False)),
+                name='unique_gstin_ifnotnull'
+                )
+        ]
+
+seller_registration_filestorage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads', 'sellerreg'))
+
 class SellerProduct(models.Model):
     seller_reg = models.ForeignKey(SellerRegistration, on_delete=models.PROTECT)
     name = models.CharField(_("Product Name"), max_length=255, blank=False, null=False)
-    image = models.ImageField(_("Product Image"), upload_to="uploads/sellerreg/%Y/%m/%d")
+    image = models.ImageField(_("Product Image"), upload_to="uploads/sellerreg/%Y/%m/%d", storage=seller_registration_filestorage)

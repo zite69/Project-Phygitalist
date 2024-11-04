@@ -310,7 +310,7 @@ LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ("en", _("English")),
     ("ml", _("Malayalam")),
-    ("ka", _("Kannada")),
+    ("kn", _("Kannada")),
     ("ta", _("Tamil")),
     ("te", _("Telugu")),
     ("hi", _("Hindi"))

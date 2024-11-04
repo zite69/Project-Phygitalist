@@ -68,6 +68,9 @@ def send_email(email, **kwargs):
 def send_email_otp(email, otp):
     return send_email(email, otp=otp, template="email/otp.html", subject="Your OTP to login to our site")
 
+def send_email_verification(email, otp):
+    return send_email(email, otp=otp, template="email/verification.html", subject="Verify your email address")
+
 def send_email_invite(email, ctx):
     #Default context values
     def_ctx = {

@@ -5,16 +5,16 @@ from django.http import JsonResponse
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
-from django.core.files.storage import FileSystemStorage
 from django.core import serializers
 from shop.apps.main.utils.sms import send_phone_otp
-from shop.apps.main.utils.email import send_email_otp
+from shop.apps.main.utils.email import send_email_verification
 from shop.apps.otp.utils import generate_otp
 from phonenumber_field.phonenumber import PhoneNumber
 from phonenumber_field.validators import validate_international_phonenumber
 from formtools.wizard.views import SessionWizardView
 from shop.apps.main.models import State, Pincode
 from .forms import REGISTRATION_FORM_TEMPLATES
+from .models import seller_registration_filestorage
 
 import json
 import logging
@@ -24,13 +24,14 @@ logger = logging.getLogger("shop.apps.registration.views")
 
 User = get_user_model()
 
+
 class HomeView(TemplateView):
     template_name = 'registration/home.html'
 
 
 class SellerRegistrationWizard(SessionWizardView):
     template_name = 'registration/seller.html'
-    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT))
+    file_storage = seller_registration_filestorage
 
     def get_template_names(self):
         logger.debug(f"Returning template: {REGISTRATION_FORM_TEMPLATES[self.steps.current]} for step {self.steps.current}")
@@ -186,7 +187,7 @@ class SendEmailOtpJson(View, JsonRequestResponseMixin):
         otp = generate_otp(user, email=True)
         logger.debug(f"created user: {user}, sending email: {user.email} an otp: {otp}")
 
-        resp = send_email_otp(email, otp)
+        resp = send_email_verification(email, otp)
         #logger.debug(f"Response after sending email otp: {resp}")
 
         logger.debug(f"Sent {user.email} an otp: {otp}")
