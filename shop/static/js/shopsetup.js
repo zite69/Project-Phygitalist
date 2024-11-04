@@ -26,7 +26,7 @@
       console.log("Inside name input");
       const newName = eventInput.target.value;
       if (!handle.dataset.editted) {
-        handle.value = slugify(newName).slice(0, 20);
+        handle.value = slugify(newName).slice(0, 12);
         short.value = handle.value.slice(0, 12);
       }
     });

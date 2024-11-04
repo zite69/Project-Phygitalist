@@ -136,7 +136,7 @@ class Profile(models.Model):
 
     photo = models.ImageField(_("Profile Photo"), null=True, upload_to=upload_profile_photo_path)
     gstin = models.CharField(_("GSTIN Number"), name="gstin", max_length=15, db_index=True, blank=False, null=True, default=None, validators=[validate_length(15)])
-    pan = INPANCardNumberField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=False, null=True, unique=True, default=None)
+    pan = INPANCardNumberField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=False, null=True, default=None)
     upi = models.CharField(_("UPI ID"), name="upi", max_length=45, db_index=True, blank=True, null=True, unique=True, validators=[validate_upi])
     tin = models.CharField(_("TIN Number"), name="tin", max_length=11, db_index=True, blank=True, null=True, unique=True, validators=[validate_length(11)])
 
@@ -146,7 +146,12 @@ class Profile(models.Model):
                 fields=['gstin'],
                 condition=~models.Q(gstin='') & models.Q(gstin__isnull=False),
                 name='unique_profile_gstin_ifnotnull'
-                )
+                ),
+            models.UniqueConstraint(
+                fields=['pan'],
+                condition=~models.Q(pan='') & models.Q(pan__isnull=False),
+                name='unique_pan_inprofile_ifnotnull'
+            )
         ]
 
 

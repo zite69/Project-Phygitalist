@@ -50,7 +50,7 @@ class SellerRegistration(models.Model):
         db_index=True, null=True,
         validators=[validate_length(15), unique_in_db(Profile, 'gstin')])
     pan = models.CharField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=False,
-        null=True, unique=True, validators=[validate_length(10), unique_in_db(Profile, 'pan')])
+        null=True, validators=[validate_length(10), unique_in_db(Profile, 'pan')])
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='seller_registration')
     pincode = models.ForeignKey(Pincode, on_delete=models.PROTECT, null=True)
@@ -70,7 +70,12 @@ class SellerRegistration(models.Model):
                 fields=['gstin'],
                 condition=(~models.Q(gstin='') & models.Q(gstin__isnull=False)),
                 name='unique_gstin_ifnotnull'
-                )
+                ),
+            models.UniqueConstraint(
+                fields=['pan'],
+                condition=(~models.Q(pan='') & models.Q(pan__isnull=False)),
+                name='unique_pan_insellerreg_ifnotnull'
+            )
         ]
 
 seller_registration_filestorage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads', 'sellerreg'))

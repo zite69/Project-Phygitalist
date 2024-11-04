@@ -671,17 +671,30 @@ class ShopDetails(FormWithRequest):
         "id": "shop-name",
     }))
 
-    handle = forms.CharField(label="", max_length=20, required=True, widget=forms.TextInput(attrs={
+    handle = forms.CharField(label="", max_length=12, required=True, widget=forms.TextInput(attrs={
         "placeholder": "Shop handle",
         "id": "shop-handle",
         "data-editted": False
     }))
 
-    short_handle = forms.CharField(label="", max_length=12, required=False, widget=forms.TextInput(attrs={
-        "placeholder": "Shop short handle",
-        "readonly": True,
-        "id": "shop-short-handle"
-    }))
+    # short_handle = forms.CharField(label="", max_length=12, required=False, widget=forms.TextInput(attrs={
+    #     "placeholder": "Shop short handle",
+    #     "readonly": True,
+    #     "id": "shop-short-handle"
+    # }))
+
+    def __init__(self, *args, request=None, **kwargs):
+        super().__init__(*args, request=request, **kwargs)
+        self.helper.layout = Layout(
+            HTML("""{% load static %}
+            <div class='success-message'>
+                <img src='{% static \'img/seller/icon_success.png\' %}' alt='Zite69'>
+                <span>Wow! Your business added successfully</span>
+            </div>
+            <p>Your Unique Shop Name</p>
+            """),
+            'name', 'handle'
+        )
 
     def clean_handle(self):
         handle = self.cleaned_data.get('handle')
@@ -703,25 +716,25 @@ class ShopDetails(FormWithRequest):
 
         return handle
 
-    def clean_short_handle(self):
-        short_handle = self.cleaned_data.get('short_handle')
+    # def clean_short_handle(self):
+    #     short_handle = self.cleaned_data.get('short_handle')
 
-        if not short_handle:
-            raise ValidationError(_("Short Handle is required."))
+    #     if not short_handle:
+    #         raise ValidationError(_("Short Handle is required."))
 
-        try:
-            SellerRegistration.objects.get(shop_handle__startswith=short_handle)
-            raise ValidationError(_("Please select another handle, this handle is very similar to another seller's handle"))
-        except SellerRegistration.DoesNotExist:
-            pass
+    #     try:
+    #         SellerRegistration.objects.get(shop_handle__startswith=short_handle)
+    #         raise ValidationError(_("Please select another handle, this handle is very similar to another seller's handle"))
+    #     except SellerRegistration.DoesNotExist:
+    #         pass
 
-        try:
-            Seller.objects.get(handle__startswith=short_handle)
-            raise ValidationError(_("Please select another handle, this handle is very similar to another seller's handle"))
-        except Seller.DoesNotExist:
-            pass
+    #     try:
+    #         Seller.objects.get(handle__startswith=short_handle)
+    #         raise ValidationError(_("Please select another handle, this handle is very similar to another seller's handle"))
+    #     except Seller.DoesNotExist:
+    #         pass
 
-        return short_handle
+    #     return short_handle
 
     def clean(self):
         form_data = super().clean()
@@ -737,8 +750,8 @@ class ShopDetails(FormWithRequest):
 
         handle = form_data.get('handle')
         logger.debug(f"handle: {handle}")
-        short_handle = form_data.get('short_handle')
-        logger.debug(f"short_handle: {short_handle}")
+        # short_handle = form_data.get('short_handle')
+        # logger.debug(f"short_handle: {short_handle}")
         if handle != '':
             user.seller_registration.shop_name = shop_name
             user.seller_registration.shop_handle = handle
