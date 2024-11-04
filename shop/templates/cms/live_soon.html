@@ -9,9 +9,19 @@
     <title>Zite69 : Supers Social Platform is Live Soon</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/livesoon.css' %}">
+    {% render_block "css" %}
 </head>
 <body>
+    {% cms_toolbar %}
     <div class="container">
+        {% if messages %}
+        <ul class="text-center messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
         <div class="logo">
             <img src="{% static 'img/wow.gif' %}" alt="Zite69">
         </div>
@@ -19,15 +29,14 @@
         <h1 class="title">live Soon</h1>
 
         <div class="promo-text">
-    <p class="desktop-view">Super socials coming to your doorstep &amp; desktop!</p>
-    <p class="desktop-view">Don't miss your first day first shop offer!</p>
-    <p class="mobile-view">Super socials coming to your doorstep &amp; desktop! Don't miss your first day first shop offer!</p>
-    </div>
+            <p class="desktop-view">Super socials coming to your doorstep &amp; desktop!</p>
+            <p class="desktop-view">Don't miss your first day first shop offer!</p>
+            <p class="mobile-view">Super socials coming to your doorstep &amp; desktop! Don't miss your first day first shop offer!</p>
+        </div>
 
         <div class="email-form">
-    <input type="email" class="email-input" placeholder="Enter email id" aria-label="Email id">
-    <button type="button" class="notify-button">Get your invite</button>
-</div>
+        {% placeholder "content" %} 
+        </div>
     </div>
 
     <footer class="footer">
@@ -46,5 +55,6 @@
     // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.
 </script>
 
+{% render_block "js" %}
 <script src="{% static 'js/scc-c2.min.js'}"></script>
 </body></html>
