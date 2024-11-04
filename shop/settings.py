@@ -620,6 +620,11 @@ LOGGING = {
     }
 }
 
+CACHES_ENV = env("CACHES", default={})
+
+if CACHES_ENV:
+    CACHES = CACHES_ENV
+
 #allauth settings
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
