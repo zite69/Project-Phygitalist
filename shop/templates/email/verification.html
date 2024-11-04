@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+
+    <!-- Import Urbanist and JetBrains Mono Fonts from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Urbanist', sans-serif; /* Apply Urbanist font here */
+        }
+
+        body {
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Blue background strip */
+        .brand-strip {
+            background-color: #f66569;
+            width: 100%;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* ZITE69 logo overlapping the blue strip and the box */
+        .logo-title {
+            position: absolute;
+            top: 60px; /* Adjust this value for proper alignment */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            padding: 10px 20px;
+
+        }
+
+        .otp-container {
+            background-color: white;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: absolute;
+            top: 120px; /* Adjust the top position */
+            z-index: 1;
+        }
+
+        .otp-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .otp-logo {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .verify-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* Line under 'Verify & Login' */
+        .verify-title::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #003DA5;
+            margin-top: 10px;
+        }
+
+        .otp-text {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .otp-code {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #003DA5;
+            font-family: 'JetBrains Mono', monospace; /* Apply JetBrains Mono to OTP code */
+        }
+
+        .otp-validity {
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .otp-container {
+                width: 90%;
+            }
+
+            .header {
+                font-size: 20px;
+            }
+
+            .verify-title {
+                font-size: 18px;
+            }
+
+            .otp-code {
+                font-size: 20px;
+            }
+
+            .blue-strip {
+                height: 150px;
+            }
+
+            .otp-container {
+                top: 75px; /* Adjust the top position on smaller screens */
+            }
+        }
+			a {
+				color: #003DA5;
+			}
+    </style>
+</head>
+<body>
+
+    <!-- Blue strip behind the content -->
+    <div class="brand-strip"></div>
+
+    <!-- ZITE69 Logo/Title Overlapping -->
+    <div class="logo-title">
+        ZITE69
+    </div>
+
+    <!-- OTP Container -->
+    <div class="otp-container">
+        <div class="otp-body">
+            <img src="cid:logo" alt="logo" class="otp-logo">
+            <div class="verify-title">Verify & Login</div>
+            <div class="otp-text">OTP to verify your email address for your ZITE69 Account is</div>
+            <div class="otp-code">{{ otp }}</div>
+            <div class="otp-validity">This OTP is valid for 10 Minutes</div>
+        </div>
+		<div class="footer">
+            For any queries & clarifications, mail us: <a href="mailto:support@zite69.com">support@zite69.com</a>
+		</div>
+    </div>
+
+</body>
+</html>
