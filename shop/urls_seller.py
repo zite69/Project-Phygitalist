@@ -33,6 +33,7 @@ logger.debug(f"urls: {apps.get_app_config('registration').urls[0]}")
 urlpatterns = [
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
     path('', include('cms.urls')),
