@@ -572,6 +572,11 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': False,
         },
+        'django.template': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'oscar.checkout': {
             'handlers': ['console'],
             'propagate': True,
