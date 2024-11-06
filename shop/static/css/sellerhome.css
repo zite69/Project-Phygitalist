@@ -14,6 +14,35 @@ body {
   align-items: center;
   margin-top: 80px; /* Adjust for fixed navbar */
 }
+h1 {
+    font-weight: bold; /* Bold font for main heading */
+    color: #333333; /* Dark gray */
+    margin: 0.5em 0;
+}
+
+h2 {
+    font-weight: bold; /* Bold font for subheading */
+    color: #555555; /* Medium gray */
+    margin: 0.4em 0;
+}
+
+h3 {
+    font-weight:lighter; /* Bold font for lower subheading */
+    color: #777777; /* Lighter gray */
+    margin: 0.3em 0;
+}
+
+h4 {
+    font-weight: normal; /* Normal font weight for less important heading */
+    color: #999999; /* Light gray */
+    margin: 0.3em 0;
+}
+
+h5 {
+    font-weight: normal; /* Normal font weight for the least important heading */
+    color: #bbbbbb; /* Very light gray */
+    margin: 0.2em 0;
+}
 
 /* Navbar styling */
 .navbar {
@@ -91,7 +120,7 @@ body {
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background: white;
+  background: #ffffff;
   position: absolute;
   left: 0;
   width: 100%;
@@ -132,6 +161,7 @@ body {
 
 /* Stats Section */
 .stats {
+  background: #f7f8f8;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
@@ -164,7 +194,7 @@ body {
 }
 
 .modal-content {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   width: 90%;
@@ -222,7 +252,43 @@ body {
     color: #f66569;
     font-weight: bold;
     display: block;
+    text-decoration: none;
 }
+/* Popup Styles */
+.popup {
+           display: none;
+           position: fixed;
+           left: 0;
+           top: 0;
+           width: 100%;
+           height: 100%;
+           background-color: rgba(0, 0, 0, 0.5);
+           justify-content: center;
+           align-items: center;
+           z-index: 9999;
+       }
+
+       .popup-content {
+           background-color:#ffffff;
+           padding: 20px;
+           border-radius: 5px;
+           text-align: center;
+           width: 300px;
+           height: 150px;
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+       }
+
+       /* Styling for text inside the popup */
+       .popup p {
+           font-size: 14px;
+           font-weight: bold;
+           margin-bottom: 20px;
+       }
+
  .play_button{
   width: 50px;
   height: 50px;
@@ -231,12 +297,30 @@ body {
   align-items: center;
   margin: 20px auto 0 auto;
 }
+
+.action-btn {
+    width: 100%;
+    background-color: #f66569;
+    color: #ffffff;
+    border: none;
+    padding:8px;
+    margin: 12px 0 0 0;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
 /* Responsive adjustments */
+
+
+
 @media (max-width: 768px) {
   .nav-links, .auth-buttons {
     display: none;
   }
-
+  .steps-section {
+      flex-direction: column;
+  }
   .hamburger {
     display: block;
   }
@@ -251,6 +335,6 @@ body {
   }
 
   .stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }
