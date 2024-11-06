@@ -1,0 +1,168 @@
+/* General styles */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+    background-color: #ffffff;
+}
+a {
+  text-decoration: none;
+}
+
+.header {
+    background-color: #F06161; /* Match background color to the image */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+
+  /* Outer circle with border */
+    .logo-container {
+      width: 48px; /* Outer circle size */
+      height: 48px;
+      border-radius: 50%; /* Makes it circular */
+      border: 1px solid #ffffff; /* White border */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: auto; /* Aligns the logo to the left */
+}
+
+  .logo {
+       width: 60px; /* Adjust the size as necessary */
+       height: 60px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       margin-right: auto; /* Aligns the logo to the left */
+}
+     .logo img {
+       max-width: 100%;
+       max-height: 100%;
+     }
+
+
+.title h1 {
+    color: #ff6b6b;
+    font-size: 24px;
+    text-decoration: underline;
+}
+
+.main-content {
+    display: flex;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    gap: 40px;
+}
+
+
+
+.image-container {
+    display: flex;                /* Enable flexbox layout */
+    justify-content: center;      /* Horizontally center the image */
+    align-items: center;          /* Vertically center the image */
+    flex: 1;
+    min-width: 300px;
+    height: 100%;                 /* Ensure the container takes up space */
+}
+
+.star-shape img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.content h2 {
+    font-size: 36px;
+    color: #4a4a4a;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+.join-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #f66569;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.join-button:hover {
+  background-color: #ff6b6b;
+    color: #ffffff; /* Optional: This maintains the color on hover */
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-size: 12px;
+    gap: 1.1rem;
+}
+
+.footer-links a{
+  text-decoration: none;
+    color: #161616;
+}
+.footer-links a:hover{
+    color: #f66569
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .header {
+         justify-content: center; /* Center the logo */
+       }
+       .logo-container {
+         margin-right: 0; /* Remove left alignment on smaller screens */
+       }
+    .image-container {
+        min-width: 200px;
+    }
+
+    .content {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .content h2 {
+        font-size: 24px;
+    }
+
+    .footer-links {
+        flex-direction: row; /* Stack links vertically */
+        gap: 1rem; /* Adjust the gap for better spacing */
+    }
+
+    .footer-links a {
+        font-size: 1rem; /* Slightly increase font size for better readability on small screens */
+    }
+}

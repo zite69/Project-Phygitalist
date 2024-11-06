@@ -1,0 +1,37 @@
+{% extends 'cms/base.html' %}
+{% load static %}
+
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/mentor.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main class="main-content">
+        <div class="image-container">
+                <img src="{% static 'img/mentor.png' %}" alt="Guru Network">
+        </div>
+        <div class="content">
+          <div class="title">
+            <h1>Grassroute Guru Network</h1>
+          </div>
+
+            <h2>Are you a mentor with a knack for creating products or services that people crave?</h2>
+            <a href="#" class="join-button">Join as G Guru & Ea₹n Good</a>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" rel="noopener">Fashion</a> |
+            <a href="#" rel="noopener">Accessories</a> |
+            <a href="#" rel="noopener">Food</a> |
+            <a href="#" rel="noopener">Decor</a> |
+            <a href="#" rel="noopener">Art & Craft</a> |
+            <a href="#" rel="noopener">Life Goods</a> |
+            <a href="#" rel="noopener">Digital Goods</a> |
+            <a href="#" rel="noopener">+More</a>
+        </div>
+    </footer>
+{% endblock %}

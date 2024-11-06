@@ -1,0 +1,21 @@
+{% extends 'cms/base.html' %}
+{% load static %}
+{% load cms_tags %}
+
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/careers.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <img src="{% static 'img/career.png' %}" alt="Guru Network" class="illustration">
+        <div class="text-content">
+            <h1>Build a career while you build a company.</h1>
+            <p class="subtitle">With a team who sees tomorrow clearly</p>
+        </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe-zfHemVC3F50QJnBuudP-06XCttgxeU8fuujR8ELIyJxTZw/viewform" class="apply-button">Apply Now</a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

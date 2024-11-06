@@ -359,6 +359,9 @@ CMS_TEMPLATES = (
     #("cms/home.html", _("Home")),
     ("cms/live_soon.html", _("Livesoon")),
     ("cms/landing.html", _("Landing")),
+    ("cms/career.html", _("Career")),
+    ("cms/mentor.html", _("Mentor")),
+    ("cms/seller_home.html", _("Seller Home")),
 )
 
 # Enable permissions

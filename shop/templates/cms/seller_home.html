@@ -1,0 +1,153 @@
+{% extends 'cms/base.html' %}
+{% load static %}
+{% load cms_tags %}
+
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/sellerhome.css' %}">
+{% endblock %}
+
+{% block header %}
+    <nav class="navbar" aria-label="Primary Navigation">
+        <div class="logo">
+            <img src="assets/imgs/zite69.png" alt="ZITE69 logo">
+        </div>
+        <div class="nav-links">
+            <a href="#" aria-label="Join">Join</a>
+            <a href="#" aria-label="Seller School">Seller School</a>
+            <a href="#" aria-label="Help">Help</a>
+        </div>
+        <div class="auth-buttons">
+            <button class="btn btn-login" onclick="openModal()" aria-label="Login Button">Login</button>
+            <button class="btn btn-sell">Start Selling</button>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" aria-label="Join">Join</a>
+        <a href="#" aria-label="Seller School">Seller School</a>
+        <a href="#" aria-label="Help">Help</a>
+        <button class="btn btn-login" onclick="openModal()" aria-label="Login Button">Login</button>
+        <button class="btn btn-sell">Start Selling</button>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <p>Anyone can sell now!</p>
+            <h1 class="hero-title">Join India's first 3-in-1 Marketplace</h1>
+            <h2 class="hero-subtitle">Set your target sales & get your orders instantly</h2>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'img/zite69-seller.png' %}" alt="Marketplace illustration">
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat-item">
+            <h2>0%</h2>
+            <p>Commission/Fee*</p>
+        </div>
+        <div class="stat-item">
+            <h2>100%</h2>
+            <p>Guaranteed Sales</p>
+        </div>
+        <div class="stat-item">
+            <h2>15</h2>
+            <p>Popular Categories</p>
+        </div>
+        <div class="stat-item">
+            <h2>7</h2>
+            <p>Days* Payment</p>
+        </div>
+    </section>
+
+
+    <!-- Second Steps Section with Play Button Trigger -->
+        <div class="steps-section">
+             <div class="step_2">
+                 <img src="{% static 'img/what.jpg' %}" class="img_hash" alt="What is it">
+                 <h3>What is it</h3>
+                 <p>ZITE69 is a super social marketplace to sell diverse categories of products and services   to 1000s of our member shoppers across India from your home or anywhere else.</p>
+                 <span><a href="#" id="playWhat"><img src="{% static 'img/play.png' %}" class="play_button" alt="What is it"></a></span>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/how.jpg' %}" class="img_hash" alt="How it works">
+                 <h3>How it works</h3>
+                 <p>Join as a seller with your product. We will pick it up from your doorstep and sell it to our member shoppers through online and offline channels.</p>
+                 <span><a href="#" id="playHow"><img src="{% static 'img/play.png' %}" class="play_button" alt="How it works"></a></span>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/why.jpg' %}" class="img_hash" alt="Why now">
+                 <h3>Why now</h3>
+                 <p>ZITE69 is India's new rising online local market. We connect 100s of sellers and 1000s of buyers with new social features and e-commerce benefits.</p>
+                 <span><a href="#" id="playWhy"><img src="{% static 'img/play.png' %}" class="play_button" alt="Why now"></a></span>
+             </div>
+         </div>
+
+
+         <!-- New Sales Section with How We Ensure 10X Sales? -->
+         <div class="steps-section">
+             <div class="step_2">
+                 <img src="{% static 'img/order.jpg' %}" class="img_hash" alt="New Orders">
+                 <h3>New Orders Everyday</h3>
+                 <p>Connect with 100% guaranteed member buyers across India to get more and more new orders.</p>
+                 <p class="text_bold"><a href="#" id="playSales">How We Ensure 10X Sales?</a></p>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/product.jpg' %}" class="img_hash" alt="Create Products">
+                 <h3>Create New Products</h3>
+                 <p>Learn from experts to create new products & sell them online and offline & direct.</p>
+                 <p class="text_bold"><a href="#" id="playSchool">Join Seller School</a></p>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/profit.jpg' %}" class="img_hash" alt="Profit">
+                 <h3>0% Fee 100% Profit*</h3>
+                 <p>Pocket more money from each sale with platform fees as low as 0% in selected cases.</p>
+                 <p class="text_bold"><a href="#" id="playMargin">Gross Margin Calculator</a></p>
+             </div>
+         </div>
+
+
+
+    <div class="modal" id="loginModal" aria-hidden="true">
+        <div class="modal-content" aria-label="Login Modal">
+            <h2>Login</h2>
+            <input type="email" placeholder="Email" aria-label="Email">
+            <input type="password" placeholder="Password" aria-label="Password">
+            <button class="btn btn-lgn" style="width: 100%" onclick="closeModal()">Login</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+<script>
+      function openModal() {
+          const modal = document.getElementById('loginModal');
+          modal.style.display = 'flex';
+          modal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeModal() {
+          const modal = document.getElementById('loginModal');
+          modal.style.display = 'none';
+          modal.setAttribute('aria-hidden', 'true');
+      }
+
+      // Close modal when clicking outside
+      window.onclick = function(event) {
+          const modal = document.getElementById('loginModal');
+          if (event.target == modal) {
+              closeModal();
+          }
+      }
+
+      // Toggle mobile menu
+      function toggleMenu() {
+          const mobileMenu = document.getElementById('mobileMenu');
+          mobileMenu.classList.toggle('show-menu');
+      }
+</script>
+{% endblock %}

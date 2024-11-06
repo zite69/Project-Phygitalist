@@ -30,14 +30,14 @@ logger = logging.getLogger("shop.urls_seller")
 logger.debug(f"urls: {apps.get_app_config('registration').urls[0]}")
 
 #urlpatterns = i18n_patterns()
-urlpatterns = [
+urlpatterns = i18n_patterns(
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
     path('', include('cms.urls')),
-]
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap');
+
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Urbanist', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 80px; /* Adjust for fixed navbar */
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 5%;
+  background: #f66569;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Logo styling */
+.logo img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Makes it circular */
+  border: 1px solid #ffffff; /* White border */
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-left: 1rem;
+  flex: 1;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Auth buttons styling */
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-login {
+  background: transparent;
+  color: #333;
+}
+
+.btn-sell {
+  background: #FFD700;
+  color: #333;
+}
+
+ .btn-lgn {
+  background: #f66569;
+  color: #333;
+}
+
+/* Hamburger menu icon */
+.hamburger {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Mobile menu styling */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: white;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu a, .mobile-menu .btn {
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  display: block;
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  padding: 4rem 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+
+.hero-content {
+  flex: 1;
+  text-align: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+/* Stats Section */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 2rem 5%;
+  text-align: center;
+  width: 100%;
+}
+
+.stat-item h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #79c6a4;
+}
+
+.stat-item p {
+  color: #666;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+/* Steps Section Styles */
+.steps-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.step,
+.step_2 {
+    text-align: center;
+    flex: 1;
+    margin: 0 auto;
+}
+.step-circle {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #ffebeb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    color: #f76c6c;
+}
+.img_hash {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.text_bold {
+    color: #f66569;
+    font-weight: bold;
+}
+.text_bold a {
+    color: #f66569;
+    font-weight: bold;
+    display: block;
+}
+ .play_button{
+  width: 50px;
+  height: 50px;
+  display: block;;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 0 auto;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links, .auth-buttons {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .show-menu {
+    display: flex;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
