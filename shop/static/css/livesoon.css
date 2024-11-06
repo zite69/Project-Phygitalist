@@ -172,6 +172,8 @@ body {
 .subscribe-form {
     display: flex;
     gap: 6px;
+    width: 100%;
+    max-width: 600px;
 }
 
 .subscribe-form input.form-control {
@@ -192,4 +194,13 @@ body {
     border-radius: 4px;
     transition: background-color 0.3 ease;
     height: 80%;
+}
+
+.form-div {
+    flex-grow: 1;
+}
+
+.invitation-controls {
+    gap: 6px;
+    width: 100%;
 }

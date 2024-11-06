@@ -6,7 +6,9 @@
           novalidate action="{% url 'form_builder:ajaxview' instance.id %}"
           method="post">
         {% csrf_token %}
-        {% include 'djangocms_form_builder/ajax_form.html' %}
-        <button type="submit" value="Get your invite" class="sub_btn common-btn">Get your invite</button>
+        <div class="d-flex justify-content-between invitation-controls">
+            {% include 'djangocms_form_builder/ajax_form.html' %}
+            <button type="submit" value="Get your invite" class="sub_btn common-btn">Get your invite</button>
+        </div>
     </form>
 {% endif %}
