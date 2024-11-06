@@ -362,6 +362,7 @@ CMS_TEMPLATES = (
     ("cms/career.html", _("Career")),
     ("cms/mentor.html", _("Mentor")),
     ("cms/seller_home.html", _("Seller Home")),
+    ("cms/generic.html", _("Generic")),
 )
 
 # Enable permissions

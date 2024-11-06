@@ -31,7 +31,7 @@ body {
     margin: 10px 0;
 }
 
-.logo img {
+.wow img {
     width: 100%;
     height: auto;
 }
@@ -176,6 +176,16 @@ body {
     gap: 6px;
     width: 100%;
     max-width: 600px;
+}
+
+@media (max-width: 768px) {
+    .invitation-controls {
+        flex-direction: column;
+        gap: 10px;
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .subscribe-form input.form-control {

@@ -1,0 +1,21 @@
+{% extends 'cms/base.html' %}
+{% load static %}
+{% load cms_tags sekizai_tags %}
+
+{% block header %}
+{% placeholder "header" or %}
+    {{ block.super }}
+{% endplaceholder %}
+{% endblock %}
+
+{% block content %}
+{% placeholder "content" or %}
+Page requires content
+{% endplaceholder %}
+{% endblock %}
+
+{% block footer %}
+{% placeholder "footer" or %}
+    {{ block.super }}
+{% endplaceholder %}
+{% endblock %}
