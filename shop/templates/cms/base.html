@@ -18,7 +18,7 @@
             {% endif %}
         {% endblock %}
         {% endspaceless %}">
-    <title>{% block title %}{% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}Zite69 - {{ page_title }}{% else %}Zite69 : Supers Social Platform is Live Soon{% endif %}{% endblock %}</title>
+    <title>{% block title %}zite69 :{% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip }}{% else %}Supers Social Platform is Live Soon{% endif %}{% endblock %}</title>
     {% block styles %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/sellercommon.css' %}">
