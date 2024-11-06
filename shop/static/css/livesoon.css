@@ -40,6 +40,9 @@ body {
     font-size: 3.5rem;
     margin: 1rem 0;
     font-weight: 800;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 .subtitle {
@@ -66,7 +69,7 @@ body {
 .email-form {
     display: flex;
     gap: 6px; /* Adds space between input and button */
-    margin: 20px 0;
+    margin: 20px auto;
     width: 100%;
     max-width: 600px; /* Adjust max-width to fit both elements */
 }
@@ -196,6 +199,12 @@ body {
     height: 80%;
 }
 
+@media (max-width: 560px) {
+    .subscribe-form button {
+        padding: 1rem 0.2rem;
+    }
+}
+
 .form-div {
     flex-grow: 1;
 }
@@ -203,4 +212,5 @@ body {
 .invitation-controls {
     gap: 6px;
     width: 100%;
+    text-align: center;
 }
