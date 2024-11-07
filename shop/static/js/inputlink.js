@@ -49,21 +49,21 @@
   };
 
   async function validateAndGetCode(type, getCodeUri, data, link) {
+    const errorSpan = document.querySelector(`span.${type}.error`);
+    if (errorSpan)
+      errorSpan.remove();
     if ((type == 'phone' && validatePhone(data)) || (type == 'email' && validateEmail(data))) {
       console.log(`Got a valid ${type} we are requesting OTP`);
-      const errorSpan = document.querySelector(`span.${type}.error`);
-      if (errorSpan)
-        errorSpan.remove();
       const resp = await getCode(type, getCodeUri, data);
       console.log("Got response from server:");
       console.log(resp);
       return resp;
     } else {
-      const errorSpan = document.createElement("span");
-      errorSpan.textContent = `${type} is invalid, please check it`;
-      errorSpan.classList.add("error", type);
+      const errorSpanNew = document.createElement("span");
+      errorSpanNew.textContent = `${type} is invalid, please check it`;
+      errorSpanNew.classList.add("error", type);
       link.classList.add("error");
-      link.parentNode.insertBefore(errorSpan, link);
+      link.parentNode.insertBefore(errorSpanNew, link);
       return null;
     }
   };

@@ -32,7 +32,7 @@ WIZARD_CONDITION_DICT = {
 #     "username": lambda w: False, # not w.request.user.is_authenticated,
 #     "mobile": lambda w: False, #w.request.user.is_anonymous or (w.request.user.is_authenticated and not w.request.user.phone_verified),
 #     "email": lambda w: False, #w.request.user.is_anonymous or (w.request.user.is_authenticated and not w.request.user.email_verified),
-#     "password": lambda w: False, #,w.request.user.is_anonymous or not w.request.user.has_usable_password(),
+#     "password": lambda w: True, #,w.request.user.is_anonymous or not w.request.user.has_usable_password(),
 #     "business": lambda w: False, #not hasattr(w.request.user, 'seller_registration'),
 #     "gst": lambda w: False, #not hasattr(w.request.user,'seller_registration') or (w.request.user.seller_registration.gstin == '' and w.request.user.seller_registration.pan == ''),
 #     "pincode": lambda w: False, #not hasattr(w.request.user,'seller_registration') or w.request.user.seller_registration.pincode == None,
@@ -44,6 +44,7 @@ WIZARD_CONDITION_DICT = {
 #     "congrats": True,
 #     "thanks": True
 # }
+
 class RegistrationConfig(OscarConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'shop.apps.registration'

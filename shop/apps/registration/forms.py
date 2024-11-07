@@ -207,6 +207,7 @@ class PasswordForm(FormWithRequest):
     def __init__(self, *args, request=None, **kwargs):
         super().__init__(*args, request=request, **kwargs)
         self.helper.layout = Layout(
+            HTML('Create Password'),
             HTML(password_validators_help_text_html()),
             'password',
             'password2'

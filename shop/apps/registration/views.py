@@ -177,7 +177,7 @@ class SendEmailOtpJson(View, JsonRequestResponseMixin):
 
         try:
             User.objects.get(email=email)
-            return JsonResponse({"error": "Email address already in use, please login with your number to proceed"})
+            return JsonResponse({"error": "Email address already in use, please login with your email or user to proceed"})
         except User.DoesNotExist:
             pass
 
