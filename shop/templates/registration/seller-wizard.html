@@ -7,8 +7,10 @@
 {% endblock %}
 
 {% block registration-form %}
+{% block form-header %}
 <h2>Register Quick</h2>
 <p>List your first product to try new market!</p>
+{% endblock %}
 <form id="seller-registration" action="" method="POST" data-step="{{ wizard.steps.current }}" {% if wizard.form.upload_files %}enctype="multipart/form-data"{% endif %}>
     {% csrf_token %}
     {{ wizard.management_form }}

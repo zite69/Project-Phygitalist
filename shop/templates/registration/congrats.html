@@ -1,8 +1,17 @@
 {% extends 'registration/seller-wizard.html' %}
 
+{% block head %}
+    {{ wizard.form.media }}
+{% endblock %}
+
+{% block form-header %}
+{% endblock %}
+
 {% block form %}
+<div class="congrats_container flex-column">
     <div class="clapping-hands">👏</div>
     <div class="congrats-text">Congrats!</div>
     <div class="seller-text">You are a ZITE69 Seller Now !</div>
     <button type="submit" class="action-btn">Finish Shop Setup</button>
+</div>
 {% endblock %}

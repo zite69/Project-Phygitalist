@@ -492,7 +492,8 @@ class GstCrispy(FormWithRequest):
             Div(
                 InlineRadios('gst_status', id='gst-id', template='registration/widgets/radio.html'),
                 css_class='radio-group'
-            )
+            ),
+            HTML('<p class="legal-support"><a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Click here</a> to consult with our legal team</p>'),
         )
 
     def clean_gstin(self):
@@ -613,6 +614,13 @@ class PincodeForm(FormWithRequest):
         }
         js = ["js/place.js", "https://code.jquery.com/ui/1.14.0/jquery-ui.js"]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper.layout = Layout(
+            Div('pincode'),
+            HTML('<p>Pincode of the place you will pack and ship your products</p>'),
+            Div('office')
+        )
     def clean(self):
         form_data = super().clean()
         place = form_data.get('office', '')

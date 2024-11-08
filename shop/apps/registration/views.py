@@ -6,6 +6,9 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
 from django.core import serializers
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
 from shop.apps.main.utils.sms import send_phone_otp
 from shop.apps.main.utils.email import send_email_verification
 from shop.apps.otp.utils import generate_otp
@@ -194,6 +197,7 @@ class SendEmailOtpJson(View, JsonRequestResponseMixin):
 
         return JsonResponse({"status": "success", "id": user.id})
 
+@method_decorator(cache_page(60*30), name='dispatch')
 class PincodeListJson(View, JsonRequestResponseMixin):
     def get(self, request, *args, **kwargs):
         pincode_prefix = request.GET.get('term', '')

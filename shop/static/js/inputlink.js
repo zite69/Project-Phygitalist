@@ -57,6 +57,19 @@
       const resp = await getCode(type, getCodeUri, data);
       console.log("Got response from server:");
       console.log(resp);
+      setTimeout(() => {
+        console.log("Enabling resend code link");
+        const resendSpan = document.createElement("span");
+        resendSpan.innerHTML = '<button class="btn btn-link">Resend Code</button>';
+        resendSpan.addEventListener('click', (evt) => {
+          console.log("Resend code clicked")
+          const resp = validateAndGetCode(type, getCodeUri, data, link);
+          handleEntryError(resp, type);
+        });
+        const step = document.querySelector("#seller-registration").dataset.step;
+        const otpDiv = document.querySelector(`#id_${step}-${type}_otp`);
+        document.querySelector(".registration-form").insertAdjacentElement('beforeend', resendSpan);
+      }, 60 * 1 * 1000);
       return resp;
     } else {
       const errorSpanNew = document.createElement("span");
@@ -79,8 +92,11 @@
       document.querySelector(".registration-form").insertBefore(errorSpan, document.querySelector("form"));
     } else {
       const errorSpan = document.querySelector("span.form.error");
+      const enterOtpOld = document.querySelector("span.enterotp");
       if (errorSpan)
         errorSpan.remove();
+      if (enterOtpOld)
+        enterOtpOld.remove();
       const enterOtpSpan = document.createElement("span");
       enterOtpSpan.textContent = `Please enter the OTP received on your ${type}`
       enterOtpSpan.classList.add("enterotp", type);
