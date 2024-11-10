@@ -1,0 +1,416 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Zite69</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+    @keyframes slideAnimation {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    @keyframes pulseAnimation {
+      0% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+    }
+
+    body {
+      font-family: "Urbanist", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-size: 16px;
+    }
+    p {
+      font-size: 17px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: #e5e7e7;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header-animation {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: slideAnimation 3s linear infinite;
+    }
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      animation: pulseAnimation 2s ease-in-out infinite;
+    }
+    .welcome-text {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .dual-language {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      gap: 20px;
+    }
+    .language-box {
+      flex: 1;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: 5px;
+      text-align: center;
+    }
+    .center-logo {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .center-logo .logo {
+      width: 80px;
+      height: 80px;
+    }
+    .center-branding {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100px; /* Adjust height if needed */
+    }
+
+    .red-stripe a {
+      display: block;
+      background-color: #f66569;
+      color: #ffffff;
+      text-align: center;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-size: 20px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .content-section {
+      margin: 40px 0;
+    }
+    .content-row {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      margin: 30px 0;
+    }
+    .image-placeholder {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .text-content-right {
+      flex: 1;
+      text-align: right;
+    }
+    .text-content-left {
+      flex: 1;
+      text-align: left;
+    }
+    .content_red {
+      background: #ececec;
+      color: #f66569;
+      padding: 15px 0;
+      height: auto;
+      text-align: center;
+    }
+    .content-row.reverse {
+      flex-direction: row-reverse;
+    }
+    .marketplace-label {
+      color: #f66569;
+      font-size: 14px;
+      margin: 10px 0;
+    }
+    .cta-button {
+      display: block;
+      background-color: #f66569;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-align: center;
+      margin: 20px auto 40px auto;
+      max-width: 250px;
+    }
+    .footer-divider {
+      margin: 30px auto;
+      max-width: 600px;
+      text-align: center;
+      border-bottom: none;
+      position: relative;
+    }
+    .footer-divider::before {
+
+      display: block;
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .footer-divider hr {
+      border: none;
+      height: 1px;
+      background: #ddd;
+      margin: 0;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 5px;
+      line-height: 1.5;
+      color: #666;
+    }
+    .footer p {
+      font-size: 12px;
+      margin: 5px 0;
+    }
+    .footer-links {
+      font-size: 10px;
+      width: 270px;
+      margin: 0 auto 15px auto;
+    }
+    .footer-links a {
+      color: #666;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Updated social-icons styles */
+    .social-icons {
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px 0;
+    }
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin: 0 10px;
+      background-color: #f66569;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    .social-icons a:hover {
+      background-color: #e54549;
+      transform: scale(1.1);
+    }
+    .social-icons i {
+      font-size: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .dual-language {
+        flex-direction: column;
+      }
+      .content-row,
+      .content-row.reverse {
+        flex-direction: column;
+        text-align: center;
+      }
+      .image-placeholder {
+        margin: 20px auto;
+      }
+    }
+    </style>
+
+
+    <!-- Correctly updated Google Fonts link for Urbanist -->
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-animation"></div>
+            <div class="logo">
+              <img
+                  alt="logo" height="60" src="{% static 'img/zite69_shop.png' %}" style="border:0;display:block;outline:none;text-decoration:none;height:60px;width:100%;font-size:13px;" width="60"/>
+            </div>
+        </div>
+
+        <div class="welcome-text">
+            <h1>Welcome, {{ user.name }}!</h1>
+        </div>
+
+        <div class="dual-language">
+            <div class="language-box">
+              <p>
+                Thanks for creating your ZITE69
+account. See how it can make selling
+and growing  with ZITE69 even easier,
+online or offline &amp; direct.
+</p>
+                  <p>Start your new success journey here
+with confidence &amp; responsibility.
+We have plans for you.
+</p>
+                  <p>Choose one and enjoy
+guaranteed orders everyday!
+
+
+              </p>
+            </div>
+            {% if user.preferences.second_language and user.preferences.second_language != '--'  and user.preferences.second_language != '' %}
+            <div class="language-box">
+                <!-- Secondary language content -->
+                <p style="text-align:right;">
+                    {% if user.preferences.second_language == 'ML' %} 
+                  സൈറ്റ് 69ൽ  അംഗമായതിന്  നന്ദി.
+  അത്  നിങ്ങളുടെ ഓൺലൈനായും
+  ഓഫ്‌ലൈനായും നേരിട്ടുമുള്ള
+  വിൽപനയും വളർച്ചയും  ഞങ്ങൾക്കൊപ്പം എങ്ങനെ
+  എളുപ്പമാക്കുന്നു എന്ന് കാണൂ!
+  ആത്‌മവിശ്വാസത്തോടെയും
+  ഉത്തരവാദിത്തത്തോടെയും ഉള്ള
+  നിങ്ങളുടെ വിജയയാത്ര ഇവിടെ ആരംഭിക്കാം.
+  നിങ്ങൾക്കായി ഞങ്ങളുടെ പദ്ധതികളുണ്ട്.
+  അതിലൊന്ന് തിരഞ്ഞെടുത്ത്
+  നിത്യേനെ ഓർഡറുകൾ  ആസ്വദിക്കൂ!
+                {% elif user.preferences.second_language == 'KN' %}
+                    Kannada Language displays here
+                {% elif user.preferences.second_language == 'TA' %}
+                    Tamil displays here
+                {% elif user.preferences.second_language == 'TE' %}
+                    Telegu dislays here
+                {% elif user.preferences.second_language == 'HI' %}
+                    Hindi displays here
+                {% endif %}
+                </p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Added center logo -->
+        <div class="center-branding">
+            <div>
+              <img
+                  alt="logo" height="80" width="80" src="{% static 'img/email/nl-logo.png' %}"
+   style="border:0;display:block;outline:none;text-decoration:none;height:80px;width:80px;"/>
+            </div>
+        </div>
+
+        <!-- Added red stripe -->
+        <div class="red-stripe">
+            <a href="#">View Plans & Check Eligibility  </a>
+        </div>
+
+        <div class="content-section">
+            <h2 style="text-align: center;">Why ZITE69 is the best  place to sell your product? </h2>
+            <div class="marketplace-label" style="text-align: center;">INDIA's FASTEST-GROWING 3-IN-1 MARKETPLACE
+</div>
+
+            <!-- First row: Image left, content right -->
+            <div class="content-row">
+              <div>
+                  <img src="{% static 'img/email/1-offline.jpg' %}" class="image-placeholder" width="100" height="100" alt="zite69">
+              </div>
+                <div class="text-content">
+                    <h3>Reach 1000s of Shoppers Direct Through Our Offline Sales Network</h3>
+                    <p>Our growing country wide  offline sales team takes your products directly to customers in IT parks, city centres, and other high-traffic areas. Set daily sales targets on your dashboard, and we'll handle the face-to-face sales to help you achieve them. We're the first platform to combine the best of both worlds.</p>
+                </div>
+            </div>
+            <!-- Second row: Image right, content left -->
+            <div class="content-row reverse">
+              <div>
+                  <img src="{% static 'img/email/2-realtime.jpg' %}" class="image-placeholder" width="100" height="100" alt="zite69">
+              </div>
+                <div class="text-content">
+                    <h3>Your Shop, Now 100% Interactive! Connect with Customers in Real-Time & Boost Sales  </h3>
+                    <p>  Our platform gives you the power of social media +more to connect with your customers. Go beyond ordinary ecommerce with immersive shopping experiences that keep customers coming back. Want to close a group deal? No problem. Host shoppers in your virtual store and negotiate on the spot like in real word.</p>
+                </div>
+            </div>
+
+            <!-- Third row: Image left, content right -->
+            <div class="content-row">
+              <div>
+                  <img src="{% static 'img/email/3-ecommerce.jpg' %}" class="image-placeholder" width="100" height="100" alt="zite69">
+              </div>
+                <div class="text-content">
+                    <h3>Cutting-Edge E-commerce: Safe, Secure, AI-Driven </h3>
+                    <p>ZITE69 is a licensed multi-vendor ecommerce operator. We leverage AI and cutting-edge technology to create a thriving super social marketplace. Our experienced local language professionals are here to support you, while our AI-powered data analytics help you stay ahead of market trends. Experience the power of the 3-in-1 phygital marketplace – only with us</p>
+                </div>
+            </div>
+            <p class="content_red">India's diverse marketplace means every business and product is unique. We understand your selling needs are too, which is why we offer multiple seller plans tailored to you. Chat with our onboarding team to find the best fit and unlock exclusive benefits. </p>
+        </div>
+
+        <a href="#" class="cta-button">Contact Your Account Manager</a>
+
+        <div class="footer-links">
+            <a href="#">Main Shop </a> |
+            <a href="#">Seller School</a> |
+            <a href="#">Buyer Blog</a> |
+            <a href="#">Contact Us</a>
+
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.youtube.com" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+
+        <div class="footer">
+          <p>Read our <a href="#">Privacy Policy</a> and <a href="#">Terms of use</a></p>
+          <p>69mm &amp; iCommerce LLP</p>
+          <p>#35, 2nd Phase</p>
+          <p>Siddapura, Whitefield, Bangalore - 66</p>
+          <p>Email: <a href="mailto:support@zite69.com">support@zite69.com</a></p>
+            <p>&copy; 2024 ZITE69. All rights reserved.</p>
+        </div>
+
+        <div class="footer-divider">
+            <hr>
+        </div>
+    </div>
+</body>
+</html>

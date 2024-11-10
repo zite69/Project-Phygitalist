@@ -1,9 +1,23 @@
-{% extends 'oscar/layout.html' %}
-
+{# extends 'oscar/layout.html' #}
+{% extends 'cms/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load compress %}
+
+{% block styles %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/otplogin.scss" %}" />
+    {% endcompress %}
+{% endblock %}
+
+{% block extrastyles %}
+{% endblock %}
 
 
 {% block content %}
+<main class="main-content">
+    <div class="signin-container">
     {% crispy form %}
+    </div>
+</main>
 {% endblock %}

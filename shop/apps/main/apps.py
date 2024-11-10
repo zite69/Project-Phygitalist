@@ -13,6 +13,10 @@ class MainShop(config.Shop):
 
     def ready(self):
         super().ready()
+        
+        from .views import test
+
+        self.test_view = test
 
         from djangocms_form_builder import actions
         from djangocms_form_builder.models import FormEntry
@@ -44,7 +48,9 @@ class MainShop(config.Shop):
 
     def get_urls(self):
         urls = super().get_urls()
-        urls.pop(1)
-        urls.insert(1, path('catalog/', self.catalogue_app.urls))
+        urls.pop(0) #Remove the RedirectView that redirects the home page, Our CMS will handle this view
+        urls.pop(0) #Remove the url spelled /catalogue/ and replace with /catalog/ below
+        urls.insert(0, path('catalog/', self.catalogue_app.urls))
+        urls.insert(0, path('test/', self.test_view))
 
         return urls

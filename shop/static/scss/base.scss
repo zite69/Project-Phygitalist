@@ -1,0 +1,27 @@
+@import "bootstrap/functions"; // Required
+/* Import vendors */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+$red: #f66569;
+$bg-color: #fff;
+$primary: $red;
+$font-family-base: "Urbanist", sans-serif;
+
+@import "bootstrap/variables"; // Required
+@import "bootstrap/variables-dark";
+
+$theme-colors: (
+    primary: $primary,
+    success: $green,
+);
+
+@import "bootstrap/maps";
+@import "bootstrap/mixins"; // Required
+
+@import "bootstrap/root"; // Required
+@import "bootstrap/reboot"; // Required
+
+@import "bootstrap/bootstrap";
+
+
