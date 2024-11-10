@@ -3,7 +3,6 @@ from oscar import config
 import logging
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
-from .utils.email import send_waitlist_welcome
 
 logger = logging.getLogger("shop.apps.main")
 
@@ -20,6 +19,8 @@ class MainShop(config.Shop):
 
         from djangocms_form_builder import actions
         from djangocms_form_builder.models import FormEntry
+
+        from .utils.email import send_waitlist_welcome
 
         @actions.register
         class AddToMailingList(actions.FormAction):
@@ -51,6 +52,6 @@ class MainShop(config.Shop):
         urls.pop(0) #Remove the RedirectView that redirects the home page, Our CMS will handle this view
         urls.pop(0) #Remove the url spelled /catalogue/ and replace with /catalog/ below
         urls.insert(0, path('catalog/', self.catalogue_app.urls))
-        urls.insert(0, path('test/', self.test_view))
+        # urls.insert(0, path('test/', self.test_view))
 
         return urls
