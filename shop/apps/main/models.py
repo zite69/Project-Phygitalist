@@ -21,6 +21,9 @@ from django.contrib.contenttypes.models import ContentType
 # class TopMenu(models.Model):
 #     title = models.CharField(_("Menu Title"), max_length=255, blank=False)
 class BaseLogModelMixin(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
     class Meta:
         abstract = True
 
