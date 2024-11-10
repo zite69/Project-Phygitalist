@@ -2,16 +2,15 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string, engines
 from django.utils.html import strip_tags
+from email.mime.image import MIMEImage
+from django.contrib.staticfiles import finders
+from functools import lru_cache
+from django.contrib.sites.models import Site
+import logging
 
 def reset_template_cache():
     for engine in engines.all():
         engine.engine.template_loaders[0].reset()
-
-from email.mime.image import MIMEImage
-
-from django.contrib.staticfiles import finders
-from functools import lru_cache
-import logging
 
 logger = logging.getLogger('shop.apps.main.utils')
 
@@ -30,6 +29,12 @@ def image_data(imgpath, imgcid):
     image = MIMEImage(image_data)
     image.add_header('Content-ID', imgcid)
     return image
+
+@lru_cache()
+def get_site_base_uri():
+    site = Site.objects.get(id=settings.SITE_ID)
+    protocol = 'https' if settings.USE_HTTPS else 'http'
+    return f"{protocol}://{site.domain}"
 
 def send_waitlist_welcome(email):
     logger.debug(f"Called to send waitlist email to {email}")
@@ -51,22 +56,41 @@ def send_waitlist_welcome(email):
     return message.send(fail_silently=False)
 
 def send_email(email, **kwargs):
-    template = kwargs.get("template", "email/otp.html")
-    logo = kwargs.get("logo", False)
-    from_email = kwargs.get("from_email", settings.DEFAULT_FROM_EMAIL)
-    subject = kwargs.get("subject", "Your OTP to login to our site")
-    images = kwargs.get("images", {})
-    cc = kwargs.get("cc", [])
-    bcc = kwargs.get("bcc", [])
-
+    # template = kwargs.get("template", "email/otp.html")
+    # logo = kwargs.get("logo", False)
+    # from_email = kwargs.get("from_email", settings.DEFAULT_FROM_EMAIL)
+    # subject = kwargs.get("subject", "Your OTP to login to our site")
+    # images = kwargs.get("images", {})
+    # cc = kwargs.get("cc", [])
+    # bcc = kwargs.get("bcc", [])
+    # base_uri = kwargs.get("base_uri", get_site_base_uri())
+    # kwargs['base_uri'] = base_uri
+    kwargs = kwargs | ({
+        "template": "email/otp.html",
+        "logo": False,
+        "from_email": settings.DEFAULT_FROM_EMAIL,
+        "subject": "Your OTP to login to our site",
+        "images": {},
+        "cc": [],
+        "bcc": [],
+        "base_uri": get_site_base_uri()
+        } | kwargs)
+    template = kwargs.get("template")
+    logo = kwargs.get("logo")
+    from_email = kwargs.get("from_email")
+    subject = kwargs.get("subject")
+    images = kwargs.get("images")
+    cc = kwargs.get("cc")
+    bcc = kwargs.get("bcc")
+ 
     html_content = render_to_string(template, context=kwargs)
-    return html_content
+    # return html_content
     text_content = strip_tags(html_content)
 
     message = EmailMultiAlternatives(
         subject=subject,
         body=text_content,
-        from_email=settings.DEFAULT_FROM_EMAIL,
+        from_email=from_email,
         to=[email]
     )
     if cc:
