@@ -5,7 +5,7 @@ from django.utils.html import strip_tags
 from email.mime.image import MIMEImage
 from django.contrib.staticfiles import finders
 from functools import lru_cache
-from django.contrib.sites.models import Site
+from .urls import get_site_base_uri
 import logging
 
 def reset_template_cache():
@@ -29,12 +29,6 @@ def image_data(imgpath, imgcid):
     image = MIMEImage(image_data)
     image.add_header('Content-ID', imgcid)
     return image
-
-@lru_cache()
-def get_site_base_uri():
-    site = Site.objects.get(id=settings.SITE_ID)
-    protocol = 'https' if settings.USE_HTTPS else 'http'
-    return f"{protocol}://{site.domain}"
 
 def send_waitlist_welcome(email):
     logger.debug(f"Called to send waitlist email to {email}")
