@@ -7,11 +7,13 @@ from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.views.generic import View
 from django.views.generic.edit import FormMixin
+from django.views.generic.list import ListView
 
-from account.mixins import LoginRequiredMixin
+#from account.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from .forms import InviteForm
-from .models import InvitationStat, JoinInvitation
+from .forms import InvitationForm, InviteForm
+from .models import Invitation, InvitationStat, JoinInvitation
 
 
 class InviteView(LoginRequiredMixin, FormMixin, View):
@@ -149,3 +151,8 @@ class AddToUserView(UserManageInviteAmountsView):
 
     def action(self, user, amount):
         InvitationStat.add_invites_to_user(user=user, amount=amount)
+
+class InvitationsList(ListView, FormMixin):
+    form_class = InvitationForm
+    model = Invitation
+    paginate_by = 10

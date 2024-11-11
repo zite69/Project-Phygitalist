@@ -157,10 +157,11 @@ INSTALLED_APPS = [
     'shop.apps.partner.apps.PartnerConfig',
     'shop.apps.seller.apps.SellerConfig',
     'shop.apps.registration.apps.RegistrationConfig',
-    'shop.apps.invitation',
+    #'shop.apps.invitation',
     'shop.apps.themezite69bs5',
     'shop.apps.otp.apps.OtpConfig',
     'shop.apps.membership.apps.MembershipConfig',
+    'shop.apps.invitation.apps.InvitationConfig',
     'djangocms_form_builder',
 ]
 

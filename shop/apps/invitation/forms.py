@@ -1,9 +1,9 @@
 from django import forms
 from django.utils.translation import gettext as _
 
-from account.models import EmailAddress
+#from account.models import EmailAddress
 
-from .models import JoinInvitation
+from .models import InvitationCode, Invitation
 
 
 class InviteForm(forms.Form):
@@ -20,3 +20,11 @@ class InviteForm(forms.Form):
         elif JoinInvitation.objects.filter(from_user=self.user, signup_code__email=email).exists():
             raise forms.ValidationError(_("You have already invited this user"))
         return email
+
+class InvitationForm(forms.ModelForm):
+
+    class Meta:
+        model = Invitation
+        fields = [
+            'email', 'phone', 'invite_type'
+        ]
