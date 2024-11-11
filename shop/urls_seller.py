@@ -35,6 +35,8 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
+    path('invitation/', include((apps.get_app_config('invitation').urls[0], 'invitation'), namespace='invitation')),
+    path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
     path('', include('cms.urls')),
 )
