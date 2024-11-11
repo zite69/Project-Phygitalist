@@ -88,7 +88,7 @@ class OtpLoginMixin(object):
                 raise ValidationError(_("Invalid Credentials Provided"))
 
 class EmailPhoneOtpRequestForm(forms.Form):
-    email_phone = forms.CharField(label=_("Email or Phonenumber"), max_length=128, required=True)
+    email_phone = forms.CharField(label=_("Email or Phonenumber"), max_length=128, required=True, help_text=_("Please enter email address or your phone number"))
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
