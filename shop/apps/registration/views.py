@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.views.generic import TemplateView, View
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
@@ -11,6 +11,7 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from shop.apps.main.utils.sms import send_phone_otp
 from shop.apps.main.utils.email import send_email_verification
+from shop.apps.main.utils.urls import get_site_base_uri
 from shop.apps.otp.utils import generate_otp
 from phonenumber_field.phonenumber import PhoneNumber
 from phonenumber_field.validators import validate_international_phonenumber
@@ -46,8 +47,12 @@ class SellerRegistrationWizard(SessionWizardView):
         return kwargs
 
     def done(self, form_list, **kwargs):
+        from shop.apps.main.utils.email import send_email_seller_welcome
         logger.debug(f"Completed the wizard: form_list {form_list}")
-        return super().done(form_list, **kwargs)
+        send_email_seller_welcome(self.request.user)
+        # return super().done(form_list, **kwargs)
+        url = get_site_base_uri(site_id=settings.DEFAULT_SITE_ID)
+        return HttpResponseRedirect(url)
 
     def get_auth_next_step(self, step):
         if not self.request.user.phone_verified:

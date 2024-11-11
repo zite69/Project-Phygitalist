@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
 from django.contrib.auth import login
+from django.contrib import messages
 from djangocms_form_builder import verbose_name
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.validators import ValidationError as PhoneValidationError
@@ -784,7 +785,7 @@ class AddProduct(FormWithRequest, forms.ModelForm):
             raise ValidationError(_("Unable to access user in session"))
 
         self.instance.seller_reg = user.seller_registration
-
+        messages.success(self.request, f"You have successfully added a product/service: {self.name}")
         return super().save(commit)
 
 class Congrats(FormWithRequest):
@@ -823,5 +824,8 @@ REGISTRATION_FORM_TEMPLATES = defaultdict(lambda: 'registration/seller.html', {
     #"gst": "registration/gst.html",
     "language": "registration/language.html",
     "congrats": "registration/congrats.html",
-    "thanks": "registration/thanks.html"
+    "thanks": "registration/thanks.html",
+    "product1": "registration/product.html",
+    "product2": "registration/product.html",
+    "product3": "registration/product.html"
 })
