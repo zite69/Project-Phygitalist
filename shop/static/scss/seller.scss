@@ -1023,6 +1023,7 @@ font-style: italic;
 
 button.get-link {
     margin: 10px;
+    padding: 0px;
 }
 
 .btn .get-link {
@@ -1032,3 +1033,11 @@ button.get-link {
     padding-bottom: 0px;
 }
 
+.btn-login {
+    background-color: #eee;
+    padding: 6px 12px;
+}
+
+.btn-login:hover {
+    background-color: #eee;
+}
