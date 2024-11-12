@@ -1,0 +1,57 @@
+@import "base";
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.header {
+    background-color: #F76C6C;
+    width: 100%;
+    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+}
+
+.text {
+    font-size: 1.4rem;
+    margin: 1.5rem 0;
+    color: #333;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.wow {
+    max-width: 200px;
+    margin: 10px 0;
+}
+
+div.cms .cms-toolbar {
+    position: sticky;
+}
+
+.navbar {
+    position: sticky;
+}
