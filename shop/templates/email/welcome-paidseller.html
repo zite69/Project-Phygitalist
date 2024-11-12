@@ -7,30 +7,6 @@
     <title>Welcome Zite69</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-    @keyframes slideAnimation {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    @keyframes pulseAnimation {
-      0% {
-        transform: scale(1);
-        opacity: 0.7;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 0.7;
-      }
-    }
-
     body {
       font-family: "Urbanist", sans-serif;
       margin: 0;
@@ -47,22 +23,13 @@
       padding: 20px;
     }
     .header {
-      background-color: #e5e7e7;
+
       padding: 15px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .header-animation {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: slideAnimation 3s linear infinite;
-    }
+
     .logo {
       width: 60px;
       height: 60px;
@@ -76,17 +43,10 @@
       text-align: center;
       padding: 20px 0;
     }
-    .dual-language {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
-      gap: 20px;
-    }
-    .language-box {
+
+    .content-box {
       flex: 1;
       padding: 15px;
-      background-color: #f5f5f5;
-      border-radius: 5px;
       text-align: center;
     }
     .center-logo {
@@ -222,8 +182,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
       margin: 0 10px;
       background-color: #f66569;
       color: #ffffff;
@@ -273,150 +233,48 @@
             <h1>Welcome, {{ user.name }}!</h1>
         </div>
 
-        <div class="dual-language">
-            <div class="language-box">
+
+            <div class="content-box">
               <p>
                 Thanks for creating your ZITE69
-account. See how it can make selling
-and growing  with ZITE69 even easier,
-online or offline &amp; direct.
-</p>
-                  <p>Start your new success journey here
-with confidence &amp; responsibility.
-We have plans for you.
-</p>
-                  <p>Choose one and enjoy
-guaranteed orders everyday!
+                account. See how it can make selling
+                 and growing  with ZITE69 even easier,
+                online or offline &amp; direct.</p>
+                  <p>  Start your new success journey here
+                    with confidence &amp; responsibility.</p>
 
 
-              </p>
-            </div>
-            {% if user.preferences.second_language and user.preferences.second_language != '--'  and user.preferences.second_language != '' %}
-            <div class="language-box">
-                <!-- Secondary language content -->
-                <p style="text-align:right;">
-                    {% if user.preferences.second_language == 'ML' %} 
-                  സൈറ്റ് 69ൽ  അംഗമായതിന്  നന്ദി.
-  അത്  നിങ്ങളുടെ ഓൺലൈനായും
-  ഓഫ്‌ലൈനായും നേരിട്ടുമുള്ള
-  വിൽപനയും വളർച്ചയും  ഞങ്ങൾക്കൊപ്പം എങ്ങനെ
-  എളുപ്പമാക്കുന്നു എന്ന് കാണൂ!
-  ആത്‌മവിശ്വാസത്തോടെയും
-  ഉത്തരവാദിത്തത്തോടെയും ഉള്ള
-  നിങ്ങളുടെ വിജയയാത്ര ഇവിടെ ആരംഭിക്കാം.
-  നിങ്ങൾക്കായി ഞങ്ങളുടെ പദ്ധതികളുണ്ട്.
-  അതിലൊന്ന് തിരഞ്ഞെടുത്ത്
-  നിത്യേനെ ഓർഡറുകൾ  ആസ്വദിക്കൂ!
-                {% elif user.preferences.second_language == 'KN' %}
-                    ನಿಮ್ಮ ಸೈಟ್69 ಖಾತೆಯನ್ನು ರಚಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು. ಆನ್‌ಲೈನ್ ಅಥವಾ ಆಫ್‌ಲೈನ್  ನೇರವಾಗಿ ಸೈಟ್69 ನೊಂದಿಗೆ ಮಾರಾಟ ಮಾಡುವುದು ಮತ್ತು ಬೆಳೆಯುವುದನ್ನು ಇದು ಹೇಗೆ ಮಾಡುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ. ಆತ್ಮವಿಶ್ವಾಸದಿಂದ ಜವಾಬ್ದಾರಿಯೊಂದಿಗೆ ನಿಮ್ಮ ಹೊಸ ಯಶಸ್ಸಿನ ಪ್ರಯಾಣವನ್ನು ಇಲ್ಲಿ ಪ್ರಾರಂಭಿಸಿ. ನಾವು ನಿಮಗಾಗಿ ಯೋಜನೆಗಳನ್ನು ಹೊಂದಿದ್ದೇವೆ. ಒಂದನ್ನು ಆರಿಸಿ ಮತ್ತು ಪ್ರತಿದಿನ ಖಾತರಿಪಡಿಸಿದ ಆದೇಶಗಳನ್ನು ಆನಂದಿಸಿ!
-                {% elif user.preferences.second_language == 'TA' %}
-                உங்கள் சைட்69 ஐ உருவாக்கியதற்கு நன்றி
-                கணக்கு. அதை எப்படி விற்பனை செய்யலாம் என்று பாருங்கள்
-                 மேலும்  சைட்69 உடன் வளர்வது இன்னும் எளிதானது,
-                ஆன்லைன், ஆஃப்லைன் & நேரடி.
-                உங்கள் புதிய வெற்றிப் பயணத்தை இங்கே தொடங்குங்கள்
-                நம்பிக்கை மற்றும் பொறுப்புடன்.
-                உங்களுக்காக எங்களிடம் திட்டங்கள் உள்ளன.
-                ஒன்றைத் தேர்ந்தெடுத்து மகிழுங்கள்
-                ஒவ்வொரு நாளும் உத்தரவாத ஆர்டர்க!
-                {% elif user.preferences.second_language == 'TE' %}
-                   మీ ಜೈಟ್ 69 ఖాతా ని సృష్టించినందుకు ధన్యవాదాలు.
-                    ఇది ఎలా అమ్ముడవుతుందో చూడండి
-                     మరియు ಜೈಟ್ 69 తో పెరగడం మరింత సులభం,
-                    ఆన్‌లైన్, ఆఫ్‌లైన్ & డైరెక్ట్.
-                    మీ కొత్త విజయ ప్రయాణాన్ని ఇక్కడ ప్రారంభించండి
-                    విశ్వాసం & బాధ్యతతో.
-                    మీ కోసం మా దగ్గర ప్రణాళికలు ఉన్నాయి.
-                    ఒకదాన్ని ఎంచుకుని ఆనందించండి
-                    ప్రతిరోజు హామీ ఆర్డర్లు!
-                {% elif user.preferences.second_language == 'HI' %}
-                    अपना ZITE69 खाता बनाने के लिए धन्यवाद। देखें कि यह ZITE69 के साथ बिक्री और विकास को और भी आसान कैसे बना सकता है, चाहे वह ऑनलाइन हो या ऑफलाइन और सीधे। आत्मविश्वास और जिम्मेदारी के साथ यहाँ अपनी नई सफलता की यात्रा शुरू करें। हमारे पास आपके लिए योजनाएँ हैं। एक चुनें और हर रोज़ गारंटीशुदा ऑर्डर का आनंद लें!
-                {% endif %}
-                </p>
-            </div>
-            {% endif %}
-        </div>
-
-        <!-- Added center logo -->
-        <div class="center-branding">
-            <div>
-              <img
-                  alt="logo" height="80" width="80" src="{{ base_uri }}{% static 'img/email/nl-logo.png' %}"
-   style="border:0;display:block;outline:none;text-decoration:none;height:80px;width:80px;"/>
-            </div>
-        </div>
-
-        <!-- Added red stripe -->
-        <div class="red-stripe">
-            <a href="#">View Plans & Check Eligibility  </a>
-        </div>
-
-        <div class="content-section">
-            <h2 style="text-align: center;">Why ZITE69 is the best  place to sell your product? </h2>
-            <div class="marketplace-label" style="text-align: center;">INDIA's FASTEST-GROWING 3-IN-1 MARKETPLACE
-</div>
-
-            <!-- First row: Image left, content right -->
-            <div class="content-row">
-              <div>
-                  <img src="{{ base_uri }}{% static 'img/email/1-offline.jpg' %}" class="image-placeholder" width="100" height="100" alt="zite69">
-              </div>
-                <div class="text-content">
-                    <h3>Reach 1000s of Shoppers Direct Through Our Offline Sales Network</h3>
-                    <p>Our growing country wide  offline sales team takes your products directly to customers in IT parks, city centres, and other high-traffic areas. Set daily sales targets on your dashboard, and we'll handle the face-to-face sales to help you achieve them. We're the first platform to combine the best of both worlds.</p>
-                </div>
-            </div>
-            <!-- Second row: Image right, content left -->
-            <div class="content-row reverse">
-              <div>
-                  <img src="{{ base_uri }}{% static 'img/email/2-realtime.jpg' %}" class="image-placeholder" width="100" height="100" alt="zite69">
-              </div>
-                <div class="text-content">
-                    <h3>Your Shop, Now 100% Interactive! Connect with Customers in Real-Time & Boost Sales  </h3>
-                    <p>  Our platform gives you the power of social media +more to connect with your customers. Go beyond ordinary ecommerce with immersive shopping experiences that keep customers coming back. Want to close a group deal? No problem. Host shoppers in your virtual store and negotiate on the spot like in real word.</p>
-                </div>
             </div>
 
-            <!-- Third row: Image left, content right -->
-            <div class="content-row">
-              <div>
-                  <img src="{% static 'img/email/3-ecommerce.jpg' %}" class="image-placeholder" width="100" height="100" alt="zite69">
-              </div>
-                <div class="text-content">
-                    <h3>Cutting-Edge E-commerce: Safe, Secure, AI-Driven </h3>
-                    <p>ZITE69 is a licensed multi-vendor ecommerce operator. We leverage AI and cutting-edge technology to create a thriving super social marketplace. Our experienced local language professionals are here to support you, while our AI-powered data analytics help you stay ahead of market trends. Experience the power of the 3-in-1 phygital marketplace – only with us</p>
-                </div>
-            </div>
-            <p class="content_red">India's diverse marketplace means every business and product is unique. We understand your selling needs are too, which is why we offer multiple seller plans tailored to you. Chat with our onboarding team to find the best fit and unlock exclusive benefits. </p>
-        </div>
 
-        <a href="#" class="cta-button">Contact Your Account Manager</a>
+
+            <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" class="cta-button">Contact Your Account Manager</a>
 
         <div class="footer-links">
-            <a href="#">Main Shop </a> |
-            <a href="#">Seller School</a> |
-            <a href="#">Buyer Blog</a> |
-            <a href="#">Contact Us</a>
+            <a href="https://www.zite69.com/">Main Shop </a> |
+            <a href="https://www.zite69.com/en/sellerschool">Seller School</a> |
+            <a href="https://szine.zite69.com/">Buyer Blog</a> |
+            <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Contact Us</a>
 
         </div>
 
         <div class="social-icons">
-            <a href="https://www.facebook.com" target="_blank">
+            <a href="https://www.facebook.com/ZITE69" target="_blank">
                 <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://www.youtube.com" target="_blank">
+            <a href="https://www.youtube.com/@ZITE69_" target="_blank">
                 <i class="fab fa-youtube"></i>
             </a>
-            <a href="https://www.instagram.com" target="_blank">
+            <a href="https://www.instagram.com/zite69_live/" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://www.linkedin.com" target="_blank">
+            <a href="https://www.linkedin.com/company/zite69/" target="_blank">
                 <i class="fab fa-linkedin-in"></i>
             </a>
         </div>
 
         <div class="footer">
-          <p>Read our <a href="#">Privacy Policy</a> and <a href="#">Terms of use</a></p>
+          <p>Read our <a href="https://szine.zite69.com/privacy-policy/">Privacy Policy</a> and <a href="https://szine.zite69.com/terms-of-use/">Terms of use</a></p>
           <p>69mm &amp; iCommerce LLP</p>
           <p>#35, 2nd Phase</p>
           <p>Siddapura, Whitefield, Bangalore - 66</p>
