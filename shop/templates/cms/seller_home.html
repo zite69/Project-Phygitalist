@@ -19,7 +19,14 @@
             <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Help">Help</a>
         </div>
         <div class="auth-buttons">
-            <a href="{% url 'otp:request' %}" class="btn btn-login" aria-label="Login Button">Login</a>
+            {% if user.is_authenticated %}
+                <form action="{% url 'account_logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-login" type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a href="{% url 'otp:request' %}" class="btn btn-login" aria-label="Login Button">Login</a>
+            {% endif %}
             <button class="btn btn-sell">Start Selling</button>
         </div>
         <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
