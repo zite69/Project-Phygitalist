@@ -1,0 +1,5 @@
+{% extends 'registration/seller.html' %}
+
+{% block form-header %}
+    <h2>Add Product {{ wizard.steps.current|slice:"-1:" }}</h2>
+{% endblock %}
