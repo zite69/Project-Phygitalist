@@ -32,7 +32,10 @@ def image_data(imgpath, imgcid):
 
 def send_waitlist_welcome(email):
     logger.debug(f"Called to send waitlist email to {email}")
-    html_content = render_to_string("email/waitlist.html")
+    context = {
+        "base_uri": get_site_base_uri()
+    }
+    html_content = render_to_string("email/waitlist.html", context=context)
     text_content = strip_tags(html_content)
 
     message = EmailMultiAlternatives(
@@ -44,7 +47,7 @@ def send_waitlist_welcome(email):
 
     message.mixed_subtype = 'related'
     message.attach_alternative(html_content, "text/html")
-    message.attach(logo_data())
+    # message.attach(logo_data())
 
     #returns the number of messages sent. in this case should be either 1 or 0
     return message.send(fail_silently=False)
