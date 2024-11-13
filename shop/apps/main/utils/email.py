@@ -67,7 +67,8 @@ def send_email(email, **kwargs):
         "images": {},
         "cc": [],
         "bcc": [],
-        "base_uri": get_site_base_uri()
+        "base_uri": get_site_base_uri(),
+        "whatsapp_link": f"https://wa.me/{settings.WHATSAPP_NUMBER}"
         } | kwargs)
     template = kwargs.get("template")
     logo = kwargs.get("logo")
