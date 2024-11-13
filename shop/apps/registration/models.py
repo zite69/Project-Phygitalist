@@ -82,5 +82,5 @@ seller_registration_filestorage = FileSystemStorage(location=os.path.join(settin
 
 class SellerProduct(models.Model):
     seller_reg = models.ForeignKey(SellerRegistration, on_delete=models.PROTECT)
-    name = models.CharField(_("Product Name"), max_length=255, blank=False, null=False)
+    name = models.CharField(_("Product Service Name"), max_length=255, blank=False, null=False)
     image = models.ImageField(_("Product Image"), upload_to="uploads/sellerreg/%Y/%m/%d", storage=seller_registration_filestorage)

@@ -778,6 +778,9 @@ class AddProduct(FormWithRequest, forms.ModelForm):
     class Meta:
         model = SellerProduct
         fields = ['image', 'name']
+        labels = {
+            'name': 'Product Service Name'
+        }
 
     def save(self, commit=True):
         user = self.get_user()
