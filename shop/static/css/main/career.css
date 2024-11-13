@@ -1,0 +1,181 @@
+/* General styles */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background-color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center; /* Center text */
+}
+
+.header {
+  background-color: #F06161; /* Match background color to the image */
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Center logo in the header */
+  align-items: center;
+  width: 100%; /* Make the header take the full width */
+  position: fixed; /* Fix the header to the top */
+  top: 0; /* Align it to the top */
+  z-index: 1000; /* Keep it above other content */
+}
+
+
+/* Outer circle with border */
+.logo-container {
+  width: 48px; /* Outer circle size */
+  height: 48px;
+  border-radius: 50%; /* Makes it circular */
+  border: 1px solid #ffffff; /* White border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto; /* Aligns the logo to the left */
+}
+
+.logo {
+  width: 60px; /* Adjust the size as necessary */
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.container {
+  max-width: 100%;
+  margin: 80px auto 0; /* Add margin at the top to avoid overlapping with the header */
+  display: flex; /* Enable flexbox */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+}
+
+.illustration {
+  width: 100%;
+  max-width: 400px;
+  margin: 15px auto;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.text-content {
+  margin: 0 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.4;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.apply-button {
+  display: inline-block;
+  font-size: 2.5rem;
+  color: #f66569;
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.apply-button:hover {
+  color: #161616;
+    transform: scale(1.05);
+}
+
+.apply-button::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ff6b6b;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom right;
+}
+
+.apply-button:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  .header {
+    justify-content: center; /* Center the logo */
+  }
+  .logo-container {
+    margin-right: 0; /* Remove left alignment on smaller screens */
+  }
+  .subtitle {
+    font-size: 1.2rem;
+  }
+
+  .apply-button {
+    font-size: 2rem;
+  }
+
+  .illustration {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .apply-button {
+    font-size: 1.8rem;
+  }
+
+  .illustration {
+    max-width: 250px;
+  }
+}

@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, resolve
 from django.views.i18n import JavaScriptCatalog
+from django.views.generic import TemplateView
 from shop.apps.main.views import home
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
@@ -32,6 +33,9 @@ urlpatterns = i18n_patterns(
     path('filer/', include('filer.urls')),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
+    path('careers/', TemplateView.as_view(template_name='main/career.html')),
+    path('mentor/', TemplateView.as_view(template_name='main/mentor.html')),
+    path('sellerschool/', TemplateView.as_view(template_name='main/sellerschool.html')),
     #path('', home, name='home'),
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('membership/', include((apps.get_app_config('membership').urls[0], 'membership'), namespace='membership')),
