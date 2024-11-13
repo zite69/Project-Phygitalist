@@ -1,0 +1,67 @@
+@import "base";
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+.header {
+  background-color: #F06161; /* Match background color to the image */
+  padding: 20px;
+  display: flex;
+  justify-content: center; /* Center logo in the header */
+  align-items: center;
+  width: 100%; /* Make the header take the full width */
+  position: fixed; /* Fix the header to the top */
+  top: 0; /* Align it to the top */
+  z-index: 1000; /* Keep it above other content */
+}
+
+/* Outer circle with border */
+.logo-container {
+  width: 48px; /* Outer circle size */
+  height: 48px;
+  border-radius: 50%; /* Makes it circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: auto; /* Aligns the logo to the left */
+}
+
+.logo {
+  width: 60px; /* Adjust the size as necessary */
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+}
+
+.text {
+    font-size: 1.4rem;
+    margin: 1.5rem 0;
+    color: #333;
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+.wow {
+    max-width: 200px;
+    margin: 10px 0;
+}
+
+div.cms .cms-toolbar {
+    position: sticky;
+}
+
+.navbar {
+    position: sticky;
+}

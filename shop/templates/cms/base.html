@@ -23,7 +23,7 @@
     {% render_block "css" %}
     {% block styles %}
         {% compress css %}
-            <link rel="stylesheet" type="text/x-scss" href="{% static "scss/sellercommon.scss" %}" />
+            <link rel="stylesheet" type="text/x-scss" href="{% static "scss/cms.scss" %}" />
         {% endcompress %}
     {% endblock %}
 
@@ -57,6 +57,7 @@
             {% block content %}{% endblock %}
         {% endblock %}
 
+   </div>
         {% block footer %}
         <footer class="footer">
             <div class="footer-links">
@@ -77,6 +78,5 @@
         {# Additional JS scripts #}
         {% block extrascripts %}{% endblock %}
         {% render_block "js" %}
-    </div>
 </body>
 </html>
