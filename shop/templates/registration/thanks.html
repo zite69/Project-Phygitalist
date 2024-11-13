@@ -1,4 +1,9 @@
 {% extends 'registration/seller-wizard.html' %}
+{% load static %}
+
+
+{% block form-header %}
+{% endblock %}
 
 {% block form %}
 <div class="congrats_container">
@@ -18,4 +23,37 @@ commerce ecosystem.
 </div>
 <button type="submit" class="action-btn">Go to main shop</button>
 <div><a href="#" class="seller-school">Visit Seller School</a></div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
+<script type="text/javascript">
+function createConfetti() {
+    const colors = ['#FFD700', '#FF69B4', '#87CEEB', '#98FB98', '#DDA0DD'];
+    const container = document.querySelector('.confetti-container');
+
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '-20px';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animation = `fall ${1.5 + Math.random()}s linear forwards`;
+        container.appendChild(confetti);
+        console.log(confetti);
+        console.log(container);
+
+        // Remove confetti element after animation
+        confetti.addEventListener('animationend', () => {
+            confetti.remove();
+        });
+    }
+}
+
+// Start confetti when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    createConfetti();
+});
+
+</script>
 {% endblock %}
