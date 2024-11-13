@@ -134,7 +134,20 @@
                  <p class="text_bold"><a href="#" id="playMargin">Gross Margin Calculator</a></p>
              </div>
          </div>
+    
+   <div id="popupBox" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p>Create your free seller account or login</p>
+            <button class="action-btn" id="okBtn">OK</button>
+        </div>
+    </div>
 
+    <div id="salesPopupBox" class="popup">
+        <div class="popup-content">
+            <p>Create your free seller account or login</p>
+            <button class="action-btn" id="salesOkBtn">OK</button>
+        </div>
+    </div>
 
     {% block scripts %}
     <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>

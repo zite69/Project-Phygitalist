@@ -124,6 +124,21 @@
     </div>
 {% endblock %}
 
+   <div id="popupBox" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p>Create your free seller account or login</p>
+            <button class="action-btn" id="okBtn">OK</button>
+        </div>
+    </div>
+
+    <div id="salesPopupBox" class="popup">
+        <div class="popup-content">
+            <p>Create your free seller account or login</p>
+            <button class="action-btn" id="salesOkBtn">OK</button>
+        </div>
+    </div>
+
+
 {% block extrascripts %}
 <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
 <script>
