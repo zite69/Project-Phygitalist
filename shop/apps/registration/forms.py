@@ -197,19 +197,19 @@ class PasswordForm(FormWithRequest):
     form_name = 'password'
     submit_label = 'Set Password'
 
-    password = forms.CharField(label="", required=True, widget=forms.PasswordInput(attrs={
+    password = forms.CharField(label="Create Your Password", required=True, widget=forms.PasswordInput(attrs={
         "placeholder": "Please enter a password of at least 8 characters containing alphabets and numbers"
     }))
 
-    password2 = forms.CharField(label="", required=True, widget=forms.PasswordInput(attrs={
+    password2 = forms.CharField(label="Confirm Your Password", required=True, widget=forms.PasswordInput(attrs={
         "placeholder": "Please enter the same password again to confirm"
     }))
 
     def __init__(self, *args, request=None, **kwargs):
         super().__init__(*args, request=request, **kwargs)
         self.helper.layout = Layout(
-            HTML('Create Password'),
-            HTML(password_validators_help_text_html()),
+            # HTML('Create Password'),
+            # HTML(password_validators_help_text_html()),
             'password',
             'password2'
         )
