@@ -12,9 +12,9 @@
             <img src="{% static 'img/zite69_shop.png' %}" alt="ZITE69 logo">
         </div>
         <div class="nav-links">
-            <a href="#" aria-label="Join">Join</a>
-            <a href="#" aria-label="Seller School">Seller School</a>
-            <a href="#" aria-label="Help">Help</a>
+            <a href="https://seller.zite69.com/en/registration/" aria-label="Join">Join</a>
+            <a href="https://www.zite69.com/en/sellerschool/" aria-label="Seller School">Seller School</a>
+            <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Help">Help</a>
         </div>
         <div class="auth-buttons">
             <a href="{% url 'otp:request' %}" class="btn btn-login" aria-label="Login Button">Login</a>
@@ -25,9 +25,9 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#" aria-label="Join">Join</a>
-        <a href="#" aria-label="Seller School">Seller School</a>
-        <a href="#" aria-label="Help">Help</a>
+        <a href="https://seller.zite69.com/en/registration/" aria-label="Join">Join</a>
+        <a href="https://www.zite69.com/en/sellerschool/" aria-label="Seller School">Seller School</a>
+        <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Help">Help</a>
         <button class="btn btn-login" onclick="openModal()" aria-label="Login Button">Login</button>
         <button class="btn btn-sell">Start Selling</button>
     </div>
