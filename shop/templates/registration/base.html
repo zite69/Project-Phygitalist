@@ -90,47 +90,51 @@
         </div>
     </div>
 
-    <div class="steps-section">
-        <div class="step_2">
-            <img src="{% static 'img/seller/what.jpg' %}" class="img_hash" alt="What is it">
-            <h3>What is it</h3>
-            <p>ZITE69 is a super social marketplace to sell diverse categories of products, learn new skills to make your new product, and start selling it to 1000s of our member shoppers from your home or anywhere else.</p>
-            <span><a href="#"><img src="{% static 'img/seller/play.png' %}" class="play_button" alt="What is it"></a></span>
-        </div>
-        <div class="step_2">
-            <img src="{% static 'img/seller/how.jpg' %}" class="img_hash" alt="How it works">
-            <h3>How it works</h3>
-            <p>Join as a seller with your product. We will pick it up from your doorstep and sell it to our member shoppers through online and offline channels. Yes! We are an online platform with an offline sales network.</p>
-            <span><a href="#"><img src="{% static 'img/seller/play.png' %}" class="play_button" alt="How it works"></a></span>
-        </div>
-        <div class="step_2">
-            <img src="{% static 'img/seller/why.jpg' %}" class="img_hash" alt="Why now">
-            <h3>Why now</h3>
-            <p>ZITE69 is India's new rising online local market. We connect 100s of sellers and 1000s of buyers with new social features and e-commerce benefits. Our offline sales network sells your product daily across India.</p>
-            <span><a href="#"><img src="{% static 'img/seller/play.png' %}" class="play_button" alt="Why now"></a></span>
-        </div>
-    </div>
+    <!-- Second Steps Section with Play Button Trigger -->
+        <div class="steps-section">
+             <div class="step_2">
+                 <img src="{% static 'img/what.jpg' %}" class="img_hash" alt="What is it">
+                 <h3>What is it</h3>
+                 <p>zite69 is a super social marketplace for growing brands  of any size and category to sell &amp; earn more.  We converge the best of physical and digital for a balanced phygital marketplace.</p>
+                 <span><a href="#" id="playWhat"><img src="{% static 'img/play.png' %}" class="play_button" alt="What is it"></a></span>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/how.jpg' %}" class="img_hash" alt="How it works">
+                 <h3>How it works</h3>
+                 <p>Join as a seller and list your product. We'll handle pickup and leverage our online and offline channels to reach eager buyers. Set your sales target on the dashboard and see how it brings orders!</p>
+                 <span><a href="#" id="playHow"><img src="{% static 'img/play.png' %}" class="play_button" alt="How it works"></a></span>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/why.jpg' %}" class="img_hash" alt="Why now">
+                 <h3>Why now</h3>
+                 <p>100% free now &amp; lifelong B2B benefits for a limited number of  founding sellers. We are India’s rising 3-IN-1 phygital marketplace, connecting shoppers &amp; sellers uniquely. Join as a founding seller now.</p>
+                 <span><a href="#" id="playWhy"><img src="{% static 'img/play.png' %}" class="play_button" alt="Why now"></a></span>
+             </div>
+         </div>
 
-    <div class="steps-section">
-        <div class="step_2">
-            <img src="{% static 'img/seller/order.jpg' %}" class="img_hash" alt="New Orders">
-            <h3>New Orders Everyday</h3>
-            <p>Connect with 100% guaranteed member buyers across India to get more and more new orders.</p>
-            <p class="text_bold">How We Ensure 10X Sales?</p>
-        </div>
-        <div class="step_2">
-            <img src="{% static 'img/seller/product.jpg' %}" class="img_hash" alt="Create Products">
-            <h3>Create New Products</h3>
-            <p>Learn from experts and experienced sellers to create newer products and sell them online, offline, and direct.</p>
-            <p class="text_bold">Join Seller School</p>
-        </div>
-        <div class="step_2">
-            <img src="{%static 'img/seller/profit.jpg' %}" class="img_hash" alt="Profit">
-            <h3>0% Fee 100% Profit*</h3>
-            <p>Pocket more money from each sale with platform fees as low as 0% in some selected cases.</p>
-            <p class="text_bold">Gross Margin Calculator</p>
-        </div>
-    </div>
+
+         <!-- New Sales Section with How We Ensure 10X Sales? -->
+         <div class="steps-section">
+             <div class="step_2">
+                 <img src="{% static 'img/order.jpg' %}" class="img_hash" alt="New Orders">
+                 <h3>New Orders Everyday</h3>
+                 <p>Connect with 100% guaranteed member buyers across India to get more and more new orders.</p>
+                 <p class="text_bold"><a href="#" id="playSales">How We Ensure 10X Sales?</a></p>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/product.jpg' %}" class="img_hash" alt="Create Products">
+                 <h3>Create New Products</h3>
+                 <p>Learn from experts and experienced sellers to create newer products and sell it online, offline and direct.</p>
+                 <p class="text_bold"><a href="#" id="playSchool">Join Seller School</a></p>
+             </div>
+             <div class="step_2">
+                 <img src="{% static 'img/profit.jpg' %}" class="img_hash" alt="Profit">
+                 <h3>0% Fee 100% Profit*</h3>
+                 <p>Enjoy more profit from each sale with platform fee as low as 0% in many selected cases*.</p>
+                 <p class="text_bold"><a href="#" id="playMargin">Gross Margin Calculator</a></p>
+             </div>
+         </div>
+
 
     {% block scripts %}
     {% endblock %}
