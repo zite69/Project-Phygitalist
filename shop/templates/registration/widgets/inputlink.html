@@ -3,7 +3,7 @@
     data-type="{{ widget.attrs.type }}" data-get-code-uri="{{ widget.attrs.getcode }}">
     <input type="{% if widget.attrs.type == 'phone' %}tel{% elif widget.attrs.type == 'email' %}email{% else %}text{% endif %}" id="id_{{ widget.name }}" value="" placeholder="{{ widget.attrs.placeholder }}"
         name="{{ widget.name }}">
-    <button type="button" class="btn btn-success get-link align-self-start">get code</button>
+    <button type="button" class="btn btn-success get-link align-self-start">get otp</button>
 </div>
 <!--
 <script>
