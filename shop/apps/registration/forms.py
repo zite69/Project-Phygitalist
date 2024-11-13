@@ -779,7 +779,7 @@ class AddProduct(FormWithRequest, forms.ModelForm):
         model = SellerProduct
         fields = ['image', 'name']
         labels = {
-            'name': 'Product Service Name'
+            'name': 'Product/Service Name'
         }
 
     def save(self, commit=True):
