@@ -22,7 +22,7 @@
     <header>
         <div class="header-container">
           <div class="logo">
-              <a href="index.html"><img src="{% static 'img/zite69_shop.png' %}" class="logo-circle" alt="Zite69"></a>
+              <a href="/"><img src="{% static 'img/zite69_shop.png' %}" class="logo-circle" alt="Zite69"></a>
           </div>
             <div class="login-form">
                 {% if user.is_authenticated %}
@@ -46,10 +46,10 @@
                 <span></span>
             </label>
             <div class="nav-links">
-                <a href="#" class="active">Home</a>
-                <a href="#">Seller School</a>
-                <a href="#">Success Stories</a>
-                <a href="#">Support</a>
+                <a href="/" class="active">Home</a>
+                <a href="https://www.zite69.com/sellerschool/">Seller School</a>
+                <a href="https://szine.zite69.com/">Blog</a>
+                <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Support</a>
             </div>
         </div>
     </nav>
