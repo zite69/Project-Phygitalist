@@ -636,10 +636,11 @@ LOGGING = {
     }
 }
 
-CACHES_ENV = env("CACHES", default={})
+CACHES_ENV = env.json("CACHES", default={})
 
 if CACHES_ENV:
-    CACHES = CACHES_ENV
+    CACHES = {}
+    CACHES['default'] = CACHES_ENV
 
 #allauth settings
 SOCIALACCOUNT_PROVIDERS = {
