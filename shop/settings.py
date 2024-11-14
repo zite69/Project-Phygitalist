@@ -241,6 +241,7 @@ TEMPLATES = [
                 'shop.apps.main.context_processors.settings',
                 'oscar.core.context_processors.metadata',
                 'dynamic_preferences.processors.global_preferences',
+                'dealer.contrib.django.context_processor',
             ],
             'loaders': default_loaders if DEBUG else cached_loaders
         },
@@ -636,6 +637,8 @@ LOGGING = {
     }
 }
 
+SHOW_REVISION = env("SHOW_REVISION", default=True)
+
 CACHES_ENV = env.json("CACHES", default={})
 
 if CACHES_ENV:
@@ -698,6 +701,8 @@ if not CORS_ALLOWED_ORIGINS:
 
 CORS_ALLOW_ALL_ORIGINS = env("CORS_ALLOW_ALL_ORIGINS", default=False)
 CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", default=[])
+
+DEALER_TYPE = "git"
 
 from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")

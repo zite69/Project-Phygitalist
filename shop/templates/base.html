@@ -32,6 +32,7 @@
             {# Default to using Google analytics #}
             {% include "oscar/partials/google_analytics.html" %}
         {% endblock %}
+        {% include "includes/revision-style.html" %}
     </head>
 
     <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
@@ -55,6 +56,7 @@
         {# Additional JS scripts #}
         {% block extrascripts %}{% endblock %}
 
+        {% include "includes/revision-tag.html" %}
         {# Block for body onload functions #}
         <script>
             $(function() {

@@ -17,6 +17,7 @@
     {% endblock %}
     <!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
     {% block head %} {% endblock %}
+    {% include "includes/revision-style.html" %}
 </head>
 <body>
     <header>
@@ -152,5 +153,6 @@
     {% block scripts %}
     <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
     {% endblock %}
+    {% include "includes/revision-tag.html" %}
 </body>
 </html>
