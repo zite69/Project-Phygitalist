@@ -21,6 +21,9 @@
         {% endspaceless %}">
     <title>{% block title %}zite69 :{% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip }}{% else %}Supers Social Platform is Live Soon{% endif %}{% endblock %}</title>
     {% render_block "css" %}
+
+    {{ settings.PLAUSIBLE_TAG | safe }}
+
     {% block styles %}
         {% compress css %}
             <link rel="stylesheet" type="text/x-scss" href="{% static "scss/cms.scss" %}" />

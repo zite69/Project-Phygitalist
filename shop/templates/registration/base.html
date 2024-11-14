@@ -18,6 +18,8 @@
     {% endblock %}
     {% block head %} {% endblock %}
     {% include "includes/revision-style.html" %}
+    
+    {{ settings.PLAUSIBLE_TAG | safe }}
 </head>
 <body>
     <header>
