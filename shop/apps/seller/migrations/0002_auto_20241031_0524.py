@@ -19,7 +19,7 @@ def load_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('seller', '0001_initial')
+        ('seller', '0003_seller_created_on_seller_updated_on')
     ]
 
     operations = [
