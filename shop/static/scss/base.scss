@@ -7,6 +7,7 @@ $red: #f66569;
 $bg-color: #fff;
 $primary: $red;
 $font-family-base: "Urbanist", sans-serif;
+$container-padding-x: 0;
 
 @import "bootstrap/variables"; // Required
 @import "bootstrap/variables-dark";
@@ -24,4 +25,6 @@ $theme-colors: (
 
 @import "bootstrap/bootstrap";
 
-
+a {
+    text-decoration: none;
+}
