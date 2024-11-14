@@ -37,7 +37,14 @@
         <a href="https://seller.zite69.com/en/registration/" aria-label="Join">Join</a>
         <a href="https://www.zite69.com/en/sellerschool/" aria-label="Seller School">Seller School</a>
         <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Help">Help</a>
-        <a class="btn btn-login" href="{% url 'otp:request' %}" aria-label="Login Button">Login</a>
+        {% if user.is_authenticated %}
+                <form action="{% url 'account_logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-login" type="submit">Logout</button>
+                </form>
+        {% else %}
+            <a class="btn btn-login" href="{% url 'otp:request' %}" aria-label="Login Button">Login</a>
+        {% endif %}
         <a href="https://seller.zite69.com/en/registration/" class="btn btn-sell">Start Selling</a>
     </div>
 {% endblock %}

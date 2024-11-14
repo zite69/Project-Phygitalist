@@ -51,6 +51,14 @@
                 <a href="https://www.zite69.com/sellerschool/">Seller School</a>
                 <a href="https://szine.zite69.com/">Blog</a>
                 <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Support</a>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'account_logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-login" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'otp:request' %}" class="btn btn-login">Login</a>
+                {% endif %}
             </div>
         </div>
     </nav>
