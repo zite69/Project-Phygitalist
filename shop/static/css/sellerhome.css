@@ -57,14 +57,6 @@ h5 {
   z-index: 1000;
 }
 
-/* Logo styling */
-.logo img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; /* Makes it circular */
-  border: 1px solid #ffffff; /* White border */
-}
-
 /* Navigation links */
 .nav-links {
   display: flex;

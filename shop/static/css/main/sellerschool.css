@@ -33,16 +33,18 @@ body {
 }
 
 .logo {
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
 }
 
 .logo img {
-    height: 40px;
-    width: auto;
     object-fit: contain;
     border-radius: 50%;
     border: 1px solid #ffffff;
+    width: 100%;
+    height: 100%;
 }
 
 .main-content {

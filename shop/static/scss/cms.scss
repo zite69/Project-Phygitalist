@@ -30,16 +30,12 @@
 }
 
 .logo {
-  width: 60px; /* Adjust the size as necessary */
-  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .logo img {
-    height: 40px;
-    width: auto;
     object-fit: contain;
     border-radius: 50%;
     border: 1px solid #ffffff;
