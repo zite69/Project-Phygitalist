@@ -9,6 +9,11 @@ $primary: $red;
 $font-family-base: "Urbanist", sans-serif;
 $container-padding-x: 0;
 
+html {
+    --bs-btn-hover-color: black;
+    --bs-btn-hover-bg: #f66569;
+}
+
 @import "bootstrap/variables"; // Required
 @import "bootstrap/variables-dark";
 

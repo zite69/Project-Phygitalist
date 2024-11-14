@@ -103,6 +103,11 @@ h5 {
   color: #333;
 }
 
+.btn-sell:hover {
+    background: #ffd700;
+    color #333;
+}
+
  .btn-lgn {
   background: #f66569;
   color: #333;

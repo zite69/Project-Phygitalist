@@ -1,26 +1,26 @@
-@import "bootstrap/functions"; // Required
-/* Import vendors */
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+// @import "bootstrap/functions"; // Required
+// /* Import vendors */
+// @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
 
-$red: #f66569;
-$bg-color: #fff;
-$primary: $red;
-$font-family-base: "Urbanist", sans-serif;
+// $red: #f66569;
+// $bg-color: #fff;
+// $primary: $red;
+// $font-family-base: "Urbanist", sans-serif;
 
-@import "bootstrap/variables"; // Required
-@import "bootstrap/variables-dark";
+// @import "bootstrap/variables"; // Required
+// @import "bootstrap/variables-dark";
 
-$theme-colors: (
-    primary: $primary,
-    success: $green,
-);
+// $theme-colors: (
+//     primary: $primary,
+//     success: $green,
+// );
 
-@import "bootstrap/maps";
-@import "bootstrap/mixins"; // Required
-@import "bootstrap/root"; // Required
+// @import "bootstrap/maps";
+// @import "bootstrap/mixins"; // Required
+// @import "bootstrap/root"; // Required
 
-@import "bootstrap/bootstrap";
+// @import "bootstrap/bootstrap";
 
 // @import "bootstrap/utilities";
 // @import "bootstrap/reboot"; // Required
@@ -54,6 +54,8 @@ $theme-colors: (
 // @import "bootstrap/offcanvas";
 // @import "bootstrap/placeholders";
 // @import "bootstrap/helpers";
+
+@import "base";
 
 body {
     background-color: #ffffff;
@@ -1040,4 +1042,33 @@ button.get-link {
 
 .btn-login:hover {
     background-color: #eee;
+}
+
+form#seller-registration {
+    p {
+        font-style: italic;
+        font-size: 0.8rem;
+        color: #adadad;
+
+        &.emoji {
+            font-style: normal;
+            font-size: 2rem;
+        }
+    }
+    
+    div.success-subtitle {
+        p {
+            font-style: normal;
+            font-size: 1rem;
+        }
+    }
+}
+
+.nav-links {
+    .btn-login {
+        display: none;
+        @include media-breakpoint-down(sm) {
+            display: block;
+        }
+    }
 }
