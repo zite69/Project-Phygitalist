@@ -22,7 +22,7 @@ Seller First Marketplace for Small Town India | Sell your product offline, onlin
             <img src="{% static 'img/zite69_shop.png' %}" alt="ZITE69 logo">
         </div>
         <div class="nav-links">
-            <a href="https://seller.zite69.com/en/registration/" aria-label="Join">Join</a>
+            <a href="{% url 'registration:home' %}" aria-label="Join">Join</a>
             <a href="https://www.zite69.com/en/sellerschool/" aria-label="Seller School">Seller School</a>
             <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Help">Help</a>
         </div>

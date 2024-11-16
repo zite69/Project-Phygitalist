@@ -59,12 +59,16 @@
       console.log(resp);
       setTimeout(() => {
         console.log("Enabling resend code link");
+        link.dataset.status = "init";
         const resendSpan = document.createElement("span");
         resendSpan.innerHTML = '<button class="btn btn-link">Resend Code</button>';
         resendSpan.addEventListener('click', (evt) => {
-          console.log("Resend code clicked")
+          console.log("Resend code clicked");
+          if (link.dataset.status == 'processing')
+            return;
           const resp = validateAndGetCode(type, getCodeUri, data, link);
           handleEntryError(resp, type);
+          link.dataset.status = 'processing';
         });
         const step = document.querySelector("#seller-registration").dataset.step;
         const otpDiv = document.querySelector(`#id_${step}-${type}_otp`);
@@ -135,15 +139,28 @@
       console.log(getcode);
       console.log(type);
       getcode.addEventListener('click', async (eventClick) => {
+        if (link.dataset.status == 'processing') {
+          return;
+        }
         const resp = await validateAndGetCode(type, getCodeUri, input.value, link);
         handleEntryError(resp, type);
+        if (resp != null && !resp.error)
+          link.dataset.status = 'processing';
         // const resp = await validateOtp(type, getCodeUri, input.value, link);
         // handleValidateError(resp, type);
       });
       input.addEventListener('keydown', async (eventKey) => {
-        if (eventKey.key == 'enter') {
+        console.log('Input keydown event:');
+        console.log(eventKey);
+        if (eventKey.key.toLowerCase() == 'enter') {
+          if (link.dataset.status == 'processing'){
+            eventKey.preventDefault();
+            return;
+          }
           const resp = await validateAndGetCode(type, getCodeUri, input.value, link);
           handleEntryError(resp, type);
+          if (resp != null && !resp.error)
+            link.dataset.status = 'processing';
           // const resp = await validateOtp(type, getCodeUri, input.value, link);
           // handleValidateError(resp, type);
           eventKey.preventDefault();
