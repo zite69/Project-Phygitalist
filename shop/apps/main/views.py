@@ -17,3 +17,7 @@ def test(request):
     logger.debug(resp)
 
     return render(request, 'main/index.html')
+
+def fivehundred(request):
+    num = 1/0
+    return render(request, 'main/500.html')
