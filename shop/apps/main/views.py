@@ -20,4 +20,10 @@ def test(request):
 
 def fivehundred(request):
     num = 1/0
-    return render(request, 'main/500.html')
+    return render(request, 'error/500.html')
+
+def not_found(request, exception):
+    return (request, "error/404.html", {})
+
+def server_error(request, exception=None):
+    return (request, "error/500.html", {})
