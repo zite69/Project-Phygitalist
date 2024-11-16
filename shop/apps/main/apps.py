@@ -13,9 +13,10 @@ class MainShop(config.Shop):
     def ready(self):
         super().ready()
         
-        from .views import test
+        from .views import test, fivehundred
 
         self.test_view = test
+        self.fivehundred = fivehundred
 
         from djangocms_form_builder import actions
         from djangocms_form_builder.models import FormEntry
@@ -53,5 +54,6 @@ class MainShop(config.Shop):
         urls.pop(0) #Remove the url spelled /catalogue/ and replace with /catalog/ below
         urls.insert(0, path('catalog/', self.catalogue_app.urls))
         # urls.insert(0, path('test/', self.test_view))
+        urls.insert(0, path('error/', self.fivehundred))
 
         return urls
