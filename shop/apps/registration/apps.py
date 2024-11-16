@@ -56,6 +56,8 @@ class RegistrationConfig(OscarConfig):
             AddBusiness, EmailAndOtp, GstPan, MobileAndOtp, UserName, PincodeForm, LanguagePreference, ShopDetails, AddProduct,
             SELLER_REGISTRATION_FORMS
         )
+        from shop.apps.registration.models import SellerRegistration
+
         def check_product(w, count):
             return w.request.user.is_authenticated and hasattr(w.request.user, 'seller_registration') and w.request.user.seller_registration.sellerproduct_set.count() == count
 
