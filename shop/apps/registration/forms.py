@@ -1,3 +1,4 @@
+from re import I
 from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.safestring import mark_safe
@@ -775,6 +776,9 @@ class AddProduct(FormWithRequest, forms.ModelForm):
     submit_label = 'Add +'
     file_upload = True
 
+    # image = forms.ImageField(label=_("Product Image"))
+    # name = forms.CharField(label=_("Product/Service Name"), max_length=64)
+
     class Meta:
         model = SellerProduct
         fields = ['image', 'name']
@@ -782,14 +786,51 @@ class AddProduct(FormWithRequest, forms.ModelForm):
             'name': 'Product/Service Name'
         }
 
+    # def __init__(self, *args, request=None, **kwargs):
+    #     super().__init__(*args, request=request, **kwargs)
+    #     logger.debug("Inside AddProduct __init__")
+
+    def form_valid(self, form):
+        logger.debug("Being called in form_valid")
+        logger.debug(f"{form}")
+        form.save()
+        return super().form_valid(form)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        user = self.get_user()
+        if not user:
+            raise ValidationError(_("Unable to access user in session data"))
+
+        image = cleaned_data.get('image', None)
+        if image:
+            logger.debug(f"image: {image} typeof {type(image)}")
+
+        name = cleaned_data.get('name', '')
+        logger.debug(f"name of product/service: {name}")
+        sp = SellerProduct.objects.create(
+            image = image,
+            name = name,
+            seller_reg = user.seller_registration
+        )
+        messages.success(self.request, f"You have successfully added a product/service: {name}")
+
+        logger.debug(f"Saved SellerProduct: id: {sp.id}")
+        return cleaned_data
+
     def save(self, commit=True):
+        logger.debug("Inside AddProduct.save function")
         user = self.get_user()
         if not user:
             raise ValidationError(_("Unable to access user in session"))
 
         self.instance.seller_reg = user.seller_registration
+        logger.debug(f"Adding product/service with name: {self.name}")
+        logger.debug(f"self.instance: {self.instance} seller_reg = {user.seller_registration}")
+        ret = super().save(commit)
+        logger.debug(f"super().save() returned: {ret}")
         messages.success(self.request, f"You have successfully added a product/service: {self.name}")
-        return super().save(commit)
+        return ret
 
 class Congrats(FormWithRequest):
     form_id = 'id_form_congrats'

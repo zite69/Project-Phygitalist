@@ -33,12 +33,14 @@ class SellerRegistration(models.Model):
     STATUS_PENDING = 'P'
     STATUS_REJECTION_TEMPORARY = 'T'
     STATUS_REJECTED = 'R'
+    STATUS_IN_PROGRESS = 'I'
 
     STATUS_CHOICES = (
         (STATUS_PENDING, 'Pending'),
         (STATUS_APPROVED, 'Approved'),
         (STATUS_REJECTION_TEMPORARY, 'Temporarily Rejected'),
-        (STATUS_REJECTED, 'Rejected')
+        (STATUS_REJECTED, 'Rejected'),
+        (STATUS_IN_PROGRESS, 'Inprogress')
     )
 
     name = models.CharField(_("Full Name"), blank=False, null=False, max_length=64)
@@ -58,7 +60,7 @@ class SellerRegistration(models.Model):
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='approved_sellers')
     approved_on = models.DateTimeField(_("Approved On"), null=True)
     approval_notes = models.TextField(_("Approval/Rejection Reasons"), blank=True, null=True)
-    approval_status = models.CharField(_("Approval Status"), max_length=2, db_index=True, default=STATUS_PENDING)
+    approval_status = models.CharField(_("Approval Status"), max_length=2, db_index=True, default=STATUS_IN_PROGRESS)
 
     @property
     def approved(self):
@@ -78,7 +80,7 @@ class SellerRegistration(models.Model):
             )
         ]
 
-seller_registration_filestorage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'uploads', 'sellerreg'))
+seller_registration_filestorage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT))
 
 class SellerProduct(models.Model):
     seller_reg = models.ForeignKey(SellerRegistration, on_delete=models.PROTECT)
