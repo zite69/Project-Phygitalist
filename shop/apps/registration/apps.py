@@ -56,12 +56,6 @@ class RegistrationConfig(OscarConfig):
             AddBusiness, EmailAndOtp, GstPan, MobileAndOtp, UserName, PincodeForm, LanguagePreference, ShopDetails, AddProduct,
             SELLER_REGISTRATION_FORMS
         )
-        from shop.apps.registration.models import SellerProduct, SellerRegistration
-        INSTANCE_DICT = {
-            "product1": SellerProduct,
-            "product2": SellerProduct,
-            "product3": SellerProduct
-        }
         def check_product(w, count):
             return w.request.user.is_authenticated and hasattr(w.request.user, 'seller_registration') and w.request.user.seller_registration.sellerproduct_set.count() == count
 
@@ -85,8 +79,6 @@ class RegistrationConfig(OscarConfig):
             for k in WIZARD_CONDITION_DICT:
                 WIZARD_CONDITION_DICT[k] = True if k == settings.WIZARD_STEP else False
 
-        logger.debug("within get_urls for registration")
-
         urls = super().get_urls()
         urls += [
             path('', self.home_view.as_view(SELLER_REGISTRATION_FORMS,
@@ -96,5 +88,4 @@ class RegistrationConfig(OscarConfig):
             path('api/emailotp/', self.send_email_otp.as_view(), name='email_otp'),
             path('api/pincode/', self.pincode_search.as_view(), name='pincode_search'),
         ]
-        logger.debug(f"home_view: {self.home_view}")
         return urls
