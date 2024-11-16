@@ -28,7 +28,7 @@ from django.http import Http404, HttpResponseRedirect
 from django.conf.urls import (handler404, handler500)
 
 handler404 = 'shop.apps.main.views.not_found'
-handler500 = 'shop.apps.main.views.server_errror'
+handler500 = 'shop.apps.main.views.server_error'
 
 urlpatterns = i18n_patterns(
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
