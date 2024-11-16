@@ -1039,7 +1039,7 @@ button.get-link {
     background-color: #eee;
 }
 
-form#seller-registration {
+form[data-step="pincode"] {
     p {
         font-style: italic;
         font-size: 0.8rem;
