@@ -39,14 +39,6 @@
 <body>
     {% cms_toolbar %}
     <div class="container{% block fluid %}{% endblock %}">
-        {% if messages %}
-        <ul class="text-center messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
         {% block header %}
         <header class="header">
             <div class="logo-container">
@@ -56,6 +48,15 @@
             </div>
         </header>
         {% endblock %}
+
+        {% if messages %}
+        <ul class="text-center messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
 
         {% block layout %}
             {# Define basic layout for all pages here #}
