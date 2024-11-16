@@ -2,6 +2,7 @@
 from django.urls import include, path, re_path
 from django.utils.translation import gettext_lazy as _
 from oscar.core.application import OscarConfig
+from django.conf import settings
 
 import logging
 
@@ -80,6 +81,9 @@ class RegistrationConfig(OscarConfig):
             "congrats": lambda w: w.request.user.is_authenticated and hasattr(w.request.user, 'seller_registration') and w.request.user.seller_registration.approval_status == SellerRegistration.STATUS_IN_PROGRESS,
             "thanks": True
         }
+        if settings.WIZARD_STEP != "":
+            for k in WIZARD_CONDITION_DICT:
+                WIZARD_CONDITION_DICT[k] = True if k == settings.WIZARD_STEP else False
 
         logger.debug("within get_urls for registration")
 

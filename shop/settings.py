@@ -148,6 +148,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'django_messages',
     'corsheaders',
+    #'image_uploader_widget',
     #'pinax.referrals',
     #'pinax.invitations',
     #'account',
@@ -572,12 +573,12 @@ LOGGING = {
         '': {
             'handlers': ['console'],
             'propagate': True,
-            'level': 'ERROR',
+            'level': 'DEBUG',
         },
         'root': {
             'handlers': ['console'],
             'propagate': True,
-            'level': 'ERROR',
+            'level': 'DEBUG',
         },
         'django': {
             'handlers': ['null'],
@@ -611,7 +612,7 @@ LOGGING = {
         },
         'shop': {
             'handlers': ['console'],
-            'level': 'WARNING',
+            'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.otp': {
@@ -703,6 +704,8 @@ CORS_ALLOW_ALL_ORIGINS = env("CORS_ALLOW_ALL_ORIGINS", default=False)
 CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", default=[])
 
 DEALER_TYPE = "git"
+
+WIZARD_STEP = env("WIZARD_STEP", default="")
 
 from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")
