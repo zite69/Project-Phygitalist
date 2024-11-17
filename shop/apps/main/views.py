@@ -23,7 +23,7 @@ def fivehundred(request):
     return render(request, 'error/500.html')
 
 def not_found(request, exception):
-    return render(request, "error/404.html", {})
+    return render(request, "error/404.html", {}, status=404)
 
 def server_error(request, exception=None):
-    return render(request, "error/500.html", {})
+    return render(request, "error/500.html", {}, status=500)
