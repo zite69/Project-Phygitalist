@@ -760,7 +760,7 @@ if DEBUG == False:
             'filename': env("LOG_FILE", default="logs/all.log")
     }
     for module in LOGGING_ENV.keys():
-        LOGGING['loggers'][module]['handlers'] = ['file']
+        LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
         LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
 
     #Setup production email
