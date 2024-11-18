@@ -4,7 +4,8 @@ from django.contrib.sites.models import Site
 from django.urls import include
 from django.apps import apps
 import logging
-from shop.apps.invitation.models import JoinInvitation, SignupCode
+from shop.apps.invitation.models import Invitation, InvitationCode
+
 logger = logging.getLogger("shop.apps.main")
 
 class DynamicSiteMiddleware(MiddlewareMixin):
