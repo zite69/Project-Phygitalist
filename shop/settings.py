@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.flatpages',
+    'django.contrib.sitemaps',
     'dynamic_preferences',
     'dynamic_preferences.users.apps.UserPreferencesConfig',
     'djmoney',

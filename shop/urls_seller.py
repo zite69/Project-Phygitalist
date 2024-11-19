@@ -19,18 +19,26 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path, resolve
+from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
-from shop.apps.main.views import home
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
+from django.conf.urls import (handler404, handler500)
+from django.contrib.sitemaps.views import sitemap
+from shop.apps.registration.sitemaps import SITEMAPS
 import logging
 
+
 logger = logging.getLogger("shop.urls_seller")
-logger.debug(f"urls: {apps.get_app_config('registration').urls[0]}")
+# logger.debug(f"urls: {apps.get_app_config('registration').urls[0]}")
+
+handler404 = 'shop.apps.main.views.not_found'
+handler500 = 'shop.apps.main.views.server_error'
+
 
 #urlpatterns = i18n_patterns()
 urlpatterns = i18n_patterns(
+    path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="seller.sitemap"),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
