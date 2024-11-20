@@ -18,6 +18,8 @@ def create_system_users(apps, schema_editor):
     sys_pass = generate_password()
     print(f"user: system , password: {sys_pass}")
     User.objects.create_superuser(username=settings.ZITE69_MAIN_USERNAME, password=sys_pass, first_name='System', last_name='User') 
+    with open(settings.BASE_DIR / "local/password.txt", "w") as f:
+        f.write(sys_pass)
 
 class Migration(migrations.Migration):
 
