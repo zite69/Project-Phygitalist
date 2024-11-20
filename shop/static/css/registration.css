@@ -9,3 +9,12 @@
 label.requiredField {
     color: red;
 }
+
+li.ui-menu-item {
+    list-style-type: none;
+}
+
+.ui-menu-item .ui-menu-item-wrapper {
+    background-color: white;
+    opacity: 1.0;  
+}
