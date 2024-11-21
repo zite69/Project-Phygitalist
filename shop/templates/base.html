@@ -39,7 +39,7 @@
     <header>
         <div class="header-container">
           <div class="logo">
-          <a href="index.html"><img src="assets/imgs/theme/zite69_shop.png" class="logo-circle" alt="Zite69"></a>
+              <a href="/"><img src="{% static 'img/zite69_shop.png' %}" class="logo-circle" alt="Zite69"></a>
           </div>
             <div class="login-form">
 
@@ -57,10 +57,10 @@
                 <span></span>
             </label>
             <div class="nav-links">
-                <a href="#" class="active">Home</a>
-                <a href="#">Seller School</a>
-                <a href="#">Success Stories</a>
-                <a href="#">Support</a>
+                <a href="/" class="active">Home</a>
+                <a href="https://seller.zite69.com/en/sellerschool/">Seller School</a>
+                <a href="https://szine.zite69.com/">Success Stories</a>
+                <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Support</a>
             </div>
         </div>
     </nav>
@@ -85,10 +85,10 @@
         <div class="footer-links">
             <a href="https://seller.zite69.com/en/registration/" target="_blank">Sell on Z69</a> |
             <a href="https://www.zite69.com/careers/" target="_blank">Work with Us</a> |
-            <a href="https://www.zite69.com/mentor/" target="_blank">Join as Mentor</a> |
+            <a href="https://seller.zite69.com/mentor/" target="_blank">Join as Mentor</a> |
             <a href="https://szine.zite69.com/" target="_blank">Visit S/Z Blog</a> |
-            <a href="https://beta.zite69.com/demo/index.html" target="_blank">View Concept</a> |
-            <a href="https://wa.me/918547299569" target="_blank">Quick Connect</a>
+            <a href="https://www.zite69.com/demo/index.html" target="_blank">View Concept</a> |
+            <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" target="_blank">Quick Connect</a>
         </div>
     </footer>
     {% endblock %}
