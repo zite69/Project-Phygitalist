@@ -1,6 +1,6 @@
 (function () {
   document.addEventListener('DOMContentLoaded', eventDoc =>{
-    const pincode = document.querySelector(".registration-form input.form-control");
+    const pincode = document.querySelector("#id_pincode-pincode");
     const place = document.querySelector(".registration-form select");
     const uri = pincode.dataset.autocompleteUri;
     console.log(uri);

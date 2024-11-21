@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
-from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html
+from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html, password_validators_help_texts
 from django.contrib.auth import login
 from django.contrib import messages
 from djangocms_form_builder import verbose_name
@@ -27,6 +27,7 @@ from .models import SellerRegistration, SellerProduct
 from shop.apps.main.models import Pincode
 from shop.apps.seller.models import Seller
 from collections import defaultdict
+# from image_uploader_widget.widgets import ImageUploaderWidget
 
 import logging
 
@@ -34,6 +35,9 @@ logger = logging.getLogger("shop.apps.registration.forms")
 
 User = get_user_model()
 
+class Tooltip(Field):
+    template = "registration/widgets/tooltip.html"
+    wrapper_class = "mb-3"
 
 class FormWithRequest(forms.Form):
 
@@ -41,6 +45,8 @@ class FormWithRequest(forms.Form):
         css = {
             "all": ("css/registration.css",)
         }
+
+        js = ['js/tooltip.js']
 
     def __init__(self, *args, request=None, **kwargs):
         if request == None:
@@ -198,7 +204,7 @@ class PasswordForm(FormWithRequest):
     form_name = 'password'
     submit_label = 'Set Password'
 
-    password = forms.CharField(label="Create Your Password", required=True, widget=forms.PasswordInput(attrs={
+    password = forms.CharField(label="Create Your Password", help_text=",".join(password_validators_help_texts()), required=True, widget=forms.PasswordInput(attrs={
         "placeholder": "Please enter a password of at least 8 characters containing alphabets and numbers"
     }))
 
@@ -211,9 +217,20 @@ class PasswordForm(FormWithRequest):
         self.helper.layout = Layout(
             # HTML('Create Password'),
             # HTML(password_validators_help_text_html()),
-            'password',
+            Tooltip('password'),
             'password2'
         )
+        logger.debug(self.fields)
+        logger.debug(self.helper)
+        for k in self.fields:
+            logger.debug(f"{k}: {self.fields[k]}")
+
+        logger.debug(self.fields['password'].__dict__)
+        logger.debug(self.helper.__dict__)
+        logger.debug(self.helper.layout.__dict__)
+        logger.debug(self.helper.layout.__dict__['fields'][0].__dict__)
+        pwd = self.fields['password']
+        logger.debug(pwd)
 
     def clean(self):
         form_data = self.cleaned_data
@@ -471,7 +488,7 @@ class GstCrispy(FormWithRequest):
     form_name = 'gst'
     submit_label = 'Sell Now'
 
-    gstin = forms.CharField(label=_("Enter GST Number"), max_length=15, required=False, widget=forms.TextInput(attrs={
+    gstin = forms.CharField(label=_("Enter GST Number"), help_text=_("GST/PAN requires verification. Please provide correct GST/PAN for quicker verification"), max_length=15, required=False, widget=forms.TextInput(attrs={
         "placeholder": "Pincode should match your selected GST pincode",
     }))
     pan = INPANCardNumberFormField(label=_("Enter PAN Number"), required=False, widget=forms.TextInput(attrs={
@@ -489,7 +506,7 @@ class GstCrispy(FormWithRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.layout = Layout(
-            Div('gstin', css_id='id-gstin'),
+            Tooltip('gstin', css_id='id-gstin'),
             Div('pan', css_id='id-pan', css_class='hide'),
             Div(
                 InlineRadios('gst_status', id='gst-id', template='registration/widgets/radio.html'),
@@ -601,7 +618,7 @@ class PincodeForm(FormWithRequest):
     form_name = 'pincode'
     submit_label = 'Start'
 
-    pincode = forms.CharField(label=_("Enter Pickup Pincode"), max_length=6, widget=forms.TextInput(attrs={
+    pincode = forms.CharField(label=_("Enter Pickup Pincode"), help_text=_("Pincode of the place you pack and ship your products. Contact support if you are not seeing your pincode"), max_length=6, widget=forms.TextInput(attrs={
         "placeholder": "Start typing PIN code to see options",
         "data-autocomplete-uri": reverse_lazy("registration:pincode_search")
     }))
@@ -619,7 +636,7 @@ class PincodeForm(FormWithRequest):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.layout = Layout(
-            Div('pincode'),
+            Tooltip('pincode'),
             HTML('<p>Pincode of the place you will pack and ship your products</p>'),
             Div('office')
         )
@@ -677,7 +694,7 @@ class ShopDetails(FormWithRequest):
     class Media:
         js = ["js/shopsetup.js"]
 
-    name = forms.CharField(label="", max_length=64, required=True, widget=forms.TextInput(attrs={
+    name = forms.CharField(label=_("Your Unique Shop Name"), help_text=_("This can be your already existing brand/business name or newly created name. If other business exists in the same name here, you have to find a new name"), max_length=64, required=True, widget=forms.TextInput(attrs={
         "placeholder": "You can change it later",
         "id": "shop-name",
     }))
@@ -702,9 +719,9 @@ class ShopDetails(FormWithRequest):
                 <img src='{% static \'img/seller/icon_success.png\' %}' alt='Zite69'>
                 <span>Wow! Your business added successfully</span>
             </div>
-            <p>Your Unique Shop Name</p>
             """),
-            'name', 'handle'
+            Tooltip('name'),
+            'handle'
         )
 
     def clean_handle(self):
@@ -778,6 +795,7 @@ class AddProduct(FormWithRequest, forms.ModelForm):
 
     # image = forms.ImageField(label=_("Product Image"))
     # name = forms.CharField(label=_("Product/Service Name"), max_length=64)
+    # image = forms.ImageField(label=_("Product Image"), widget=ImageUploaderWidget())
 
     class Meta:
         model = SellerProduct
@@ -785,16 +803,20 @@ class AddProduct(FormWithRequest, forms.ModelForm):
         labels = {
             'name': 'Product/Service Name'
         }
+        # widgets = {
+        #     'image': ImageUploaderWidget
+        # }
 
     # def __init__(self, *args, request=None, **kwargs):
     #     super().__init__(*args, request=request, **kwargs)
-    #     logger.debug("Inside AddProduct __init__")
+    #     self.fields['image'].widget = ImageUploaderWidget()
+    #     logger.warning(f"Setting field image widget: {self.fields['image'].widget}")
 
-    def form_valid(self, form):
-        logger.debug("Being called in form_valid")
-        logger.debug(f"{form}")
-        form.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     logger.warning("Being called in form_valid")
+    #     logger.warning(f"{form}")
+    #     form.save()
+    #     return super().form_valid(form)
 
     def clean(self):
         cleaned_data = super().clean()

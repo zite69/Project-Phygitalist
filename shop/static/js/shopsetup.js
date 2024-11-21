@@ -17,17 +17,14 @@
   document.addEventListener('DOMContentLoaded', eventDoc => {
     const name = document.getElementById("shop-name");
     const handle = document.getElementById("shop-handle");
-    const short = document.getElementById("shop-short-handle");
     console.log(name);
     console.log(handle);
     console.log(short);
 
     name.addEventListener('input', eventInput => {
-      console.log("Inside name input");
       const newName = eventInput.target.value;
       if (!handle.dataset.editted) {
         handle.value = slugify(newName).slice(0, 12);
-        short.value = handle.value.slice(0, 12);
       }
     });
 
