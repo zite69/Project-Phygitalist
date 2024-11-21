@@ -40,12 +40,8 @@ urlpatterns = i18n_patterns(
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
     path('careers/', TemplateView.as_view(template_name='main/career.html'), name="careers"),
-    path('mentor/', TemplateView.as_view(template_name='main/mentor.html'), name="mentor"),
-    path('sellerschool/', TemplateView.as_view(template_name='main/sellerschool.html'), name="sellerschool"),
-    #path('', home, name='home'),
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('membership/', include((apps.get_app_config('membership').urls[0], 'membership'), namespace='membership')),
-    #path('referrals/', include('pinax.referrals.urls', namespace='pinax_referrals')),
     path('', include(apps.get_app_config('main').urls[0])),
     path('', include('cms.urls')),
 )

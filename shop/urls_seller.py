@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.i18n import JavaScriptCatalog
+from django.views.generic import TemplateView
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
 from django.conf.urls import (handler404, handler500)
@@ -43,6 +44,8 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
+    path('mentor/', TemplateView.as_view(template_name='main/mentor.html'), name="mentor"),
+    path('sellerschool/', TemplateView.as_view(template_name='main/sellerschool.html'), name="sellerschool"),
     path('invitation/', include((apps.get_app_config('invitation').urls[0], 'invitation'), namespace='invitation')),
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
