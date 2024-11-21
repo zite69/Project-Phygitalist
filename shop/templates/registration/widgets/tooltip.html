@@ -1,0 +1,9 @@
+{% load crispy_forms_field %}
+<{% if tag %}{{ tag }}{% else %}div{% endif %} id="div_{{ field.auto_id }}" class="{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_show_errors%}{% if field.errors %} has-error{% endif %}{% endif %}{% if field.css_class %} {{ field.css_class }}{% endif %}">
+{{ field|css_class|json_script:"data" }}
+<label class="form-label requiredField" for="{{ field.id_for_label }}">
+    <span>{{ field.label }}</span>
+    <span class="help-icon" data-bs-toggle="tooltip" data-bs-original-title="{{ field.help_text }}">?</span>
+</label>
+{% crispy_field field class="mb-3" %}
+</{% if tag %}{{ tag }}{% else %}div{% endif %}>
