@@ -1,90 +1,27 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load cms_tags sekizai_tags %}
 {% load i18n %}
 {% load compress %}
+{% load static %}
 {% get_current_language as LANGUAGE_CODE %}
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
-    <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{% spaceless %}
-        {% block description %}
-            {% page_attribute 'meta_description' as page_description %}
-            {% if page_description and page_description.strip %}
-                {{ page_description.strip }}
-            {% else %}
-                ZITE69: #SuperSocial Marketplace | ♥ Add cash to your cart! 🔴Live Chat & Shop, Buy Nearby📍Group Buy  +More ₹upee Deals
-            {% endif %}
-        {% endblock %}
-        {% endspaceless %}">
-    <title>{% block title %}zite69 :{% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip }}{% else %}Supers Social Platform is Live Soon{% endif %}{% endblock %}</title>
-    {% render_block "css" %}
 
-    {{ settings.PLAUSIBLE_TAG | safe }}
+{% block description %}
+{% spaceless %}
+    {% page_attribute 'meta_description' as page_description %}
+    {% if page_description and page_description.strip %}
+        {{ page_description.strip }}
+    {% else %}
+        ZITE69: #SuperSocial Marketplace | ♥ Add cash to your cart! 🔴Live Chat & Shop, Buy Nearby📍Group Buy  +More ₹upee Deals
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
 
-    {% block styles %}
-        {% compress css %}
-            <link rel="stylesheet" type="text/x-scss" href="{% static "scss/cms.scss" %}" />
-        {% endcompress %}
-    {% endblock %}
+{% block title %}{{ shop_name }} - {% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
-    {% include 'includes/revision-style.html' %}
+{% block styles %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/cms.scss" %}" />
+    {% endcompress %}
+{% endblock %}
 
-    {% block extrastyles %}
-    {% endblock %}
-
-</head>
-<body>
-    {% cms_toolbar %}
-    <div class="container{% block fluid %}{% endblock %}">
-        {% block header %}
-        <header class="header">
-            <div class="logo-container">
-              <div class="logo">
-              <a href="/"><img src="{% static 'img/zite69_shop.png' %}" alt="zite69 Logo"></a>
-              </div>
-            </div>
-        </header>
-        {% endblock %}
-
-        {% if messages %}
-        <ul class="text-center messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-
-
-        {% block layout %}
-            {# Define basic layout for all pages here #}
-            {% block content %}{% endblock %}
-        {% endblock %}
-
-   </div>
-        {% block footer %}
-        <footer class="footer">
-            <div class="footer-links">
-                <a href="https://seller.zite69.com/en/registration/" target="_blank">Sell on Z69</a> |
-                <a href="https://www.zite69.com/careers/" target="_blank">Work with Us</a> |
-                <a href="https://www.zite69.com/mentor/" target="_blank">Join as Mentor</a> |
-                <a href="https://szine.zite69.com/" target="_blank">Visit S/Z Blog</a> |
-                <a href="https://beta.zite69.com/demo/index.html" target="_blank">View Concept</a> |
-                <a href="https://wa.me/918547299569" target="_blank">Quick Connect</a>
-            </div>
-        </footer>
-        {% include 'includes/revision-tag.html' %}
-
-        {% endblock %}
-
-        {# Local scripts #}
-        {% block scripts %}
-        {% endblock %}
-
-        {# Additional JS scripts #}
-        {% block extrascripts %}{% endblock %}
-        {% render_block "js" %}
-</body>
-</html>

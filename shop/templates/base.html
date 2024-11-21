@@ -1,69 +1,120 @@
 {% load i18n %}
 {% load static %}
 {% load cms_tags sekizai_tags %}
-
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE|default:"en-gb" }}" class="{% block html_class %}no-js{% endblock %}">
-    <head>
-        <title>{% block title %}{{ shop_name }} - {{ shop_tagline }}{% endblock %}</title>
+<html lang="{{ LANGUAGE_CODE|default:"en" }}" class="{% block html_class %}no-js{% endblock %}">
+<head>
+    <title>{% block title %}{{ shop_name }} - {{ shop_tagline }}{% endblock %}</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="created" content="{% now "jS M Y h:i" %}" />
+    <meta name="description" content="{% block description %}ZITE69 is a rising social marketplace with a super social income sharing model. 
+    Fashion | Beauty | Food | Wellness | Gifts | Arts | Crafts |  Games |  Life Goods | Digital Goods; all good stuff you needed  in your  life & life changing new stuff you didn’t know you needed!
+    {% endblock %}" />
+    <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}" />
 
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <meta name="created" content="{% now "jS M Y h:i" %}" />
-        <meta name="description" content="{% block description %}ZITE69 is a rising social marketplace with a super social income sharing model. 
-        Fashion | Beauty | Food | Wellness | Gifts | Arts | Crafts |  Games |  Life Goods | Digital Goods; all good stuff you needed  in your  life & life changing new stuff you didn’t know you needed!
-        {% endblock %}" />
-        <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}" />
-    
-        {{ settings.PLAUSIBLE_TAG | safe }}
+    {{ settings.PLAUSIBLE_TAG | safe }}
 
-        {% block favicon %}
-            <link rel="shortcut icon" href="{% static "oscar/favicon.ico" %}" />
-        {% endblock %}
+    {% block favicon %}
+        <link rel="shortcut icon" href="{% static "oscar/favicon.ico" %}" />
+    {% endblock %}
 
-        {# Block where global CSS will go. #}
-        {% block styles %}{% endblock %}
+    {# Block where global CSS will go. #}
+    {% block styles %}{% endblock %}
 
-        {# Additional CSS - specific to certain pages #}
-        {% block extrastyles %}{% endblock %}
+    {# Additional CSS - specific to certain pages #}
+    {% block extrastyles %}{% endblock %}
 
-        {% block extrahead %}{% endblock %}
-        {% render_block "css" %}
-        {% block tracking %}
-            {# Default to using Google analytics #}
-            {% include "oscar/partials/google_analytics.html" %}
-        {% endblock %}
-        {% include "includes/revision-style.html" %}
-    </head>
+    {% block extrahead %}{% endblock %}
+    {% render_block "css" %}
+    {% block tracking %}
+        {# Default to using Google analytics #}
+        {% include "oscar/partials/google_analytics.html" %}
+    {% endblock %}
+    {% include "includes/revision-style.html" %}
+</head>
 
-    <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
-        {% cms_toolbar %}
-        {# Main content goes in this 'layout' block #}
-        {% block layout %}
-            {% block content %}{% endblock %}
-        {% endblock %}
+<body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
+    {% cms_toolbar %}
+    {% block header %}
+    <header>
+        <div class="header-container">
+          <div class="logo">
+          <a href="index.html"><img src="assets/imgs/theme/zite69_shop.png" class="logo-circle" alt="Zite69"></a>
+          </div>
+            <div class="login-form">
 
-        {# Scripts loaded from a CDN. #}
-        {% block cdn_scripts %}
-            <!-- jQuery -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery.min.js" %}"><\/script>')</script>
-        {% endblock %}
+            <button class="login-btn">Login</button>
+            </div>
+        </div>
+    </header>
 
-        {# Local scripts #}
-        {% block scripts %}
-        {% endblock %}
+    <nav>
+        <div class="nav-container">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="nav-links">
+                <a href="#" class="active">Home</a>
+                <a href="#">Seller School</a>
+                <a href="#">Success Stories</a>
+                <a href="#">Support</a>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
 
-        {# Additional JS scripts #}
-        {% block extrascripts %}{% endblock %}
+    {% block messages %}
+        {% if messages %}
+            <ul class="text-center messages">{% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+        {% endfor %}</ul>
+        {% endif %}
+    {% endblock %}
 
-        {% include "includes/revision-tag.html" %}
-        {# Block for body onload functions #}
-        <script>
-            $(function() {
-                {% block onbodyload %}{% endblock %}
-            });
-        </script>
-        {% render_block "js" %}
-        {# Page meta-data - this is populated by the 'metadata' template context processor #}
-    </body>
+
+    {# Main content goes in this 'layout' block #}
+    {% block layout %}
+        {% block content %}{% endblock %}
+    {% endblock %}
+
+    {% block footer %}
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://seller.zite69.com/en/registration/" target="_blank">Sell on Z69</a> |
+            <a href="https://www.zite69.com/careers/" target="_blank">Work with Us</a> |
+            <a href="https://www.zite69.com/mentor/" target="_blank">Join as Mentor</a> |
+            <a href="https://szine.zite69.com/" target="_blank">Visit S/Z Blog</a> |
+            <a href="https://beta.zite69.com/demo/index.html" target="_blank">View Concept</a> |
+            <a href="https://wa.me/918547299569" target="_blank">Quick Connect</a>
+        </div>
+    </footer>
+    {% endblock %}
+
+    {# Scripts loaded from a CDN. #}
+    {% block cdn_scripts %}
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{% static "oscar/js/jquery/jquery.min.js" %}"><\/script>')</script>
+    {% endblock %}
+
+    {# Local scripts #}
+    {% block scripts %}
+    {% endblock %}
+
+    {# Additional JS scripts #}
+    {% block extrascripts %}{% endblock %}
+
+    {% include "includes/revision-tag.html" %}
+    {# Block for body onload functions #}
+    <script>
+        $(function() {
+            {% block onbodyload %}{% endblock %}
+        });
+    </script>
+    {% render_block "js" %}
+    {# Page meta-data - this is populated by the 'metadata' template context processor #}
+</body>
 </html>
