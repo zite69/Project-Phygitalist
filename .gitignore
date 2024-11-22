@@ -1,3 +1,9 @@
+.gitconfig
+#Editors/IDEs
+.zed
+.idea
+pyrightconfig.json
+
 *.log
 *.pot
 *.pyc
