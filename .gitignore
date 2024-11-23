@@ -3,6 +3,7 @@
 .zed
 .idea
 pyrightconfig.json
+.phcode.json
 
 *.log
 *.pot
