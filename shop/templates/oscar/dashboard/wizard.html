@@ -1,0 +1,20 @@
+{% extends 'oscar/dashboard/layout.html' %}
+{% load static %}
+{% load compress %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'oscar/css/styles.css' %}">
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/dashboard/wizard.scss" %}" />
+    {% endcompress %}
+{% endblock %}
+
+{% block dashboard_content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10">
+            <h1>Seller - Onboarding</h1>
+        </div>
+    </div>
+</div>
+{% endblock %}
