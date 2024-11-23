@@ -80,6 +80,58 @@ a {
     }
 }
 
+/* Header Styles */
+header {
+    background-color: $primary;
+    padding: 15px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    border: 1px #ffffff solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.logo-text {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.login-form input {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+}
+
+.login-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+
 /* Navigation Styles */
 nav {
     background-color: white;
