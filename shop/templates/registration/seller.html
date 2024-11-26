@@ -2,10 +2,6 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block head %}
-    {{ wizard.form.media }}
-{% endblock %}
-
 {% block form %}
     {% crispy form %}
 {% endblock %}
