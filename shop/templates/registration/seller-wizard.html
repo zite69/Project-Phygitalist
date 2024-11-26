@@ -2,8 +2,8 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block extrahead %}
-    {{ wizard.form.media }}
+{% block extrastyles %}
+    {{ wizard.form.media.css }}
 {% endblock %}
 
 {% block registration-form %}
@@ -24,4 +24,9 @@
         {% endblock %}
     {% endif %}
 </form>
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    {{ wizard.form.media.js }}
 {% endblock %}
