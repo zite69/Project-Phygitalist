@@ -631,7 +631,7 @@ class PincodeForm(FormWithRequest):
         css = {
             "all": ["https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css"]
         }
-        js = ["js/place.js", "https://code.jquery.com/ui/1.14.0/jquery-ui.js"]
+        js = ["https://code.jquery.com/ui/1.14.0/jquery-ui.js", "js/place.js"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
