@@ -19,7 +19,6 @@
     const handle = document.getElementById("shop-handle");
     console.log(name);
     console.log(handle);
-    console.log(short);
 
     name.addEventListener('input', eventInput => {
       const newName = eventInput.target.value;
