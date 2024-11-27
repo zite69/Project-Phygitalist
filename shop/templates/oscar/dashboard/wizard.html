@@ -10,11 +10,170 @@
 {% endblock %}
 
 {% block dashboard_content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-10">
-            <h1>Seller - Onboarding</h1>
-        </div>
-    </div>
-</div>
+
+        <aside class="sidebar">
+            <div class="progress-status">
+                <h3>Your onboarding completion status</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <span>60%</span>
+            </div>
+            <ul class="verification-steps">
+                <li class="verification-step completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Phone & Email Verification</span>
+                </li>
+                <li class="verification-step completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Password Creation</span>
+                </li>
+                <li class="verification-step completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>GST & Business Id Verification </span>
+                </li>
+                <li class="verification-step completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Shop Name & Handle Creation</span>
+                </li>
+                <li class="verification-step pending">
+                    <i class="far fa-circle"></i>
+                    <span>Pickup Address </span>
+                </li>
+                <li class="verification-step pending">
+                    <i class="far fa-circle"></i>
+                    <span>Bank Account Details </span>
+                </li>
+                <li class="verification-step pending">
+                    <i class="far fa-circle"></i>
+                    <span>Shipping Preferences</span>
+                </li>
+                <li class="verification-step pending">
+                    <i class="far fa-circle"></i>
+                    <span>Signature Verification </span>
+                </li>
+                <li class="verification-step pending">
+                    <i class="far fa-circle"></i>
+                    <span>First Listing & Initial Stock</span>
+                </li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="greeting">
+                <h1>Hello, {#var#}!</h1>
+            </div>
+            <section class="verification-section">
+                <h3>Mobile & Email Verification</h3>
+                <div class="verification-item">
+                    <span>+919400859345</span>
+                    <span class="verified-badge">Verified</span>
+                </div>
+                <div class="verification-item">
+                    <span>seller@gmail.com</span>
+                    <span class="verified-badge">Verified</span>
+                </div>
+            </section>
+            <section>
+                <div class="input-group">
+                    <label>Pickup Pincode</label><span class="help-icon" data-bs-toggle="tooltip" title="Shop name requirements: • Must be between 4-30 characters • Can contain letters, numbers, and hyphens • Must be unique • Cannot contain special characters or spaces • Cannot start or end with a hyphen">?</span>
+                    <input type="number" placeholder="000000" />
+                    
+                </div>
+            </section>
+
+            <section class="address-section">
+                <div class="input-group">
+                    <label>Pickup Address</label>
+                    <input type="text" placeholder="Building number/name" />
+                    <input type="text" placeholder="Street, Road Local area" />
+                    <input type="text" placeholder="Addressline 2" />
+                    <input type="text" placeholder="Landmark" />
+                </div>
+                <div class="input-group">
+                    <label>Enter City</label>
+                    <input type="text" placeholder="City" />
+                </div>
+                <div class="input-group">
+                    <label>Enter State</label>
+                    <input type="text" placeholder="State" />
+                </div>
+            </section>
+            <div class="action-buttons">
+                <button class="btn btn-primary">Save</button>
+            </div>
+            <div class="form-container">
+                <h2>Bank Account Details</h2>
+                <form>
+                    <!-- Account Holder Name -->
+                    <div class="input-group">
+                        <label for="account-holder-name">Account Holder Name <span class="text-danger">*</span></label>
+                        <input type="text" id="account-holder-name" class="input-group" placeholder="Enter your name as in the bank records" required>
+                    </div>
+                    <!-- Bank Account Number -->
+                    <div class="input-group">
+                        <label for="account-number">Bank Account Number <span class="text-danger">*</span></label>
+                        <input type="text" id="account-number" class="input-group" placeholder="Enter your bank account number" required>
+                    </div>
+                    <!-- Bank Name -->
+                    <div class="input-group">
+                        <label for="bank-name">Bank Name <span class="text-danger">*</span></label>
+                        <input type="text" id="bank-name" class="input-group" placeholder="Enter your bank name" required>
+                    </div>
+                    <!-- Bank IFSC Code -->
+                    <div class="input-group">
+                        <label for="ifsc-code">Bank IFSC Code <span class="text-danger">*</span></label>
+                        <input type="text" id="ifsc-code" class="input-group" placeholder="Enter the IFSC code of your bank branch" required>
+                        <small class="small-text">Find your IFSC code on your cheque book or bank statement.</small>
+                    </div>
+
+                    <!-- Account Type -->
+                    <div class="input-group">
+                        <label for="account-type">Account Type <span class="text-danger">*</span></label>
+                        <select id="account-type" class="input-group" required>
+                            <option value="">Select Account Type</option>
+                            <option value="savings">Savings Account</option>
+                            <option value="current">Current Account</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <!-- Registered Mobile Number -->
+                    <div class="input-group">
+                        <label for="registered-mobile">Phone Number Linked to Bank Account <span class="text-muted">(Optional)</span></label>
+                        <input type="text" id="registered-mobile" class="input-group" placeholder="Enter registered mobile number">
+                    </div>
+                  <!-- Shipping Preferences Section -->
+                    <section class="shipping-section">
+                        <h2>Choose Shipping Preference</h3>
+                        <div class="shipping-option">
+                          <input type="checkbox" id="self-shipping" name="shipping-preference" value="self-shipping">
+                          <label for="self-shipping">Self-shipping</label>
+                        </div>
+                        <div class="shipping-option">
+                          <input type="checkbox" id="zite69-shipping" name="shipping-preference" value="zite69-shipping" disabled>
+                          <label for="zite69-shipping">zite69 Shipping (coming soon)</label>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Add Your Signature</h3>
+                        <div class="signature-section">
+                            <div class="signature-option">
+                                <input type="file" name="product-image" class="file-upload" accept="image/*">
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Save Button -->
+                    <button type="submit" class="btn btn-primary">Save Details</button>
+                    <div>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <aside class="help-sidebar">
+         <button class="btn btn-secondary" disabled>Go to listing</button>
+          <button class="btn btn-secondary"disabled>Go Live Now</button>
+            <h3>Do you need help?</h3>
+            <p>Our team of specialists would be happy to help you setup your shop on zite69.</p>
+            <p>If you would like their assistance,</p>
+            <button class="btn btn-primary">Request a Callback</button>
+        </aside>
 {% endblock %}

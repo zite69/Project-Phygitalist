@@ -1,5 +1,244 @@
 @import '../base';
 
-.page-content h1 {
-    color: pink;
+.step i {
+  color: #4caf50;
+}
+
+.step.completed {
+  color: #2196f3;
+}
+
+.sidebar {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.progress-status {
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ffa500;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  width: 60%;
+  height: 100%;
+  background: #4caf50;
+  border-radius: 4px;
+}
+
+.verification-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.verification-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.verification-step.completed i {
+  color: #4caf50;
+}
+
+.verification-step.pending i {
+  color: #ff8c00 ;
+}
+
+.main-content {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.greeting {
+  margin-bottom: 30px;
+}
+
+.verification-section {
+  margin-bottom: 30px;
+}
+
+.verification-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+
+.verified-badge {
+  margin-left: auto;
+  color: #4caf50;
+  background: #e8f5e9;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+/* Add specificity for input inside .input-group */
+.input-group > input {
+    border-radius: 8px !important; /* Ensure this applies */
+    margin-left: 0 !important;     /* Neutralize Bootstrap margin */
+    border-top-left-radius: 8px;  /* Reset */
+    border-bottom-left-radius: 8px;
+}
+.input-group {
+  margin-bottom: 8px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #666;
+}
+
+
+
+.signature-section {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.signature-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2196f3;
+  cursor: pointer;
+}
+
+.address-section input {
+  margin-bottom: 15px;
+}
+.shipping-section {
+  margin-bottom: 15px;
+}
+
+.help-sidebar {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  line-height: 26px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* General Button Styles */
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  background: #f66569 !important;
+  color: #ffffff !important;
+}
+
+/* Remove Hover Effects */
+.btn:hover,
+.btn:focus,
+.btn:active {
+  background: #f66569 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+
+.btn-secondary:disabled {
+  margin-bottom: 10px;
+  background: #ddd !important; /* Faded background */
+  color: #aaa !important;     /* Faded text */
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+.btn-secondary:disabled:hover {
+  background: #ddd !important; /* Prevent hover effects */
+  color: #aaa !important;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.success-message {
+  color: #4caf50;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.file-upload {
+    display: block;
+    font-size: 14px;
+    color: #6c757d;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #666666;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+  .form-container h2 {
+      font-size: 18px;
+      color: #343a40;
+      margin-bottom: 15px;
+  }
+
+.text-danger{
+  color: #dc3545 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+
+    }
+
+    .sidebar, .main-content, .help-sidebar {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+.page-content{
+    display: flex;
+    flex-direction: row;
 }
