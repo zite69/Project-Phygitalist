@@ -7,7 +7,7 @@ class StaticPagesSitemap(sitemaps.Sitemap):
     changefreq = "weekly"
 
     def items(self):
-        return ["careers", "mentor", "sellerschool"]
+        return ["careers"]
 
     def location(self, item):
         return reverse(item)

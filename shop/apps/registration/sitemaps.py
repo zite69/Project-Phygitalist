@@ -7,7 +7,7 @@ class StaticPagesSitemap(sitemaps.Sitemap):
     changefreq = "weekly"
 
     def items(self):
-        return ["registration:home"]
+        return ["registration:home", "mentor", "sellerschool"]
 
     def location(self, item):
         return reverse_lazy(item)
