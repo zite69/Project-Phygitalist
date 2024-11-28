@@ -57,6 +57,9 @@
     </nav>
 {% endblock %}
 
+{% block messages %}
+{% endblock %}
+
 {% block content %}
     <section class="hero-section">
         <div class="hero-container">
@@ -65,6 +68,12 @@
                 <p>1000s of our member shoppers waiting<br>to see what you have in your store</p>
             </div>
             <div class="registration-form">
+                {% if messages %}
+                    <ul class="text-center messages">{% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+                {% endfor %}</ul>
+                {% endif %}
+
                 {% block registration-form %}
                 {% endblock %}
             </div>

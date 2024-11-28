@@ -835,7 +835,7 @@ class AddProduct(FormWithRequest, forms.ModelForm):
             name = name,
             seller_reg = user.seller_registration
         )
-        messages.success(self.request, f"You have successfully added a product/service: {name}")
+        messages.success(self.request, f"Your product has been added successfully")
 
         logger.debug(f"Saved SellerProduct: id: {sp.id}")
         return cleaned_data
