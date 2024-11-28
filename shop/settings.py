@@ -706,6 +706,10 @@ CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", default=[])
 
 DEALER_TYPE = "git"
 
+#File upload sizes
+FILE_UPLOAD_MAX_MEMORY_SIZE = 4194304 #4MB
+FILE_UPLOAD_TEMP_DIR = BASE_DIR / "tmp"
+
 WIZARD_STEP = env("WIZARD_STEP", default="")
 
 from email.utils import parseaddr
