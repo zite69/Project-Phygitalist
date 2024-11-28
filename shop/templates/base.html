@@ -44,8 +44,14 @@
               <a href="/"><img src="{% static 'img/zite69_shop.png' %}" class="logo-circle" alt="Zite69"></a>
           </div>
             <div class="login-form">
-
-            <button class="login-btn">Login</button>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'account_logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-login" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'otp:request' %}" class="btn btn-login">Login</a>
+                {% endif %}
             </div>
         </div>
     </header>
