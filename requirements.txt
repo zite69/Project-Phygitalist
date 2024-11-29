@@ -36,6 +36,7 @@ django-filter==24.3
 django-formtools==2.5.1
 django-fsm==2.8.2
 django-haystack==3.3.0
+django-image-uploader-widget==1.0.0
 django-libsass==0.9
 django-localflavor==4.0
 django-messages @ git+https://github.com/zite69/django-messages.git@ca7f095ac03e3142d44621c5de31d16106e39e86
