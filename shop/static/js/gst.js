@@ -1,7 +1,7 @@
 (function () {
   document.addEventListener('DOMContentLoaded', eventDoc => {
     const step = document.getElementById("seller-registration").dataset.step;
-    const divGst = document.getElementById('id-gstin');
+    const divGst = document.getElementById('div_id_gst-gstin');
     const divPan = document.getElementById('id-pan');
     const initialSelection = document.querySelector(`input[name="${step}-gst_status"]:checked`);
     if (initialSelection.value == 'Y') {

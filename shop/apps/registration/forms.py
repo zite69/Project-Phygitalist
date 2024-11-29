@@ -27,7 +27,7 @@ from .models import SellerRegistration, SellerProduct
 from shop.apps.main.models import Pincode
 from shop.apps.seller.models import Seller
 from collections import defaultdict
-# from image_uploader_widget.widgets import ImageUploaderWidget
+from image_uploader_widget.widgets import ImageUploaderWidget
 
 import logging
 
@@ -429,6 +429,7 @@ class GstPan(FormWithRequest):
     def clean_pan(self):
         pan = self.cleaned_data.get('pan', '')
 
+        logger.debug(f"Inside clean_pan: {pan}")
         if pan != "":
             try:
                 Profile.objects.get(pan=pan)
@@ -517,10 +518,10 @@ class GstCrispy(FormWithRequest):
 
     def clean_gstin(self):
         gst = self.cleaned_data.get('gstin', '')
-        gst_status = self.cleaned_data.get('gst_status', 'Y')
+        # gst_status = self.cleaned_data.get('gst_status', 'Y')
 
-        if gst_status != 'Y':
-            return gst
+        # if gst_status != 'Y':
+        #     return gst
 
         if gst != "":
             try:
@@ -540,10 +541,13 @@ class GstCrispy(FormWithRequest):
 
     def clean_pan(self):
         pan = self.cleaned_data.get('pan', '')
-        gst_status = self.cleaned_data.get('gst_status', 'Y')
+        # gst_status = self.cleaned_data.get('gst_status', 'Y')
 
-        if gst_status == 'Y':
-            return pan
+        logger.debug(f"pan: {pan}")
+        # logger.debug(f"gst_status: {gst_status}")
+
+        # if gst_status == 'Y':
+        #     return pan
 
         if pan != "":
             try:
@@ -571,6 +575,16 @@ class GstCrispy(FormWithRequest):
 
         gst = form_data.get('gstin', '')
         pan = form_data.get('pan', '')
+        gst_status = form_data.get('gst_status', '')
+        
+        if gst_status == '':
+            raise ValidationError(_("Invalid GST Status"))
+
+        if gst_status == 'Y' and gst == '':
+            raise ValidationError(_("You must specify a valid GST number"))
+        elif pan == '':
+            raise ValidationError(_("You must specify a valid PAN number"))
+
         if gst == '' and pan == '':
             logger.debug(f"Form errors: {self._errors}")
             if not self._errors:
@@ -597,7 +611,7 @@ class GstCrispy(FormWithRequest):
 
             try:
                 profile = Profile.objects.get(user=user)
-                profile.type = Profile.TYPE_BUYER
+                profile.type = Profile.TYPE_SELLER
                 profile.level = 1
                 profile.gstin = gst
                 profile.pan = pan
@@ -605,7 +619,7 @@ class GstCrispy(FormWithRequest):
             except Profile.DoesNotExist:
                 profile = Profile.objects.create(
                     user = user,
-                    type = Profile.TYPE_BUYER,
+                    type = Profile.TYPE_SELLER,
                     level = 1,
                     gstin = gst,
                     pan = pan,
@@ -806,14 +820,26 @@ class AddProduct(FormWithRequest, forms.ModelForm):
         labels = {
             'name': 'Product/Service Name'
         }
-        # widgets = {
-        #     'image': ImageUploaderWidget
-        # }
+        widgets = {
+            'image': ImageUploaderWidget()
+        }
 
-    # def __init__(self, *args, request=None, **kwargs):
-    #     super().__init__(*args, request=request, **kwargs)
-    #     self.fields['image'].widget = ImageUploaderWidget()
-    #     logger.warning(f"Setting field image widget: {self.fields['image'].widget}")
+    class Media:
+        js = ['js/upload.js']
+
+    def __init__(self, *args, request=None, **kwargs):
+        super().__init__(*args, request=request, **kwargs)
+        # self.fields['image'].widget = ImageUploaderWidget()
+        # logger.warning(f"Setting field image widget: {self.fields['image'].widget}")
+        self.helper.layout = Layout(
+            Div(
+                HTML('<label>Product Image*</label>'),
+                Field('image', template="registration/widgets/image.html"),
+                HTML('<p class="file-size">Please limit file size to 5MB</p>'),
+                'name',
+                css_class="col-md-12 mb-0 iuw-light"
+            )
+         )
 
     # def form_valid(self, form):
     #     logger.warning("Being called in form_valid")

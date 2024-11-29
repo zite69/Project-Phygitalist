@@ -37,3 +37,8 @@ li.ui-menu-item {
     display: flex;
 }
 
+.file-size {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: grey;
+}
