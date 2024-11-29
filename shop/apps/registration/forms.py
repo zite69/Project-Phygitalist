@@ -726,18 +726,21 @@ class ShopDetails(FormWithRequest):
 
     def clean_handle(self):
         handle = self.cleaned_data.get('handle')
+        logger.debug(f"Inside clean_handle trying to clean: {handle}")
 
         if not handle:
             raise ValidationError(_("Handle is required."))
 
         try:
             SellerRegistration.objects.get(shop_handle=handle)
+            logger.debug("We found handle in SellerRegistration")
             raise ValidationError(_("Handle not available, please choose another handle"))
         except SellerRegistration.DoesNotExist:
             pass
 
         try:
             Seller.objects.get(handle=handle)
+            logger.debug("Found handle in Seller")
             raise ValidationError(_("Handle not available, please choose another handle"))
         except Seller.DoesNotExist:
             pass
@@ -776,7 +779,7 @@ class ShopDetails(FormWithRequest):
         if shop_name == '':
             raise ValidationError(_("Shop name is required. Please select some name, it can be changed later"))
 
-        handle = form_data.get('handle')
+        handle = form_data.get('handle', '')
         logger.debug(f"handle: {handle}")
         # short_handle = form_data.get('short_handle')
         # logger.debug(f"short_handle: {short_handle}")
