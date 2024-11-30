@@ -522,6 +522,7 @@ class GstCrispy(FormWithRequest):
 
         # if gst_status != 'Y':
         #     return gst
+        logger.debug(f"clean_gstin: {gst}")
 
         if gst != "":
             try:
@@ -576,14 +577,19 @@ class GstCrispy(FormWithRequest):
         gst = form_data.get('gstin', '')
         pan = form_data.get('pan', '')
         gst_status = form_data.get('gst_status', '')
-        
+        logger.debug(f"gst: {gst}")
+        logger.debug(f"pan: {pan}")
+        logger.debug(f"gst_status: {gst_status}")
+
         if gst_status == '':
             raise ValidationError(_("Invalid GST Status"))
 
         if gst_status == 'Y' and gst == '':
-            raise ValidationError(_("You must specify a valid GST number"))
+            if not self._errors:
+                raise ValidationError(_("You must specify a valid GST number"))
         elif pan == '':
-            raise ValidationError(_("You must specify a valid PAN number"))
+            if not self._errors:
+                raise ValidationError(_("You must specify a valid PAN number"))
 
         if gst == '' and pan == '':
             logger.debug(f"Form errors: {self._errors}")
