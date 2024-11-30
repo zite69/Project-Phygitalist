@@ -52,6 +52,7 @@
             if (divPan.querySelector("input").value == "") {
               divPan.classList.remove("success");
               divPan.classList.add("error");
+              const errorSpan = document.createElement("span");
               errorSpan.textContent = 'Please enter PAN number';
               errorSpan.classList.add("error", "form");
               document.querySelector(".registration-form").insertBefore(errorSpan, document.querySelector(`#div_id_${step}-gstin`));
