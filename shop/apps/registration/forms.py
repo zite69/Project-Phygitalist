@@ -479,12 +479,12 @@ class GstPan(FormWithRequest):
         return form_data
 
 class GstCrispy(FormWithRequest):
-    STATUS_CHOICES = [
-        ('Y', 'I have GST'),
-        ('N', "I don't have GST"),
-        ('E', 'I am expemted'),
-        ('L', 'I will add later')
-    ]
+    # STATUS_CHOICES = [
+    #     ('Y', 'I have GST'),
+    #     ('N', "I don't have GST"),
+    #     ('E', 'I am expemted'),
+    #     ('L', 'I will add later')
+    # ]
     form_id = 'id_form_gst'
     form_name = 'gst'
     submit_label = 'Sell Now'
@@ -495,7 +495,7 @@ class GstCrispy(FormWithRequest):
     pan = INPANCardNumberFormField(label=_("Enter PAN Number"), required=False, widget=forms.TextInput(attrs={
         "placeholder": "Please enter your registered PAN number",
     }))
-    gst_status = forms.ChoiceField(choices=STATUS_CHOICES, initial='Y', widget=forms.RadioSelect)
+    gst_status = forms.ChoiceField(choices=SellerRegistration.GST_STATUS_CHOICES, initial='Y', widget=forms.RadioSelect)
 
     class Media:
         css = {
@@ -587,7 +587,7 @@ class GstCrispy(FormWithRequest):
         if gst_status == 'Y' and gst == '':
             if not self._errors:
                 raise ValidationError(_("You must specify a valid GST number"))
-        elif pan == '':
+        elif gst_status != 'Y' and pan == '':
             if not self._errors:
                 raise ValidationError(_("You must specify a valid PAN number"))
 
