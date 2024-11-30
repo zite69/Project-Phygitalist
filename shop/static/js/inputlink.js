@@ -1,5 +1,5 @@
 (function () {
-  console.log("inside inputlink.js");
+  // console.log("inside inputlink.js");
   function validatePhone(phone) {
       //const regex = /^(?:(?:\+|0{0,2}91)\s*|0)?\s*(?:[6-9]\d{4})\s*\d{5}$/;
       const regex1 = /^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/;
@@ -127,7 +127,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', (eventLoaded) => {
-    console.log("Inside DOMContentLoaded");
+    // console.log("Inside DOMContentLoaded");
     const inputLinks = document.getElementsByClassName("input-link");
     for (const link of inputLinks) {
       const input = link.querySelector("input");
@@ -135,9 +135,9 @@
       const type = link.dataset.type;
       // const widgetType = link.dataset.typeWidget;
       const getCodeUri = link.dataset.getCodeUri;
-      console.log(input);
-      console.log(getcode);
-      console.log(type);
+      // console.log(input);
+      // console.log(getcode);
+      // console.log(type);
       getcode.addEventListener('click', async (eventClick) => {
         if (link.dataset.status == 'processing') {
           return;
@@ -150,8 +150,8 @@
         // handleValidateError(resp, type);
       });
       input.addEventListener('keydown', async (eventKey) => {
-        console.log('Input keydown event:');
-        console.log(eventKey);
+        // console.log('Input keydown event:');
+        // console.log(eventKey);
         if (eventKey.key.toLowerCase() == 'enter') {
           if (link.dataset.status == 'processing'){
             eventKey.preventDefault();
