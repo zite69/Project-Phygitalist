@@ -28,10 +28,10 @@ from shop.apps.main.models import Pincode
 from shop.apps.seller.models import Seller
 from collections import defaultdict
 from image_uploader_widget.widgets import ImageUploaderWidget
-
+from shop.apps.main.utils.email import send_email_seller_welcome
 import logging
 
-logger = logging.getLogger("shop.apps.registration.forms")
+logger = logging.getLogger("shop.apps.registration")
 
 User = get_user_model()
 
@@ -317,8 +317,9 @@ class MobileAndOtp(FormWithRequest):
         if not valid_user:
             raise ValidationError(_("Invalid OTP"))
 
-        valid_user.phone_verified = True
-        valid_user.save()
+        if not self.errors:
+            valid_user.phone_verified = True
+            valid_user.save()
 
         return form_data
 
@@ -516,8 +517,8 @@ class GstCrispy(FormWithRequest):
             HTML('<p class="legal-support"><a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Click here</a> to consult with our legal team</p>'),
         )
 
-    def clean_gstin(self):
-        gst = self.cleaned_data.get('gstin', '')
+    def _clean_gstin(self,  gst):
+        # gst = self.cleaned_data.get('gstin', '')
         # gst_status = self.cleaned_data.get('gst_status', 'Y')
 
         # if gst_status != 'Y':
@@ -540,8 +541,8 @@ class GstCrispy(FormWithRequest):
         logger.debug(f"Inside clean_gstin: returning gst: {gst}")
         return gst
 
-    def clean_pan(self):
-        pan = self.cleaned_data.get('pan', '')
+    def _clean_pan(self, pan):
+        # pan = self.cleaned_data.get('pan', '')
         # gst_status = self.cleaned_data.get('gst_status', 'Y')
 
         logger.debug(f"pan: {pan}")
@@ -572,7 +573,7 @@ class GstCrispy(FormWithRequest):
 
         user = self.get_user()
         if not user:
-            raise ValidationError(_("User is not being set this session"))
+            raise ValidationError(_("User is not set in the session"))
 
         gst = form_data.get('gstin', '')
         pan = form_data.get('pan', '')
@@ -596,40 +597,47 @@ class GstCrispy(FormWithRequest):
             if not self._errors:
                 raise ValidationError(_("You must specify either GST or PAN"))
         else:
-            #Check if the user already has a sellerregistration record created.
-            try:
-                seller_registration = SellerRegistration.objects.get(user=user)
-                seller_registration.phone = user.phone
-                seller_registration.email = user.email
-                seller_registration.gstin = gst
-                seller_registration.pan = pan
-                seller_registration.user = user
-                seller_registration.save()
-            except SellerRegistration.DoesNotExist:
-                seller_registration = SellerRegistration.objects.create(
-                    name = user.get_full_name(),
-                    phone = user.phone,
-                    email = user.email,
-                    gstin = gst,
-                    pan = pan,
-                    user = user
-                )
+            if gst_status == 'Y':
+                gst = self._clean_gstin(gst)
+                pan = None
+            else:
+                pan = self._clean_pan(pan)
+                gst = None
+            if not self.errors:
+                #Check if the user already has a sellerregistration record created.
+                try:
+                    seller_registration = SellerRegistration.objects.get(user=user)
+                    seller_registration.phone = user.phone
+                    seller_registration.email = user.email
+                    seller_registration.gstin = gst
+                    seller_registration.pan = pan
+                    seller_registration.user = user
+                    seller_registration.save()
+                except SellerRegistration.DoesNotExist:
+                    seller_registration = SellerRegistration.objects.create(
+                        name = user.get_full_name(),
+                        phone = user.phone,
+                        email = user.email,
+                        gstin = gst,
+                        pan = pan,
+                        user = user
+                    )
 
-            try:
-                profile = Profile.objects.get(user=user)
-                profile.type = Profile.TYPE_SELLER
-                profile.level = 1
-                profile.gstin = gst
-                profile.pan = pan
-                profile.save()
-            except Profile.DoesNotExist:
-                profile = Profile.objects.create(
-                    user = user,
-                    type = Profile.TYPE_SELLER,
-                    level = 1,
-                    gstin = gst,
-                    pan = pan,
-                )
+                try:
+                    profile = Profile.objects.get(user=user)
+                    profile.type = Profile.TYPE_SELLER
+                    profile.level = 1
+                    profile.gstin = gst
+                    profile.pan = pan
+                    profile.save()
+                except Profile.DoesNotExist:
+                    profile = Profile.objects.create(
+                        user = user,
+                        type = Profile.TYPE_SELLER,
+                        level = 1,
+                        gstin = gst,
+                        pan = pan,
+                    )
 
         return form_data
 
@@ -671,13 +679,14 @@ class PincodeForm(FormWithRequest):
         if not user:
             raise ValidationError(_("User not found in the database"))
 
-        try:
-            place_object = Pincode.objects.get(id=int(place))
-            user.seller_registration.pincode = place_object
-            user.seller_registration.save()
-        except Pincode.DoesNotExist:
-            logger.critical("Becomes important to notify people that Pincode was not found")
-            raise ValidationError(_("Pincode not found in the database"))
+        if not self.errors:
+            try:
+                place_object = Pincode.objects.get(id=int(place))
+                user.seller_registration.pincode = place_object
+                user.seller_registration.save()
+            except Pincode.DoesNotExist:
+                logger.critical("Becomes important to notify people that Pincode was not found")
+                raise ValidationError(_("Pincode not found in the database"))
 
         return form_data
 
@@ -702,7 +711,8 @@ class LanguagePreference(FormWithRequest):
             raise ValidationError(_("System error: Unable to find user in the session"))
         logger.debug(f"Got back user: {user}")
         logger.debug(f"Setting secondary language to: {language}")
-        user.preferences['second_language'] = language.upper()
+        if not self.errors:
+            user.preferences['second_language'] = language.upper()
 
         return form_data
 
@@ -803,7 +813,7 @@ class ShopDetails(FormWithRequest):
         logger.debug(f"handle: {handle}")
         # short_handle = form_data.get('short_handle')
         # logger.debug(f"short_handle: {short_handle}")
-        if handle != '':
+        if handle != '' and not self.errors:
             user.seller_registration.shop_name = shop_name
             user.seller_registration.shop_handle = handle
             user.seller_registration.save()
@@ -841,7 +851,7 @@ class AddProduct(FormWithRequest, forms.ModelForm):
             Div(
                 HTML('<label>Product Image*</label>'),
                 Field('image', template="registration/widgets/image.html"),
-                HTML('<p class="file-size">Please limit file size to 5MB</p>'),
+                HTML('<p class="file-size">Please limit file size to 5MB. And filename to 100 characters</p>'),
                 'name',
                 css_class="col-md-12 mb-0 iuw-light"
             )
@@ -865,14 +875,17 @@ class AddProduct(FormWithRequest, forms.ModelForm):
 
         name = cleaned_data.get('name', '')
         logger.debug(f"name of product/service: {name}")
-        sp = SellerProduct.objects.create(
-            image = image,
-            name = name,
-            seller_reg = user.seller_registration
-        )
-        messages.success(self.request, f"Your product has been added successfully")
+        logger.debug(f"errors: {self.errors}")
+        if not self.errors:
+            sp = SellerProduct.objects.create(
+                image = image,
+                name = name,
+                seller_reg = user.seller_registration
+            )
+            messages.success(self.request, f"Your product has been added successfully")
 
-        logger.debug(f"Saved SellerProduct: id: {sp.id}")
+            logger.debug(f"Saved SellerProduct: id: {sp.id}")
+
         return cleaned_data
 
     def save(self, commit=True):
@@ -894,6 +907,13 @@ class Congrats(FormWithRequest):
     form_name = 'congrats'
     submit_label = 'Finish Shop Setup'
 
+    def clean(self):
+        if self.request.user.seller_registration.approval_status == SellerRegistration.STATUS_IN_PROGRESS:
+            send_email_seller_welcome(self.request.user)
+            self.request.user.seller_registration.approval_status = SellerRegistration.STATUS_PENDING
+            self.request.user.seller_registration.save()
+ 
+        return super().clean()
 
 class Thanks(FormWithRequest):
     form_id = 'id_form_thanks'

@@ -5,11 +5,15 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.deconstruct import deconstructible
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.contrib import admin
 from phonenumber_field.modelfields import PhoneNumberField
 from shop.apps.user.models import validate_length, Profile, User
 from typing import Any, Self
 from shop.apps.main.models import Pincode
 import os
+import logging
+
+logger = logging.getLogger("shop.apps.registration")
 
 @deconstructible
 class unique_in_db(object):
@@ -26,7 +30,7 @@ class unique_in_db(object):
                   )
 
     def __eq__(self, other: Self) -> bool:
-        return self.field == other.field
+        return self.field == other.field and self.model == other.model
 
 class SellerRegistration(models.Model):
     STATUS_APPROVED = 'A'
@@ -34,7 +38,7 @@ class SellerRegistration(models.Model):
     STATUS_REJECTION_TEMPORARY = 'T'
     STATUS_REJECTED = 'R'
     STATUS_IN_PROGRESS = 'I'
-
+    
     STATUS_CHOICES = (
         (STATUS_PENDING, 'Pending'),
         (STATUS_APPROVED, 'Approved'),
@@ -42,17 +46,34 @@ class SellerRegistration(models.Model):
         (STATUS_REJECTED, 'Rejected'),
         (STATUS_IN_PROGRESS, 'Inprogress')
     )
+    
+    GST_STATUS_HAVE = 'Y'
+    GST_STATUS_DONT = 'N'
+    GST_STATUS_EXEMPT = 'E'
+    GST_STATUS_LATER = 'L'
+
+    GST_STATUS_CHOICES = [
+        (GST_STATUS_HAVE, 'I have GST'),
+        (GST_STATUS_DONT, "I don't have GST"),
+        (GST_STATUS_EXEMPT, 'I am expemted'),
+        (GST_STATUS_LATER, 'I will add later')
+    ]
 
     name = models.CharField(_("Full Name"), blank=False, null=False, max_length=64)
     shop_name = models.CharField(_("Shop Name"), blank=False, null=False, max_length=128)
     shop_handle = models.SlugField(_("Shop Handle"), blank=False, null=False, max_length=20)
-    phone = PhoneNumberField(_("Phone Number"), db_index=True, blank=False, validators=[unique_in_db(User, 'phone')])
-    email = models.EmailField(_("Email Adderss"), db_index=True, blank=False, validators=[unique_in_db(User, 'email')])
-    gstin = models.CharField(_("GSTIN Number"), name="gstin", max_length=15, blank=False,
+    phone = PhoneNumberField(_("Phone Number"), db_index=True, blank=True, null=True)
+    email = models.EmailField(_("Email Adderss"), db_index=True, blank=True, null=True)
+
+    gst_status = models.CharField(_("GST Status"), max_length=2, choices=GST_STATUS_CHOICES, db_index=True, blank=False, null=False, default=GST_STATUS_HAVE)
+    gstin = models.CharField(_("GSTIN Number"), name="gstin", max_length=15, blank=True,
         db_index=True, null=True,
-        validators=[validate_length(15), unique_in_db(Profile, 'gstin')])
-    pan = models.CharField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=False,
-        null=True, validators=[validate_length(10), unique_in_db(Profile, 'pan')])
+        validators=[validate_length(15)])
+    gstin_verified = models.BooleanField(_("GSTIN Verified by Admin"), default=False, blank=True, null=True)
+
+    pan = models.CharField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=True,
+        null=True, validators=[validate_length(10)])
+    pan_verified = models.BooleanField(_("PAN Number verified by Admin"), default=False, blank=True, null=True)
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='seller_registration')
     pincode = models.ForeignKey(Pincode, on_delete=models.PROTECT, null=True)
@@ -60,11 +81,73 @@ class SellerRegistration(models.Model):
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='approved_sellers')
     approved_on = models.DateTimeField(_("Approved On"), null=True)
     approval_notes = models.TextField(_("Approval/Rejection Reasons"), blank=True, null=True)
-    approval_status = models.CharField(_("Approval Status"), max_length=2, db_index=True, default=STATUS_IN_PROGRESS)
+    approval_status = models.CharField(_("Approval Status"), choices=STATUS_CHOICES, max_length=2, db_index=True, default=STATUS_IN_PROGRESS)
 
     @property
     def approved(self):
-        return self.approval_status == self.__class__.STATUS_APPROVED
+        return self.approval_status == SellerRegistration.STATUS_APPROVED
+
+    def get_pincode(self):
+        return self.pincode.pincode
+
+    def gst_status_label(self):
+        for k, v in SellerRegistration.GST_STATUS_CHOICES:
+            if self.gst_status == k:
+                return v
+
+        return ""
+
+    def get_approval_status(self):
+        for k, v in SellerRegistration.STATUS_CHOICES:
+            if self.approval_status == k:
+                return v
+
+        return ""
+
+    def clean(self):
+        logger.debug("Inside model clean")
+        if self.gstin and self.gstin != "":
+            # Check for unique GST across SellerRegistration and Profile
+            others = SellerRegistration.objects.filter(gstin=self.gstin).exclude(pk=self.pk)
+            if others.count() > 0:
+                raise ValidationError(_("This GSTIN number already exists in our database. Please check the number or login with your registered ID"))
+            
+            others = Profile.objects.filter(gstin=self.gstin).exclude(user__seller_registration=self)
+            if others.count() > 0:
+                raise ValidationError(_("This GSTIN number already exists in our database. Please check the number or login with your registered ID"))
+
+        if self.pan and self.pan != "":
+            # Check for unique PAN across SellerRegistration and Profile
+            others = SellerRegistration.objects.filter(pan=self.pan).exclude(pk=self.pk)
+            if others.count() > 0:
+                raise ValidationError(_("This PAN number already exists in our database. Please check the number of login with your registered ID"))
+
+            others = Profile.objects.filter(pan=self.pan).exclude(user__seller_registration=self)
+            if others.count() > 0:
+                raise ValidationError(_("This PAN number already exists in our database. Please check the number or login with your registered ID"))
+
+        if self.phone:
+            # Check phone number
+            others = SellerRegistration.objects.filter(phone=self.phone).exclude(pk=self.pk)
+            if others.count() > 0:
+                raise ValidationError(_("This phone number already exists in our database. Please check the number or login with your registered ID"))
+
+            others = User.objects.filter(phone=self.phone).exclude(seller_registration=self)
+            if others.count() > 0:
+                raise ValidationError(_("This phone number already exists in our database. Please check the number or login with your registered ID"))
+
+        if self.email and self.email != "":
+            # Check email address
+            others = SellerRegistration.objects.filter(email=self.email).exclude(pk=self.pk)
+            if others.count() > 0:
+                logger.debug(f"Found email in SellerRegistration email:{self.email} pk: {self.pk}")
+                raise ValidationError(_("This email already exists in our database. Please check the number or login with your registered ID"))
+
+            others = User.objects.filter(email=self.email).exclude(seller_registration=self)
+            if others.count() > 0:
+                logger.debug(f"Found email in User email: {self.email} self: {self}")
+                raise ValidationError(_("This email already exists in our database. Please check the number or login with your registered ID"))
+
 
     class Meta:
         constraints = [
@@ -79,6 +162,12 @@ class SellerRegistration(models.Model):
                 name='unique_pan_insellerreg_ifnotnull'
             )
         ]
+
+    def __str__(self):
+        if self.shop_handle != '':
+            return self.shop_handle
+        elif self.phone != None:
+            return str(self.phone)
 
 seller_registration_filestorage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT))
 

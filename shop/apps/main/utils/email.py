@@ -146,3 +146,13 @@ def send_email_seller_welcome(user, **kwargs):
     kwargs['user'] = user
 
     return send_email(user.email, **kwargs)
+
+def send_seller_approval(user, registration, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/seller-approval.html",
+        "subject": "Your Seller Registration status has changed"
+        } | kwargs)
+    kwargs['user'] = user
+    kwargs['registration'] = registration
+
+    return send_email(user.email, **kwargs)

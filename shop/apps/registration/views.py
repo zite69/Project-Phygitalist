@@ -47,13 +47,13 @@ class SellerRegistrationWizard(SessionWizardView):
         return kwargs
 
     def done(self, form_list, **kwargs):
-        from shop.apps.main.utils.email import send_email_seller_welcome
-        from shop.apps.registration.models import SellerRegistration
-        logger.debug(f"Completed the wizard: form_list {form_list}")
-        if self.request.user.seller_registration.approval_status == SellerRegistration.STATUS_IN_PROGRESS:
-            send_email_seller_welcome(self.request.user)
-            self.request.user.seller_registration.approval_status = SellerRegistration.STATUS_PENDING
-            self.request.user.seller_registration.save()
+        # from shop.apps.main.utils.email import send_email_seller_welcome
+        # from shop.apps.registration.models import SellerRegistration
+        # logger.debug(f"Completed the wizard: form_list {form_list}")
+        # if self.request.user.seller_registration.approval_status == SellerRegistration.STATUS_IN_PROGRESS:
+        #     send_email_seller_welcome(self.request.user)
+        #     self.request.user.seller_registration.approval_status = SellerRegistration.STATUS_PENDING
+        #     self.request.user.seller_registration.save()
         # return super().done(form_list, **kwargs)
         url = get_site_base_uri(site_id=settings.DEFAULT_SITE_ID)
         return HttpResponseRedirect(url)
