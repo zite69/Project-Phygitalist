@@ -42,3 +42,11 @@ li.ui-menu-item {
     font-size: 0.8rem;
     color: grey;
 }
+
+.errorlist {
+    list-style-type: none;
+}
+
+.errorlist li {
+    color: red;
+}

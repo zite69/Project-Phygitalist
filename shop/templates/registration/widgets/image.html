@@ -1,2 +1,7 @@
 {% load crispy_forms_field %}
+
 {% crispy_field field %}
+
+{% if field.errors %}
+{{ field.errors }}
+{% endif %}
