@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import SellerRegistration, SellerProduct
 from image_uploader_widget.admin import ImageUploaderInline
 from shop.apps.main.utils.email import send_seller_approval
@@ -24,7 +25,7 @@ class SellerRegistrationForm(forms.ModelForm):
         instance = super().save(commit=False)
         logger.debug("Inside form save")
         logger.debug(instance.approval_status)
-        if instance.approval_status == SellerRegistration.STATUS_APPROVED or SellerRegistration.STATUS_REJECTED or SellerRegistration.STATUS_REJECTION_TEMPORARY:
+        if instance.approval_status in (SellerRegistration.STATUS_APPROVED, SellerRegistration.STATUS_REJECTED, SellerRegistration.STATUS_REJECTION_TEMPORARY):
             #Send an email notification
             resp = send_seller_approval(instance.user, instance)
             logger.debug("got response from send_seller_approval:")
@@ -38,15 +39,29 @@ class SellerProductAdmin(ImageUploaderInline):
     model = SellerProduct
     fields = ['name', 'image']
 
+class ApprovalStatusListFilter(admin.SimpleListFilter):
+    title = _("Approval Status")
+
+    parameter_name = "approval_status"
+
+    def lookups(self, request, model_admin):
+        return SellerRegistration.STATUS_CHOICES
+
+    def queryset(self, request, queryset):
+        filter_value = self.value()
+        return queryset.filter(approval_status=filter_value) if filter_value else queryset  
+
 @admin.register(SellerRegistration)
 class SellerRegistrationAdmin(admin.ModelAdmin):
     form = SellerRegistrationForm
     inlines = [SellerProductAdmin]
+    list_filter = [ApprovalStatusListFilter]
     list_display = ['name', 'shop_handle', 'phone', 'email', 'gstin', 'pan']
     fields = ['name', 'shop_name', 'shop_handle', 'phone', 'email', 
               'gst_status_label', 'gstin', 'gstin_verified', 'pan', 'pan_verified', 
               'get_pincode', 'approval_status', 'approval_notes']
     readonly_fields = ['gst_status_label', 'get_pincode']
+    search_fields = ['phone', 'email', 'gstin', 'pan', 'shop_handle']
 
     @admin.display(description="GST Status")
     def gst_status_label(self, instance):
