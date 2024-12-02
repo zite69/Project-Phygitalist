@@ -54,6 +54,6 @@ class MainShop(config.Shop):
         urls.pop(0) #Remove the url spelled /catalogue/ and replace with /catalog/ below
         urls.insert(0, path('catalog/', self.catalogue_app.urls))
         # urls.insert(0, path('test/', self.test_view))
-        urls.insert(0, path('error/', self.fivehundred))
+        # urls.insert(0, path('error/', self.fivehundred))
 
         return urls
