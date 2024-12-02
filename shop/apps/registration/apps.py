@@ -68,7 +68,7 @@ class RegistrationConfig(OscarConfig):
             "password": lambda w: w.request.user.is_anonymous or not w.request.user.has_usable_password(),
             "business": lambda w: not hasattr(w.request.user, 'seller_registration'),
             "gst": lambda w: not hasattr(w.request.user,'seller_registration') or (w.request.user.seller_registration.gstin == '' and w.request.user.seller_registration.pan == ''),
-            "pincode": lambda w: not hasattr(w.request.user,'seller_registration') or w.request.user.seller_registration.pincode == None,
+            "pincode": lambda w: not hasattr(w.request.user,'seller_registration') or w.request.user.seller_registration.postoffice == None,
             "language": lambda w: not hasattr(w.request.user, 'preferences') or w.request.user.preferences['second_language'] == '',
             "shop": lambda w: w.request.user.is_anonymous or not hasattr(w.request.user, 'seller_registration') or w.request.user.seller_registration.shop_name == '',
             "product1": lambda w: check_product(w, 0),

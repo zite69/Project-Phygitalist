@@ -24,7 +24,7 @@ from crispy_forms.layout import HTML, Submit, Layout, Row, Column, Div, Field
 from crispy_forms.bootstrap import AppendedText, StrictButton, InlineRadios
 from localflavor.in_.forms import INPANCardNumberFormField
 from .models import SellerRegistration, SellerProduct
-from shop.apps.main.models import Pincode
+from shop.apps.main.models import Postoffice
 from shop.apps.seller.models import Seller
 from collections import defaultdict
 from image_uploader_widget.widgets import ImageUploaderWidget
@@ -681,10 +681,10 @@ class PincodeForm(FormWithRequest):
 
         if not self.errors:
             try:
-                place_object = Pincode.objects.get(id=int(place))
-                user.seller_registration.pincode = place_object
+                place_object = Postoffice.objects.get(id=int(place))
+                user.seller_registration.postoffice = place_object
                 user.seller_registration.save()
-            except Pincode.DoesNotExist:
+            except Postoffice.DoesNotExist:
                 logger.critical("Becomes important to notify people that Pincode was not found")
                 raise ValidationError(_("Pincode not found in the database"))
 

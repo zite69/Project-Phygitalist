@@ -6,20 +6,6 @@ from localflavor.in_.models import INStateField
 from localflavor.in_.in_states import STATE_CHOICES
 from django.contrib.contenttypes.models import ContentType
 
-# Create your models here.
-
-# class CarouselSlide(models.Model):
-#     slide = models.ImageField(_("Carousel Slide Image"), upload_to="images/carousel/%Y/%m/%d")
-#     html = models.TextField(_("Slide HTML"), blank=True)
-#     order = models.PositiveSmallIntegerField(_("Order"))
-#     active = models.BooleanField(default=True)
-
-# class TopBarFlash(models.Model):
-#     html = models.TextField(_("Flash HTML"), blank=False)
-#     active = models.BooleanField(default=True)
-
-# class TopMenu(models.Model):
-#     title = models.CharField(_("Menu Title"), max_length=255, blank=False)
 class BaseLogModelMixin(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -46,7 +32,7 @@ class State(models.Model):
             Index(fields=['code', 'name'])
         ]
 
-class Pincode(models.Model):
+class Postoffice(models.Model):
     office = models.CharField(_("Post Office Name"), max_length=64, db_index=True)
     pincode = models.CharField(_("PIN Code"), max_length=6, db_index=True)
     state = models.ForeignKey(State, on_delete=models.PROTECT)

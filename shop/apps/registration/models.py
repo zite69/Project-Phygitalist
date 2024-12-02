@@ -9,7 +9,7 @@ from django.contrib import admin
 from phonenumber_field.modelfields import PhoneNumberField
 from shop.apps.user.models import validate_length, Profile, User
 from typing import Any, Self
-from shop.apps.main.models import Pincode
+from shop.apps.main.models import Postoffice
 import os
 import logging
 
@@ -76,7 +76,7 @@ class SellerRegistration(models.Model):
     pan_verified = models.BooleanField(_("PAN Number verified by Admin"), default=False, blank=True, null=True)
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='seller_registration')
-    pincode = models.ForeignKey(Pincode, on_delete=models.PROTECT, null=True)
+    postoffice = models.ForeignKey(Postoffice, on_delete=models.PROTECT, null=True)
 
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='approved_sellers')
     approved_on = models.DateTimeField(_("Approved On"), null=True)
@@ -88,7 +88,8 @@ class SellerRegistration(models.Model):
         return self.approval_status == SellerRegistration.STATUS_APPROVED
 
     def get_pincode(self):
-        return self.pincode.pincode
+        return self.postoffice.pincode
+
 
     def gst_status_label(self):
         for k, v in SellerRegistration.GST_STATUS_CHOICES:

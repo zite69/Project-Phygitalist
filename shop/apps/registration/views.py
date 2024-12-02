@@ -16,7 +16,7 @@ from shop.apps.otp.utils import generate_otp
 from phonenumber_field.phonenumber import PhoneNumber
 from phonenumber_field.validators import validate_international_phonenumber
 from formtools.wizard.views import SessionWizardView
-from shop.apps.main.models import State, Pincode
+from shop.apps.main.models import State, Postoffice
 from .forms import REGISTRATION_FORM_TEMPLATES
 from .models import seller_registration_filestorage
 
@@ -216,9 +216,9 @@ class PincodeListJson(View, JsonRequestResponseMixin):
 
         results = []
         if action == 'pincode':
-            results = list(Pincode.objects.filter(pincode__startswith=pincode_prefix).order_by('pincode').values_list('pincode', flat=True).distinct()[:20])
+            results = list(Postoffice.objects.filter(pincode__startswith=pincode_prefix).order_by('pincode').values_list('pincode', flat=True).distinct()[:20])
         elif action == 'place':
-            pincodes = Pincode.objects.filter(pincode=pincode_prefix).order_by('office')
+            pincodes = Postoffice.objects.filter(pincode=pincode_prefix).order_by('office')
             results = [ {'id': p.id, 'place': p.office} for p in pincodes ]
 
         #data = [p.pincode for p in results]
