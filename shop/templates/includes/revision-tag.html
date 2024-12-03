@@ -1,4 +1,4 @@
 <div class="git-revision container-fluid mx-auto text-center">
-    version: {{ REVISION }}
+    version:{% if settings.SHOW_REVISION %}{{ REVISION }}{% else %}{{ TAG }}{% endif %}
 </div>
 
