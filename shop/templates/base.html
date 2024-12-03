@@ -100,6 +100,7 @@
         </div>
     </footer>
     {% endblock %}
+    {% include "includes/revision-tag.html" %}
 
     {# Scripts loaded from a CDN. #}
     {% block cdn_scripts %}
@@ -116,7 +117,6 @@
     {# Additional JS scripts #}
     {% block extrascripts %}{% endblock %}
 
-    {% include "includes/revision-tag.html" %}
     {# Block for body onload functions #}
     <script>
         $(function() {
