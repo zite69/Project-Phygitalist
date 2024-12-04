@@ -42,8 +42,8 @@ Seller First Marketplace for Small Town India | Sell your product offline, onlin
 
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <a href="https://seller.zite69.com/en/registration/" aria-label="Join">Join</a>
-        <a href="https://www.zite69.com/en/sellerschool/" aria-label="Seller School">Seller School</a>
+        <a href="{% url 'registration:home' %}" aria-label="Join">Join</a>
+        <a href="{% url 'sellerschool' %}" aria-label="Seller School">Seller School</a>
         <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Help">Help</a>
         {% if user.is_authenticated %}
                 <form action="{% url 'account_logout' %}" method="POST">
@@ -53,7 +53,7 @@ Seller First Marketplace for Small Town India | Sell your product offline, onlin
         {% else %}
             <a class="btn btn-login" href="{% url 'otp:request' %}" aria-label="Login Button">Login</a>
         {% endif %}
-        <a href="https://seller.zite69.com/en/registration/" class="btn btn-sell">Start Selling</a>
+        <a href="{% url 'registraion:home' %}" class="btn btn-sell">Start Selling</a>
     </div>
 {% endblock %}
 
