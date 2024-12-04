@@ -1,6 +1,7 @@
 #from django.apps import AppConfig
 from django.urls import include, path, re_path
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import never_cache
 from oscar.core.application import OscarConfig
 from django.conf import settings
 
@@ -83,8 +84,8 @@ class RegistrationConfig(OscarConfig):
 
         urls = super().get_urls()
         urls += [
-            path('', self.home_view.as_view(SELLER_REGISTRATION_FORMS,
-                condition_dict=WIZARD_CONDITION_DICT), name='home'),
+            path('', never_cache(self.home_view.as_view(SELLER_REGISTRATION_FORMS,
+                condition_dict=WIZARD_CONDITION_DICT)), name='home'),
             path('api/username/', self.username_available.as_view(), name='username_available'),
             path('api/phoneotp/', self.send_phone_otp.as_view(), name='phone_otp'),
             path('api/emailotp/', self.send_email_otp.as_view(), name='email_otp'),
