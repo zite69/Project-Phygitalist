@@ -93,7 +93,7 @@
       const errorSpan = document.createElement("span");
       errorSpan.textContent = response.error;
       errorSpan.classList.add("error", "form");
-      document.querySelector(".registration-form").insertBefore(errorSpan, document.querySelector("form"));
+      document.querySelector(".registration-form").insertBefore(errorSpan, document.querySelector(".registration-form form"));
     } else {
       const errorSpan = document.querySelector("span.form.error");
       const enterOtpOld = document.querySelector("span.enterotp");
