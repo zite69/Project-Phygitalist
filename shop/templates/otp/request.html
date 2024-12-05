@@ -1,12 +1,14 @@
 {% extends 'cms/base.html' %}
-{% load static %}
+{% load static sekizai_tags %}
 {% load crispy_forms_tags %}
 {% load compress %}
 {% load sass_tags %}
 
+{% block head %}
 {% addtoblock "css" %}
     <link rel="stylesheet" type="text/css" href="{% sass_src "scss/otplogin.scss" %}" />
 {% endaddtoblock %}
+{% endblock %}
 
 {% block extrastyles %}
 {% endblock %}
