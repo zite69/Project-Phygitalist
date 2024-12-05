@@ -158,5 +158,7 @@
 {% endblock %}
 
 {% block scripts %}
+{% addtoblock "js" %}
 <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
+{% endaddtoblock %}
 {% endblock %}

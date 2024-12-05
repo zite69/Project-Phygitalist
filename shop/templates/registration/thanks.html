@@ -2,7 +2,6 @@
 {% load static %}
 {% load sekizai_tags %}
 
-
 {% block form-header %}
 {% endblock %}
 
@@ -27,6 +26,7 @@ commerce ecosystem.
 {% endblock %}
 
 {% block scripts %}
+{{ block.super }}
 {% addtoblock "js" %}
 <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
 <script type="text/javascript">
