@@ -33,6 +33,8 @@
 
 {% block scripts %}
     {{ block.super }}
-    {{ wizard.form.media.js }}
-    <script type="text/javascript" src="{% static 'js/alertback.js' %}"></script>
+    {% addtoblock "js" %}
+        {{ wizard.form.media.js }}
+        <script type="text/javascript" src="{% static 'js/alertback.js' %}"></script>
+    {% endaddtoblock %}
 {% endblock %}
