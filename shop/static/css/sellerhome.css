@@ -324,6 +324,8 @@ h5 {
 
   .show-menu {
     display: flex;
+    top: 75px;
+    
   }
 
   .hero {
