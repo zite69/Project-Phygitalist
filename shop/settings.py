@@ -417,7 +417,7 @@ COMPRESS_PRECOMPILERS = (
 # sass_processor settings
 SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
 SASS_PRECISION = 8
-COMPRESS_JINJA2_GET_ENVIRONMENT = environment
+# COMPRESS_JINJA2_GET_ENVIRONMENT = environment
 
 # Add project-wide static files directory
 # https://docs.djangoproject.com/en/4.2/ref/settings/#media-root
