@@ -1,14 +1,12 @@
-{# extends 'oscar/layout.html' #}
 {% extends 'cms/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% load compress %}
+{% load sass_tags %}
 
-{% block styles %}
-    {% compress css %}
-        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/otplogin.scss" %}" />
-    {% endcompress %}
-{% endblock %}
+{% addtoblock "css" %}
+    <link rel="stylesheet" type="text/css" href="{% sass_src "scss/otplogin.scss" %}" />
+{% endaddtoblock %}
 
 {% block extrastyles %}
 {% endblock %}

@@ -30,6 +30,7 @@ env.read_env(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+from shop.apps.main.jinja2 import environment
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-0eh6bi(v$wrvxy!o!(ma+#ydupk6+9ap7(94-1c$mgktn)s2_l'
@@ -144,6 +145,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',   # Default thumbnail backend, can be replaced
     'django_tables2',
     'compressor',
+    'sass_processor',
     'django_extensions',
     'crispy_forms',
     'crispy_bootstrap5',
@@ -226,6 +228,7 @@ cached_loaders = [('django.template.loaders.cached.Loader', default_loaders)]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # 'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [
             os.path.join(BASE_DIR, "shop", "templates"),
         ],
@@ -245,7 +248,7 @@ TEMPLATES = [
                 'dynamic_preferences.processors.global_preferences',
                 'dealer.contrib.django.context_processor',
             ],
-            'loaders': default_loaders if DEBUG else cached_loaders
+            'loaders': default_loaders if DEBUG else cached_loaders,
         },
     },
 ]
@@ -403,13 +406,18 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder'
+    'compressor.finders.CompressorFinder',
+    'sass_processor.finders.CssFinder',
 ]
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
+# sass_processor settings
+SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
+SASS_PRECISION = 8
+COMPRESS_JINJA2_GET_ENVIRONMENT = environment
 
 # Add project-wide static files directory
 # https://docs.djangoproject.com/en/4.2/ref/settings/#media-root

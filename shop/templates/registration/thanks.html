@@ -1,5 +1,6 @@
 {% extends 'registration/seller-wizard.html' %}
 {% load static %}
+{% load sekizai_tags %}
 
 
 {% block form-header %}
@@ -26,6 +27,7 @@ commerce ecosystem.
 {% endblock %}
 
 {% block scripts %}
+{% addtoblock "js" %}
 <script type="text/javascript" src="{% static 'js/popup.js' %}"></script>
 <script type="text/javascript">
 function createConfetti() {
@@ -56,4 +58,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+{% endaddtoblock %}
 {% endblock %}

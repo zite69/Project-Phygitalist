@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static sekizai_tags %}
 {% block description %}zite69 is India’s rising 3-in-1 Marketplace for the people who buy and by the people who make. We are hiring now for all departments. Show your interest now{% endblock %}
 {% block title %}Offline, Online &amp; Hybrid Opportunities for Diverse Talents Across India | Apply Now{% endblock %}
 
 {% block styles %}
+{% addtoblock "css" %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/main/career.css' %}">
+{% endaddtoblock %}
 {% endblock %}
 
 {% block header %}

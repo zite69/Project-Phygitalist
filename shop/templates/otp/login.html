@@ -3,14 +3,13 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load compress %}
+{% load sekizai_tags %}
+{% load sass_tags %}
 
-{% block styles %}
-    {% compress css %}
-        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/otplogin.scss" %}" />
-    {% endcompress %}
-{% endblock %}
-
-{% block extrastyles %}
+{% block head %}
+{% addtoblock "css" %}
+    <link rel="stylesheet" type="text/css" href="{% sass_src "scss/otplogin.scss" %}" />
+{% endaddtoblock %}
 {% endblock %}
 
 {% block fluid %}-fluid{% endblock %}

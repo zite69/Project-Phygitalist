@@ -1,16 +1,15 @@
 {% extends 'oscar/dashboard/layout.html' %}
-{% load static %}
+{% load static sekizai_tags %}
 {% load compress %}
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static 'oscar/css/styles.css' %}">
-    {% compress css %}
-        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/dashboard/wizard.scss" %}" />
-    {% endcompress %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" type="text/css" href="{% sass_src "scss/dashboard/wizard.scss" %}" />
+    {% endaddtoblock %}
 {% endblock %}
 
 {% block dashboard_content %}
-
         <aside class="sidebar">
             <div class="progress-status">
                 <h3>Your onboarding completion status</h3>
@@ -22,7 +21,7 @@
             <ul class="verification-steps">
                 <li class="verification-step completed">
                     <i class="fas fa-check-circle"></i>
-                    <span>Phone & Email Verification</span>
+                    <span>Phone &amp; Email Verification</span>
                 </li>
                 <li class="verification-step completed">
                     <i class="fas fa-check-circle"></i>
@@ -30,19 +29,19 @@
                 </li>
                 <li class="verification-step completed">
                     <i class="fas fa-check-circle"></i>
-                    <span>GST & Business Id Verification </span>
+                    <span>GST &amp; Business Id Verification </span>
                 </li>
                 <li class="verification-step completed">
                     <i class="fas fa-check-circle"></i>
-                    <span>Shop Name & Handle Creation</span>
+                    <span>Shop Name &amp; Handle Creation</span>
                 </li>
                 <li class="verification-step pending">
                     <i class="far fa-circle"></i>
-                    <span>Pickup Address </span>
+                    <span>Pickup Address</span>
                 </li>
                 <li class="verification-step pending">
                     <i class="far fa-circle"></i>
-                    <span>Bank Account Details </span>
+                    <span>Bank Account Details</span>
                 </li>
                 <li class="verification-step pending">
                     <i class="far fa-circle"></i>
@@ -54,7 +53,7 @@
                 </li>
                 <li class="verification-step pending">
                     <i class="far fa-circle"></i>
-                    <span>First Listing & Initial Stock</span>
+                    <span>First Listing &amp; Initial Stock</span>
                 </li>
             </ul>
         </aside>

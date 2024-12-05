@@ -1,9 +1,13 @@
 {% extends 'cms/base.html' %}
 {% load static %}
 {% load cms_tags sekizai_tags %}
+{% load sass_tags %}
 
-{% block extrastyles %}
+{% block head %}
+{{ block.super }}
+{% addtoblock "css" %}
     <link rel="stylesheet" href="{% static 'css/livesoon.css' %}">
+{% endaddtoblock %}
 {% endblock %}
 
 {% block header %}
@@ -35,5 +39,4 @@ Fashion | Beauty|  Food  | Feel Goods |  Life Goods | Digital Goods | For all th
         {% placeholder "content" %}
         </div>
 </div>
-        
 {% endblock %}

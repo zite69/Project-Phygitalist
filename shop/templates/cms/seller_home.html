@@ -1,9 +1,13 @@
 {% extends 'cms/base.html' %}
-{% load static %}
+{% load static sekizai_tags %}
 {% load cms_tags %}
+{% load sass_tags %}
 
-{% block extrastyles %}
-    <link rel="stylesheet" href="{% static 'css/sellerhome.css' %}">
+{% block head %}
+{{ block.super }}
+{% addtoblock "css" %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sellerhome.css' %}">
+{% endaddtoblock %}
 {% endblock %}
 
 {% block title %}

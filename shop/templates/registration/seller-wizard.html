@@ -1,10 +1,14 @@
 {% extends 'registration/base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load sekizai_tags %}
 
-{% block extrastyles %}
+{% block head %}
+{{ block.super }}
+{% addtoblock "css" %}
     {{ wizard.form.media.css }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/registrationoverwrite.css' %}">
+{% endaddtoblock %}
 {% endblock %}
 
 {% block registration-form %}

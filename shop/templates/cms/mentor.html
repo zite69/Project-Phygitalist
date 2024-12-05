@@ -1,8 +1,12 @@
 {% extends 'cms/base.html' %}
 {% load static %}
+{% load sekizai_tags %}
 
-{% block extrastyles %}
+{% block head %}
+{{ block.super }}
+{% addtoblock "css" %}
     <link rel="stylesheet" href="{% static 'css/mentor.css' %}">
+{% endaddtoblock %}
 {% endblock %}
 
 {% block content %}

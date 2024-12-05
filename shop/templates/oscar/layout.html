@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static sekizai_tags %}
 {% load compress %}
 {% load cms_tags %}
+{% load sass_tags %}
 
-{% block styles %}
-    {% compress css %}
-    <link rel="stylesheet" type="text/x-scss" href="{% static "scss/main.scss" %}" />
-    {% endcompress %}
+{% block head %}
+{% addtoblock "css" %}
+    <link rel="stylesheet" type="text/css" href="{% sass_src "scss/main.scss" %}" />
+{% endaddtoblock %}
 {% endblock %}
 
 {% block description %}
