@@ -15,7 +15,7 @@ body {
     color: #333;
 }
 
-.livesoon_content {
+.livesoon_container {
     max-width: 1200px;
     margin: 0 auto;
     padding:0;
@@ -151,7 +151,7 @@ body {
         width: 100%; /* Button spans full width on small screens */
     }
 
-    .container {
+    .livesoon_container{
         padding: 1rem;
     }
 
