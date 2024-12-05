@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
-z% load static %}
+{% load static %}
 {% load compress %}
+{% load sekizai_tags %}
 
 {% block title %}Join as Founding Seller Now |  3-in-1 Marketplace to Sell Daily &amp; Earn More{% endblock %}
 
 {% block description %}Seller First Marketplace for Small Town India | Sell your product offline, online &amp; direct with our hybrid sales network.{% endblock %}
 
 {% block styles %}
-    {% compress css %}
-        <link rel="stylesheet" type="text/x-scss" href="{% static "scss/seller.scss" %}" />
-    {% endcompress %}
+{% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static "scss/seller.scss" %}" />
+{% endcompress %}
 {% endblock %}
 
 {% block header %}
