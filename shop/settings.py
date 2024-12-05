@@ -30,7 +30,7 @@ env.read_env(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-from shop.apps.main.jinja2 import environment
+# from shop.apps.main.jinja2 import environment
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = 'django-insecure-0eh6bi(v$wrvxy!o!(ma+#ydupk6+9ap7(94-1c$mgktn)s2_l'
