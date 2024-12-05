@@ -1,7 +1,7 @@
 {% load z69filters %}
 <div class="d-flex input-link justify-content-between align-items-center"
     data-type="{{ widget.attrs.type }}" data-get-code-uri="{{ widget.attrs.getcode }}" data-status="init">
-    <input type="{% if widget.attrs.type == 'phone' %}tel{% elif widget.attrs.type == 'email' %}email{% else %}text{% endif %}" id="id_{{ widget.name }}" placeholder="{{ widget.attrs.placeholder }}" class="textinput form-control" value="{{ widget.value }}"
+    <input type="{% if widget.attrs.type == 'phone' %}tel{% elif widget.attrs.type == 'email' %}email{% else %}text{% endif %}" id="id_{{ widget.name }}" placeholder="{{ widget.attrs.placeholder }}" class="textinput form-control" value="{% if widget.value %}{{ widget.value }}{% endif %}"
         name="{{ widget.name }}">
     <button type="button" class="btn btn-success get-link align-self-start">Get OTP</button>
 </div>
