@@ -249,6 +249,8 @@ TEMPLATES = [
                 'dealer.contrib.django.context_processor',
             ],
             'loaders': default_loaders if DEBUG else cached_loaders,
+            # 'loader': default_loaders if DEBUG else cached_loaders,
+            # 'environment': 'shop.apps.main.jinja2.environment'
         },
     },
 ]
