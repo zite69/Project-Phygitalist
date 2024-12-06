@@ -63,7 +63,7 @@
         let resendSpan = document.querySelector("button.resend-code");
         if (resendSpan == null) {
             resendSpan = document.createElement("span");
-            resendSpan.innerHTML = '<button class="btn btn-link resend-code">Resend Code</button>';
+            resendSpan.innerHTML = '<button class="btn btn-link resend-code">Resend OTP</button>';
             resendSpan.addEventListener('click', (evt) => {
               console.log("Resend code clicked");
               if (link.dataset.status == 'processing' || link.dataset.status == 'clicked')
