@@ -187,11 +187,8 @@ class SendEmailOtpJson(View, JsonRequestResponseMixin):
             return JsonResponse({"error": "Invalid email address, please check and re-enter"})
 
 
-        try:
-            User.objects.get(email=email)
+        if User.objects.filter(email=email).exclude(pk=user.pk).exists():
             return JsonResponse({"error": "Email address already in use, please login with your email or user to proceed"})
-        except User.DoesNotExist:
-            pass
 
         user.email = email
         user.save()
