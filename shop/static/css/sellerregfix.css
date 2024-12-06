@@ -1,0 +1,17 @@
+
+:root, :root[data-theme="auto"] {
+    color-scheme: light;
+}
+
+.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front:hover li {
+    color: #333;
+}
+
+.ui-menu-item .ui-menu-item-wrapper {
+    color: #333;
+}
+
+.ui-menu-item .ui-menu-item-wrapper:hover {
+    border: none;
+    color: #333;
+}

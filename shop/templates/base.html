@@ -33,8 +33,10 @@
     
     {% block head %}{% endblock %}
 
-    {% block extrahead %}{% endblock %}
     {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+
+    {% block extrahead %}{% endblock %}
+
     {% block tracking %}
         {# Default to using Google analytics #}
         {% include "oscar/partials/google_analytics.html" %}
