@@ -10,14 +10,14 @@
 {% spaceless %}
     {% page_attribute 'meta_description' as page_description %}
     {% if page_description and page_description.strip %}
-        {{ page_description.strip }}
+        {{ page_description.strip|safe }}
     {% else %}
-        ZITE69: #SuperSocial Marketplace | ♥ Add cash to your cart! 🔴Live Chat &amp; Shop, Buy Nearby📍Group Buy  +More ₹upee Deals
+        ZITE69: #SuperSocial Marketplace | ♥ Add cash to your cart! 🔴Live Chat & Shop, Buy Nearby📍Group Buy  +More ₹upee Deals
     {% endif %}
 {% endspaceless %}
 {% endblock %}
 
-{% block title %}{{ shop_name }} - {% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip }}{% else %}{{ block.super }}{% endif %}{% endblock %}
+{% block title %}{{ shop_name }} - {% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip|safe }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block head %}
 {% addtoblock "css" %}
