@@ -446,6 +446,7 @@ OSCAR_DEFAULT_CURRENCY = 'INR'
 
 #LOGGING = env.json("LOGGING", default={})
 LOGGING_ENV = env.json("LOGGING", default={})
+LOG_DIR = env("LOG_DIR", default=BASE_DIR / "logs")
 
 RAZORPAY_TEST = env("RAZORPAY_TEST", default=True)
 
@@ -721,6 +722,7 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 7*1024*1024 #7MB
 FILE_UPLOAD_TEMP_DIR = BASE_DIR / "tmp"
 
 WIZARD_STEP = env("WIZARD_STEP", default="")
+DEBUG_WIZARD_FORM_STEP = env("DEBUG_WIZARD_FORM_STEP", default="")
 
 from email.utils import parseaddr
 ADMINS_ENV = env("ADMINS", default="")

@@ -76,7 +76,8 @@ class RegistrationConfig(OscarConfig):
             "product2": lambda w: check_product(w, 1),
             "product3": lambda w: check_product(w, 2),
             "congrats": lambda w: w.request.user.is_authenticated and hasattr(w.request.user, 'seller_registration') and w.request.user.seller_registration.approval_status == SellerRegistration.STATUS_IN_PROGRESS,
-            "thanks": True
+            "thanks": True,
+            "error": lambda w: hasattr(w, 'errors')
         }
         if settings.DEBUG and settings.WIZARD_STEP != "":
             for k in WIZARD_CONDITION_DICT:

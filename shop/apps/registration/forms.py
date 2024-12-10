@@ -920,6 +920,10 @@ class Thanks(FormWithRequest):
     form_name = 'thanks'
     submit_label = 'Go to main shop'
 
+class ErrorStep(FormWithRequest):
+    form_id = 'id_form_error'
+    form_name = 'error'
+    submit_label = 'Go to main shop'
 
 SELLER_REGISTRATION_FORMS = [
     ("username", UserName),
@@ -935,7 +939,8 @@ SELLER_REGISTRATION_FORMS = [
     ("product2", AddProduct),
     ("product3", AddProduct),
     ("congrats", Congrats),
-    ("thanks", Thanks)
+    ("thanks", Thanks),
+    ("error", ErrorStep)
 ]
 
 #All the keys in the SELLER_REGISTRATION_FORMS above will have the default value of registration/seller.html
@@ -948,5 +953,6 @@ REGISTRATION_FORM_TEMPLATES = defaultdict(lambda: 'registration/seller.html', {
     "thanks": "registration/thanks.html",
     "product1": "registration/product.html",
     "product2": "registration/product.html",
-    "product3": "registration/product.html"
+    "product3": "registration/product.html",
+    "error": "registration/error.html"
 })

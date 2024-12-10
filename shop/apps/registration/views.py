@@ -1,14 +1,18 @@
+from collections import OrderedDict
 from django.shortcuts import render
 from django.conf import settings
+from django import forms
 from django.views.generic import TemplateView, View
 from django.http import HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.core.validators import validate_email
 from django.core import serializers
+from django.core.exceptions import SuspiciousOperation
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
+from datetime import datetime
 from shop.apps.main.utils.sms import send_phone_otp
 from shop.apps.main.utils.email import send_email_verification
 from shop.apps.main.utils.urls import get_site_base_uri
@@ -16,6 +20,7 @@ from shop.apps.otp.utils import generate_otp
 from phonenumber_field.phonenumber import PhoneNumber
 from phonenumber_field.validators import validate_international_phonenumber
 from formtools.wizard.views import SessionWizardView
+from formtools.wizard.forms import ManagementForm
 from shop.apps.main.models import State, Postoffice
 from .forms import REGISTRATION_FORM_TEMPLATES
 from .models import seller_registration_filestorage
@@ -23,6 +28,7 @@ from .models import seller_registration_filestorage
 import json
 import logging
 import os
+import traceback
 
 logger = logging.getLogger("shop.apps.registration.views")
 
@@ -45,6 +51,188 @@ class SellerRegistrationWizard(SessionWizardView):
         kwargs = super().get_form_kwargs(step)
         kwargs['request'] = self.request
         return kwargs
+
+    def process_step(self, form):
+        logger.debug(f"in process_step. form: {form}")
+        logger.debug(form)
+        logger.debug(f"current step: {self.steps.current}")
+        return super().process_step(form)
+
+    def render_goto_step(self, goto_step, **kwargs):
+        logger.debug("inside render_goto_step")
+        logger.debug(f"goto_step: {goto_step}")
+        logger.debug(f"kwargs: {kwargs}")
+        return super().render_goto_step(goto_step, **kwargs)
+
+    def render_revalidation_failure(self, step, form, **kwargs):
+        logger.debug("inside render_revalidation_failure")
+        logger.debug(f"step: {step}")
+        logger.debug(f"form: {form.__class__}")
+        return super().render_revalidation_failure(step, form, **kwargs)
+
+    def _get_debug_form_list(self):
+        form_list = OrderedDict()
+        condition_list = OrderedDict()
+        condition_result_list = OrderedDict()
+        for form_key, form_class in self.form_list.items():
+            # try to fetch the value from condition list, by default, the form
+            # gets passed to the new list.
+            condition = self.condition_dict.get(form_key, True)
+            # logger.debug(f"got condition: {condition} for form_key: {form_key}")
+            if callable(condition):
+                # call the value if needed, passes the current instance.
+                condition_list[form_key] = condition
+                result = condition(self)
+                condition_result_list[form_key] = result
+                condition = result
+            if condition:
+                form_list[form_key] = form_class
+        return form_list, condition_list, condition_result_list
+
+
+    def post(self, *args, **kwargs):
+        """
+        This method handles POST requests.
+
+        The wizard will render either the current step (if form validation
+        wasn't successful), the next step (if the current step was stored
+        successful) or the done view (if no more steps are available)
+        """
+        # Look for a wizard_goto_step element in the posted data which
+        # contains a valid step name. If one was found, render the requested
+        # form. (This makes stepping back a lot easier).
+        wizard_goto_step = self.request.POST.get('wizard_goto_step', None)
+        if wizard_goto_step and wizard_goto_step in self.get_form_list():
+            return self.render_goto_step(wizard_goto_step)
+
+        # Check if form was refreshed
+        management_form = ManagementForm(self.request.POST, prefix=self.prefix)
+        if not management_form.is_valid():
+            raise SuspiciousOperation(_('ManagementForm data is missing or has been tampered.'))
+
+        form_current_step = management_form.cleaned_data['current_step']
+        if (form_current_step != self.steps.current and
+                self.storage.current_step is not None):
+            logger.debug(f"Changing current step from: {self.steps.current} to: {form_current_step}")
+            # form refreshed, change current step
+            self.storage.current_step = form_current_step
+        logger.debug(f"form_current_step: {form_current_step}")
+        # if settings.DEBUG and settings.DEBUG_WIZARD_FORM_STEP == form_current_step:
+        #     self.errors = {"error": f"Failed to get step: {self.steps.current}"}
+        #     ts = datetime.now().strftime("%Y-%m-%d:%H:%M:%S")
+        #     trace_filename = f"{ts}.log"
+        #     pickle_forms_filename = f"{ts}-forms.pkl"
+        #     pickle_condition_filename = f"{ts}-condition.pkl"
+        #     pickle_result_filename = f"{ts}-result.pkl"
+        #     logger.debug(f"Got a 500 error in the wizard and self.request.user: {self.request.user}")
+        #     user_id = self.request.session.get('user_id', -1)
+        #     if user_id != -1:
+        #         user = User.objects.get(id=user_id)
+        #     else:
+        #         user = None
+        #     if self.request.user and self.request.user.username:
+        #        trace_filename = f"{self.request.user.username}-{trace_filename}"
+        #        pickle_forms_filename = f"{self.request.user.username}-{pickle_forms_filename}"
+        #        pickle_condition_filename = f"{self.request.user.username}-{pickle_condition_filename}"
+        #        pickle_result_filename = f"{self.request.user.username}-{pickle_result_filename}"
+        #     elif user:
+        #         user_id = self.request.session.get('user_id', -1)
+        #         trace_filename = f"{user.username}-{trace_filename}"
+        #         pickle_forms_filename = f"{user.username}-{pickle_forms_filename}"
+        #         pickle_condition_filename = f"{user.username}-{pickle_condition_filename}"
+        #         pickle_result_filename = f"{user.username}-{pickle_result_filename}"
+
+        #     forms_list, condition_list, result_list = self._get_debug_form_list()
+        #     import dill as pickle
+        #     with open(os.path.join(settings.LOG_DIR, pickle_forms_filename), "wb") as fp:
+        #         pickle.dump(forms_list, fp)
+        #     with open(os.path.join(settings.LOG_DIR, pickle_condition_filename), "wb") as fp:
+        #         pickle.dump(condition_list, fp)
+        #     with open(os.path.join(settings.LOG_DIR, pickle_result_filename), "wb") as fp:
+        #         pickle.dump(result_list, fp)
+        #     with open(os.path.join(settings.LOG_DIR, trace_filename), "w") as f:
+        #         f.write("".join(traceback.format_stack()))
+
+        #     return self.render_goto_step('error', user=user)
+
+        # get the form for the current step
+        try:
+            form = self.get_form(data=self.request.POST, files=self.request.FILES)
+        except KeyError as e:
+            self.errors = {"error": f"Failed to get step: {self.steps.current}"}
+            ts = datetime.now().strftime("%Y-%m-%d:%H:%M:%S")
+            trace_filename = f"{ts}.log"
+            pickle_forms_filename = f"{ts}-forms.pkl"
+            pickle_condition_filename = f"{ts}-condition.pkl"
+            pickle_result_filename = f"{ts}-result.pkl"
+            logger.debug(f"Got a 500 error in the wizard and self.request.user: {self.request.user}")
+            if self.request.user and self.request.user.username:
+               trace_filename = f"{self.request.user.username}-{trace_filename}"
+               pickle_forms_filename = f"{self.request.user.username}-{pickle_forms_filename}"
+               pickle_condition_filename = f"{self.request.user.username}-{pickle_condition_filename}"
+               pickle_result_filename = f"{self.request.user.username}-{pickle_result_filename}"
+            elif self.request.session.get('user_id', -1) != -1:
+                user_id = self.request.session.get('user_id', -1)
+                user = User.objects.get(id=user_id)
+                trace_filename = f"{user.username}-{trace_filename}"
+                pickle_forms_filename = f"{user.username}-{pickle_forms_filename}"
+                pickle_condition_filename = f"{user.username}-{pickle_condition_filename}"
+                pickle_result_filename = f"{user.username}-{pickle_result_filename}"
+
+            forms_list, condition_list, result_list = self._get_debug_form_list()
+            import dill as pickle
+            with open(os.path.join(settings.LOG_DIR, pickle_forms_filename), "wb") as fp:
+                pickle.dump(forms_list, fp)
+            with open(os.path.join(settings.LOG_DIR, pickle_condition_filename), "wb") as fp:
+                pickle.dump(condition_list, fp)
+            with open(os.path.join(settings.LOG_DIR, pickle_result_filename), "wb") as fp:
+                pickle.dump(result_list, fp)
+            with open(os.path.join(settings.LOG_DIR, trace_filename), "w") as f:
+                f.write("".join(traceback.format_stack()))
+
+            return self.render_goto_step('error')
+
+
+        # and try to validate
+        if form.is_valid():
+            # if the form is valid, store the cleaned data and files.
+            self.storage.set_step_data(self.steps.current, self.process_step(form))
+            self.storage.set_step_files(self.steps.current, self.process_step_files(form))
+
+            # check if the current step is the last step
+            if self.steps.current == self.steps.last:
+                # no more steps, render done view
+                return self.render_done(form, **kwargs)
+            else:
+                # proceed to the next step
+                return self.render_next_step(form)
+        return self.render(form)
+
+
+    def get_form(self, step=None, data=None, files=None):
+        logger.debug("inside wizard get_form")
+        if step is None:
+            step = self.steps.current
+            logger.debug(f"step argument passed in is None so it is now set to current: {step}")
+        # form_list = self.get_form_list()
+        form_class = self.get_form_list()[step]
+        # prepare the kwargs for the form instance.
+        kwargs = self.get_form_kwargs(step)
+        kwargs.update({
+            'data': data,
+            'files': files,
+            'prefix': self.get_form_prefix(step, form_class),
+            'initial': self.get_form_initial(step),
+        })
+        if issubclass(form_class, (forms.ModelForm, forms.models.BaseInlineFormSet)):
+            # If the form is based on ModelForm or InlineFormSet,
+            # add instance if available and not previously set.
+            kwargs.setdefault('instance', self.get_form_instance(step))
+        elif issubclass(form_class, forms.models.BaseModelFormSet):
+            # If the form is based on ModelFormSet, add queryset if available
+            # and not previous set.
+            kwargs.setdefault('queryset', self.get_form_instance(step))
+        return form_class(**kwargs)
 
     def done(self, form_list, **kwargs):
         # from shop.apps.main.utils.email import send_email_seller_welcome

@@ -17,6 +17,7 @@ cssselect2==0.7.0
 dealer==2.1.0
 decorator==5.1.1
 defusedxml==0.7.1
+dill==0.3.9
 Django==4.2.16
 django-allauth==64.1.0
 django-appconf==1.0.6

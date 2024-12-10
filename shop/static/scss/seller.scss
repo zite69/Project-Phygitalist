@@ -1082,3 +1082,13 @@ form[data-step="pincode"] {
     }
 }
 
+.text_error {
+    font-size: 15px;
+    line-height: 25px;
+    color: #666666;
+    font-style: italic;
+}
+
+.error_heading h2 {
+    color: $red;
+}
