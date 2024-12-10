@@ -1,0 +1,50 @@
+{% extends 'registration/base.html' %}
+
+{% block registration-form %}
+<div class="container">
+    <div class="content_box">
+        <div class="error_heading mx-auto"><h2>Server Error</h2></div>
+        <div class="text_error">
+            We have faced some system error while processing your form. We have recorded the following information about you:
+            {% if self.request.user.is_authenticated %}
+            <p>Your username is: {{self.request.user.username}}</p>
+                <p>Your password has been saved.</p>
+                <p>Your email address is recorded as: {{self.request.user.email}}</p>
+                <p>Your phone number is recorded as: {{self.request.user.phone}}</p>
+                {% if self.request.user.seller_registration %}
+                    {% if self.request.user.seller_registration.gstin %}
+                    <p>Your GST number is recorded as: {{self.request.user.seller_registration.gstin}}</p>
+                    {% endif %}
+                    {% if self.request.user.seller_registration.pan %}
+                    <p>Your PAN number is recorded as: {{self.request.user.seller_registration.pan}}</p>
+                    {% endif %}
+                {% endif %}
+            {% elif self.request.user %}
+            {# User name has been recorded but they have not yet entered their password: #}
+                {% if self.request.user.username %}
+                <p>Your username is {{ self.request.user.username }}</p>
+                {% endif %}
+                {% if self.request.user.email %}
+                <p>Your email address is recorded as: {{self.request.user.email}}</p>
+                {% endif %}
+                {% if self.request.user.phone %}
+                <p>Your phone number is recorded as: {{ self.request.user.phone }}</p>
+                {% endif %}
+            {% elif user %}
+                {% if user.username %}
+                <p>Your username is {{ user.username }}</p>
+                {% endif %}
+                {% if user.email %}
+                <p>Your email address is recorded as: {{user.email}}</p>
+                {% endif %}
+                {% if user.phone %}
+                <p>Your phone number is recorded as: {{ user.phone }}</p>
+                {% endif %}
+            {% endif %}
+            <p>Please contact the admin at <a href="mailto:admin@zite69.com?subject=Failed+Seller+Registration">admin@zite69.com</a>
+                and provide them the details above so they can help you in completing your form.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
