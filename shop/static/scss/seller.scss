@@ -1092,3 +1092,11 @@ form[data-step="pincode"] {
 .error_heading h2 {
     color: $red;
 }
+
+.resend-code {
+    text-decoration: none;
+}
+
+.resend-code:hover {
+    background-color: transparent;
+}
