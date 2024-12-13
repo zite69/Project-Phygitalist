@@ -24,3 +24,8 @@
     <link rel="stylesheet" type="text/css" href="{% sass_src "scss/cms.scss" %}" />
 {% endaddtoblock %}
 {% endblock %}
+
+{% block header %}
+{% include "includes/cms_toolbar.html" %}
+{{ block.super }}
+{% endblock %}
