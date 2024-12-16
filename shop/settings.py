@@ -173,7 +173,6 @@ if DEBUG:
     INSTALLED_APPS.insert(7, 'whitenoise.runserver_nostatic')
 
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'shop.apps.main.middleware.DynamicSiteMiddleware',
@@ -194,7 +193,6 @@ MIDDLEWARE = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'cms.middleware.utils.ApphookReloadMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 if DEBUG:
@@ -207,6 +205,9 @@ AUTH_USER_MODEL = 'user.User'
 
 if DEBUG:
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
+else:
+    MIDDLEWARE = ['django.middleware.cache.UpdateCacheMiddleware',] + MIDDLEWARE
+    MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware', ]
 
 INTERNAL_IPS = [
     "127.0.0.1",
