@@ -73,9 +73,9 @@ def validate_upi(value):
         raise ValidationError(_("UPI ID %(value)s does not appear to be valid"))
 
 class User(AbstractUser):
-    email = models.EmailField(_("Email Address"), unique=True, blank=True, null=True)
+    email = models.EmailField(_("Email Address"), blank=False, null=True)
     username = models.CharField(_("Username"), max_length=64, unique=True, blank=False)
-    phone = PhoneNumberField(_("Phone Number"), unique=True, region='IN', blank=False, null=True)
+    phone = PhoneNumberField(_("Phone Number"), region='IN', blank=False, null=True)
     email_verified = models.BooleanField(_("Verified Email"), default=False)
     phone_verified = models.BooleanField(_("Verified Phonenumber"), default=False)
 
@@ -88,7 +88,17 @@ class User(AbstractUser):
             models.CheckConstraint(
                 check=Q(email__isnull=False) | Q(username__isnull=False) | Q(phone__isnull=False),
                 name='not_all_null'
-            )
+            ),
+            models.UniqueConstraint(
+                fields=['email'],
+                condition=(~models.Q(email='') & models.Q(email__isnull=False)),
+                name='unique_email_ifnotnull'
+            ),
+            models.UniqueConstraint(
+                fields=['phone'],
+                condition=(models.Q(phone__isnull=False)),
+                name='unique_phone_ifnotnull'
+            ),
         ]
 
     # def __init__(self, *args, **kwargs):
