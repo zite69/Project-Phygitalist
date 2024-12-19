@@ -610,6 +610,7 @@ class GstCrispy(FormWithRequest):
                     seller_registration.phone = user.phone
                     seller_registration.email = user.email
                     seller_registration.gstin = gst
+                    seller_registration.gst_status = gst_status
                     seller_registration.pan = pan
                     seller_registration.user = user
                     seller_registration.save()
@@ -618,6 +619,7 @@ class GstCrispy(FormWithRequest):
                         name = user.get_full_name(),
                         phone = user.phone,
                         email = user.email,
+                        gst_status = gst_status,
                         gstin = gst,
                         pan = pan,
                         user = user
