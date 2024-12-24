@@ -20,15 +20,16 @@ from shop.apps.main.errors import ConfigurationError
 from shop.apps.otp.utils import authenticate_otp
 from shop.apps.user.models import Profile
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, Submit, Layout, Row, Column, Div, Field
+from crispy_forms.layout import HTML, MultiField, Submit, Layout, Row, Column, Div, Field, Fieldset
 from crispy_forms.bootstrap import AppendedText, StrictButton, InlineRadios
 from localflavor.in_.forms import INPANCardNumberFormField
 from .models import SellerRegistration, SellerProduct
 from shop.apps.main.models import Postoffice
-from shop.apps.seller.models import Seller
+from shop.apps.seller.models import Seller, SellerPickupAddress
 from collections import defaultdict
-from image_uploader_widget.widgets import ImageUploaderWidget
+from image_uploader_widget.widgets import ImageUploaderWidget, widgets
 from shop.apps.main.utils.email import send_email_seller_welcome
+from oscar.core.loading import get_class
 import logging
 
 logger = logging.getLogger("shop.apps.registration")
@@ -38,6 +39,9 @@ User = get_user_model()
 class Tooltip(Field):
     template = "registration/widgets/tooltip.html"
     wrapper_class = "mb-3"
+
+class BareInput(Field):
+    template = "registration/widgets/bareinput.html"
 
 class FormWithRequest(forms.Form):
 
@@ -958,3 +962,177 @@ REGISTRATION_FORM_TEMPLATES = defaultdict(lambda: 'registration/seller.html', {
     "product3": "registration/product.html",
     "error": "registration/error.html"
 })
+from localflavor.in_.in_states import STATE_CHOICES
+from shop.apps.zitepayment.models import BankAccount
+
+class OnboardingFormMixin(forms.ModelForm):
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        self.helper = FormHelper()
+        self.helper.form_id = self.__class__.form_id
+        self.helper.attrs = {
+                'data-status': 'init'
+        }
+
+
+class SellerPickupAddressForm(OnboardingFormMixin):
+    form_id = 'id_pickup'
+
+    state = forms.ChoiceField(choices=STATE_CHOICES)
+
+    class Meta:
+        model = SellerPickupAddress
+        fields = ['line1', 'line2', 'line3', 'line4', 'state']
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.request = request
+        # self.helper = FormHelper()
+        # self.helper.form_id = self.__class__.form_id
+        # self.helper.attrs = {
+        #         'data-status': 'init'
+        #         }
+        self.helper.layout = Layout(
+                MultiField(
+                    'Pickup Address',
+                    BareInput('line1', placeholder="Building name, Street Address, Road, Local Area"),
+                    BareInput('line2', placeholder="Address line 2"),
+                    BareInput('line3', placeholder="Landmark"),
+               ),
+               Field('line4', placeholder="City"),
+               'state',
+               )
+        self.helper.add_input(Submit(name="pickup", value="Save", css_class="btn btn-primary"))
+
+class PickupAddressForm(forms.Form):
+    # building = forms.CharField(label=_("Building number/name"), max_length=255, blank=False)
+    street = forms.CharField(label=_("Street, Road, Local Area"), max_length=255, required=True)
+    line2 = forms.CharField(label=_("Address Line 2"), max_length=255, required=False)
+    landmark = forms.CharField(label=_("Landmark"), max_length=255, required=False)
+    city = forms.CharField(label=_("City"), max_length=255, required=True)
+    state = forms.ChoiceField(label=_("Enter State"), choices=STATE_CHOICES, required=True)
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        for lbl in ['street', 'line2', 'landmark']:
+            self.fields[lbl].label = False
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+               MultiField(
+                    'Pickup Address',
+                    BareInput('street', placeholder="Building name, Street Address, Road, Local Area"),
+                    BareInput('line2', placeholder="Address line 2"),
+                    BareInput('landmark', placeholder="Landmark"),
+               ),
+               Field('city', placeholder="City"),
+               'state',
+             )
+        self.helper.add_input(Submit(name="pickup", value="Save", css_class="btn btn-primary"))
+
+class BankDetailsForm(OnboardingFormMixin):
+    form_id = 'id_bank'
+
+    class Meta:
+        model = BankAccount
+        fields = ['name', 'account_number', 'bank', 'ifsc', 'account_type', 'registered_phone']
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.request = request
+        # self.helper = FormHelper()
+        self.helper.layout = Layout(
+                Fieldset(
+                   'Bank Details',
+                   Field('name', placeholder="Enter your name as in the bank records"),
+                   Field('account_number', placeholder="Enter your bank account number"),
+                   Field('bank', placeholder="Enter your bank name"),
+                   Field('ifsc', placeholder="Enter the IFSC code of your bank branch"),
+                   Field('account_type', placeholder="Select Account Type"),
+                   Field('registered_phone', placeholder="Enter registered mobile number"),
+                   ))
+        self.helper.add_input(Submit(name="bank", value="Save Details", css_class="btn btn-primary"))
+
+class SellerRemainingForm(OnboardingFormMixin):
+    form_id = 'id_seller'
+
+    class Meta:
+        model = Seller
+        fields = ['shipping_preference', 'signature_file', 'gstin_file', 'pan_file']
+        widgets = {
+            'signature_file': ImageUploaderWidget(),
+            'shipping_preference': forms.RadioSelect(),
+            'gstin_file': ImageUploaderWidget(),
+            'pan_file': ImageUploaderWidget()
+        }
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.request = request
+        # self.helper = FormHelper()
+        self.helper.include_media = False
+        self.fields['shipping_preference'].choices = Seller.SHIPPING_CHOICES
+        self.fields['shipping_preference'].initial = Seller.SHIPPING_SELF
+        self.helper.layout = Layout(
+            'shipping_preference',
+            HTML("<label>Add Signature</label>"),
+            Field('signature_file', template="registration/widgets/image.html", css_class="mb-2"),
+            )
+
+        if request.user.seller_registration.gst_status == 'Y':
+            self.fields['pan_file'].required = False
+            self.fields['pan_file'].widget = forms.HiddenInput()
+            self.fields['gstin_file'] = forms.ImageField(label=_("Add your GSTIN scan proof"), widget=ImageUploaderWidget())
+            self.helper.layout.append(
+                Div(
+                HTML("<label>Add GST PDF or scan copy</label>"),
+                Field("gstin_file", template="registration/widgets/image.html", css_class="mb-2"),
+                css_id="gstinfile",
+                )
+                )
+        else:
+            self.fields['gstin_file'].required = False
+            self.fields['gstin_file'].widget = forms.HiddenInput()
+            self.fields['pan_file'] = forms.ImageField(label=_("Add your PAN scan proof"), widget=ImageUploaderWidget())
+            self.helper.layout.append(
+                Div(
+                    HTML("<label>Add PAN card scan</label>"),
+                    Field("pan_file", template="registration/widgets/image.html", css_class="mb-2"),
+                    css_id="panfile",
+                )
+             )
+
+        self.helper.add_input(Submit(name="seller", value="Save", css_class="btn btn-primary"))
+
+class OnboardingForm(forms.Form):
+    street = forms.CharField(label=_("Street, Road, Local Area"), max_length=255, required=True)
+    line2 = forms.CharField(label=_("Address Line 2"), max_length=255, required=True)
+    landmark = forms.CharField(label=_("Landmark"), max_length=255, required=False)
+    city = forms.CharField(label=_("Enter City"), max_length=255, required=True)
+    state = forms.ChoiceField(label=_("Enter State"), choices=STATE_CHOICES)
+    
+    name = forms.CharField(label=_("Account Holders Name"), max_length=255, required=True)
+    account_number = forms.CharField(label=_("Bank Account Number"), max_length=18, required=True)
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        for field in ['street', 'line2', 'landmark']:
+            self.fields[field].label = False
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+               MultiField(
+                    'Pickup Address',
+                    BareInput('street', placeholder="Building name, Street Address, Road, Local Area"),
+                    BareInput('line2', placeholder="Address line 2"),
+                    BareInput('landmark', placeholder="Landmark"),
+               ),
+               Field('city', placeholder="City"),
+               'state',
+               Fieldset(
+                   'Bank Details',
+                   'name',
+                   'account_number'
+                   )
+             )

@@ -85,6 +85,15 @@
   font-size: 14px;
 }
 
+.notverified-badge {
+  margin-left: auto;
+  color: $red;
+  background: #e8f5e9;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
 .input-group input {
   width: 100%;
   padding: 12px;
@@ -98,7 +107,9 @@
     margin-left: 0 !important;     /* Neutralize Bootstrap margin */
     border-top-left-radius: 8px;  /* Reset */
     border-bottom-left-radius: 8px;
+    margin-bottom: 15px;
 }
+
 .input-group {
   margin-bottom: 8px;
 }
@@ -241,4 +252,14 @@
 .page-content{
     display: flex;
     flex-direction: row;
+}
+
+.iuw-root {
+  background-color: white;
+  color: black;
+}
+
+.asteriskField {
+  padding-left: 0.5rem;
+  color: #dc3545 !important
 }

@@ -78,7 +78,7 @@ class SellerRegistration(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='seller_registration')
     postoffice = models.ForeignKey(Postoffice, on_delete=models.PROTECT, null=True)
 
-    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='approved_sellers')
+    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name='approved_sellerregistrations')
     approved_on = models.DateTimeField(_("Approved On"), null=True)
     approval_notes = models.TextField(_("Approval/Rejection Reasons"), blank=True, null=True)
     approval_status = models.CharField(_("Approval Status"), choices=STATUS_CHOICES, max_length=2, db_index=True, default=STATUS_IN_PROGRESS)

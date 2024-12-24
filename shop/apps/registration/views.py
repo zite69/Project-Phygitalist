@@ -1,7 +1,9 @@
-from collections import OrderedDict
-from django.shortcuts import render
+from collections import OrderedDict, defaultdict
+from re import T
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django import forms
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView, View
 from django.http import HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ValidationError
@@ -12,7 +14,16 @@ from django.core.exceptions import SuspiciousOperation
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
+from django.utils.decorators import classonlymethod
+from django.contrib import messages
+from django.core import serializers
+import json
+
 from datetime import datetime
+
+from django.views.generic.edit import FormView
+from shop.apps.address.utils import get_default_country
+from shop.apps.main.errors import ConfigurationError
 from shop.apps.main.utils.sms import send_phone_otp
 from shop.apps.main.utils.email import send_email_verification
 from shop.apps.main.utils.urls import get_site_base_uri
@@ -22,7 +33,11 @@ from phonenumber_field.validators import validate_international_phonenumber
 from formtools.wizard.views import SessionWizardView
 from formtools.wizard.forms import ManagementForm
 from shop.apps.main.models import State, Postoffice
-from .forms import REGISTRATION_FORM_TEMPLATES
+from shop.apps.seller.models import SellerPickupAddress, Seller
+from shop.apps.registration.models import SellerRegistration
+from shop.apps.zitepayment.models import BankAccount
+
+from .forms import REGISTRATION_FORM_TEMPLATES, OnboardingForm, PickupAddressForm
 from .models import seller_registration_filestorage
 
 import json
@@ -30,10 +45,10 @@ import logging
 import os
 import traceback
 
-logger = logging.getLogger("shop.apps.registration.views")
+logger = logging.getLogger(__package__)
 
 User = get_user_model()
-
+india = get_default_country()
 
 class HomeView(TemplateView):
     template_name = 'registration/home.html'
@@ -53,9 +68,9 @@ class SellerRegistrationWizard(SessionWizardView):
         return kwargs
 
     def process_step(self, form):
-        logger.debug(f"in process_step. form: {form}")
-        logger.debug(form)
-        logger.debug(f"current step: {self.steps.current}")
+        # logger.debug(f"in process_step. form: {form}")
+        # logger.debug(form)
+        logger.debug(f"in process_step, current step: {self.steps.current}")
         return super().process_step(form)
 
     def render_goto_step(self, goto_step, **kwargs):
@@ -416,3 +431,273 @@ class ValidatePhoneOtp(View, JsonRequestResponseMixin):
         data = self.get_data(request, *args, **kwargs)
         if type(data) == JsonResponse:
             return data
+
+from crispy_forms.layout import Field
+class UnprefixedHiddenInput(forms.HiddenInput):
+
+    def render(self, name, value, attrs=None, renderer=None):
+        logger.debug("Inside render")
+        return super().render(name, value, attrs, renderer)
+
+    def get_context(self, name, value, attrs=None):
+        logger.debug("Inside get_context")
+        ctx = super().get_context(name, value, attrs)
+        ctx['widget']['name'] = 'submit_id'
+        logger.debug(ctx['widget']['template_name'])
+        logger.debug("Inside get_context for hidden widget")
+        return ctx
+
+    def build_attrs(self, base_attrs, extra_attrs=None):
+        attrs = super().build_attrs(base_attrs, extra_attrs)
+        attrs['data-dash'] = 'yes'
+        logger.debug("Inside build_attrs")
+        return attrs
+
+class MultiFormView(TemplateView):
+    # form_classes is a dictionary of {"key": FormClass}
+    form_classes = {}
+    # key_property_lookup is a dictionary of lookups for forms that are instances of ModelForm.
+    # this property does a lookup for that particular property and deeply nested string 
+    # the deeply nested property string starts from self - ie this class.
+    # so a property string could look like 'request.user.seller_registration'
+    # an example key_property_lookup is {"pickup": {"user": "request.user.seller.sellerpickupaddress"}}
+    key_property_lookup = {}
+    template_name = "oscar/dashboard/wizard.html"
+    success_url = reverse_lazy("dashboard:index")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.form_instances = {}  # Store existing model instances
+        self.form_classes = kwargs.get('form_classes', {})
+        self.forms = OrderedDict()
+
+        request = kwargs.get('request', None)
+        if request:
+            logger.debug("We got request")
+            self.request = request
+        else:
+            logger.debug("No request in kwargs __init__ in view")
+
+    def update_forms(self):
+        # Prepare forms with submit_id
+        for k, form_class in self.form_classes.items():
+            # Try to get existing instance for ModelForms
+            instance = self.get_existing_instance(form_class, k)
+
+            # Initialize form with potential instance
+            form_kwargs = {
+                'prefix': k,
+                **self.get_form_kwargs(prefix=k)
+            }
+
+            if self.request.method == "POST":
+                form_kwargs['data'] = self.request.POST
+                form_kwargs['files'] = self.request.FILES
+
+            # Add instance only for ModelForms
+            if instance:
+                form_kwargs['instance'] = instance
+
+            self.form_instances[k] = instance
+            self.forms[k] = form_class(**form_kwargs)
+
+            self.forms[k].fields['submit_id'] = forms.CharField(initial=k)
+            self.forms[k].helper.layout.append(Field('submit_id', type="hidden", template="registration/widgets/unprefixed_field.html"))
+            self.forms[k].fields['submit_id'].widget.attrs['name'] = 'submit_id'
+
+    def _get_completion_percentage(self):
+        completion = 60
+        if hasattr(self.request.user, 'seller') and self.request.user.seller.pickup_addresses.count() > 0:
+            completion += 10
+        if self.request.user.bankaccount_set.count() >= 1:
+            completion += 10
+        if hasattr(self.request.user, 'seller') and self.request.user.seller.shipping_preference != '':
+            completion += 10
+
+        return completion
+
+    def get_existing_instance(self, form_class, key):
+        """
+        Retrieve existing model instance for ModelForms
+        """
+        # Check if this is a ModelForm
+        if not issubclass(form_class, forms.ModelForm):
+            return None
+
+        if not hasattr(self.request.user, 'seller'):
+            try:
+                registration = SellerRegistration.objects.get(user=self.request.user)
+            except SellerRegistration.DoesNotExist:
+                raise ConfigurationError(_("User must never come here without first registering"))
+
+            self.seller = Seller.objects.create(
+                    user = self.request.user,
+                    name = registration.shop_name,
+                    handle = registration.shop_handle,
+                    gstin = registration.gstin,
+                    pan = registration.pan,
+                    )
+        else:
+            self.seller = self.request.user.seller
+        if key == "pickup":
+            try:
+                return SellerPickupAddress.objects.get(seller=self.seller)
+            except SellerPickupAddress.DoesNotExist:
+                return None
+        elif key == "bank":
+            try:
+                return BankAccount.objects.get(user=self.request.user)
+            except BankAccount.DoesNotExist:
+                return None
+        elif key == "seller":
+            return self.seller
+        
+        return None
+
+    def get_form_kwargs(self, prefix=""):
+        """
+        Additional kwargs for form initialization
+        Can be overridden in subclasses
+        """
+        if hasattr(self, 'request'):
+            return {
+                'request': self.request  # Pass request to forms that might need it
+            }
+
+        return {}
+
+    def get(self, request, *args, **kwargs):
+        logger.debug("Inside get")
+        context = self.get_context_data(**kwargs)
+        #context['forms'] = self.forms
+        logger.debug("forms:")
+        logger.debug(self.forms)
+        return self.render_to_response(context)
+
+    def all_forms_valid(self):
+        return all([form.is_valid() for _, form in self.forms.items()])
+
+    def post(self, request, *args, **kwargs):
+        # Determine which form was submitted
+        key = request.POST.get('submit_id')
+
+        # Reinitialize forms with POST data
+        #self.forms = OrderedDict()
+        form_class = self.form_classes.get(key)
+        instance = self.get_existing_instance(form_class, key)
+        form_kwargs = {
+            'prefix': key,
+            'data': request.POST,
+            'files': request.FILES,
+            **self.get_form_kwargs(prefix=key)
+        }
+        if instance:
+            form_kwargs['instance'] = instance
+
+        self.forms[key] = form_class(**form_kwargs)
+
+        if self.forms[key] and self.forms[key].is_valid():
+            return self.form_valid(self.forms[key], key)
+        else:
+            return self.form_invalid()
+
+    def form_valid(self, form, form_key):
+        """
+        Handle form saving for both ModelForms and regular Forms
+        """
+        # For ModelForms, save the instance
+        if isinstance(form, forms.ModelForm):
+            logger.debug(f"Being called inside form_valid with form {form} and key: {form_key}")
+            instance = form.save(commit=False)
+
+            # Try to set user if possible
+            try:
+                instance.user = self.request.user
+            except AttributeError:
+                pass
+
+            if form_key == "pickup":
+                instance.seller = self.seller
+                instance.country = india
+                messages.success(self.request, "Pickup Address saved successfully")
+            elif form_key == "bank":
+                messages.success(self.request, "Bank Details saved successfully")
+            elif form_key == 'seller':
+                messages.success(self.request, "Shipping Preferences, GST/PAN and Signature saved successfully. You will be notified via email when your Seller account is fully functional.")
+
+            instance.save()
+            if form_key == 'seller':
+                logger.debug("At last step seller - checking if all forms are valid")
+                if self.all_forms_valid():
+                    logger.debug("All forms valid redirecting to success_url")
+                    return HttpResponseRedirect(self.success_url)
+            #messages.success(self.request, f"{form_key.replace('_', ' ').title()} saved successfully!")
+        else:
+            # For regular forms, you might want to do something else
+            # This could be overridden in a subclass
+            # We are only using ModelForms currently, so this is never called
+            messages.success(self.request, "Form submitted successfully!")
+
+        return HttpResponseRedirect(self.request.path)
+
+    def form_invalid(self):
+        """
+        Render the page with validation errors
+        """
+        context = self.get_context_data(forms=self.forms)
+        return self.render_to_response(context)
+
+    def _is_gst_uploaded(self):
+        return all([self.request.user.seller_registration.gstin != '', 
+                    hasattr(self.request.user, 'seller') and (
+                        (self.request.user.seller_registration.gst_status == 'Y' and self.request.user.seller.gstin_file) 
+                        or 
+                        (self.request.user.seller_registration.gst_status != 'Y' and self.request.user.seller.pan_file)
+                    )])
+
+    def get_steps(self):
+        steps = defaultdict(lambda : False)
+        if self.request.user.phone_verified and self.request.user.email_verified:
+            steps['phone'] = True
+        steps['password'] = True
+        if self._is_gst_uploaded():
+            steps['gst'] = True
+        if self.request.user.seller_registration.shop_name != '':
+            steps['shop'] = True
+        if hasattr(self.request.user, 'seller') and self.request.user.seller.pickup_addresses.count() > 0:
+            steps['pickup'] = True
+        if hasattr(self.request.user, 'seller') and self.request.user.seller.signature_file:
+            steps['signature'] = True
+        if hasattr(self.request.user, 'seller') and self.request.user.seller.shipping_preference != '':
+            steps['shipping'] = True
+        if self.request.user.bankaccount_set.count() > 0:
+            steps['bank'] = True
+
+        logging.debug("in get_steps: ")
+        logging.debug(steps)
+        # logging.debug(hasattr(self.request.user, 'seller') and self.request.seller.signature_file != None)
+
+        return steps
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['registration'] = self.request.user.seller_registration
+        ctx['registration_json'] = serializers.serialize('json', [self.request.user.seller_registration])
+        ctx['completion_percentage'] = self._get_completion_percentage()
+        ctx['steps'] = self.get_steps()
+        self.update_forms()
+        ctx['forms'] = self.forms
+        return ctx
+
+
+    @classmethod
+    def as_view(cls, form_classes=None, **initkwargs):
+        """
+        Class method to create the view with form classes
+        """
+        if not form_classes:
+            raise ValueError("form_classes must be provided")
+
+        initkwargs['form_classes'] = form_classes
+        return super().as_view(**initkwargs)
+

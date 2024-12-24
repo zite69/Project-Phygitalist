@@ -1,7 +1,9 @@
 {% load crispy_forms_field %}
 
-{% crispy_field field %}
+<div class="mb-3">
+    {% crispy_field field %}
 
-{% if field.errors %}
-{{ field.errors }}
-{% endif %}
+    {% if field.errors %}
+        {{ field.errors }}
+    {% endif %}
+</div>
