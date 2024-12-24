@@ -109,7 +109,7 @@ INSTALLED_APPS = [
     'oscar.config.Shop',
     'oscar.apps.analytics.apps.AnalyticsConfig',
     'oscar.apps.checkout.apps.CheckoutConfig',
-    'oscar.apps.address.apps.AddressConfig',
+    #'oscar.apps.address.apps.AddressConfig',
     'oscar.apps.shipping.apps.ShippingConfig',
     #'oscar.apps.catalogue.apps.CatalogueConfig',
     'oscar.apps.catalogue.reviews.apps.CatalogueReviewsConfig',
@@ -158,6 +158,7 @@ INSTALLED_APPS = [
     'shop.apps.main',
     'shop.apps.wishlist',
     'shop.apps.catalogue.apps.CatalogueConfig',
+    'shop.apps.address.apps.AddressConfig',
     'shop.apps.partner.apps.PartnerConfig',
     'shop.apps.seller.apps.SellerConfig',
     'shop.apps.registration.apps.RegistrationConfig',
@@ -166,6 +167,7 @@ INSTALLED_APPS = [
     'shop.apps.otp.apps.OtpConfig',
     'shop.apps.membership.apps.MembershipConfig',
     'shop.apps.invitation.apps.InvitationConfig',
+    'shop.apps.zitepayment.apps.ZitepaymentConfig',
     'djangocms_form_builder',
 ]
 
@@ -428,6 +430,9 @@ SASS_PRECISION = 8
 MEDIA_URL = "media/"
 #MEDIA_ROOT = str(BASE_DIR.parent / "media")
 MEDIA_ROOT = env("MEDIA_ROOT", default=BASE_DIR.parent)
+
+PROTECTED_URL = "/protected/"
+PROTECTED_ROOT = env("PROTECTED_ROOT", default=BASE_DIR / "protected" )
 
 #OSCAR_HOMEPAGE = ''
 
