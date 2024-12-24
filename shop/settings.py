@@ -792,6 +792,10 @@ if DEBUG == False:
     for module in LOGGING_ENV.keys():
         LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
         LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
+    
+    #Asynchronous queues - Celery, RabbitMQ, Valkey settings
+    CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="")
+    CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", default="")
 
     #Setup production email
     EMAIL_HOST_USER = env("EMAIL_HOST_USER")
