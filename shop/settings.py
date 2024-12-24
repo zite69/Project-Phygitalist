@@ -794,7 +794,7 @@ if DEBUG == False:
     #Setup production logging
     LOGGING['handlers']['file'] = {
             'level': env("LOG_LEVEL", default="WARNING"),
-            'class': 'logging.TimedRotatingFileHandler',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
             'formatter': 'verbose',
             'filename': env("LOG_FILE", default="logs/all.log"),
             'when': 'midnight',
