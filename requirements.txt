@@ -34,6 +34,7 @@ django-extensions==3.2.3
 django-extra-views==0.14.0
 django-filer==3.3.0
 django-filter==24.3
+djangocms-forms @ git+https://github.com/zite69/djangocms-forms.git@446ad941c79dba86d4ef734310416770a1cfb657
 django-formtools==2.5.1
 django-fsm==2.8.2
 django-haystack==3.3.0

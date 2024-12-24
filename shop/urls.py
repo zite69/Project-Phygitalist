@@ -43,6 +43,7 @@ urlpatterns = i18n_patterns(
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('membership/', include((apps.get_app_config('membership').urls[0], 'membership'), namespace='membership')),
     path('', include(apps.get_app_config('main').urls[0])),
+    path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),
 )
 

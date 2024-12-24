@@ -1,0 +1,56 @@
+{% load cms_tags  djangocms_forms_tags i18n sekizai_tags static %}
+{% if instance %}
+<div class="forms">
+    <form id="{{ instance.form_id }}"
+          class="djangocms-form-builder-ajax-form subscribe-form subscribe-form-1 validate wow fadeInDown"
+          data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInDown;"
+          novalidate action="{{ form.submission_url }}"
+          method="post">
+	    <div class="form-errors" style="display:none;"></div>
+        {% csrf_token %}
+        <div class="d-flex justify-content-between invitation-controls">
+            {% for field in form.visible_fields %}
+            <div class="mb-3">
+                {{ field }}
+            </div>
+            {% endfor %}
+			{% for hidden in form.hidden_fields %}
+				{{ hidden }}
+			{% endfor %}
+            <button type="submit" value="Get your invite" class="sub_btn common-btn">Get your invite</button>
+        </div>
+    </form>
+	<div class="form-success" style="display: none;">
+		{% if instance.post_submit_msg %}
+			<p>{{ instance.post_submit_msg|safe }}</p>
+		{% else %}
+            <h3>{% trans 'Submission successful' %}</h3>
+            <p>{% trans 'Thank You! Your form has been successfully submitted!' %}</p>
+		{% endif %}
+	</div>
+</div>
+{% endif %}
+
+{% addtoblock "css" %}
+    {% if instance.use_honeypot %}
+        <style type="text/css">
+            .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+        </style>
+    {% endif %}
+{% endaddtoblock %}
+{% addtoblock "js" %}
+    {% if instance.use_recaptcha %}
+        <script src="https://www.google.com/recaptcha/api.js?onload=reCapctchaOnloadCallback&render=explicit" async defer></script>
+    {% endif %}
+	<script src="{% static 'js/djangocms_forms/libs/jquery.form.min.js' %}"></script>
+	<script src="{% static 'js/djangocms_forms/jquery.djangocms-forms.js' %}"></script>
+
+	<script type="text/javascript">
+		$(function() {
+		  $('.forms').cmsForms({
+			  'reCaptchaSiteKey': '{{ recaptcha_site_key }}',
+			  'redirectDelay': 1000
+		  });
+		});
+	</script>
+{% endaddtoblock %}

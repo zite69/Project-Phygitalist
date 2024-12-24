@@ -169,6 +169,7 @@ INSTALLED_APPS = [
     'shop.apps.invitation.apps.InvitationConfig',
     'shop.apps.zitepayment.apps.ZitepaymentConfig',
     'djangocms_form_builder',
+    'djangocms_forms',
 ]
 
 if DEBUG:
@@ -208,6 +209,7 @@ AUTH_USER_MODEL = 'user.User'
 if DEBUG:
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 else:
+    #Enable caching only for non-DEBUG environments - Testing and Production
     MIDDLEWARE = ['django.middleware.cache.UpdateCacheMiddleware',] + MIDDLEWARE
     MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware', ]
 
@@ -547,6 +549,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DJANGOCMS_FRONTEND_THEME = "shop.apps.themezite69bs5"
 #DJANGOCMS_FRONTEND_FRAMEWORK = "shop.apps.themezite69bs5"
+DJANGOCMS_FORMS_PLUGIN_MODULE = _('Generic')
+DJANGOCMS_FORMS_PLUGIN_NAME = _('Form Trial')
+DJANGOCMS_FORMS_DEFAULT_TEMPLATE = 'djangocms_forms/form_template/default.html'
+DJANGOCMS_FORMS_TEMPLATES = (
+    ('djangocms_forms/form_template/default.html', _('Default')),
+    ('djangocms_forms/form_template/livesoon.html', _('Livesoon')),
+)
+DJANGOCMS_FORMS_WIDGET_CSS_CLASSES = {'__all__': ('form-control', ) }
+DJANGOCMS_FORMS_USE_HTML5_REQUIRED = True
 
 LOGGING = {
     'version': 1,
