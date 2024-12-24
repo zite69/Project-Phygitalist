@@ -50,7 +50,7 @@ ONBOARDING_FORM_CLASSES = {
 urlpatterns = i18n_patterns(
     path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="seller.sitemap"),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
-    path('dashboard/onboarding//', MultiFormView.as_view(form_classes=ONBOARDING_FORM_CLASSES), name="onboarding-wizard"),
+    path('dashboard/onboarding/', MultiFormView.as_view(form_classes=ONBOARDING_FORM_CLASSES), name="onboarding-wizard"),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
