@@ -27,6 +27,7 @@ django-compressor==4.5.1
 django-cors-headers==4.6.0
 django-crispy-forms==2.3
 django-debug-toolbar==4.4.6
+django-downloadview==2.4.0
 django-dynamic-preferences==1.16.0
 django-entangled==0.5.4
 django-environ==0.11.2
