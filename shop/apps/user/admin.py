@@ -23,11 +23,11 @@ class CustomUserAdmin(UserAdmin):
     ]
 
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None,{'fields':('phone',),}),
+        (None,{'fields':('phone', 'email_verified', 'phone_verified' ),}),
     )
     
     fieldsets = UserAdmin.fieldsets + (
-        (None,{'fields':('phone',),}),
+        (None,{'fields':('phone', 'email_verified', 'phone_verified'),}),
     )
     
     # def formfield_for_dbfield(self, db_field, **kwargs):
