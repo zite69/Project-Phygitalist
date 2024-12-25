@@ -73,7 +73,7 @@ def validate_upi(value):
         raise ValidationError(_("UPI ID %(value)s does not appear to be valid"))
 
 class User(AbstractUser):
-    email = models.EmailField(_("Email Address"), blank=False, null=True)
+    email = models.EmailField(_("Email Address"), blank=True, null=True)
     username = models.CharField(_("Username"), max_length=64, unique=True, blank=False)
     phone = PhoneNumberField(_("Phone Number"), region='IN', blank=False, null=True)
     email_verified = models.BooleanField(_("Verified Email"), default=False)
