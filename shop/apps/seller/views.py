@@ -11,8 +11,21 @@ from shop.apps.user.models import Profile
 from shop.apps.seller.forms import SellerRegistrationForm
 #from pinax.referrals.models import Referral
 import logging
+from django_downloadview import ObjectDownloadView
 
 logger = logging.getLogger('shop.apps.seller')
+
+class DebugDownloadView(ObjectDownloadView):
+    def get(self, request, *args, **kwargs):
+        logger.debug("Inside debug download view")
+        logger.debug(len(args))
+        logger.debug(" ".join([f"{k}:{v}" for k, v in kwargs.items()]))
+        logger.debug(kwargs.get('pk', -1))
+        logger.debug(kwargs.get('filename', 'nofilename'))
+        resp = super().get(request, *args, **kwargs)
+        logger.debug("Response:")
+        logger.debug(resp)
+        return resp
 
 class ProfileView(DetailView):
     model = Profile

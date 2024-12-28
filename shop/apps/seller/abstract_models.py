@@ -24,13 +24,13 @@ from shop.apps.address.abstract_models import AbstractAddress
 from shop.apps.main.storages import protected_storage, ProtectedStorage
 
 def gstin_upload_path(instance, filename):
-    return f"seller/{instance.user.id}/gstin/{filename}"
+    return f"seller/{instance.id}/gstin/{filename}"
 
 def pan_upload_path(instance, filename):
-    return f"seller/{instance.user.id}/pan/{filename}"
+    return f"seller/{instance.id}/pan/{filename}"
 
 def signature_upload_path(instance, filename):
-    return f"seller/{instance.user.id}/signature/{filename}"
+    return f"seller/{instance.id}/signature/{filename}"
 
 class AbstractSeller(BaseLogModelMixin):
     SHIPPING_SELF, SHIPPING_ZITE69 = ('S', 'Z')

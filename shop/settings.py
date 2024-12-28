@@ -76,6 +76,7 @@ INSTALLED_APPS = [
     'sekizai',
     'treebeard',
     'parler',
+    'rules.apps.AutodiscoverRulesConfig',
 
     #allauth apps
     'allauth',
@@ -274,6 +275,7 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 
 AUTHENTICATION_BACKENDS = (
     #'oscar.apps.customer.auth_backends.EmailBackend',
+    'rules.permissions.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
     'shop.apps.otp.auth.OtpBackend',
