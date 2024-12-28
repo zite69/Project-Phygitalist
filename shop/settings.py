@@ -213,7 +213,7 @@ else:
     #Enable caching only for non-DEBUG environments - Testing and Production
     MIDDLEWARE = ['django.middleware.cache.UpdateCacheMiddleware',] + MIDDLEWARE
     MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware', 
-                   'django_downloadview.SmartDownloadMiddleware',
+                   'django_downloadview.ProxiedMiddleware',
                   ]
 
 INTERNAL_IPS = [
