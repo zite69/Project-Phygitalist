@@ -212,7 +212,9 @@ if DEBUG:
 else:
     #Enable caching only for non-DEBUG environments - Testing and Production
     MIDDLEWARE = ['django.middleware.cache.UpdateCacheMiddleware',] + MIDDLEWARE
-    MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware', ]
+    MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware', 
+                   'django_downloadview.SmartDownloadMiddleware',
+                  ]
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -816,3 +818,13 @@ if DEBUG == False:
     EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
     EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
     MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
+
+    # Settings for protected storage and use of X-Accel-Redirect for nginx to serve 
+    # sensitive files
+    DOWNLOADVIEW_BACKEND = 'django_downloadview.nginx.XAccelRedirectMiddleware'
+    DOWNLOADVIEW_RULES = [
+        {
+            'source_url': '/protected/',
+            'destination_url': '/django-protected/'
+        }
+    ]
