@@ -208,7 +208,9 @@ INSTALLED_APPS += env("INSTALLED_APPS", default=[])
 AUTH_USER_MODEL = 'user.User'
 
 if DEBUG:
-    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',
+                   'django_downloadview.nginx.XAccelRedirectMiddleware',
+                   ]
 else:
     #Enable caching only for non-DEBUG environments - Testing and Production
     MIDDLEWARE = ['django.middleware.cache.UpdateCacheMiddleware',] + MIDDLEWARE
@@ -439,6 +441,14 @@ MEDIA_ROOT = env("MEDIA_ROOT", default=BASE_DIR.parent)
 
 PROTECTED_URL = "/protected/"
 PROTECTED_ROOT = env("PROTECTED_ROOT", default=BASE_DIR / "protected" )
+
+# django-downloadview Nginx X-Accel Header middleware settings
+NGINX_X_ACCEL_REDIRECT_MAPPING = {
+    PROTECTED_ROOT: "/django-protected"
+}
+
+NGINX_X_ACCEL_REDIRECT_PREFIX = "/django-protected"
+
 
 #OSCAR_HOMEPAGE = ''
 
@@ -793,6 +803,14 @@ if ZITE69_SELLER_DOMAIN not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(ZITE69_SELLER_DOMAIN)
 
 PLAUSIBLE_TAG = env.str("PLAUSIBLE_TAG", default="", multiline=True)
+
+DOWNLOADVIEW_BACKEND = 'django_downloadview.nginx.XAccelRedirectMiddleware'
+DOWNLOADVIEW_RULES = [
+    {
+        'source_url': '/protected/',
+        'destination_url': '/django-protected/'
+    }
+]
 
 if DEBUG == False:
     #Setup production logging
