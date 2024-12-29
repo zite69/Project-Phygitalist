@@ -568,6 +568,9 @@ class MultiFormView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         logger.debug("Inside get")
+        if not hasattr(self.request.user, 'seller_registration'):
+            messages.warning(self.request, 'You must first register as a seller')
+            return HttpResponseRedirect("registration:home")
         context = self.get_context_data(**kwargs)
         #context['forms'] = self.forms
         logger.debug("forms:")
