@@ -68,6 +68,7 @@ class AbstractSeller(BaseLogModelMixin):
     approved = models.BooleanField(_("Seller Approved by Admin"), default=False)
     approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.PROTECT, related_name="approved_sellers")
     approved_on = models.DateTimeField(_("When the Seller was approved"), null=True)
+    approval_notes = models.TextField(_("Rejection Reasons"), blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -87,6 +88,9 @@ class AbstractSeller(BaseLogModelMixin):
                 name='unique_pan_in_seller_ifnotnull'
             )
         ]
+
+    def __str__(self):
+        return f"{self.user.username} - {self.handle}"
 
 class AbstractSellerAddress(AbstractAddress):
     seller = models.ForeignKey(

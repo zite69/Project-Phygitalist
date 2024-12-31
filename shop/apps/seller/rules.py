@@ -1,8 +1,6 @@
 from shop.apps.seller.models import Seller
 import rules
 
-print("Loading rules")
-
 @rules.predicate
 def is_seller_account(user, seller):
     return seller.user == user

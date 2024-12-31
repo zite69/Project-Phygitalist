@@ -50,6 +50,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=[])
 INSTALLED_APPS = [
     'shop.apps.user',
     'djangocms_admin_style',
+    'admin_volt.apps.AdminVoltConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
     'djangocms_text_ckeditor',
     'djangocms_alias',
     'djangocms_versioning',
+    'django_select2',
 
     'sekizai',
     'treebeard',
@@ -153,6 +155,7 @@ INSTALLED_APPS = [
     'django_messages',
     'corsheaders',
     'image_uploader_widget',
+    'macros',
     #'pinax.referrals',
     #'pinax.invitations',
     #'account',

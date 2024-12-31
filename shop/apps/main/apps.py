@@ -43,11 +43,6 @@ class MainShop(config.Shop):
                     logger.debug(f"Got response back from send email call: {count}")
                     messages.success(request, "You have been added to the waiting list. Please expect an email from us soon!")
 
-        #from django.conf import settings
-        #logger.debug(settings.ALLOWED_HOSTS)
-        #logger.warn("Inside FormAction execute")
-        #logger.debug(actions._action_registry)
-
     def get_urls(self):
         urls = super().get_urls()
         urls.pop(0) #Remove the RedirectView that redirects the home page, Our CMS will handle this view

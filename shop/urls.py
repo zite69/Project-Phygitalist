@@ -36,6 +36,7 @@ urlpatterns = i18n_patterns(
     path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="django.contrib.sitemaps.views.sitemap"),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('admin/', admin.site.urls),
+    path('select2/', include('django_select2.urls')),
     path('filer/', include('filer.urls')),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
@@ -45,6 +46,7 @@ urlpatterns = i18n_patterns(
     path('', include(apps.get_app_config('main').urls[0])),
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),
+    path('volt/', include('admin_volt.urls')),
 )
 
 if settings.DEBUG:

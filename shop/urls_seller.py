@@ -31,6 +31,8 @@ from shop.apps.registration.sitemaps import SITEMAPS
 from shop.apps.registration.views import MultiFormView
 from shop.apps.registration.forms import BankDetailsForm, SellerPickupAddressForm, SellerRemainingForm
 from shop.apps.seller.models import Seller
+from shop.apps.main.decorators import check_perm_404
+
 import logging
 from django_downloadview import ObjectDownloadView
 from django.shortcuts import HttpResponse
@@ -51,6 +53,7 @@ urlpatterns = i18n_patterns(
     path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="seller.sitemap"),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('dashboard/onboarding/', MultiFormView.as_view(form_classes=ONBOARDING_FORM_CLASSES), name="onboarding-wizard"),
+    path('select2/', include('django_select2.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
@@ -64,12 +67,13 @@ urlpatterns = i18n_patterns(
     path('customer/', apps.get_app_config('customer').urls),
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),
+    path('volt/', include('admin_volt.urls')),
 )
 
 urlpatterns = [
-    path('protected/seller/<int:pk>/gstin/<str:filename>', permission_required('seller.view_media', fn=objectgetter(Seller, 'pk'), login_url='/not-found/', redirect_field_name='')(ObjectDownloadView.as_view(model=Seller, file_field="gstin_file")), name="gtstin-file-protected-view"),
-    path('protected/seller/<int:pk>)/pan/<str:filename>', permission_required('seller.view_media', fn=objectgetter(Seller, 'pk'), login_url='/not-found/', redirect_field_name='')(ObjectDownloadView.as_view(model=Seller, file_field="pan_file")), name="pan-file-protected-view"),
-    path("protected/seller/<int:pk>/signature/<str:filename>", permission_required('seller.view_media', fn=objectgetter(Seller, 'pk'), login_url='/not-found/', redirect_field_name='')(ObjectDownloadView.as_view(model=Seller, file_field="signature_file")), name="signature-file-protected-view"),
+    path("protected/seller/<int:pk>/gstin/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="gstin_file")), name="gtstin-file-protected-view"),
+    path("protected/seller/<int:pk>/pan/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="pan_file")), name="pan-file-protected-view"),
+    path("protected/seller/<int:pk>/signature/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="signature_file")), name="signature-file-protected-view"),
         ] + urlpatterns
 
 if settings.DEBUG:
