@@ -13,5 +13,5 @@ def run(*args):
         if hasattr(u, 'seller'):
             u.seller.pickup_addresses.all().delete()
             u.seller.delete()
-        u.save()
+        u.delete()
     Session.objects.all().delete()
