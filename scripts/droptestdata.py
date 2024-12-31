@@ -10,7 +10,8 @@ def run(*args):
     for u in User.objects.filter(~Q(username='system') & ~Q(username='arun') & ~Q(username=settings.ZITE69_SU_USERNAME)
                 & ~Q(username__startswith='seller')):
         u.bankaccount_set.all().delete()
-        u.seller.pickup_addresses.all().delete()
-        u.seller.delete()
+        if hasattr(u, 'seller'):
+            u.seller.pickup_addresses.all().delete()
+            u.seller.delete()
         u.save()
     Session.objects.all().delete()
