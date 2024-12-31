@@ -7,5 +7,10 @@ from django.conf import settings
 def run(*args):
     SellerProduct.objects.all().delete()
     SellerRegistration.objects.all().delete()
-    User.objects.filter(~Q(username='system') & ~Q(username='arun') & ~Q(username=settings.ZITE69_SU_USERNAME)).delete()
+    for u in User.objects.filter(~Q(username='system') & ~Q(username='arun') & ~Q(username=settings.ZITE69_SU_USERNAME)
+                & ~Q(username__startswith='seller')):
+        u.bankaccount_set.all().delete()
+        u.seller.pickup_addresses.all().delete()
+        u.seller.delete()
+        u.save()
     Session.objects.all().delete()
