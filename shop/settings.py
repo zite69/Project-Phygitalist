@@ -173,7 +173,7 @@ INSTALLED_APPS = [
     'shop.apps.membership.apps.MembershipConfig',
     'shop.apps.invitation.apps.InvitationConfig',
     'shop.apps.zitepayment.apps.ZitepaymentConfig',
-    'djangocms_form_builder',
+    # 'djangocms_form_builder',
     'djangocms_forms',
 ]
 
