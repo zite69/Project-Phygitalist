@@ -130,7 +130,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.reports.apps.ReportsDashboardConfig',
     'oscar.apps.dashboard.users.apps.UsersDashboardConfig',
     'oscar.apps.dashboard.orders.apps.OrdersDashboardConfig',
-    'oscar.apps.dashboard.catalogue.apps.CatalogueDashboardConfig',
+    # 'oscar.apps.dashboard.catalogue.apps.CatalogueDashboardConfig',
     'oscar.apps.dashboard.offers.apps.OffersDashboardConfig',
     'oscar.apps.dashboard.partners.apps.PartnersDashboardConfig',
     'oscar.apps.dashboard.pages.apps.PagesDashboardConfig',
@@ -162,6 +162,7 @@ INSTALLED_APPS = [
     'shop.apps.main',
     'shop.apps.wishlist',
     'shop.apps.catalogue.apps.CatalogueConfig',
+    'shop.apps.catalogue_dashboard.dashboard.catalogue.apps.CatalogueDashboardConfig',
     'shop.apps.address.apps.AddressConfig',
     'shop.apps.partner.apps.PartnerConfig',
     'shop.apps.seller.apps.SellerConfig',
@@ -567,7 +568,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 DJANGOCMS_FRONTEND_THEME = "shop.apps.themezite69bs5"
 #DJANGOCMS_FRONTEND_FRAMEWORK = "shop.apps.themezite69bs5"
 DJANGOCMS_FORMS_PLUGIN_MODULE = _('Generic')
-DJANGOCMS_FORMS_PLUGIN_NAME = _('Form Trial')
+DJANGOCMS_FORMS_PLUGIN_NAME = _('Form')
 DJANGOCMS_FORMS_DEFAULT_TEMPLATE = 'djangocms_forms/form_template/default.html'
 DJANGOCMS_FORMS_TEMPLATES = (
     ('djangocms_forms/form_template/default.html', _('Default')),
