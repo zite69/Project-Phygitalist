@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models import Index
 from django.utils.translation import gettext_lazy as _
-from djangocms_form_builder.models import MAX_LENGTH
 from localflavor.in_.models import INStateField
 from localflavor.in_.in_states import STATE_CHOICES
 from django.contrib.contenttypes.models import ContentType

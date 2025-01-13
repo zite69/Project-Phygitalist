@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.utils.translation import gettext_lazy as _
-from djangocms_form_builder.models import MAX_LENGTH
 from filer.models import abstract
 from djmoney.models.fields import MoneyField
 from shop.apps.main.models import BaseLogModelMixin
