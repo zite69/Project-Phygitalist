@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 from django.urls import path
-from djangocms_form_builder import verbose_name
 from oscar.core.application import OscarConfig
 from django.utils.translation import gettext_lazy as _
 

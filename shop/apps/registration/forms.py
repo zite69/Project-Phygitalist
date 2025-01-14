@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib.auth.password_validation import validate_password, password_validators_help_text_html, password_validators_help_texts
 from django.contrib.auth import login
 from django.contrib import messages
-from djangocms_form_builder import verbose_name
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.validators import ValidationError as PhoneValidationError
 from django.core.exceptions import ValidationError
