@@ -112,7 +112,7 @@ class ProductClassListView(originalviews.ProductClassListView):
         qs = super().get_queryset()
         ic(self.request.user)
         # if user is superuser then don't filter any of the Product Classes
-        if self.request.user.is_superuser:
+        if self.request.user.is_superuser or self.request.user.groups.filter(name='Seller Admin').exists():
             return qs
         if hasattr(self.request.user, 'seller'):
             qs.filter(Q(seller__id=1) | Q(seller__id=self.request.user.seller.id))
