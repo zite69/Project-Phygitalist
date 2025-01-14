@@ -16,7 +16,6 @@ from django.db.models import Count, Exists, OuterRef, Sum
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 from django.utils.translation import gettext_lazy as _
-from djangocms_form_builder import verbose_name
 from oscar.core.loading import get_class, get_model
 from shop.apps.main.models import BaseLogModelMixin
 from shop.apps.user.models import validate_length
