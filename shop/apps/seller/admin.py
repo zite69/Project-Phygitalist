@@ -88,6 +88,6 @@ class SellerAdmin(admin.ModelAdmin):
     #     return super().changeform_view(request, object_id, form_url, extra_context)
 
     def render_change_form(self, request, context, add=False, change=False, form_url="", obj=None):
-        if obj:
+        if obj and hasattr(obj.user, 'seller_registration'):
             context['registration_json'] = serializers.serialize('json', [obj.user.seller_registration])
         return super().render_change_form(request, context, add, change, form_url, obj)
