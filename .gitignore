@@ -28,3 +28,5 @@ Makefile
 /static
 /media
 /logs
+/protected
+shop/static/scss/**/*.css
