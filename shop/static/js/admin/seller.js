@@ -7,6 +7,7 @@
         // const continue = document.querySelector("button[name='_continue']");
         const continueBtn = document.querySelector("button[name=_continue]");
         const approved = document.getElementById("id_approved");
+        const action = document.getElementById("id_action");
 
         approve.addEventListener('click', evtClick => {
             const signature_verified = document.getElementById("id_signature_file_verified").checked;
@@ -25,6 +26,7 @@
                 alert(msg);
                 return;
             }
+            action.value = "approved";
             approved.checked = true;
             continueBtn.click();
         });
@@ -33,6 +35,7 @@
                 alert('You must specify a reason for Rejection');
                 return;
             }
+            action.value = "rejected";
             approved.checked = false;
             continueBtn.click();
         });

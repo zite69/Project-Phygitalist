@@ -12,7 +12,8 @@ from oscar.core.loading import is_model_registered
 
 
 class Partner(AbstractPartner):
-    seller = models.ForeignKey(Seller, verbose_name=_("Seller"), blank=False, null=False, default=settings.ZITE69_MAIN_SELLER_ID, on_delete=models.CASCADE)
+    # seller = models.ForeignKey(Seller, verbose_name=_("Seller"), blank=False, null=False, default=settings.ZITE69_MAIN_SELLER_ID, on_delete=models.CASCADE)
+    sellers = models.ManyToManyField(Seller, related_name='partners')
 
 if not is_model_registered('partner', 'PartnerAddress'):
     class PartnerAddress(AbstractPartnerAddress):

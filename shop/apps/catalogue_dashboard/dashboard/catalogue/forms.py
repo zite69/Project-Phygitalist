@@ -1,9 +1,25 @@
+from django import forms
+from django.db.models import query
+from django.utils.translation import gettext_lazy as _
 from oscar.apps.dashboard.catalogue import forms as originalforms
 from oscar.core.loading import get_model
+from shop.apps.seller.models import Seller
 
-ProductClass = get_model("catalogue", "ProductClass")
+Product = get_model("catalogue", "Product")
 
-class ProductClassForm(originalforms.ProductClassForm):
+class ProductForm(originalforms.ProductForm):
     class Meta:
-        model = ProductClass
-        fields = ["seller", "name", "requires_shipping", "track_stock", "options"]
+        model = Product
+        fields = [
+            "seller",
+            "title",
+            "upc",
+            "description",
+            "is_public",
+            "is_discountable",
+            "structure",
+            "slug",
+            "meta_title",
+            "meta_description",
+        ]
+
