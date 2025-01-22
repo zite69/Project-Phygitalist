@@ -40,7 +40,7 @@ class SellerAdminForm(forms.ModelForm):
         if not instance:
             return
 
-        if instance.user.seller_registration.gst_status == 'Y':
+        if hasattr(instance.user, 'seller_registration') and instance.user.seller_registration.gst_status == 'Y':
             self.hide_group('pan')
         else:
             self.hide_group('gstin')
