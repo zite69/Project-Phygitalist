@@ -24,7 +24,7 @@ from django.views.i18n import JavaScriptCatalog
 from django.views.generic import TemplateView
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
-from django.conf.urls import (handler404, handler500)
+from django.conf.urls import (handler404, handler500, handler403)
 from django.contrib.sitemaps.views import sitemap
 # from django.contrib.auth.decorators import permission_required
 from shop.apps.registration.sitemaps import SITEMAPS
@@ -42,6 +42,7 @@ logger = logging.getLogger("shop.urls_seller")
 
 handler404 = 'shop.apps.main.views.not_found'
 handler500 = 'shop.apps.main.views.server_error'
+handler403 = 'shop.apps.main.views.unauthorized'
 
 ONBOARDING_FORM_CLASSES = {
     "pickup": SellerPickupAddressForm,

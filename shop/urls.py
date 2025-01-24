@@ -25,12 +25,13 @@ from django.views.generic import TemplateView
 from shop.apps.main.views import home
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
-from django.conf.urls import (handler404, handler500)
+from django.conf.urls import (handler404, handler500, handler403)
 from django.contrib.sitemaps.views import sitemap
 from shop.apps.main.sitemaps import SITEMAPS
 
 handler404 = 'shop.apps.main.views.not_found'
 handler500 = 'shop.apps.main.views.server_error'
+handler403 = 'shop.apps.main.views.unauthorized'
 
 urlpatterns = i18n_patterns(
     path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="django.contrib.sitemaps.views.sitemap"),
