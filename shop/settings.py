@@ -429,7 +429,18 @@ STATICFILES_FINDERS = [
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
+    ('application/json', 'echo {infile}'),
 )
+
+COMPRESS_FILTERS = {
+    'css': [
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.rCSSMinFilter',
+    ],
+    'js': [
+        'compressor.filters.jsmin.JSMinFilter',
+    ],
+}
 
 # sass_processor settings
 SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
