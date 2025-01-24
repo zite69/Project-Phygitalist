@@ -1,11 +1,14 @@
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from oscar.apps.dashboard.catalogue import views as originalviews
-from shop.apps.catalogue_dashboard.dashboard.catalogue.forms import ProductForm
+from shop.apps.catalogue_dashboard.dashboard.catalogue.forms import ProductForm, ProductSearchForm
 from shop.apps.catalogue_dashboard.dashboard.catalogue.tables import ProductTable
+from rules.contrib.views import PermissionRequiredMixin
 from icecream import ic
 
 class ProductListView(originalviews.ProductListView):
     table_class = ProductTable
+    form_class = ProductSearchForm
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -16,11 +19,31 @@ class ProductListView(originalviews.ProductListView):
         return ctx
 
 
+    def apply_search(self, queryset):
+        qs = super().apply_search(queryset)
+        data = self.form.cleaned_data
+        seller = data['seller']
+
+        if seller:
+            qs = qs.filter(seller=seller)
+
+        return qs
+
 class ProductCreateRedirectView(originalviews.ProductCreateRedirectView):
     pass
 
-class ProductCreateUpdateView(originalviews.ProductCreateUpdateView):
+class ProductCreateUpdateView(originalviews.ProductCreateUpdateView, PermissionRequiredMixin):
     form_class = ProductForm
+    permission_required = 'products.can_edit_product'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if not self.request.user.has_perm('products.can_edit_product', obj):
+            raise PermissionDenied
+        return obj
+
+    # def get_permission_object(self):
+    #     return self.get_object()
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)

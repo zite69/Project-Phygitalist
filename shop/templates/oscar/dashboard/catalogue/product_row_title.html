@@ -1,0 +1,8 @@
+{% load django_tables2 %}
+{% load rules %}
+{% has_perm 'products.can_edit_product' request.user record as can_edit_product %}
+{% if can_edit_product %}
+<a href="{% url 'dashboard:catalogue-product' pk=record.pk %}{% querystring %}">{{ value }}</a>
+{% else %}
+{{ value }}
+{% endif %}

@@ -23,3 +23,12 @@ class ProductForm(originalforms.ProductForm):
             "meta_description",
         ]
 
+class ProductSearchForm(originalforms.ProductSearchForm):
+    seller = forms.ModelChoiceField(
+            queryset=Seller.objects.all(),
+            label=_("Seller"),
+            empty_label=_("--All Sellers--"),
+            required=False
+            )
+
+    field_order = ['seller', 'upc', 'title']
