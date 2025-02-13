@@ -174,6 +174,7 @@ INSTALLED_APPS = [
     'shop.apps.membership.apps.MembershipConfig',
     'shop.apps.invitation.apps.InvitationConfig',
     'shop.apps.zitepayment.apps.ZitepaymentConfig',
+    'shop.apps.webinar.apps.WebinarConfig',
     'djangocms_forms',
 ]
 

@@ -1,0 +1,417 @@
+/* General styles */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif;
+}
+
+a {
+    color: inherit; /* Inherits the color from the parent element */
+    text-decoration: none; /* Removes the underline */
+}
+
+body {
+    line-height: 1.6;
+    background-color: #f3e9d7;!important;  /* Fixed syntax */
+    color: #333;
+}
+.header {
+    background-color: #F06161; /* Match background color to the image */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+
+  /* Outer circle with border */
+    .logo-container {
+      width: 60px; /* Outer circle size */
+      height: 60px;
+      border-radius: 50%; /* Makes it circular */
+      border: 1px solid #ffffff; /* White border */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: auto; /* Aligns the logo to the left */
+}
+
+  .logo {
+       width: 50px; /* Adjust the size as necessary */
+       height: 50px;
+       display: flex;
+}
+     .logo img {
+       max-width: 100%;
+       max-height: 100%;
+     }
+
+
+.banner {
+    padding: 60px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #f3e9d7;
+}
+
+.heading-top {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.join-live {
+    font-size: 4.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #f66569;
+}
+
+.team-highlight {
+    background-color: #f66569;
+    padding: 8px 20px;
+    display: inline-block;
+    font-size: 1.8rem;
+    margin: 10px 0 30px;
+    color: #f3e9d7;
+}
+
+.subheading {
+    font-size: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    color: #444;
+}
+
+.language-circle {
+    background-color: #f66569;
+    color: #f3e9d7;
+    padding: 20px;
+    border-radius: 50%;
+    width: 195px;
+    height: 195px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
+
+.benefits-section {
+    background-color: #79c6a4;
+    padding: 60px 20px;
+    margin: 40px  0 40px 0;
+    color: #ffffff;
+}
+
+
+.benefits-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.benefits-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.benefits-list {
+    list-style: none;
+    padding:0;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.bullet-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.bullet-icon path {
+    fill: #ffffff; fill:
+}
+
+.register-btn {
+    display: inline-block;
+    padding: 15px 50px;
+    background-color: #f66569;
+    color: #f3e9d7;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+}
+
+.register-btn:hover {
+    background-color: #d93518;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #f3e9d7;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-bottom: 2px solid rgba(237, 60, 31, 0.2);
+    font-size: 1rem;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-bottom-color: #f66569;
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #f66569;
+    background: none;
+    border: none;
+}
+
+.submit-btn {
+    background-color: #f66569;
+    color: #f3e9d7;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    float: right;
+}
+
+.submit-btn:after {
+    content: "↗";
+    font-size: 1.2em;
+}
+
+.modal-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f66569;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+/* Base styles for the footer and footer links */
+.footer {
+    width: 100%;
+    padding: 2rem;
+    font-size: 12px;
+    text-align: center;
+    color:#2c2d2f;
+    border-top: 1px solid #eee;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #c1bdbd;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.footer-links a {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #ff1a1a;
+}
+.whatsapp-float {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: #f66569;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #f66569;
+    transform: scale(1.1);
+}
+/*new code*/
+
+.arrow-container {
+            position: fixed;
+            bottom: 140px;  /* Adjusted to be above the register button */
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 100;
+        }
+
+        .down-arrow {
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #79c6a4;  /* Green color matching WhatsApp */
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(15px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(5px) translateX(-50%);
+            }
+        }
+
+
+
+@media (max-width: 768px) {
+    .banner {
+        padding: 30px 15px;
+    }
+
+    .heading-top {
+        font-size: 1.8rem;
+    }
+
+    .join-live {
+        font-size: 2.8rem;
+    }
+
+    .team-highlight {
+        font-size: 1.4rem;
+    }
+
+    .language-circle {
+        position: static;
+        margin: 30px auto;
+        width: 180px;
+        height: 180px;
+        font-size: 1rem;
+    }
+
+    .benefits-section {
+        padding: 40px 15px;
+    }
+
+    .benefits-list li {
+        font-size: 1.1rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-links {
+        gap: 8px; /* Adjust the gap for better spacing */
+    }
+
+    .footer-links a {
+        font-size: 11px; /* Slightly increase font size for better readability on small screens */
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .modal-title {
+        font-size: 2rem;
+    }
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .whatsapp-float svg {
+        width: 28px;
+        height: 28px;
+    }
+}

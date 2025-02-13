@@ -28,6 +28,8 @@ from django.http import Http404, HttpResponseRedirect
 from django.conf.urls import (handler404, handler500, handler403)
 from django.contrib.sitemaps.views import sitemap
 from shop.apps.main.sitemaps import SITEMAPS
+from shop.apps.webinar.views import CreateRegistrationView
+from django.views.generic import TemplateView
 
 handler404 = 'shop.apps.main.views.not_found'
 handler500 = 'shop.apps.main.views.server_error'
@@ -44,6 +46,8 @@ urlpatterns = i18n_patterns(
     path('careers/', TemplateView.as_view(template_name='main/career.html'), name="careers"),
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('membership/', include((apps.get_app_config('membership').urls[0], 'membership'), namespace='membership')),
+    path('webinar/', CreateRegistrationView.as_view(), name='webinar'),
+    path('webinar/thanks/', TemplateView.as_view(template_name='webinarthanks.html'), name='webinarthanks'),
     path('', include(apps.get_app_config('main').urls[0])),
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),

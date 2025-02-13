@@ -1,0 +1,199 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Live Webinar - Team ZITE69</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/webinar.css' %}">
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo">
+          <a href="#"> <img src="{% static 'img/zite69_shop.png' %}" alt="Logo"></a>
+      </div>
+    </div>
+   </header>
+    <div class="banner">
+        <h2 class="heading-top">Hey 👋 your boss job is here!</h2>
+        <div class="join-live">Join Live</div>
+        <div class="team-highlight">With Team ZITE69</div>
+        <p class="subheading">Webinar on India's first 3-in-1 marketplace &amp; grab your role quickly !</p>
+        <div class="language-circle">
+            Live sessions available in English, Hindi, Tamil, Telugu &amp; Malayalam
+        </div>
+    </div>
+
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2>What you will get in the live webinar</h2>
+            <ul class="benefits-list">
+                <li>
+                  <svg class="bullet-icon" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25952 32.6143L12.8591 38.8202L17.1692 30.876L17.1704 30.8738C17.8935 29.5737 18.9351 28.9822 19.9997 28.9822C20.9793 28.9822 22.0233 29.5679 22.7496 30.8738L22.7508 30.876L27.0609 38.8202L35.6636 32.6121L29.3181 26.0127L29.3147 26.0093C28.5224 25.2171 28.1867 24.3051 28.1867 23.574C28.1867 22.2883 29.1366 21.1645 31.0447 20.7965L31.0478 20.7959L40 19.1913L36.8109 9.00394L28.5312 12.8903C27.8706 13.1833 27.2247 13.3228 26.6688 13.3228C25.8118 13.3228 25.1038 12.9839 24.6381 12.3956C24.1697 11.804 23.9084 10.9107 24.0543 9.74178L24.0544 9.74037L25.2374 0.699219H14.6033L15.7862 9.74037L15.7864 9.74178C15.9321 10.91 15.6717 11.8492 15.1948 12.485C14.7214 13.1162 14.0123 13.4816 13.1719 13.4816C12.618 13.4816 11.9848 13.3433 11.3436 12.987L11.3325 12.9809L3.19131 8.99506L0 19.1895L8.7933 20.796C10.6265 21.1641 11.654 22.3691 11.654 23.574C11.654 24.3793 11.3223 25.213 10.526 26.0093L10.5215 26.0139L4.25952 32.6143ZM19.9997 28.4965C19.9997 28.4965 19.9998 28.4965 19.9997 28.4965Z" fill="currentColor"/>
+                  </svg>
+                    How to start &amp; run your phygital supermarket with ₹0 investment
+                </li>
+                <li>
+                  <svg class="bullet-icon" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25952 32.6143L12.8591 38.8202L17.1692 30.876L17.1704 30.8738C17.8935 29.5737 18.9351 28.9822 19.9997 28.9822C20.9793 28.9822 22.0233 29.5679 22.7496 30.8738L22.7508 30.876L27.0609 38.8202L35.6636 32.6121L29.3181 26.0127L29.3147 26.0093C28.5224 25.2171 28.1867 24.3051 28.1867 23.574C28.1867 22.2883 29.1366 21.1645 31.0447 20.7965L31.0478 20.7959L40 19.1913L36.8109 9.00394L28.5312 12.8903C27.8706 13.1833 27.2247 13.3228 26.6688 13.3228C25.8118 13.3228 25.1038 12.9839 24.6381 12.3956C24.1697 11.804 23.9084 10.9107 24.0543 9.74178L24.0544 9.74037L25.2374 0.699219H14.6033L15.7862 9.74037L15.7864 9.74178C15.9321 10.91 15.6717 11.8492 15.1948 12.485C14.7214 13.1162 14.0123 13.4816 13.1719 13.4816C12.618 13.4816 11.9848 13.3433 11.3436 12.987L11.3325 12.9809L3.19131 8.99506L0 19.1895L8.7933 20.796C10.6265 21.1641 11.654 22.3691 11.654 23.574C11.654 24.3793 11.3223 25.213 10.526 26.0093L10.5215 26.0139L4.25952 32.6143ZM19.9997 28.4965C19.9997 28.4965 19.9998 28.4965 19.9997 28.4965Z" fill="currentColor"/>
+                  </svg>
+                    Eligibility &amp; Income scope
+                </li>
+                <li>
+                  <svg class="bullet-icon" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25952 32.6143L12.8591 38.8202L17.1692 30.876L17.1704 30.8738C17.8935 29.5737 18.9351 28.9822 19.9997 28.9822C20.9793 28.9822 22.0233 29.5679 22.7496 30.8738L22.7508 30.876L27.0609 38.8202L35.6636 32.6121L29.3181 26.0127L29.3147 26.0093C28.5224 25.2171 28.1867 24.3051 28.1867 23.574C28.1867 22.2883 29.1366 21.1645 31.0447 20.7965L31.0478 20.7959L40 19.1913L36.8109 9.00394L28.5312 12.8903C27.8706 13.1833 27.2247 13.3228 26.6688 13.3228C25.8118 13.3228 25.1038 12.9839 24.6381 12.3956C24.1697 11.804 23.9084 10.9107 24.0543 9.74178L24.0544 9.74037L25.2374 0.699219H14.6033L15.7862 9.74037L15.7864 9.74178C15.9321 10.91 15.6717 11.8492 15.1948 12.485C14.7214 13.1162 14.0123 13.4816 13.1719 13.4816C12.618 13.4816 11.9848 13.3433 11.3436 12.987L11.3325 12.9809L3.19131 8.99506L0 19.1895L8.7933 20.796C10.6265 21.1641 11.654 22.3691 11.654 23.574C11.654 24.3793 11.3223 25.213 10.526 26.0093L10.5215 26.0139L4.25952 32.6143ZM19.9997 28.4965C19.9997 28.4965 19.9998 28.4965 19.9997 28.4965Z" fill="currentColor"/>
+                  </svg>
+                    Question &amp; Answer Session
+                </li>
+                <li>
+                  <svg class="bullet-icon" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25952 32.6143L12.8591 38.8202L17.1692 30.876L17.1704 30.8738C17.8935 29.5737 18.9351 28.9822 19.9997 28.9822C20.9793 28.9822 22.0233 29.5679 22.7496 30.8738L22.7508 30.876L27.0609 38.8202L35.6636 32.6121L29.3181 26.0127L29.3147 26.0093C28.5224 25.2171 28.1867 24.3051 28.1867 23.574C28.1867 22.2883 29.1366 21.1645 31.0447 20.7965L31.0478 20.7959L40 19.1913L36.8109 9.00394L28.5312 12.8903C27.8706 13.1833 27.2247 13.3228 26.6688 13.3228C25.8118 13.3228 25.1038 12.9839 24.6381 12.3956C24.1697 11.804 23.9084 10.9107 24.0543 9.74178L24.0544 9.74037L25.2374 0.699219H14.6033L15.7862 9.74037L15.7864 9.74178C15.9321 10.91 15.6717 11.8492 15.1948 12.485C14.7214 13.1162 14.0123 13.4816 13.1719 13.4816C12.618 13.4816 11.9848 13.3433 11.3436 12.987L11.3325 12.9809L3.19131 8.99506L0 19.1895L8.7933 20.796C10.6265 21.1641 11.654 22.3691 11.654 23.574C11.654 24.3793 11.3223 25.213 10.526 26.0093L10.5215 26.0139L4.25952 32.6143ZM19.9997 28.4965C19.9997 28.4965 19.9998 28.4965 19.9997 28.4965Z" fill="currentColor"/>
+                  </svg>
+                    Free annual membership for 69M Shopping Club worths ₹690
+                </li>
+                <li>
+                  <svg class="bullet-icon" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4.25952 32.6143L12.8591 38.8202L17.1692 30.876L17.1704 30.8738C17.8935 29.5737 18.9351 28.9822 19.9997 28.9822C20.9793 28.9822 22.0233 29.5679 22.7496 30.8738L22.7508 30.876L27.0609 38.8202L35.6636 32.6121L29.3181 26.0127L29.3147 26.0093C28.5224 25.2171 28.1867 24.3051 28.1867 23.574C28.1867 22.2883 29.1366 21.1645 31.0447 20.7965L31.0478 20.7959L40 19.1913L36.8109 9.00394L28.5312 12.8903C27.8706 13.1833 27.2247 13.3228 26.6688 13.3228C25.8118 13.3228 25.1038 12.9839 24.6381 12.3956C24.1697 11.804 23.9084 10.9107 24.0543 9.74178L24.0544 9.74037L25.2374 0.699219H14.6033L15.7862 9.74037L15.7864 9.74178C15.9321 10.91 15.6717 11.8492 15.1948 12.485C14.7214 13.1162 14.0123 13.4816 13.1719 13.4816C12.618 13.4816 11.9848 13.3433 11.3436 12.987L11.3325 12.9809L3.19131 8.99506L0 19.1895L8.7933 20.796C10.6265 21.1641 11.654 22.3691 11.654 23.574C11.654 24.3793 11.3223 25.213 10.526 26.0093L10.5215 26.0139L4.25952 32.6143ZM19.9997 28.4965C19.9997 28.4965 19.9998 28.4965 19.9997 28.4965Z" fill="currentColor"/>
+                  </svg>
+                    Exclusive Share &amp; Earn Benefit links
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="arrow-container">
+       <div class="down-arrow"></div>
+   </div>
+
+   <div style="text-align: center; margin-bottom: 60px;">
+       <button class="register-btn" onclick="openModal()">Register Now</button>
+      <p>Hurry up! We need people for all pincodes across India<p>
+   </div>
+
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <h2 class="modal-title">LET'S DO THIS.</h2>
+            <div id="successMessage" style="display: block; color: green; text-align: center; margin-top: 20px; font-style:italic;">
+                Your registration has been completed successfully. We will get back to you with the time &amp; date of your webinar. Thank you!
+          </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            openModal();
+        });
+
+
+        function openModal() {
+            document.getElementById('registerModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        /*
+        document.getElementById('registerForm').onsubmit = function(e) {
+            e.preventDefault();
+
+            // Hide the form
+            this.style.display = 'none';
+
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Clear form
+            this.reset();
+
+            // Close modal after 2 seconds
+            setTimeout(() => {
+                closeModal();
+                // Reset the form display for next time
+                this.style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }, 200000);
+        }
+        */
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('registerModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+
+            // Add click event listener to arrow container
+  document.querySelector('.arrow-container').addEventListener('click', function() {
+      // Find the register button
+      const registerBtn = document.querySelector('.register-btn');
+
+      // Smooth scroll to the register button
+      registerBtn.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+      });
+
+      // Hide the arrow after scrolling
+      this.style.opacity = '0';
+      this.style.transition = 'opacity 0.5s ease';
+
+      // Remove the arrow from DOM after fade out
+      setTimeout(() => {
+          this.style.display = 'none';
+      }, 500);
+  });
+
+  // Add a hover effect to make the arrow more interactive
+  const arrow = document.querySelector('.arrow-container');
+  arrow.style.cursor = 'pointer';
+
+  // Optional: Add a subtle animation to the arrow to make it more noticeable
+  arrow.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(5px)';
+      this.style.transition = 'transform 0.3s ease';
+  });
+
+  arrow.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+      this.style.transition = 'transform 0.3s ease';
+  });
+
+  // Show/hide arrow based on scroll position
+  window.addEventListener('scroll', function() {
+      const arrow = document.querySelector('.arrow-container');
+      const registerBtn = document.querySelector('.register-btn');
+      const registerPosition = registerBtn.getBoundingClientRect().top;
+
+      // If register button is visible in viewport, hide the arrow
+      if (registerPosition <= window.innerHeight) {
+          arrow.style.opacity = '0';
+          setTimeout(() => {
+              arrow.style.display = 'none';
+          }, 500);
+      }
+  });
+        }
+    </script>
+    <a href="https://wa.me/918547299569" class="whatsapp-float" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://beta.zite69.com/ui/rs/index.html" target="_blank">Sell on Z69</a> |
+            <a href="http://moksharoutesholidays.com/demo/Careers/career.html" target="_blank">Work with Us</a> |
+            <a href="https://www.moksharoutesholidays.com/demo/Mentor/mentor.html" target="_blank">Join as Mentor</a> |
+            <a href="https://szine.zite69.com" target="_blank">Visit S/Z Blog</a> |
+            <a href="https://beta.zite69.com/demo/index.html" target="_blank">View Concept</a> |
+            <a href="https://wa.me/918547299569" target="_blank">Quick Connect</a>
+        </div>
+        <p>© 2025 69mm &amp; iCommerce LLP | Support: <a href="mailto:webinar@zite69.com">webinar@zite69.com</a></p>
+
+    </footer>
+</body>
+</html>
