@@ -27,3 +27,6 @@ def not_found(request, exception):
 
 def server_error(request, exception=None):
     return render(request, "error/500.html", {}, status=500)
+
+def unauthorized(request, exception=None):
+    return render(request, "error/403.html", {}, status=403)
