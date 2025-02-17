@@ -150,6 +150,17 @@ body {
     fill: #ffffff; fill:
 }
 
+.register-container {
+   text-align: center;
+   margin-bottom: 60px;
+}
+
+.hurry-text {
+   color: #f66569;
+   font-weight: bold;
+}
+
+
 .register-btn {
     display: inline-block;
     padding: 15px 50px;
