@@ -31,6 +31,8 @@ from shop.apps.main.sitemaps import SITEMAPS
 from shop.apps.webinar.views import CreateRegistrationView
 from django.views.generic import TemplateView
 
+from shop.apps.zitepayment.views import RazorpayCallbackView
+
 handler404 = 'shop.apps.main.views.not_found'
 handler500 = 'shop.apps.main.views.server_error'
 handler403 = 'shop.apps.main.views.unauthorized'
@@ -48,6 +50,7 @@ urlpatterns = i18n_patterns(
     path('membership/', include((apps.get_app_config('membership').urls[0], 'membership'), namespace='membership')),
     path('webinar/', CreateRegistrationView.as_view(), name='webinar'),
     path('webinar/thanks/', TemplateView.as_view(template_name='webinarthanks.html'), name='webinarthanks'),
+    path('checkout/callback/', RazorpayCallbackView.as_view(), name='payment-callback'),
     path('', include(apps.get_app_config('main').urls[0])),
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),

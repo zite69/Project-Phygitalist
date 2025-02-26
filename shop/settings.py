@@ -111,7 +111,7 @@ INSTALLED_APPS = [
     # django-cms apps
     'oscar.config.Shop',
     'oscar.apps.analytics.apps.AnalyticsConfig',
-    'oscar.apps.checkout.apps.CheckoutConfig',
+    #'oscar.apps.checkout.apps.CheckoutConfig',
     #'oscar.apps.address.apps.AddressConfig',
     'oscar.apps.shipping.apps.ShippingConfig',
     #'oscar.apps.catalogue.apps.CatalogueConfig',
@@ -168,6 +168,7 @@ INSTALLED_APPS = [
     'shop.apps.partner.apps.PartnerConfig',
     'shop.apps.seller.apps.SellerConfig',
     'shop.apps.registration.apps.RegistrationConfig',
+    'shop.apps.checkout.apps.CheckoutConfig',
     #'shop.apps.invitation',
     'shop.apps.themezite69bs5',
     'shop.apps.otp.apps.OtpConfig',
