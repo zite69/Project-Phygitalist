@@ -37,7 +37,7 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
             'customer_name': ctx['user'].name,
             'customer_email': ctx['user'].email,
             'customer_phone': ctx['user'].phone,
-            'callback_url': 'http://www.z69.local:8000/en/checkout/callback/'
+            'callback_url': 'https://beta.zite69.com/en/checkout/callback/'
         }
         ctx['options'] = options
 
