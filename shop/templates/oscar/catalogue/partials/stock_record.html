@@ -1,0 +1,95 @@
+{% load currency_filters %}
+{% load i18n %}
+{% load purchase_info_tags %}
+{% load static %}
+
+{% purchase_info_for_product request product as session %}
+
+{% if session.price.exists %}
+    {% if session.price.excl_tax == 0 %}
+        <p class="price_color">{% trans "Free" %}</p>
+    {% elif session.price.is_tax_known %}
+         <div class="clearfix product-price-cover">
+                                            <div class="product-price primary-color float-left">
+                                                <ins><span class="text-brand">{{ session.price.excl_tax|currency:session.price.currency }}</span></ins>
+                                                <span>[Member Only Price]</span><span class="original_price font-md ml-15">Original Price : ₹800</span>
+                                                <div class="super_line">
+                                                <span><img src="{% static 'img/icons/icon-luckyspin.svg' %}" alt="" class="icon_special">Luckydraw</span>
+                                                <span><img src="{% static 'img/icons/icon-superlink.svg' %}" alt="" class="icon_special">Referral Cash</span>
+                                                <span><img src="{% static 'img/icons/group_buy.svg' %}" alt="" class="icon_special">Group Buy</span>
+                                                </div>
+                                            </div>
+                                        </div>
+    {% else %}
+        <p class="price_color">{{ session.price.excl_tax|currency:session.price.currency }}</p>
+    {% endif %}
+{% else %}
+    <p class="price_color">&nbsp;</p>
+{% endif %}
+{% if session.price.exists %}
+<p class="{{ session.availability.code }} availability">
+    
+    <div class="product_sort_info font-xs mb-30">
+                                            <ul>
+                                                <li class="mb-10"><i class="fi-rs-crown mr-5"></i> Free delivery for members </li>
+                                                <li class="mb-10"><i class="fi-rs-time-forward mr-5"></i> Delivering in 10 Days</li>
+                                                <li><i class="fi-rs-refresh mr-5"></i> 15 Day Returns</li>
+                                            </ul>
+                                        </div>
+    {% if session.availability.is_available_to_buy %}
+       <div class="attr-detail attr-color mb-15">
+                                            <strong class="mr-10">Color</strong>
+                                            <ul class="list-filter color-filter">
+                                                <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
+                                                <li class="active"><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
+                                                <li class=""><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
+                                                <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
+                                                <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
+                                                <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
+                                                <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
+                                            </ul>
+                                        </div>
+<div class="attr-detail attr-size">
+                                            <strong class="mr-10">Size</strong>
+                                            <ul class="list-filter size-filter font-small">
+                                                <li><a href="#">S</a></li>
+                                                <li class="active"><a href="#">M</a></li>
+                                                <li><a href="#">L</a></li>
+                                                <li><a href="#">XL</a></li>
+                                                <li><a href="#">XXL</a></li>
+                                            </ul>
+                                        </div>
+<div class="detail-extralink">
+                                            <div class="detail-qty border radius">
+                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">1</span>
+                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            </div>
+                                            <div class="product-extra-link2">
+                                                <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                            </div>
+                                        </div>
+<div class="detail-extralink">
+                                            <div class="product-extra-link2">
+                                                <button type="Personalisation" class="button button-custom">Add Personalisation</button>
+                                                <button type="video" class="button button-custom">Video Call Shop</button>
+                                                <button type="live" class="button button-custom">Join Live Sales</button>
+                                                <button type="buy" class="button button-custom">Buy Quick</button>
+                                            </div>
+</div>
+
+    {% else %}
+        <i class="fas fa-ban"></i>
+    {% endif %}
+    {% if verbose %}
+        {{ session.availability.message }}
+    {% else %}
+        {{ session.availability.short_message }}
+    {% endif %}
+</p>
+{% else %}
+    <i class="fas fa-ban"></i>
+    {% trans 'Unavailable' %}
+{% endif %}
