@@ -482,6 +482,7 @@ OSCAR_SHOP_NAME = "zite69"
 OSCAR_SHOP_TAGLINE = "Super Social Marketplace"
 
 OSCAR_DEFAULT_CURRENCY = 'INR'
+OSCAR_FROM_EMAIL = env("OSCAR_FROM_EMAIL", env("DEFAULT_FROM_EMAIL"))
 
 #LOGGING = env.json("LOGGING", default={})
 LOGGING_ENV = env.json("LOGGING", default={})
