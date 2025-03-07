@@ -61,7 +61,7 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
             'callback_url': payment_callback,
             'prefill': {
                 'email': ctx['user'].email,
-                'phone': ctx['user'].phone,
+                'phone': ctx['user'].phone.as_international,
                 'name': ctx['user'].name
             },
             'theme': {
