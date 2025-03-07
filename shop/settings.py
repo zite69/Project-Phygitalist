@@ -645,6 +645,11 @@ LOGGING = {
             'propagate': True,
             'level': 'INFO',
         },
+        'django.server': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'ERROR',
+        },
         'django.request': {
             'handlers': ['console'],
             'level': 'WARNING',

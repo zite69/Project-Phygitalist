@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.urls import reverse
 from django.contrib.sites.models import Site
 from functools import lru_cache
 
@@ -8,4 +9,9 @@ def get_site_base_uri(site_id=settings.SITE_ID):
     protocol = 'https' if settings.USE_HTTPS else 'http'
     return f"{protocol}://{site.domain}"
 
-
+def get_absolute_url(site_id=settings.SITE_ID, view_name=""):
+    sbu = get_site_base_uri(site_id=site_id)
+    if view_name == "":
+        return sbu
+    else:
+        return f"{sbu}{reverse(view_name)}"
