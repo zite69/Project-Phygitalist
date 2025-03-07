@@ -61,13 +61,15 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
             'callback_url': payment_callback,
             'prefill': {
                 'email': ctx['user'].email,
-                'phone': ctx['user'].phone.as_international,
                 'name': ctx['user'].name
             },
             'theme': {
                 'color': '#f66569'
             }
         }
+        if ctx['user'].phone is not None:
+            options['prefill']['phone'] = ctx['user'].phone.as_international
+
         ctx['options'] = options
 
         if self.preview:
