@@ -482,7 +482,6 @@ OSCAR_SHOP_NAME = "zite69"
 OSCAR_SHOP_TAGLINE = "Super Social Marketplace"
 
 OSCAR_DEFAULT_CURRENCY = 'INR'
-OSCAR_FROM_EMAIL = env("OSCAR_FROM_EMAIL", env("DEFAULT_FROM_EMAIL"))
 
 #LOGGING = env.json("LOGGING", default={})
 LOGGING_ENV = env.json("LOGGING", default={})
@@ -787,6 +786,7 @@ MANAGERS = tuple(parseaddr(email) for email in MANAGERS_ENV.split(","))
 
 SERVER_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
 DEFAULT_FROM_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
+OSCAR_FROM_EMAIL = env("OSCAR_FROM_EMAIL", default=DEFAULT_FROM_EMAIL)
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX")
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
