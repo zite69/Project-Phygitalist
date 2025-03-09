@@ -141,7 +141,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
 
     # 3rd-party apps that oscar depends on
-    #'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
+    'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
     'widget_tweaks',
     'haystack',
     #'treebeard',
@@ -562,7 +562,7 @@ OSCAR_ELASTICSEARCH_FACETS = [
 WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "oscar_elasticsearch.search.backend",
-        "URLS": ["http://127.0.0.1:9200"],
+        "URLS": ["http://127.0.0.1:9312"],
         "INDEX": "zite69",
         "TIMEOUT": 120,
         "OPTIONS": {},
@@ -573,6 +573,8 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 HAYSTACK_CONNECTIONS = {"default": {}}
+
+OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9312")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
