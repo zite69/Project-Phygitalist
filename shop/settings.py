@@ -562,7 +562,7 @@ OSCAR_ELASTICSEARCH_FACETS = [
 WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "oscar_elasticsearch.search.backend",
-        "URLS": ["http://127.0.0.1:9312"],
+        "URLS": ["http://127.0.0.1:9200"],
         "INDEX": "zite69",
         "TIMEOUT": 120,
         "OPTIONS": {},
@@ -574,7 +574,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 HAYSTACK_CONNECTIONS = {"default": {}}
 
-OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9312")
+OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
