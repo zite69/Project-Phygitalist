@@ -142,6 +142,7 @@ INSTALLED_APPS = [
 
     # 3rd-party apps that oscar depends on
     'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
+    'oscar_odin',
     'widget_tweaks',
     'haystack',
     #'treebeard',
