@@ -563,7 +563,7 @@ WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "oscar_elasticsearch.search.backend",
         "URLS": ["http://127.0.0.1:9200"],
-        "INDEX": "zite69",
+        "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", "beta"),
         "TIMEOUT": 120,
         "OPTIONS": {},
         "INDEX_SETTINGS": {},
