@@ -502,6 +502,7 @@ PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
 # Elasticsearch Configuration
 #OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
+OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
 OSCAR_ELASTICSEARCH_FACETS = [
     {
         "name": "price",
@@ -563,7 +564,7 @@ WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "oscar_elasticsearch.search.backend",
         "URLS": ["http://127.0.0.1:9200"],
-        "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", "beta"),
+        "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
         "TIMEOUT": 120,
         "OPTIONS": {},
         "INDEX_SETTINGS": {},
