@@ -15,7 +15,8 @@ class DynamicSiteMiddleware(MiddlewareMixin):
     """
     def process_request(self, request):
         logger.debug(request.get_host())
-        host = request.get_host().split(":")[0]
+        # host = request.get_host().split(":")[0]
+        host = request.get_host()
         try:
             current_site = Site.objects.get(domain=host)
             logger.debug(f"Got site: {current_site}")
