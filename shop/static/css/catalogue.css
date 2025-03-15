@@ -10115,3 +10115,154 @@ span.fi-rs-apps {
 .zoomContainer{ z-index: 9999;}
 .zoomWindow{ z-index: 9999;}
 /*# sourceMappingURL=main.css.map */
+
+/*Carousel for product page*/
+
+.coupon-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    background-color:#ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 12px 0;
+    overflow: hidden; /* <-- Add this so only the active slide is visible */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.coupon-slides {
+    display: flex;
+    transition: transform 0.3s ease;
+    width: 200%;
+}
+
+.coupon-slide {
+    width: 50%;
+    display: flex;
+    gap: 20px;
+    padding: 0 15px;
+}
+
+.coupon {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.coupon-header {
+    padding: 15px;
+    color:#ffffff;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.coupon-body {
+    background-color: #ffffff;
+    padding: 15px;
+    text-align: center;
+}
+
+.coupon-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f9f9f9;
+}
+
+.coupon-code {
+    background-color: #f1f1f1;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: bold;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 35px 0 0;
+    z-index: 10;
+}
+
+.control-btn {
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.pincode_box{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0 0 0;
+}
+input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 150px;
+}
+button {
+    background: black;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+  .pincode_box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    input {
+        width: 100%;
+    }
+}
+.control-btn:hover {
+    background-color: rgba(0,0,0,0.5);
+}
+
+.slide-indicators {
+    display: none;
+}
+
+.coupon-1 .coupon-header {
+    background-color: #f66569;
+}
+
+.coupon-2 .coupon-header {
+    background-color: #79c6a4;
+}
+
+@media (max-width: 768px) {
+    .coupon-slide {
+        flex-direction: row;
+        gap: 10px;
+    }
+}

@@ -82,7 +82,15 @@
                                                 </span>
                                             </div>
                                             <div class="product-rate-cover text-end">
-                                                <span class="font-small ml-5 stars">  ★★★★★</span>
+                                                <div class="social-icons single-share">
+                                        <ul class="text-grey-5 d-inline-block"> 
+                                            <li class="social-rupees"><a href="#"><img src="{% static 'img/icons/icon-rupees.svg'%}" alt=""></a></li>
+                                            <li><strong class="mr-10">Share  &amp; Earn :</strong></li>
+                                            <li class="social-facebook"><a href="#"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt=""></a></li>
+                                            <li class="social-twitter"> <a href="#"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt=""></a></li>
+                                            <li class="social-instagram"><a href="#"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt=""></a></li>
+                                        </ul>
+                                    </div>
                                             </div>
                                         </div>
             {% block product_stock_record %}
@@ -118,9 +126,235 @@
 
     {% block product_description %}
         {% if product.description %}
-        <div id="product_description" class="sub-header">
-            <h2>{% trans "Product Description" %}</h2>
-        </div>
+      
+    <div class="tab-style3">
+                                <ul class="nav nav-tabs text-uppercase">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content shop_info_tab entry-main-content">
+                                    <div class="tab-pane fade show active" id="Description">
+                                        <div class="">
+                                            <p> {{ product.description|safe }}
+ </p>
+                                            <p>content</p>
+
+                                            <hr class="wp-block-separator is-style-dots">
+
+                                            <h4 class="mt-30">Shipping &amp; Return </h4>
+                                            <hr class="wp-block-separator is-style-wide">
+                                            <p>ZITE69  returns and exchange policy gives you the option to return or exchange items purchased on Flourish within 10 days. We only ask that you don't use the product and preserve its original condition, tags, and packaging.
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="Additional-info">
+                                        
+                                        <table class="font-md">
+                                            {% if product.upc %}
+        <tr>
+            <th>{% trans "UPC" %}</th><td>{{ product.upc }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th>{% trans "Product Type" %}</th><td>{{ product.get_product_class.name }}</td>
+        </tr>
+
+        {% purchase_info_for_product request product as session %}
+        {% if session.price.exists %}
+        
+       
+            <tr>
+                <th>{% trans "Price (excl. tax)" %}</th><td>{{ session.price.excl_tax|currency:session.price.currency }}</td>
+            </tr>
+            {% if session.price.is_tax_known %}
+                <tr>
+                    <th>{% trans "Price (incl. tax)" %}</th><td>{{ session.price.incl_tax|currency:session.price.currency }}</td>
+                </tr>
+                <tr>
+                    <th>{% trans "Tax" %}</th><td>{{ session.price.tax|currency:session.price.currency }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>{% trans "Availability" %}</th>
+                <td>{{ session.availability.message }}</td>
+            </tr>
+        {% endif %}
+        {% for av in product.get_attribute_values %}
+            <tr>
+                <th>{{ av.attribute.name }}</th>
+                <td>{{ av.value_as_html }}</td>
+            </tr>
+        {% endfor %}
+        {% iffeature "reviews" %}
+            <tr>
+                <th>{% trans "Number of reviews" %}</th>
+                <td>{{ product.num_approved_reviews }}</td>
+            </tr>
+        {% endiffeature %}
+                                            <!--
+                                            <tbody>
+                                                <tr class="stand-up">
+                                                    <th>Stand Up</th>
+                                                    <td>
+                                                        <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="folded-wo-wheels">
+                                                    <th>Folded (w/o wheels)</th>
+                                                    <td>
+                                                        <p>32.5″L x 18.5″W x 16.5″H</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="folded-w-wheels">
+                                                    <th>Folded (w/ wheels)</th>
+                                                    <td>
+                                                        <p>32.5″L x 24″W x 18.5″H</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="door-pass-through">
+                                                    <th>Door Pass Through</th>
+                                                    <td>
+                                                        <p>24</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="frame">
+                                                    <th>Frame</th>
+                                                    <td>
+                                                        <p>Aluminum</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="weight-wo-wheels">
+                                                    <th>Weight (w/o wheels)</th>
+                                                    <td>
+                                                        <p>20 LBS</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="weight-capacity">
+                                                    <th>Weight Capacity</th>
+                                                    <td>
+                                                        <p>60 LBS</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="width">
+                                                    <th>Width</th>
+                                                    <td>
+                                                        <p>24″</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="handle-height-ground-to-handle">
+                                                    <th>Handle height (ground to handle)</th>
+                                                    <td>
+                                                        <p>37-45″</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="wheels">
+                                                    <th>Wheels</th>
+                                                    <td>
+                                                        <p>12″ air / wide track slick tread</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="seat-back-height">
+                                                    <th>Seat back height</th>
+                                                    <td>
+                                                        <p>21.5″</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="head-room-inside-canopy">
+                                                    <th>Head room (inside canopy)</th>
+                                                    <td>
+                                                        <p>25″</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="pa_color">
+                                                    <th>Color</th>
+                                                    <td>
+                                                        <p>Black, Blue, Red, White</p>
+                                                    </td>
+                                                </tr>
+                                                <tr class="pa_size">
+                                                    <th>Size</th>
+                                                    <td>
+                                                        <p>M, S</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+-->
+                                            
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="Reviews">
+                                        <!--Comments-->
+                                        <div class="comments-area">
+                                            {% if product.num_approved_reviews == 0 %}
+                <p>
+                    {% if product|is_review_permitted:user %}
+                        {% url 'catalogue:reviews-add' product_slug=product.slug product_pk=product.id as add_review_url %}
+                            {% blocktrans %}This product does not have any reviews yet -
+                            <a href="{{ add_review_url }}#addreview">be the first to write one</a>.
+                        {% endblocktrans %}
+                    {% else %}
+                        {% trans "This product does not have any reviews yet" %}.
+                    {% endif %}
+                </p>
+            {% else %}
+                <ol class="list-unstyled review-list">
+                    {% for review in product.reviews.approved.all|slice:":3" %}
+                        <li>
+                        {% include 'oscar/catalogue/partials/review.html' %}
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+                                          
+                                        </div>
+                                        <!--comment form-->
+                                        <div class="comment-form">
+                                            <h4 class="mb-15">Add a review</h4>
+                                            <div class="product-rate d-inline-block mb-30">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-12">
+                                                    <form class="form-contact comment_form" action="#" id="commentForm">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="form-group">
+                                                                    <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="submit" class="button button-contactForm">Submit Review</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
         <p>{{ product.description|safe }}</p>
         {% endif %}
     {% endblock %}
@@ -224,10 +458,193 @@
     {% endwith %}
 
     {% recently_viewed_products current_product=product %}
+    <div class="row mt-60">
+                              <div class="col-12">
+                                <h3 class="section-title style-1 mb-30">Group Buy</h3>
+                              </div>
+                              <div class="col-12">
+                                <div class="row related-products">
+                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                                    <div class="product-cart-wrap small hover-up">
+                                      <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                          <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/jeans-top-2-1.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/zine69-hover.jpg" alt="">
+                                          </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal
+                                          "><i class="fi-rs-search"></i></a>
+                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                          <span class="hot">Hot</span>
+                                        </div>
+                                      </div>
+                                      <div class="product-content-wrap">
+                                        <h2><a href="shop-product-right.html" tabindex="0">White Tee,Jeans..</a></h2>
+                                        <div class="rating-result" title="90%">
+                                          <span>
+                                          </span>
+                                        </div>
+                                        <div class="product-price">
+                                          <span>₹1200</span>
+                                          <span class="old-price">₹1600 </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                                    <div class="product-cart-wrap small hover-up">
+                                      <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                          <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/makeup-2-2.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/zine69-hover.jpg" alt="">
+                                          </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
+                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                          <span class="sale">New</span>
+                                        </div>
+                                      </div>
+                                      <div class="product-content-wrap">
+                                        <h2><a href="shop-product-right.html" tabindex="0">Full Face Grooming Kit</a></h2>
+                                        <div class="rating-result" title="90%">
+                                          <span>
+                                          </span>
+                                        </div>
+                                        <div class="product-price">
+                                          <span>₹950</span>
+                                          <span class="old-price">₹1500</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                                    <div class="product-cart-wrap small hover-up">
+                                      <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                          <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/cap-2-3.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/zine69-hover.jpg" alt="">
+                                          </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
+                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                          <span class="new">New</span>
+                                        </div>
+                                      </div>
+                                      <div class="product-content-wrap">
+                                        <h2><a href="shop-product-right.html" tabindex="0">Multi Colour Hats</a></h2>
+                                        <div class="rating-result" title="90%">
+                                          <span>
+                                          </span>
+                                        </div>
+                                        <div class="product-price">
+                                          <span>₹130/P300</span>
+                                          <span class="old-price">₹630</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                                    <div class="product-cart-wrap small hover-up mb-0">
+                                      <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                          <a href="shop-product-right.html" tabindex="0">
+                                            <img class="default-img" src="assets/imgs/shop/pearls-2-4.jpg" alt="">
+                                            <img class="hover-img" src="assets/imgs/shop/zine69-hover.jpg" alt="">
+                                          </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
+                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                          <span class="hot">Hot</span>
+                                        </div>
+                                      </div>
+                                      <div class="product-content-wrap">
+                                        <h2><a href="shop-product-right.html" tabindex="0">Jewelry Materials</a></h2>
+                                        <div class="rating-result" title="90%">
+                                          <span>
+                                          </span>
+                                        </div>
+                                        <div class="product-price">
+                                          <span>₹ 1 -₹ 100</span>
+                                          <span class="old-price">₹5-₹500</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+    
+    <div class="banner-img banner-big wow fadeIn f-none animated mt-50 animated animated" style="visibility: visible;">
+                                <img class="border-radius-10" src="assets/imgs/banner/Therapy.png" alt="">
+                                <div class="banner-text">
+                                    <h4 class="mb-15 mt-40">We are hiring</h4>
+                                    <h2 class="fw-600 mb-20">Shopping is a Therapy.We Need Therapists.<br>Looking for Product Curators</h2>
+                                </div>
+                            </div>
 
 </article><!-- End of product page -->
 {% endblock content %}
 
 {% block extrascripts %}
     {{ block.super }}
+  <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelector('.coupon-slides');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            let currentSlide = 0;
+
+            function updateSlide() {
+                slides.style.transform = `translateX(-${currentSlide * 50}%)`;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % 2;
+                updateSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + 2) % 2;
+                updateSlide();
+            });
+
+            // Touch support
+            let touchStartX = 0;
+            slides.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+
+            slides.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                if (touchStartX - touchEndX > 50) {
+                    // Swipe left
+                    currentSlide = (currentSlide + 1) % 2;
+                    updateSlide();
+                } else if (touchEndX - touchStartX > 50) {
+                    // Swipe right
+                    currentSlide = (currentSlide - 1 + 2) % 2;
+                    updateSlide();
+                }
+            });
+        });
+    </script>
 {% endblock %}

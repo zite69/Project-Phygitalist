@@ -28,7 +28,74 @@
 {% endif %}
 {% if session.price.exists %}
 <p class="{{ session.availability.code }} availability">
-    
+     <div class="coupon-carousel">
+        <div class="carousel-controls">
+            <button class="control-btn prev-btn">&#10094;</button>
+            <button class="control-btn next-btn">&#10095;</button>
+        </div>
+
+        <div class="coupon-slides">
+            <div class="coupon-slide">
+                <div class="coupon coupon-1">
+                    <div class="coupon-header">20% OFF</div>
+                    <div class="coupon-body">
+                        <p>Ultimate discount for all customers</p>
+                        <p>Valid until March 31, 2025</p>
+                    </div>
+                    <div class="coupon-footer">
+                        <div class="coupon-code">SAVE20</div>
+                        <div class="status">
+                            <span>Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coupon coupon-2">
+                    <div class="coupon-header">FREE SHIPPING</div>
+                    <div class="coupon-body">
+                        <p>Free shipping on all orders</p>
+                        <p>Valid until April 15, 2025</p>
+                    </div>
+                    <div class="coupon-footer">
+                        <div class="coupon-code">FREESHIP</div>
+                        <div class="status">
+                            <span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coupon-slide">
+              <div class="coupon coupon-1">
+                    <div class="coupon-header">30% OFF</div>
+                    <div class="coupon-body">
+                        <p>Extended discount for loyal customers</p>
+                        <p>Valid until May 15, 2025</p>
+                    </div>
+                    <div class="coupon-footer">
+                        <div class="coupon-code">SAVE30</div>
+                        <div class="status">
+                            <span>Active</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="coupon coupon-2">
+                    <div class="coupon-header">BUNDLE DEAL</div>
+                    <div class="coupon-body">
+                        <p>Buy 2 get 1 free on selected items</p>
+                        <p>Valid until June 30, 2025</p>
+                    </div>
+                    <div class="coupon-footer">
+                        <div class="coupon-code">BUNDLE2GET1</div>
+                        <div class="status">
+                            <span>Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="product_sort_info font-xs mb-30">
                                             <ul>
                                                 <li class="mb-10"><i class="fi-rs-crown mr-5"></i> Free delivery for members </li>
@@ -68,18 +135,28 @@
                                             </div>
                                             <div class="product-extra-link2">
                                                 <button type="submit" class="button button-add-to-cart">Add to cart</button>
+                                                 <button type="buy" class="button button-custom">Buy Quick</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                             </div>
                                         </div>
 <div class="detail-extralink">
                                             <div class="product-extra-link2">
                                                 <button type="Personalisation" class="button button-custom">Add Personalisation</button>
                                                 <button type="video" class="button button-custom">Video Call Shop</button>
-                                                <button type="live" class="button button-custom">Join Live Sales</button>
-                                                <button type="buy" class="button button-custom">Buy Quick</button>
+                                                <button type="live" class="button button-custom">Join Live Sales</button>  
                                             </div>
 </div>
+<div class="pincode_box">
+    <label for="pincode">Estimated Delivery Date</label>
+    <input type="text" id="pincode" placeholder="Enter pincode">
+    <button>Check</button>
+</div>
+
+<ul class="product-meta font-xs color-grey mt-50">
+                                            <li class="mb-5">Group Order Quote: <a href="#">Available</a></li>
+                                            <li>Personalisation:<span class="in-stock text-success ml-5">Yes </span></li>
+                                            <li class="mb-5">Tags: <a href="#" rel="tag">Creative Tees, </a>, <a href="#" rel="tag">Women Dress</a>, <a href="#" rel="tag">Dress</a> </li>
+                                        </ul>
 
     {% else %}
         <i class="fas fa-ban"></i>
