@@ -4,7 +4,10 @@ from django.db.models.fields import validators
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from phonenumber_field.modelfields import PhoneNumberField
+from oscar.core.loading import get_model
 import re
+
+Basket = get_model('basket', 'Basket')
 
 SWIFT_REX = re.compile(r"[A-Z]{6}[A-Z0-9]{2}(?:[A-Z0-9]{3})?")
 
@@ -39,4 +42,9 @@ class BankAccount(models.Model):
 
     class Meta:
         unique_together = ['bank', 'account_number']
+
+class RazorpayOrder(models.Model):
+    razorpay_order_id = models.CharField(max_length=255, unique=True)
+    basket = models.ForeignKey(Basket, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 

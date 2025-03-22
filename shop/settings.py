@@ -123,7 +123,7 @@ INSTALLED_APPS = [
     'oscar.apps.offer.apps.OfferConfig',
     'oscar.apps.order.apps.OrderConfig',
     'oscar.apps.customer.apps.CustomerConfig',
-    'oscar.apps.search.apps.SearchConfig',
+    # 'oscar.apps.search.apps.SearchConfig',
     'oscar.apps.voucher.apps.VoucherConfig',
     'oscar.apps.wishlists.apps.WishlistsConfig',
     'oscar.apps.dashboard.apps.DashboardConfig',
@@ -141,7 +141,8 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
 
     # 3rd-party apps that oscar depends on
-    #'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
+    'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
+    'oscar_odin',
     'widget_tweaks',
     'haystack',
     #'treebeard',
@@ -502,6 +503,7 @@ PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
 # Elasticsearch Configuration
 #OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
+OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
 OSCAR_ELASTICSEARCH_FACETS = [
     {
         "name": "price",
@@ -563,7 +565,7 @@ WAGTAILSEARCH_BACKENDS = {
     "default": {
         "BACKEND": "oscar_elasticsearch.search.backend",
         "URLS": ["http://127.0.0.1:9200"],
-        "INDEX": "zite69",
+        "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
         "TIMEOUT": 120,
         "OPTIONS": {},
         "INDEX_SETTINGS": {},
@@ -573,6 +575,8 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 HAYSTACK_CONNECTIONS = {"default": {}}
+
+OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -644,6 +648,11 @@ LOGGING = {
             'handlers': ['null'],
             'propagate': True,
             'level': 'INFO',
+        },
+        'django.server': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'ERROR',
         },
         'django.request': {
             'handlers': ['console'],
@@ -781,6 +790,7 @@ MANAGERS = tuple(parseaddr(email) for email in MANAGERS_ENV.split(","))
 
 SERVER_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
 DEFAULT_FROM_EMAIL = env("SYSTEM_EMAIL_ADDRESS")
+OSCAR_FROM_EMAIL = env("OSCAR_FROM_EMAIL", default=DEFAULT_FROM_EMAIL)
 EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend")
 EMAIL_SUBJECT_PREFIX = env("EMAIL_SUBJECT_PREFIX")
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"

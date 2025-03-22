@@ -1,0 +1,12 @@
+{% extends 'oscar/checkout/checkout.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Payment Error" %}
+{% endblock %}
+
+{% block payment_details_content %}
+<div>
+    Encountered an error during payment: {{ error }}
+</div>
+{% endblock %}

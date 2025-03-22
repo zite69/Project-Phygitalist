@@ -65,3 +65,6 @@ update `pip` using `pip install -U pip` before running the
     python manage.py runserver 0.0.0.0:8000
     ```
 7. Now go to http://www.z69.local:8000/ and you will be asked to login and create the CMS page for the home page. Create that, and then do the same with http://seller.z69.local:8000/ and create that CMS page as well.
+
+# Payment Testing
+Use following credit cards for testing razorpay payment gateway - https://razorpay.com/docs/payments/payments/test-card-details/

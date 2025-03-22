@@ -6,6 +6,22 @@
     {% trans "Payment details" %} | {{ block.super }}
 {% endblock %}
 
+{% block extrahead %}
+    {{ block.super }}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        .product-table {
+            max-width: 100%;
+            overflow-x: auto;
+
+            th, td {
+                text-align: center !important;
+            } 
+        }
+   </style>
+{% endblock %}
+
+
 {% block checkout_nav %}
     {% include 'oscar/checkout/nav.html' with step=3 %}
 {% endblock %}
@@ -13,21 +29,44 @@
 {% block checkout_title %}{% trans "Enter payment details" %}{% endblock %}
 
 {% block order_contents %}
+<table class="table table-bordered product-table">
+    <thead>
+        <tr>
+            <th class="col-lg-5 col-md-6 col-sm-7">Product Name</th>
+            <th class="col-lg-1 col-md-1 col-sm-2">Quantity</th>
+            <th class="col-lg-6 col-md-5 col-sm-5">Image</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for line in basket.lines.all %}
+    <tr>
+        <td class="line-product">{{ line.product }}</td>
+        <td class="line-quantity">{{ line.quantity }}</td>
+        <td class="line-image">
+            <img style="width: 120px; height: auto;" src="{{ line.product.primary_image.original.url }}"></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 <div>Order Total: ₹{{ order_total.incl_tax }}</div>
 {% endblock %}
 {% block shipping_address %}{% endblock %}
 {% block shipping_method %}{% endblock %}
 {% block payment_method %}{% endblock %}
 
-{% block extrahead %}
-    {{ block.super }}
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-{% endblock %}
-
 {% block payment_details %}
     {% block payment_details_content %}
     <button id="rzp-button1">Pay with Razorpay</button>
+    {{ options|json_script:"razorpay-options" }}
     <script>
+        const opts = JSON.parse(document.getElementById('razorpay-options').textContent);
+        console.log(opts);
+        opts.modal = {
+            ondismiss: function () {
+                window.location.href = "{% url 'checkout:payment-details' %}";
+            }
+        }
         const options = {
             'key': "{{ options.key }}",
             'amount': "{{ options.amount }}",
@@ -46,7 +85,7 @@
                 'color': '#f66569'
             }
         };
-        const rzrpay = new Razorpay(options);
+        const rzrpay = new Razorpay(opts);
         document.getElementById('rzp-button1').onclick = function (e) {
             rzrpay.open();
             e.preventDefault();
