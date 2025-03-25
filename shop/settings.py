@@ -292,20 +292,20 @@ AUTHENTICATION_BACKENDS = (
     'shop.apps.otp.auth.OtpBackend',
 )
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-    },
-}
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+#     },
+# }
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/zite69',
-        'ADMIN_URL': 'http://127.0.0.1:8393/solr/admin/cores',
-        'INCLUDE_SPELLING': True,
-    },
-}
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+#         'URL': 'http://127.0.0.1:8983/solr/zite69',
+#         'ADMIN_URL': 'http://127.0.0.1:8393/solr/admin/cores',
+#         'INCLUDE_SPELLING': True,
+#     },
+# }
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -721,13 +721,27 @@ SOCIALACCOUNT_PROVIDERS = {
         # For each OAuth based provider, either add a ``SocialApp``
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
+        'SCOPE': [
+            'profile',
+            'email',
+            'https://www.googleapis.com/auth/user.phonenumbers.read'
+        ],
+        'USER_INFO_URL': 'https://people.googleapis.com/v1/people/me',
+        'USER_INFO_PARAMS': 'phoneNumbers',
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+            'prompt': 'select_account consent'
+        },
+        'OAUTH_PKCE_ENABLED': True,
+        'EMAIL_AUTHENTICATION': True,
+        'FETCH_USERINFO': True
     }
 }
+
+ACCOUNT_ADAPTER = 'shop.apps.main.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'shop.apps.main.adapters.SocialAccountAdapter'
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_STORE_TOKENS = True
 
 #Dynamic preferences
 DYNAMIC_PREFERENCES = {

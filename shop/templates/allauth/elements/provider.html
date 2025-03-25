@@ -1,0 +1,14 @@
+{% load static %}
+{% load socialaccount %}
+<div class="social-btn">
+    {% with social_auth_image='img/'|add:attrs.provider_id|add:'.png' %}
+    <img src="{% static social_auth_image %}" alt="{{ attrs.name }}">
+    {% endwith %}
+    <form method="post" action="{{ attrs.href }}">
+        {% csrf_token %}
+        <button type="submit">{{attrs.name}}</button>
+        <p>{{ csrf_token }}</p>
+    </form>
+    <a title="{{ attrs.name }}" href="{{ attrs.href }}" class="me-3">{{ attrs.name }}</a>
+    <a href="{% provider_login_url attrs.provider_id %}" class="ms-2">{{ attrs.name }}</a>
+</div>
