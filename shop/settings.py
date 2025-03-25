@@ -742,6 +742,7 @@ ACCOUNT_ADAPTER = 'shop.apps.main.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'shop.apps.main.adapters.SocialAccountAdapter'
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 SOCIALACCOUNT_STORE_TOKENS = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' # This is for the redirect URI for allauth. We set it to https for production below
 
 #Dynamic preferences
 DYNAMIC_PREFERENCES = {
@@ -887,3 +888,4 @@ if DEBUG == False:
             'destination_url': '/django-protected/'
         }
     ]
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
