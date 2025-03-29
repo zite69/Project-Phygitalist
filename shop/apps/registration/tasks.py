@@ -5,8 +5,7 @@ from shop.apps.address.utils import get_default_country
 from django.contrib.auth import get_user_model
 from celery import shared_task
 
-User = get_user_model()
-india = get_default_country()
+india = None
 
 def parse_address(address):
     *parsed_address, city, state, pincode = map(lambda e: e.strip(), address.split(","))
@@ -20,6 +19,9 @@ def parse_address(address):
 
 @shared_task()
 def update_bank_details(ifsc_code, bankaccount_id):
+    global india 
+    if india is None:
+        india  = get_default_country()
     bank_details = get_ifsc_details(ifsc_code)
     address, city, state, pincode = parse_address(bank_details['ADDRESS'])
     bank_address = OrganizationAddress.objects.create(

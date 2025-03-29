@@ -48,7 +48,7 @@ import traceback
 logger = logging.getLogger(__package__)
 
 User = get_user_model()
-india = get_default_country()
+india = None
 
 class HomeView(TemplateView):
     template_name = 'registration/home.html'
@@ -608,6 +608,7 @@ class MultiFormView(TemplateView):
         """
         Handle form saving for both ModelForms and regular Forms
         """
+        global india
         # For ModelForms, save the instance
         if isinstance(form, forms.ModelForm):
             logger.debug(f"Being called inside form_valid with form {form} and key: {form_key}")
@@ -618,6 +619,9 @@ class MultiFormView(TemplateView):
                 instance.user = self.request.user
             except AttributeError:
                 pass
+
+            if india is None:
+                india = get_default_country()
 
             if form_key == "pickup":
                 instance.seller = self.seller
