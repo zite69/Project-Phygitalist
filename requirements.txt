@@ -44,7 +44,6 @@ django-extensions==3.2.3
 django-extra-views==0.14.0
 django-filer==3.3.0
 django-filter==24.3
-djangocms-forms @ git+https://github.com/zite69/djangocms-forms.git@2c25e170ec82f890313cd51bfe91eb466f44c559
 django-formtools==2.5.1
 django-fsm==2.8.2
 django-haystack==3.3.0
@@ -73,7 +72,7 @@ django-widget-tweaks==1.5.0
 djangocms-admin-style==3.3.1
 djangocms-alias==2.0.1
 djangocms-attributes-field==4.0.0
-djangocms-forms @ git+https://github.com/zite69/djangocms-forms.git@446ad941c79dba86d4ef734310416770a1cfb657
+djangocms-forms @ git+https://github.com/zite69/djangocms-forms.git@2c25e170ec82f890313cd51bfe91eb466f44c559
 djangocms-frontend==1.3.3
 djangocms-text-ckeditor==5.1.5
 djangocms-versioning==2.0.2
