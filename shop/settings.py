@@ -743,6 +743,22 @@ SOCIALACCOUNT_ADAPTER = 'shop.apps.main.adapters.SocialAccountAdapter'
 SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
 SOCIALACCOUNT_STORE_TOKENS = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' # This is for the redirect URI for allauth. We set it to https for production below
+ACCOUNT_LOGIN_METHODS = {"phone", "email", "username"}
+ACCOUNT_SIGNUP_FIELDS = [
+    "phone*",
+    "email*",
+    "username*",
+    "password1",
+    "password2"
+]
+ACCOUNT_FORMS = {
+    'request_login_code': 'shop.apps.main.forms.RequestLoginCodeForm'
+}
+
+ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGIN_BY_CODE_ENABLED = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 #Dynamic preferences
 DYNAMIC_PREFERENCES = {

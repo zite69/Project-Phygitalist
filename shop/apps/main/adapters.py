@@ -4,8 +4,12 @@ from django.dispatch import receiver
 from allauth.socialaccount.signals import social_account_added
 from phonenumber_field.formfields import PhoneNumberField
 from allauth.socialaccount.models import SocialAccount, SocialToken, SocialLogin
+from django.contrib.auth import get_user, get_user_model
+from shop.apps.main.utils.sms import send_phone_otp
 import requests
 import logging
+
+User = get_user_model()
 
 logger = logging.getLogger(__package__)
 
@@ -36,16 +40,38 @@ def after_social_account_added(request, sociallogin, *args, **kwargs):
         logger.debug(response.text)
 
 class AccountAdapter(DefaultAccountAdapter):
+    def phone_form_field(self, **kwargs):
+        kwargs['region'] = 'IN'
+        return PhoneNumberField(**kwargs)
+
     def get_phone_field(self, request):
         return PhoneNumberField(region='IN')
 
-    def set_phone_number(self, user, phone_number):
+    def get_phone(self, user):
+        return user.phone.as_international, user.phone_verified
+
+    def set_phone(self, user, phone_number, verified):
         user.phone = phone_number
+        user.phone_verified = verified
         user.save()
 
-    def verify_phone_number(self, user):
+    def set_phone_verified(self, user, phone):
         user.phone_verified = True
         user.save()
+
+    def get_user_by_phone(self, phone):
+        try:
+            return User.objects.get(phone=phone)
+        except User.DoesNotExist:
+            return None
+
+    def send_verification_code_sms(self, user, phone, code, **kwargs):
+        logger.debug(f"Sending code: {code} to phone: {phone} for user: {user}")
+        resp = send_phone_otp(user.phone, code)
+
+    def send_unknown_account_sms(self, phone, **kwargs):
+        # Phonenumber sent to unknown account
+        pass
 
 class SocialAccountAdapter(DefaultSocialAccountAdapter):
     def on_authentication_error(self, request, provider, error=None, exception=None, extra_context=None):
