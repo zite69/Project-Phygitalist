@@ -503,80 +503,80 @@ PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
 # Elasticsearch Configuration
 #OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
-OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
-OSCAR_ELASTICSEARCH_FACETS = [
-    {
-        "name": "price",
-        "label": "Price",
-        "type": "range",
-        "formatter": "oscar_elasticsearch.search.format.currency",
-        "ranges": [
-            25,
-            100,
-            500,
-            1000
-        ]
-    },
-    {
-        "name": "attrs.gewicht",
-        "label": "Gewicht",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.googleshopping",
-        "label": "Google product",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.size",
-        "label": "Maat",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.height",
-        "label": "Hoogte",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.zult",
-        "label": "Datum",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.stroomverbruik",
-        "label": "Stroomverbruik",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.bijzonderheden",
-        "label": "Bijzonderheden",
-        "type": "term",
-        "ranges": []
-    }
-]
+# OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
+# OSCAR_ELASTICSEARCH_FACETS = [
+#     {
+#         "name": "price",
+#         "label": "Price",
+#         "type": "range",
+#         "formatter": "oscar_elasticsearch.search.format.currency",
+#         "ranges": [
+#             25,
+#             100,
+#             500,
+#             1000
+#         ]
+#     },
+#     {
+#         "name": "attrs.gewicht",
+#         "label": "Gewicht",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.googleshopping",
+#         "label": "Google product",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.size",
+#         "label": "Maat",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.height",
+#         "label": "Hoogte",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.zult",
+#         "label": "Datum",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.stroomverbruik",
+#         "label": "Stroomverbruik",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.bijzonderheden",
+#         "label": "Bijzonderheden",
+#         "type": "term",
+#         "ranges": []
+#     }
+# ]
 
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "oscar_elasticsearch.search.backend",
-        "URLS": ["http://127.0.0.1:9200"],
-        "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
-        "TIMEOUT": 120,
-        "OPTIONS": {},
-        "INDEX_SETTINGS": {},
-        "ATOMIC_REBUILD": True,
-        "AUTO_UPDATE": True,
-    }
-}
+# WAGTAILSEARCH_BACKENDS = {
+#     "default": {
+#         "BACKEND": "oscar_elasticsearch.search.backend",
+#         "URLS": ["http://127.0.0.1:9200"],
+#         "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
+#         "TIMEOUT": 120,
+#         "OPTIONS": {},
+#         "INDEX_SETTINGS": {},
+#         "ATOMIC_REBUILD": True,
+#         "AUTO_UPDATE": True,
+#     }
+# }
 
-HAYSTACK_CONNECTIONS = {"default": {}}
+# HAYSTACK_CONNECTIONS = {"default": {}}
 
-OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
+# OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
