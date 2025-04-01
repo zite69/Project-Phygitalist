@@ -3,7 +3,6 @@ from oscar.core.application import OscarConfig
 from django.conf import settings
 from django.urls import include, path, re_path
 from django.utils.translation import gettext_lazy as _
-from shop.apps.search.views import SearchView
 
 
 class SearchConfig(OscarConfig):
@@ -15,6 +14,7 @@ class SearchConfig(OscarConfig):
 
     def ready(self):
         super().ready()
+        from shop.apps.search.views import SearchView
 
         self.search_view = SearchView.as_view()
 
