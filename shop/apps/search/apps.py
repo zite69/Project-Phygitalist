@@ -16,11 +16,11 @@ class SearchConfig(OscarConfig):
         super().ready()
         from shop.apps.search.views import SearchView
 
-        self.search_view = SearchView.as_view()
+        self.search_view = SearchView
 
     def get_urls(self):
         urls = super().get_urls()
         urls += [
-            path('', self.search_view, name='search')
+            path('', self.search_view.as_view(), name='search')
         ]
         return urls

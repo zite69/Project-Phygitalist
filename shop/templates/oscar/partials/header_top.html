@@ -13,7 +13,14 @@
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
-                        <div class="text-center">
+                        <form action="{% url 'search:search' %}" method="GET">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <label for="q" class="col-form-label">Search zite69:</label>
+                                    <input type="text" name="q" class="form-control">
+                                    <button type="submit" name="submit" value="search">Search</button>
+                                </div>
+                        </form>
+                        <!--
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
                                     <li>Launching on August 15th! <a href="https://forms.gle/ww2nk3DiejtoQZds6" style="color:#28343d;" target="_blank"> Know more</a></li>
@@ -22,7 +29,7 @@
                                     {% static_alias "flashnews" %}
                                 </ul>
                             </div>
-                        </div>
+                        -->
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
