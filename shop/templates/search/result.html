@@ -5,15 +5,36 @@
     {% if result_count == 0 %}
     <div class="row">
         <div class="col-md-6 mx-auto">
-            No products matching your query: {{ request.GET.q }} were found
+            No products matching your query: "{{ request.GET.q }}" were found
         </div>
     </div>
     {% else %}
+        <div class="row">
+            <div class="col-md-12"> 
+                <strong>Showing {{ result_count }} results for query: "{{ request.GET.q }}"</strong>
+            </div>
+        </div>
         {% for product in products %}
         <div class="row">
-            <div class="col-md-12">
-                {{ product.score }}
-                {{ product.product.get_absolute_url }}
+            <div class="col-md-3">
+                <img src="{{ product.product.get_absolute_url }}">
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.product.title }}</h5>
+                        <p class="card-text">
+                            {{ product.product.description }}
+                        </p>
+                        <p class="card-text">
+                            <ul>
+                            {% for attribute in product.product.attribute_values.all %}
+                                <li>{{ attribute.summary }}</li>
+                            {% endfor %}
+                            </ul>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
