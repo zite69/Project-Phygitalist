@@ -17,14 +17,14 @@
         {% for product in products %}
         <div class="row">
             <div class="col-md-3">
-                <img src="{{ product.product.get_absolute_url }}">
+                <img src=>
             </div>
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ product.product.title }}</h5>
+                        <h5 class="card-title"><a href="{{ product.product.get_absolute_url }}">{{ product.product.title }}</a></h5>
                         <p class="card-text">
-                            {{ product.product.description }}
+                            {{ product.product.description|safe }}
                         </p>
                         <p class="card-text">
                             <ul>
