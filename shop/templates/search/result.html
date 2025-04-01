@@ -1,4 +1,7 @@
 {% extends "oscar/layout.html" %}
+{% load currency_filters %}
+{% load product_tags %}
+{% load purchase_info_tags %}
 
 {% block content %}
 <div class="col-md-12">
@@ -19,7 +22,7 @@
             <div class="col-md-3">
                 <img src="{{ product.product.images.first.original.url }}">
             </div>
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title"><a href="{{ product.product.get_absolute_url }}">{{ product.product.title }}</a></h5>
@@ -35,8 +38,17 @@
                         </p>
                     </div>
                 </div>
+            </div> <!-- col-md-6 -->
+            <div class="col-md-3">
+                {% purchase_info_for_product request product.product as session %}
+                {% if session.price.exists %}
+                        Price without tax: {{ session.price.excl_tax|currency:session.price.currency }}
+                        {% if session.price.is_tax_known %}
+                        Price including tax: {{ session.price.incl_tax|currency:session.price.currency }}
+                        {% endif %}
+                {% endif %}
             </div>
-        </div>
+        </div> <!--- row -->
         {% endfor %}
     {% endif %}
 </div>
