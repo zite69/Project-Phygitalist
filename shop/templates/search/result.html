@@ -17,7 +17,7 @@
         {% for product in products %}
         <div class="row">
             <div class="col-md-3">
-                <img src=>
+                <img src="{{ product.product.images.first.original.url }}">
             </div>
             <div class="col-md-9">
                 <div class="card">
