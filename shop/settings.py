@@ -292,11 +292,11 @@ AUTHENTICATION_BACKENDS = (
     'shop.apps.otp.auth.OtpBackend',
 )
 
-# HAYSTACK_CONNECTIONS = {
-#     'default': {
-#         'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-#     },
-# }
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
 
 # HAYSTACK_CONNECTIONS = {
 #     'default': {

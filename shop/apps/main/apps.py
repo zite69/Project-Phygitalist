@@ -1,5 +1,7 @@
 from django.urls import path
+from django.apps import apps
 from oscar import config
+from oscar.core.loading import get_class
 import logging
 from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
@@ -12,7 +14,7 @@ class MainShop(config.Shop):
 
     def ready(self):
         super().ready()
-        
+
         from .views import test, fivehundred
 
         self.test_view = test
