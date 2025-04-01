@@ -25,7 +25,7 @@ class SearchView(TemplateView):
                     results = searchApi.search({"table": "products", "query": {"query_string": q}})
                     if results.hits.total > 0:
                         ctx['result_count'] = results.hits.total
-                        ctx['products'] = hits_to_products(result.hits.hits)
+                        ctx['products'] = hits_to_products(results.hits.hits)
                     else:
                         ctx['result_count'] = 0
                         ctx['products'] = []
