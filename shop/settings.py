@@ -141,10 +141,10 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
 
     # 3rd-party apps that oscar depends on
-    'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
+    # 'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
     'oscar_odin',
     'widget_tweaks',
-    'haystack',
+    # 'haystack',
     #'treebeard',
     'sorl.thumbnail',   # Default thumbnail backend, can be replaced
     'django_tables2',
@@ -177,6 +177,7 @@ INSTALLED_APPS = [
     'shop.apps.invitation.apps.InvitationConfig',
     'shop.apps.zitepayment.apps.ZitepaymentConfig',
     'shop.apps.webinar.apps.WebinarConfig',
+    'shop.apps.search.apps.SearchConfig',
     'djangocms_forms',
 ]
 

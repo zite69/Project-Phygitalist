@@ -23,4 +23,4 @@ class SearchConfig(OscarConfig):
         urls += [
             path('', self.search_view, name='search')
         ]
-
+        return urls
