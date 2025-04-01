@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from manticoresearch.rest import ApiException
 from manticoresearch.models import InsertDocumentRequest, SearchQuery, SearchRequest
 from shop.apps.catalogue.models import Product
+import manticoresearch
 
 configuration = manticoresearch.Configuration(
         host="http://127.0.0.1:9308"
