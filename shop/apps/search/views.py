@@ -17,7 +17,7 @@ class SearchView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         q = self.request.GET.get('q', '')
-        if q != ''
+        if q != '':
             with manticoresearch.ApiClient(configuration) as api_client:
                 searchApi = manticoresearch.SearchApi(api_client)
                 try:
