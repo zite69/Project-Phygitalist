@@ -10,6 +10,25 @@
 {% endaddtoblock %}
 {% endblock %}
 
+{% block extrahead %}
+<style>
+button.search-button {
+	/*justify-content: flex-end;*/
+	border: 1px solid #fff;
+	background-color: #fff;
+	height: 36px;
+	width: 44px;
+	border-radius: 2px;
+	cursor: pointer;
+	padding: 4px 12px 0 8px;
+}
+input.q {
+    height: 36px;
+    border-radius: 0px;
+}
+</style>
+{% endblock %}
+
 {% block description %}
     {% page_attribute "meta_description" as page_meta %}
     {% if page_meta and page_meta.strip %}
