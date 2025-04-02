@@ -13,33 +13,21 @@
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-4">
-                        <form action="{% url 'search:search' %}" method="GET">
-                                <div class="d-flex justify-content-center align-items-center">
-                                    <label for="q" class="col-form-label">Search zite69:</label>
-                                    <input type="text" name="q" class="form-control q">
-                                    <button type="submit" class="search-button">
-                                        <svg width="20" height="20" viewBox="0 0 17 18" class="" xmlns="http://www.w3.org/2000/svg"><g fill="#2874F1" fill-rule="evenodd"><path class="EwE-Fa" d="m11.618 9.897l4.225 4.212c.092.092.101.232.02.313l-1.465 1.46c-.081.081-.221.072-.314-.02l-4.216-4.203"></path><path class="EwE-Fa" d="m6.486 10.901c-2.42 0-4.381-1.956-4.381-4.368 0-2.413 1.961-4.369 4.381-4.369 2.42 0 4.381 1.956 4.381 4.369 0 2.413-1.961 4.368-4.381 4.368m0-10.835c-3.582 0-6.486 2.895-6.486 6.467 0 3.572 2.904 6.467 6.486 6.467 3.582 0 6.486-2.895 6.486-6.467 0-3.572-2.904-6.467-6.486-6.467"></path></g></svg>
-
-                                    </button>
-                                </div>
-                        </form>
-                        <!--
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
                                     <li>Launching on August 15th! <a href="https://forms.gle/ww2nk3DiejtoQZds6" style="color:#28343d;" target="_blank"> Know more</a></li>
-                                    <li>Work around home & earn up to 70k/m!<a href="https://forms.gle/62F9C7zH3HovrWB26" style="color:#28343d;" target="_blank"> Join now</a></li>
+                                    <li>Work around home &amp; earn up to 70k/m!<a href="https://forms.gle/62F9C7zH3HovrWB26" style="color:#28343d;" target="_blank"> Join now</a></li>
                                     <li>We are hiring! <a href="https://forms.gle/62F9C7zH3HovrWB26" style="color:#28343d;" target="_blank">Apply now </a></li>
                                     {% static_alias "flashnews" %}
                                 </ul>
                             </div>
-                        -->
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
                                 <li>
                                     <li>
-                                        <a class="language-dropdown-active" href="https://szine.zite69.com/69mutual-club/69mutual-club-membership-join/"> <i class=""></i> Become a Member </a>
+                                        <a href="https://szine.zite69.com/69mutual-club/69mutual-club-membership-join/"> <i class=""></i> Become a Member </a>
                                     </li>
                                     
                                     {% if user.is_authenticated %}

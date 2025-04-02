@@ -8,19 +8,13 @@
                     {% if settings.LIVE %}
                     <div class="header-right">
                         <div class="search-style-2">
-                                <select class="select-active">
-                                    {% category_tree as tree_categories %}
-                                    {% for category, info in tree_categories %}
-                                    <option>{{ category.name }}</option>
-                                    {% endfor %}
-                                </select>
                                 {% include "oscar/partials/search.html" %}
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
                                     <a href="shop-wishlist.html">
-                                        <img class="svgInject" alt="Evara" src="{% static 'imgs/theme/icons/icon-heart.svg' %}">
+                                        <img class="svgInject" alt="Evara" src="{% static 'img/theme/icons/icon-heart.svg' %}">
                                         <span class="pro-count blue">{% if request.user.is_authenticated %}{{ wishlists.count }}{% endif %}</span>
                                     </a>
                                 </div>

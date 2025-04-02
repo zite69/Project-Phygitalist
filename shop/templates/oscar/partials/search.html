@@ -1,6 +1,13 @@
 {% load i18n %}
+{% load category_tags %}
 
 <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search:search' %}">
+    <select class="select-active" name="category">
+        {% category_tree depth=1 as tree_categories %}
+        <option value="0">All Categories</option>
+        {% for category, info in tree_categories %}
+        <option value="{{category.id}}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
     <input name="q" placeholder="{% trans 'Search' %}" aria-label="{% trans 'Search' %}">
-    <button class="btn btn btn-secondary my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
 </form>
