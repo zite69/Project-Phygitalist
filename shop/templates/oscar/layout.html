@@ -6,8 +6,28 @@
 
 {% block head %}
 {% addtoblock "css" %}
-    <link rel="stylesheet" type="text/css" href="{% sass_src "scss/main.scss" %}" />
+<!-- <link rel="stylesheet" type="text/css" href="{% sass_src "scss/main.scss" %}"> -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/evara.css' %}">
 {% endaddtoblock %}
+{% endblock %}
+
+{% block extrahead %}
+<style>
+button.search-button {
+	/*justify-content: flex-end;*/
+	border: 1px solid #fff;
+	background-color: #fff;
+	height: 36px;
+	width: 44px;
+	border-radius: 2px;
+	cursor: pointer;
+	padding: 4px 12px 0 8px;
+}
+input.q {
+    height: 36px;
+    border-radius: 0px;
+}
+</style>
 {% endblock %}
 
 {% block description %}
@@ -20,20 +40,19 @@
 {% endblock %}
 
 {% block page_header %}
+    {# Site logo/title, mini-basket, browse dropdown and searchbox #}
+    <header class="header-area header-style-4 header-height-2">
+        {% include "oscar/partials/header_top.html" %}
+        {% include "oscar/partials/header_middle.html" %}
+        {% include "oscar/partials/header_bottom.html" %}
+    </header>
+    {% include "oscar/partials/header_mobile.html" %}
 {% endblock %}
 
 {% block layout %}
         
     {# Top-horizontal bar with account, notifictions, dashboard links #}
     {# include "oscar/partials/nav_accounts.html" #}
-
-    {# Site logo/title, mini-basket, browse dropdown and searchbox #}
-    <header class="header-area header-style-1 header-height-2">
-        {% include "oscar/partials/header_top.html" %}
-        {% include "oscar/partials/header_middle.html" %}
-        {% include "oscar/partials/header_bottom.html" %}
-    </header>
-    {% include "oscar/partials/header_mobile.html" %}
 
     {# Main content of page - other layout templates may override this block #}
     {% block content_wrapper %}
@@ -57,6 +76,9 @@
         </div>
     {% endblock %}
 
+{% endblock %}
+
+{% block footer %}
     {% include "oscar/partials/footer.html" %}
 {% endblock %}
 

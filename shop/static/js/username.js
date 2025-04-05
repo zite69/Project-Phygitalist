@@ -18,8 +18,6 @@
     return result;
   }
 
-
-
   document.addEventListener('DOMContentLoaded', (docEvent) => {
     const username = document.querySelector(".username");
     //console.log("inside on domcontentloaded");

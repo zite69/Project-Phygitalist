@@ -30,6 +30,7 @@ from django.contrib.sitemaps.views import sitemap
 from shop.apps.main.sitemaps import SITEMAPS
 from shop.apps.webinar.views import CreateRegistrationView
 from django.views.generic import TemplateView
+from shop.apps.main.views import LoginView
 
 from shop.apps.zitepayment.views import RazorpayCallbackView
 
@@ -43,6 +44,7 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('select2/', include('django_select2.urls')),
     path('filer/', include('filer.urls')),
+    path('accounts/login/', LoginView.as_view()),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
     path('careers/', TemplateView.as_view(template_name='main/career.html'), name="careers"),

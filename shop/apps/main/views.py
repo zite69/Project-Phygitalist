@@ -1,10 +1,24 @@
+from django.db.models.functions import Sign
 from django.shortcuts import render
 from .utils.email import send_email_otp
 import logging
+from allauth.account.views import LoginView as OGLoginView
+from allauth.account.forms import RequestLoginCodeForm, SignupForm 
+from allauth.utils import get_form_class
+from allauth.account import app_settings
 
 logger = logging.getLogger("shop.apps.main")
 
 # Create your views here.
+
+class LoginView(OGLoginView):
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['request_code_form'] = RequestLoginCodeForm()
+        ctx['signup_form'] = SignupForm()
+
+        return ctx
 
 def home(request):
     context = {}

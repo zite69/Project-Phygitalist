@@ -141,10 +141,10 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.shipping.apps.ShippingDashboardConfig',
 
     # 3rd-party apps that oscar depends on
-    'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
+    # 'oscar_elasticsearch.search.apps.OscarElasticSearchConfig',
     'oscar_odin',
     'widget_tweaks',
-    'haystack',
+    # 'haystack',
     #'treebeard',
     'sorl.thumbnail',   # Default thumbnail backend, can be replaced
     'django_tables2',
@@ -177,6 +177,7 @@ INSTALLED_APPS = [
     'shop.apps.invitation.apps.InvitationConfig',
     'shop.apps.zitepayment.apps.ZitepaymentConfig',
     'shop.apps.webinar.apps.WebinarConfig',
+    'shop.apps.search.apps.SearchConfig',
     'djangocms_forms',
 ]
 
@@ -298,14 +299,14 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr/zite69',
-        'ADMIN_URL': 'http://127.0.0.1:8393/solr/admin/cores',
-        'INCLUDE_SPELLING': True,
-    },
-}
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+#         'URL': 'http://127.0.0.1:8983/solr/zite69',
+#         'ADMIN_URL': 'http://127.0.0.1:8393/solr/admin/cores',
+#         'INCLUDE_SPELLING': True,
+#     },
+# }
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -503,80 +504,80 @@ PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
 # Elasticsearch Configuration
 #OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
-OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
-OSCAR_ELASTICSEARCH_FACETS = [
-    {
-        "name": "price",
-        "label": "Price",
-        "type": "range",
-        "formatter": "oscar_elasticsearch.search.format.currency",
-        "ranges": [
-            25,
-            100,
-            500,
-            1000
-        ]
-    },
-    {
-        "name": "attrs.gewicht",
-        "label": "Gewicht",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.googleshopping",
-        "label": "Google product",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.size",
-        "label": "Maat",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.height",
-        "label": "Hoogte",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.zult",
-        "label": "Datum",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.stroomverbruik",
-        "label": "Stroomverbruik",
-        "type": "term",
-        "ranges": []
-    },
-    {
-        "name": "attrs.bijzonderheden",
-        "label": "Bijzonderheden",
-        "type": "term",
-        "ranges": []
-    }
-]
+# OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
+# OSCAR_ELASTICSEARCH_FACETS = [
+#     {
+#         "name": "price",
+#         "label": "Price",
+#         "type": "range",
+#         "formatter": "oscar_elasticsearch.search.format.currency",
+#         "ranges": [
+#             25,
+#             100,
+#             500,
+#             1000
+#         ]
+#     },
+#     {
+#         "name": "attrs.gewicht",
+#         "label": "Gewicht",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.googleshopping",
+#         "label": "Google product",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.size",
+#         "label": "Maat",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.height",
+#         "label": "Hoogte",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.zult",
+#         "label": "Datum",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.stroomverbruik",
+#         "label": "Stroomverbruik",
+#         "type": "term",
+#         "ranges": []
+#     },
+#     {
+#         "name": "attrs.bijzonderheden",
+#         "label": "Bijzonderheden",
+#         "type": "term",
+#         "ranges": []
+#     }
+# ]
 
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "oscar_elasticsearch.search.backend",
-        "URLS": ["http://127.0.0.1:9200"],
-        "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
-        "TIMEOUT": 120,
-        "OPTIONS": {},
-        "INDEX_SETTINGS": {},
-        "ATOMIC_REBUILD": True,
-        "AUTO_UPDATE": True,
-    }
-}
+# WAGTAILSEARCH_BACKENDS = {
+#     "default": {
+#         "BACKEND": "oscar_elasticsearch.search.backend",
+#         "URLS": ["http://127.0.0.1:9200"],
+#         "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
+#         "TIMEOUT": 120,
+#         "OPTIONS": {},
+#         "INDEX_SETTINGS": {},
+#         "ATOMIC_REBUILD": True,
+#         "AUTO_UPDATE": True,
+#     }
+# }
 
-HAYSTACK_CONNECTIONS = {"default": {}}
+# HAYSTACK_CONNECTIONS = {"default": {}}
 
-OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
+# OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -721,13 +722,44 @@ SOCIALACCOUNT_PROVIDERS = {
         # For each OAuth based provider, either add a ``SocialApp``
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
-        'APP': {
-            'client_id': '123',
-            'secret': '456',
-            'key': ''
-        }
+        'SCOPE': [
+            'profile',
+            'email',
+            'https://www.googleapis.com/auth/user.phonenumbers.read'
+        ],
+        'USER_INFO_URL': 'https://people.googleapis.com/v1/people/me',
+        'USER_INFO_PARAMS': 'phoneNumbers',
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+            'prompt': 'select_account consent'
+        },
+        'OAUTH_PKCE_ENABLED': True,
+        'EMAIL_AUTHENTICATION': True,
+        'FETCH_USERINFO': True
     }
 }
+
+ACCOUNT_ADAPTER = 'shop.apps.main.adapters.AccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'shop.apps.main.adapters.SocialAccountAdapter'
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_STORE_TOKENS = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' # This is for the redirect URI for allauth. We set it to https for production below
+ACCOUNT_LOGIN_METHODS = {"phone", "email", "username"}
+ACCOUNT_SIGNUP_FIELDS = [
+    "phone*",
+    "email*",
+    "username*",
+    "password1",
+    "password2"
+]
+ACCOUNT_FORMS = {
+    'request_login_code': 'shop.apps.main.forms.RequestLoginCodeForm'
+}
+
+ACCOUNT_EMAIL_VERIFICATION = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_LOGIN_BY_CODE_ENABLED = True
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 
 #Dynamic preferences
 DYNAMIC_PREFERENCES = {
@@ -873,3 +905,4 @@ if DEBUG == False:
             'destination_url': '/django-protected/'
         }
     ]
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'

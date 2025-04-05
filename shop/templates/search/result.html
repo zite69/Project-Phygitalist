@@ -1,0 +1,55 @@
+{% extends "oscar/layout.html" %}
+{% load currency_filters %}
+{% load product_tags %}
+{% load purchase_info_tags %}
+
+{% block content %}
+<div class="col-md-12">
+    {% if result_count == 0 %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            No products matching your query: "{{ request.GET.q }}" were found
+        </div>
+    </div>
+    {% else %}
+        <div class="row">
+            <div class="col-md-12"> 
+                <strong>Showing {{ result_count }} results for query: "{{ request.GET.q }}"</strong>
+            </div>
+        </div>
+        {% for product in products %}
+        <div class="row">
+            <div class="col-md-3">
+                <img src="{{ product.product.images.first.original.url }}">
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{{ product.product.get_absolute_url }}">{{ product.product.title }}</a></h5>
+                        <p class="card-text">
+                            {{ product.product.description|safe }}
+                        </p>
+                        <p class="card-text">
+                            <ul>
+                            {% for attribute in product.product.attribute_values.all %}
+                                <li>{{ attribute.summary }}</li>
+                            {% endfor %}
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div> <!-- col-md-6 -->
+            <div class="col-md-3">
+                {% purchase_info_for_product request product.product as session %}
+                {% if session.price.exists %}
+                        Price without tax: {{ session.price.excl_tax|currency:session.price.currency }}
+                        {% if session.price.is_tax_known %}
+                        Price including tax: {{ session.price.incl_tax|currency:session.price.currency }}
+                        {% endif %}
+                {% endif %}
+            </div>
+        </div> <!--- row -->
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

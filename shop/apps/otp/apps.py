@@ -14,16 +14,18 @@ class OtpConfig(OscarConfig):
 
     def ready(self):
         super().ready()
-        from .views import RequestOtpView, OtpLoginView
+        from .views import RequestOtpView, OtpLoginView, RequestOtpJsonView
 
         self.request_view = RequestOtpView
         self.login_view = OtpLoginView
+        self.request_jsonview = RequestOtpJsonView
     
     def get_urls(self):
         urls = super().get_urls()
         urls += [
             path('request/', self.request_view.as_view(), name="request"),
-            path('login/', self.login_view.as_view(), name="login")
+            path('login/', self.login_view.as_view(), name="login"),
+            path('emailphone/request/', self.request_jsonview.as_view(), name="emailphone")
         ]
 
         return urls

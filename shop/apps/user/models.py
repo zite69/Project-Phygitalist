@@ -147,6 +147,7 @@ class Profile(models.Model):
     type = models.CharField(_("User Profile Type"), name="type", max_length=4, db_index=True, choices=TYPE_CHOICES)
     level = models.PositiveSmallIntegerField(_("Seller or CEO level"), default=1)
 
+    avatar_url = models.URLField(_("Avatar URL"), default='https://www.zite69.com/static/img/generic-profile.png')
     photo = models.ImageField(_("Profile Photo"), null=True, upload_to=upload_profile_photo_path)
     gstin = models.CharField(_("GSTIN Number"), name="gstin", max_length=15, db_index=True, blank=False, null=True, default=None, validators=[validate_length(15)])
     pan = INPANCardNumberField(_("PAN Number"), name="pan", max_length=10, db_index=True, blank=False, null=True, default=None)

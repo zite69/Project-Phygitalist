@@ -1,6 +1,8 @@
 -r requirements.txt
-psycopg2==2.9.10
+#psycopg2==2.9.10
+psycopg[binary]
 django-valkey[libvalkey]
 gunicorn==23.0.0
 Celery
 amqp==5.3.1
+manticoresearch-devel @ git+https://github.com/manticoresoftware/manticoresearch-python.git@bda6d1bcd40f8aaa22f0012567220c4511880043

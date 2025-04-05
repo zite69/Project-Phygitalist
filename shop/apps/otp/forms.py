@@ -1,7 +1,7 @@
-from typing import Any, Mapping
+# from typing import Any, Mapping
 from django import forms
-from django.forms.renderers import BaseRenderer
-from django.forms.utils import ErrorList
+# from django.forms.renderers import BaseRenderer
+# from django.forms.utils import ErrorList
 from phonenumber_field.formfields import PhoneNumberField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -11,9 +11,8 @@ from .utils import generate_otp
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
-from shop.apps.main.utils.common import dump
+# from shop.apps.main.utils.common import dump
 import logging
-from shop.apps.main.utils.common import dump
 from django.core.validators import validate_email
 #from phonenumber_field.validators import validate_phonenumber
 from phonenumber_field.validators import validate_international_phonenumber
@@ -158,12 +157,11 @@ class EmailPhoneOtpRequestForm(forms.Form):
             return False
 
 
-
-
 class OtpVerificationForm(forms.Form):
     email_phone = forms.CharField(label=_("Email or Phone number"), max_length=256, required=True)
     otp = forms.CharField(max_length=10)
     type = forms.CharField(widget=forms.HiddenInput())
+    field_next = forms.CharField(widget=forms.HiddenInput())
 
     def __init__(self, request=None, *args, **kwargs) -> None:
         self.request = request

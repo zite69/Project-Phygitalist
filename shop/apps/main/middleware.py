@@ -14,11 +14,12 @@ class DynamicSiteMiddleware(MiddlewareMixin):
     and set settings.SITE_ID to the correct Site object
     """
     def process_request(self, request):
-        logger.debug(request.get_host())
-        host = request.get_host().split(":")[0]
+        # logger.debug(request.get_host())
+        # host = request.get_host().split(":")[0]
+        host = request.get_host()
         try:
             current_site = Site.objects.get(domain=host)
-            logger.debug(f"Got site: {current_site}")
+            # logger.debug(f"Got site: {current_site}")
         except Site.DoesNotExist:
             current_site = Site.objects.get(id=settings.DEFAULT_SITE_ID)
             logger.debug(f"Got default site: {current_site}")
