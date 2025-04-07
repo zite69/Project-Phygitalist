@@ -116,7 +116,81 @@
             <section>
                 {% crispy forms.seller %}
             </section>
+    <section>
+                      <div class="box_terms">
+                        <h2 class="terms-link" id="termsLink">Terms and Condition</h2>
+                      </div>
+    </section>
         </main>
+  
+<div id="termsModal" class="modal">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <div class="modal-title">Terms and Conditions for Sellers on Zite69.com</div>
+                          <button class="close-btn">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                          <h3>1. Introduction</h3>
+                          <p>By registering as a seller on Zite69.com, you agree to comply with these Terms and Conditions. Failure to adhere may result in suspension or termination of your account.</p>
+
+                          <h3>2. Seller Eligibility</h3>
+                          <p>Sellers must provide accurate business and contact information. Zite69.com reserves the right to verify and approve seller accounts before listing any products. Sellers must also comply with local business regulations and tax requirements.</p>
+
+                          <h3>3. Product Listings</h3>
+                          <p>Sellers are responsible for ensuring that their products comply with applicable laws, do not infringe intellectual property rights, and are accurately described. Misrepresentation or prohibited items will lead to removal and potential account suspension. Counterfeit or illegal items are strictly prohibited.</p>
+
+
+                          <h3>4. Pricing and Payments</h3>
+                          <p>Sellers set their own prices, but Zite69.com reserves the right to impose commission fees. Payouts will be processed according to the platform’s payment schedule, subject to deductions for applicable service fees. Sellers must ensure bank account details provided for payouts are accurate.</p>
+
+                          <h3>5. Order Fulfillment and Shipping</h3>
+                          <p>Sellers must fulfill orders promptly and provide accurate tracking details. Delays, misdeliveries, or cancellations without valid reasons may result in penalties. Sellers are responsible for packaging products securely to prevent damage during transit.</p>
+                          <h3>6. Returns and Refunds</h3>
+                          <p>Sellers must establish a clear return and refund policy in compliance with Zite69.com’s guidelines. Refund disputes will be handled based on evidence provided by both the buyer and seller. Sellers are responsible for processing returns in a timely manner.</p>
+                          <h3>7. Prohibited Activities</h3>
+                          <p>Fraudulent activities, spamming, fake reviews, and misuse of the platform are strictly prohibited. Violations may lead to account termination and legal action. Sellers must not attempt to manipulate ratings, engage in misleading advertising, or conduct transactions outside of the platform.</p>
+                          <h3>8. Data Privacy and Security</h3>
+                          <p>Sellers must protect customer data and adhere to data privacy laws. Unauthorized sharing, selling, or misuse of customer information is strictly prohibited.</p>
+                          <h3>9. Liability and Indemnification</h3>
+                          <p>Zite69.com is not liable for seller disputes, product defects, or transaction failures. Sellers agree to indemnify Zite69.com against any claims arising from their business activities. Sellers must ensure compliance with applicable laws and industry standards.</p>
+                          <h3>10. Intellectual Property Rights</h3>
+                          <p>Sellers grant Zite69.com the right to use product images, descriptions, and branding for promotional purposes. Sellers must not infringe on trademarks, copyrights, or patents of third parties.</p>
+                          <h3>11. Compliance with Laws</h3>
+                          <p>Sellers must comply with all applicable laws, regulations, and taxation requirements. Zite69.com is not responsible for tax filings or legal liabilities related to seller operations.</p>
+                          <h3>12. Customer Service</h3>
+                          <p>Sellers must provide prompt and professional customer service, addressing inquiries, complaints, and issues efficiently.</p>
+                          <h3>13. Product Quality and Authenticity</h3>
+                          <p>ll products sold must be authentic and meet quality standards. Selling counterfeit or substandard goods is strictly prohibited.</p>
+                          <h3>14. Account Suspension and Termination</h3>
+                          <p>Zite69.com reserves the right to suspend or terminate a seller’s account for any violation of these terms, fraud, or poor performance.</p>
+                          <h3>15. Marketing and Promotions</h3>
+                          <p>Sellers may participate in promotional campaigns offered by Zite69.com but must adhere to the platform's guidelines for discounts and offers</p>
+                          <h3>16. Taxes and Duties</h3>
+                          <p>Sellers are responsible for all applicable taxes and duties associated with their products and transactions.</p>
+                          <h3>17. Restricted and Prohibited Items</h3>
+                          <p>Sellers must not list restricted, illegal, or prohibited items as defined by Zite69.com’s policies.</p>
+                          <h3>18. Seller Ratings and Reviews</h3>
+                          <p>Seller performance will be evaluated based on customer ratings and reviews. Consistently poor ratings may lead to account restrictions.</p>
+                          <h3>19. Reporting Violations</h3>
+                          <p>Sellers must report any fraudulent or suspicious activity to Zite69.com’s support team immediately.</p>
+                          <h3>20. Modifications and Termination</h3>
+                          <p>Zite69.com reserves the right to modify these Terms at any time. Continued use of the platform constitutes acceptance of updated terms. Sellers may terminate their accounts by providing written notice, but outstanding obligations must be settled before closure.</p>
+                          <h3></h3>
+                          <p>For inquiries, contact support@zite69.com.</p>
+                        </div>
+                        <div class="modal-footer">
+                          <div class="checkbox-wrapper">
+                            <input type="checkbox" id="readTerms">
+                            <label for="readTerms">I have thoroughly reviewed the terms and conditions and acknowledge my responsibility to comply with them.</label>
+                          </div>
+                          <div class="checkbox-wrapper">
+                            <input type="checkbox" id="acceptTerms">
+                            <label for="acceptTerms">By proceeding, I confirm that I have read and accepted all the terms and conditions outlined.</label>
+                          </div>
+                          <button class="submit-btn" id="submitBtn" disabled>Submit</button>
+                        </div>
+                      </div>
+                    </div>
         <aside class="help-sidebar">
          <button class="btn btn-secondary" disabled>Go to listing</button>
           <button class="btn btn-secondary"disabled>Go Live Now</button>
@@ -135,4 +209,44 @@
     {% endfor %}
     <script type="text/javascript" src="{% static 'js/onboarding.js' %}"></script>
 {% endaddtoblock %}
+<script>
+      // Get elements
+      const modal = document.getElementById('termsModal');
+      const termsLink = document.getElementById('termsLink');
+      const closeBtn = document.querySelector('.close-btn');
+      const readTerms = document.getElementById('readTerms');
+      const acceptTerms = document.getElementById('acceptTerms');
+      const submitBtn = document.getElementById('submitBtn');
+
+      // Open modal when clicking on Terms and Condition
+      termsLink.addEventListener('click', function() {
+        modal.style.display = 'block';
+      });
+
+      // Close modal when clicking on X
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+
+      // Enable/disable submit button based on checkbox states
+      function updateSubmitButton() {
+        submitBtn.disabled = !(readTerms.checked && acceptTerms.checked);
+      }
+
+      readTerms.addEventListener('change', updateSubmitButton);
+      acceptTerms.addEventListener('change', updateSubmitButton);
+
+      // Handle submit button click
+      submitBtn.addEventListener('click', function() {
+        alert('Terms accepted successfully!');
+        modal.style.display = 'none';
+      });
+    </script>
 {% endblock %}
