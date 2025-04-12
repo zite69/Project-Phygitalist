@@ -62,7 +62,7 @@ def run(*args):
             # print(sql_response)
             # drop_resp = utilsApi.sql(SQL['DROP_PRODUCTS_SQL'])
             # print('drop_resp: ', drop_resp)
-            api_resp = searchApi.search({"table": "products", "query": {"query_string": "Pink", "in": {"any(categories)": "[1]"}}})
+            api_resp = searchApi.search({"table": "products", "query": {"query_string": "Pink", "in": {"any(categories)": [1]}}})
             print("search response: ", api_resp)
             # print(api_resp.hits)
             # print(api_resp.hits.total)

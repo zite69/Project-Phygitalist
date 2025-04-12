@@ -18,14 +18,14 @@ class SearchView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         q = self.request.GET.get('q', '')
-        category = self.request.GET.get('category', '')
+        category = self.request.GET.get('category', '0')
         if q != '':
             with manticoresearch.ApiClient(configuration) as api_client:
                 searchApi = manticoresearch.SearchApi(api_client)
                 try:
                     query = {"query_string": q}
-                    if category != '':
-                        query["in"] = {"any(categories)": category}
+                    if category != '0':
+                        query["in"] = {"any(categories)": [int(category)]}
                     results = searchApi.search({"table": "products", "query": query})
                     if results.hits.total > 0:
                         ctx['result_count'] = results.hits.total
