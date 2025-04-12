@@ -2,7 +2,7 @@ from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.dispatch import receiver
 from allauth.socialaccount.signals import social_account_added
-from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.formfields import PhoneNumberField as PhoneNumberFormField
 from allauth.socialaccount.models import SocialAccount, SocialToken, SocialLogin
 from django.contrib.auth import get_user, get_user_model
 from shop.apps.main.utils.sms import send_phone_otp
@@ -140,10 +140,10 @@ def after_social_account_added(request, sociallogin, *args, **kwargs):
 class AccountAdapter(DefaultAccountAdapter):
     def phone_form_field(self, **kwargs):
         kwargs['region'] = 'IN'
-        return PhoneNumberField(**kwargs)
+        return PhoneNumberFormField(**kwargs)
 
     def get_phone_field(self, request):
-        return PhoneNumberField(region='IN')
+        return PhoneNumberFormField(region='IN')
 
     def get_phone(self, user):
         return user.phone.as_international, user.phone_verified
