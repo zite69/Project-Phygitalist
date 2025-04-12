@@ -11,7 +11,7 @@ configuration = manticoresearch.Configuration(
 SQL = {
     'CREATE_PRODUCTS_SQL': """
             CREATE TABLE IF NOT EXISTS products(title text, description text, meta_title text, 
-                meta_description text, product_id int, url string)
+                categories multi, meta_description text, product_id int, url string)
             """,
     'DROP_PRODUCTS_SQL': """DROP TABLE IF EXISTS products"""
 }
@@ -21,7 +21,8 @@ def make_document(product):
         "title": product.title,
         "description": strip_tags(product.description),
         "product_id": product.id,
-        "url": product.get_absolute_url()
+        "url": product.get_absolute_url(),
+        "categories": [c.id for c in product.categories.all()]
     }
     if product.meta_title is not None:
         doc["meta_title"] = product.meta_title
