@@ -9,10 +9,6 @@ h2#page-title {
     font-family: 'Urbanist', Arial, sans-serif; /* Urbanist as primary font */
 }
 
-.container {
-    /* max-width: 600px; */
-    width: 100%;
-}
 
 .tabs {
     display: flex;
