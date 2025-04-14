@@ -502,90 +502,13 @@ PHONENUMBER_DEFAULT_REGION = 'IN'
 PHONENUMBER_DB_FORMAT = "RFC3966"
 PHONENUMBER_DEFAULT_FORMAT = "RFC3966"
 
-# Elasticsearch Configuration
-#OSCAR_PRODUCT_SEARCH_HANDLER = "oscar_elasticsearch.search.search_handlers.ProductSearchHandler"
-# OSCAR_ELASTICSEARCH_PROJECT_NAME = "oscar_elasticsearch"
-# OSCAR_ELASTICSEARCH_FACETS = [
-#     {
-#         "name": "price",
-#         "label": "Price",
-#         "type": "range",
-#         "formatter": "oscar_elasticsearch.search.format.currency",
-#         "ranges": [
-#             25,
-#             100,
-#             500,
-#             1000
-#         ]
-#     },
-#     {
-#         "name": "attrs.gewicht",
-#         "label": "Gewicht",
-#         "type": "term",
-#         "ranges": []
-#     },
-#     {
-#         "name": "attrs.googleshopping",
-#         "label": "Google product",
-#         "type": "term",
-#         "ranges": []
-#     },
-#     {
-#         "name": "attrs.size",
-#         "label": "Maat",
-#         "type": "term",
-#         "ranges": []
-#     },
-#     {
-#         "name": "attrs.height",
-#         "label": "Hoogte",
-#         "type": "term",
-#         "ranges": []
-#     },
-#     {
-#         "name": "attrs.zult",
-#         "label": "Datum",
-#         "type": "term",
-#         "ranges": []
-#     },
-#     {
-#         "name": "attrs.stroomverbruik",
-#         "label": "Stroomverbruik",
-#         "type": "term",
-#         "ranges": []
-#     },
-#     {
-#         "name": "attrs.bijzonderheden",
-#         "label": "Bijzonderheden",
-#         "type": "term",
-#         "ranges": []
-#     }
-# ]
-
-# WAGTAILSEARCH_BACKENDS = {
-#     "default": {
-#         "BACKEND": "oscar_elasticsearch.search.backend",
-#         "URLS": ["http://127.0.0.1:9200"],
-#         "INDEX": env("OSCAR_ELASTICSEARCH_INDEX", default="beta"),
-#         "TIMEOUT": 120,
-#         "OPTIONS": {},
-#         "INDEX_SETTINGS": {},
-#         "ATOMIC_REBUILD": True,
-#         "AUTO_UPDATE": True,
-#     }
-# }
-
-# HAYSTACK_CONNECTIONS = {"default": {}}
-
-# OSCAR_ELASTICSEARCH_SERVER_URLS = env("OSCAR_ELASTICSEARCH_SERVER_URLS", default="http://127.0.0.1:9200")
-OSCAR_PRODUCTS_PER_PAGE = 10
+OSCAR_PRODUCTS_PER_PAGE = 20
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 DJANGOCMS_FRONTEND_THEME = "shop.apps.themezite69bs5"
-#DJANGOCMS_FRONTEND_FRAMEWORK = "shop.apps.themezite69bs5"
 DJANGOCMS_FORMS_PLUGIN_MODULE = _('Generic')
 DJANGOCMS_FORMS_PLUGIN_NAME = _('Form')
 DJANGOCMS_FORMS_DEFAULT_TEMPLATE = 'djangocms_forms/form_template/default.html'
