@@ -3,8 +3,8 @@
 {% load cms_tags sekizai_tags %}
 
 {% block page_header %}
+{{ block.super }}
 {% placeholder "header" or %}
-    {{ block.super }}
 {% endplaceholder %}
 {% endblock %}
 
