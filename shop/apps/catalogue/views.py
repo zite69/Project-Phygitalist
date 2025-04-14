@@ -17,11 +17,6 @@ class CatalogueView(ListView):
     context_object_name = 'products'
     model = Product
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        ctx = super().get_context_data(object_list=object_list, **kwargs)
-        logger.debug(ctx)
-        return ctx
-
 class ProductCategoryView(ListView):
     paginate_by = 1
     template_name = 'oscar/catalogue/category.html'
