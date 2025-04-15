@@ -755,6 +755,7 @@ EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_HOST = env("EMAIL_HOST", default="email-smtp.ap-south-1.amazonaws.com")
 EMAIL_PORT = env("EMAIL_PORT", default=587)
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", default=True)
+SEND_TEST_EMAIL = env("SEND_TEST_EMAIL")
 
 SMS_AUTH_KEY = env("SMS_AUTH_KEY", default="")
 SMS_AUTH_TOKEN = env("SMS_AUTH_TOKEN", default="")
