@@ -13,18 +13,17 @@ def get_var_nodes(node):
     return ret
 
 def run(*args):
-    print(len(args))
     cmd = args[0]
-    typ = args[1]
+    temp = args[1]
     if cmd == 'list':
-        template = get_template(f"email/{typ}.html")
+        template = get_template(f"email/{temp}.html")
         variables = []
         for n in template.template.nodelist:
             variables.extend(get_var_nodes(n))
         variables = [v.token.contents for v in variables]
-        print(f"Variables inside {typ}.html: {variables}")
+        print(f"Variables inside {temp}.html: {variables}")
     elif cmd == 'send':
-        template_name = f"email/{typ}.html"
+        template_name = f"email/{temp}.html"
         template = get_template(template_name)
         variables = []
         for n in template.template.nodelist:
