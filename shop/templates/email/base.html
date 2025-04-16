@@ -1,330 +1,154 @@
 {% load static %}
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-  <head>
-    <title>
-      
-    </title>
-    <!--[if !mso]><!-->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<![endif]-->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style type="text/css">
-      #outlook a { padding:0; }
-      body { margin:0;padding:0;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%; }
-      table, td { border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt; }
-      img { border:0;height:auto;line-height:100%; outline:none;text-decoration:none;-ms-interpolation-mode:bicubic; }
-      p { display:block;margin:13px 0; }
-    </style>
-    <!--[if mso]>
-    <noscript>
-    <xml>
-    <o:OfficeDocumentSettings>
-      <o:AllowPNG/>
-      <o:PixelsPerInch>96</o:PixelsPerInch>
-    </o:OfficeDocumentSettings>
-    </xml>
-    </noscript>
-    <![endif]-->
-    <!--[if lte mso 11]>
-    <style type="text/css">
-      .mj-outlook-group-fix { width:100% !important; }
-    </style>
-    <![endif]-->
-    
-      <!--[if !mso]><!-->
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700&display=swap" rel="stylesheet" type="text/css">
-        <style type="text/css">
-          @import url(https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;600;700&display=swap);
-        </style>
-      <!--<![endif]-->
-
-    
-    
-    <style type="text/css">
-      @media only screen and (min-width:480px) {
-        .mj-column-per-100 { width:100% !important; max-width: 100%; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zite69 - Item Shipped Mail</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      font-family: 'Urbanist', sans-serif;
+    }
+    .main-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    h1 {
+      font-size: 24px;
+      color: #f66569;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    .status-box {
+      background-color: #e8f5e9;
+      padding: 25px;
+      border-left: 5px solid #4CAF50;
+      font-size: 16px;
+      border-radius: 6px;
+      margin: 30px 0;
+      color: #2e7d32;
+    }
+    .cta-button {
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      display: inline-block;
+      border-radius: 4px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+    .footer {
+      background-color: #79c6a4;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 14px;
+    }
+    .footer a {
+      color: white;
+      text-decoration: underline;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons a {
+      display: inline-block;
+      margin: 0 8px;
+    }
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+    }
+    .product-table td {
+      vertical-align: top;
+      padding: 10px;
+    }
+    .product-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .billing-table {
+      width: 100%;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    .billing-table td {
+      padding: 5px 0;
+    }
+    .billing-table .label {
+      color: #666;
+    }
+    .billing-table .value {
+      text-align: right;
+      font-weight: 600;
+    }
+    @media screen and (max-width: 620px) {
+      .product-img {
+        width: 100%;
+        height: auto;
       }
-    </style>
-    <style media="screen and (min-width:480px)">
-      .moz-text-html .mj-column-per-100 { width:100% !important; max-width: 100%; }
-    </style>
-    
-  
-    <style type="text/css">
-        @media only screen and (max-width:480px) {
-          table.mj-full-width-mobile { width: 100% !important; }
-          td.mj-full-width-mobile { width: auto !important; }
-        }
-    </style>
-    <style type="text/css">
-    {% block style %}
-    {% endblock %}
-    </style>
-    
-  </head>
-  <body style="word-spacing:normal;">
-    
-    
-      <div
-         style=""
-      >
-        
-      
-      <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#f66569" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+    }
+  </style>
+</head>
+<body>
+  <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f8f8">
+    <tr>
+      <td align="center">
     
       {% block header %} 
-      <div  style="background:#f66569;background-color:#f66569;margin:0px auto;max-width:600px;">
-        
-        <table
-           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#f66569;background-color:#f66569;width:100%;"
-        >
-          <tbody>
-            <tr>
-              <td
-                 style="direction:ltr;font-size:0px;padding:20px;text-align:center;"
-              >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:560px;" ><![endif]-->
-            
-      <div
-         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
-      >
-        
-      <table
-         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
-      >
-        <tbody>
-          
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <table
-         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
-      >
-        <tbody>
+        <table class="main-container" cellpadding="0" cellspacing="0" width="100%">
+          <!-- Header -->
           <tr>
-            <td  style="width:60px;">
-              
-      <img
-          alt="zite69" height="auto" src="{{ base_uri }}{% static 'img/zite69_shop.png' %}" style="border:1px solid #ffffff;border-radius:50%;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="60"
-      />
-    
+            <td bgcolor="#f66569" align="center" style="padding: 30px 20px;">
+              <div class="logo" style="margin-top: 15px;">
+    <img alt="logo" src="{{ base_uri }}{% static 'img/zite69_shop.png' %}" style="width: 60px; height: 60px; border-radius: 50%; border: 1px solid #fff;" />
+  </div>
             </td>
           </tr>
-        </tbody>
-      </table>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:16px;font-weight:600;line-height:1.6;text-align:center;color:#ffffff;"
-      >zite69</div>
-    
-                </td>
-              </tr>
-            
-        </tbody>
-      </table>
-    
-      </div>
-    
-          <!--[if mso | IE]></td></tr></table><![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-      </div>
-      {% endblock %} 
+
+
+      {% endblock %}
       
       {% block content %}
-      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
-    
-      
-      <div  style="margin:0px auto;max-width:600px;">
-        
-        <table
-           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
-        >
-          <tbody>
-            <tr>
-              <td
-                 style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;"
-              >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
-            
-      <div
-         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
-      >
-        
-      <table
-         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
-      >
-        <tbody>
           
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:24px;font-weight:600;line-height:1.6;text-align:center;color:#333333;"
-      >Welcome to zite69!</div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:16px;line-height:1.6;text-align:center;color:#333333;"
-      >Explore our wide range of products and services.</div>
-    
-                </td>
-              </tr>
-            
-        </tbody>
-      </table>
-    
-      </div>
-    
-          <!--[if mso | IE]></td></tr></table><![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-      </div>
-    
-      
-      <!--[if mso | IE]></td></tr></table><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#f4f4f4" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
-    
       {% endblock %} 
 
       {% block footer %}
-      <div  style="background:#f4f4f4;background-color:#f4f4f4;margin:0px auto;max-width:600px;">
-        
-        <table
-           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#f4f4f4;background-color:#f4f4f4;width:100%;"
-        >
-          <tbody>
-            <tr>
-              <td
-                 style="direction:ltr;font-size:0px;padding:10px;text-align:center;"
-              >
-                <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:580px;" ><![endif]-->
-            
-      <div
-         class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
-      >
-        
-      <table
-         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
-      >
-        <tbody>
-          
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:14px;line-height:1.6;text-align:center;color:#666666;"
-      >Main Shop | Seller School | Blog | Connect</div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:14px;line-height:1.6;text-align:center;color:#666666;"
-      >Read our <a href="#" style="color: #f66569;">Privacy Policy</a> and <a href="#" style="color: #f66569;">Terms of use</a></div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:14px;line-height:1.6;text-align:center;color:#666666;"
-      >69mm &amp; iCommerce LLP</div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:14px;line-height:1.6;text-align:center;color:#666666;"
-      >#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66</div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:14px;line-height:1.6;text-align:center;color:#666666;"
-      >Email: <a href="mailto:support@zite69.com" style="color: #f66569;">support@zite69.com</a></div>
-    
-                </td>
-              </tr>
-            
-              <tr>
-                <td
-                   align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
-                >
-                  
-      <div
-         style="font-family:Urbanist, sans-serif;font-size:14px;line-height:1.6;text-align:center;color:#666666;"
-      >&copy; 2024 ZITE69. All rights reserved.</div>
-    
-                </td>
-              </tr>
-            
-        </tbody>
-      </table>
-    
-      </div>
-    
-          <!--[if mso | IE]></td></tr></table><![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
-      </div>
-      {% endblock %}    
+      <!-- Footer -->
+          <tr>
+            <td>
+              <div class="footer">
+                <p>69mm & iCommerce LLP</p>
+                <p>#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66</p>
+                <p>Email: <a href="mailto:support@zite69.com">support@zite69.com</a></p>
+                <div class="social-icons">
+                  <a href="https://instagram.com/zite69"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" /></a>
+                  <a href="https://facebook.com/zite69"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" /></a>
+                  <a href="https://twitter.com/zite69"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" /></a>
+                </div>
+                <p>&copy; 2025 ZITE69. All rights reserved.</p>
+              </div>
+            </td>
+          </tr>
 
-      <!--[if mso | IE]></td></tr></table><![endif]-->
-    
-      </div>
-    
-  </body>
+        </table>
+      {% endblock %}    
+      </td>
+    </tr>
+  </table>
+</body>
 </html>
-  
+      
+    

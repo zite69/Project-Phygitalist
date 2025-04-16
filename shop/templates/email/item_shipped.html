@@ -1,0 +1,64 @@
+{% extends 'email/base.html' %}
+
+{% block content %}
+          <!-- Body -->
+          <tr>
+            <td style="padding: 30px 20px;">
+              <h1>Item Shipped Mail</h1>
+              <p>Hello <strong>abhilashchamban</strong>,</p>
+              <p>Your item has been shipped and is on its way to your delivery address.</p>
+
+              <div class="status-box">
+                Order #: 406-4686401-5365944<br/>
+                Shipping to: Rani, Kenichira/Wayanad, Kerala, India<br/>
+                Estimated Arrival: <strong>Monday, March 17</strong><br/>
+                Shipping Speed: Standard Delivery
+              </div>
+
+              <!-- Product List -->
+              <table width="100%" class="product-table">
+                <tr>
+                  <td width="90">
+                    <img src="https://via.placeholder.com/80" alt="Product" class="product-img" />
+                  </td>
+                  <td>
+                    <strong>Urban Minimalist T-Shirt</strong><br/>
+                    Size: M<br/>
+                    Qty: 1
+                  </td>
+                  <td align="right">
+                    ₹499.00
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Billing Details -->
+              <table class="billing-table">
+                <tr>
+                  <td class="label">Subtotal</td>
+                  <td class="value">₹499.00</td>
+                </tr>
+                <tr>
+                  <td class="label">Shipping</td>
+                  <td class="value">Free</td>
+                </tr>
+                <tr>
+                  <td class="label">Payment Status</td>
+                  <td class="value">Pending</td>
+                </tr>
+                <tr>
+                  <td class="label"><strong>Total</strong></td>
+                  <td class="value"><strong>₹499.00</strong></td>
+                </tr>
+              </table>
+
+              <a href="#" class="cta-button">View Order Details</a>
+
+              <!-- Referral -->
+              <div class="status-box" style="background-color:#fff3e0; color:#e65100; border-left-color:#fb8c00;">
+                Refer a friend and get <strong>₹100 OFF</strong> your next order!<br />
+                Your referral code: <strong>ZITEFRIEND100</strong>
+              </div>
+            </td>
+          </tr>
+{% endblock %}
