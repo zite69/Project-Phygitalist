@@ -4,32 +4,32 @@ from django.template.base import VariableNode
 from shop.apps.main.utils.email import send_email
 
 def get_var_nodes(node):
-    ret = []
-    for n in node.nodelist:
-        if n.__class__ == VariableNode:
-            ret.append(n)
-        if hasattr(n, 'nodelist'):
-            ret.extend(get_var_nodes(n))
+    ret = set()
+    if hasattr(node, 'nodelist'):
+        for n in node.nodelist:
+            if n.__class__ == VariableNode:
+                ret.add(n.token.contents)
+            if hasattr(n, 'nodelist'):
+                ret.update(get_var_nodes(n))
     return ret
 
 def run(*args):
     cmd = args[0]
     temp = args[1]
+    template_name = f"email/{temp}.html"
+    template = get_template(template_name)
+    variables = set()
+    for n in template.template.nodelist:
+        variables.update(get_var_nodes(n))
+    base = get_template(template.template.nodelist[0].parent_name.token.strip("'"))
+    for n in base.template.nodelist:
+        variables.update(get_var_nodes(n))
+    variables = list(filter(lambda n: n != 'base_uri', variables))
     if cmd == 'list':
-        template = get_template(f"email/{temp}.html")
-        variables = []
-        for n in template.template.nodelist:
-            variables.extend(get_var_nodes(n))
-        variables = [v.token.contents for v in variables]
         print(f"Variables inside {temp}.html: {variables}")
     elif cmd == 'send':
-        template_name = f"email/{temp}.html"
-        template = get_template(template_name)
-        variables = []
-        for n in template.template.nodelist:
-            variables.extend(get_var_nodes(n))
-        variables = [v.token.contents for v in variables]
         ctx = {}
+        ctx['base_uri'] = 'https://www.zite69.com'
         if len(variables) + 2 != len(args):
             print(f"Please specify all variable values: {variables}")
             return
