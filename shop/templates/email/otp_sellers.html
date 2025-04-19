@@ -1,0 +1,40 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+    .otp-message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .otp-code {
+      font-size: 24px;
+      font-weight: bold;
+      color: #79c6a4;
+      margin-top: 10px;
+      letter-spacing: 2px;
+    }
+{% endblock %}
+
+{% block content %}
+           <!-- OTP Message -->
+          <div class="otp-message">
+            <h2>Your OTP for Zite69</h2>
+            <p>Hi <strong>[User Name]</strong>,</p>
+            <p>Use the One-Time Password (OTP) below to complete your verification:</p>
+            <div class="otp-code">
+              <strong>[OTP Code]</strong>
+            </div>
+            <p>The OTP is valid for 10 minutes. Please do not share it with anyone.</p>
+          </div>
+
+         
+          
+{% endblock %}

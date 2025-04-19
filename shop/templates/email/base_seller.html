@@ -1,0 +1,71 @@
+{% extends "email/base.html" %}
+
+{% block style %}
+
+    .footer-seller {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .footer-seller  p {
+      margin: 5px 0;
+    }
+
+    .footer-seller-links {
+      font-size: 12px;
+      margin: 20px auto;
+      text-align: center; 
+    }
+
+    .footer-seller-links a {
+      color: #666;
+      text-decoration: none;
+    
+    }
+
+    .footer-seller-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-seller-divider {
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .footer-seller-divider hr {
+      border: none;
+      height: 1px;
+      background: #ddd;
+      margin: 0;
+    }
+{% endblock %}
+
+{% block footer %}
+
+          <tr>
+            <td>
+          <!-- Footer Links -->
+          <div class="footer-seller-links">
+            <a href="#">Help Center</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a>
+          </div>
+              
+          <!-- Footer Section -->
+          <div class="footer-seller">
+            <p>69mm & iCommerce LLP</p>
+            <p>#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66</p>
+            <p>Email: <a href="mailto:support@zite69.com">support@zite69.com</a></p>
+            <p>&copy; 2025 ZITE69. All rights reserved.</p>
+          </div>
+
+          <!-- Footer Divider -->
+          <div class="footer-seller-divider">
+            <hr />
+          </div>
+            </td>
+</tr>
+</table>
+{% endblock %}

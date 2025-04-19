@@ -1,0 +1,47 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+  .message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: left;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .cta-button {
+      display: block;
+      background-color: #79c6a4;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-align: center;
+      margin: 30px auto;
+      width: 60%;
+    }
+
+{% endblock %}
+
+{% block content %}
+      
+      <!-- Onboarding Form Message -->
+          <div class="message">
+            <h2>Complete Your Onboarding Form</h2>
+            <p>Hi <strong>[Seller Name]</strong>,</p>
+            <p>Welcome to Zite69! To get started, please fill out the onboarding form with your business and product details.</p>
+            <p>This will help us verify and activate your seller profile faster.</p>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="[Onboarding Form URL]" class="cta-button">Fill Onboarding Form</a>
+
+         
+          
+{% endblock %}

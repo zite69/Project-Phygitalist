@@ -1,0 +1,45 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+  .message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .cta-button {
+      display: block;
+      background-color: #79c6a4;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-align: center;
+      margin: 30px auto;
+      width: 60%;
+    }
+
+{% endblock %}
+
+{% block content %}
+          <!-- Item Shipped Message -->
+          <div class="message">
+            <h2>Your Item Has Been Marked as Shipped</h2>
+            <p>Hi <strong>[Seller Name]</strong>,</p>
+            <p>The seller has updated the status of your order to <strong>"Item Shipped"</strong>.</p>
+            <p>You can track your order or view shipping details using the button below.</p>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="[Order Tracking Link]" class="cta-button">Track Your Order</a>
+
+          
+{% endblock %}

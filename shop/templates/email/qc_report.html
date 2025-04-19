@@ -1,0 +1,47 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+  .message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .cta-button {
+      display: block;
+      background-color: #79c6a4;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-align: center;
+      margin: 30px auto;
+      width: 60%;
+    }
+
+{% endblock %}
+
+{% block content %}
+      
+<!-- QC Submission Report Message -->
+          <div class="message">
+            <h2>Product QC Submission Report</h2>
+            <p>Hi <strong>[Seller Name]</strong>,</p>
+            <p>Your product has been submitted for Quality Check.</p>
+            <p>We've generated a submission report. Please review the product details and take action if any edits are required.</p>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="[Product QC View/Edit Link]" class="cta-button">View / Edit Product</a>
+
+         
+          
+{% endblock %}

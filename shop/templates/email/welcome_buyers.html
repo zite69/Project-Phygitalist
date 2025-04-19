@@ -1,0 +1,28 @@
+{% extends 'email/base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- Main Content -->
+          <div class="content">
+            <h1>Welcome to Zite69!</h1>
+            <p>Hey <strong>[Buyer Name]</strong>,</p>
+            <p>We’re thrilled to have you onboard! You’ve just joined a vibrant community of fashion-forward individuals who appreciate unique, thoughtfully designed pieces.</p>
+            <p>Explore handpicked collections and exclusive drops from creative sellers around the country.</p>
+            <p>To celebrate, here’s a little something for you:</p>
+            <p style="font-size: 18px;"><strong>Use code <span style="color:#f66569;">WELCOME10</span> for 10% off your first purchase!</strong></p>
+
+            <div style="text-align: center; margin: 30px 0;">
+              <a href="#" class="cta-button">Start Shopping</a>
+            </div>
+
+            <p>If you have any questions, we're just an email away. Happy shopping!</p>
+            <p>Cheers,<br/>Team Zite69</p>
+          </div>
+
+          <!-- Referral Banner -->
+          <div class="referral-banner">
+            <h2>Refer & Earn!</h2>
+            <p>Share your love for Zite69 with your friends. Get ₹100 off for every friend who signs up & shops!</p>
+            <a href="#">Invite Friends</a>
+          </div>
+{% endblock %}

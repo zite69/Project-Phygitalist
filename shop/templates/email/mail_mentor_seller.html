@@ -1,0 +1,74 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+  .message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: left;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+      .cta-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-start;
+    }
+
+    .cta-buttons a {
+      background-color: #e97676;
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 15px 20px;
+      border-radius: 12px;
+      display: inline-block;
+      text-align: center;
+      gap: 10px;
+      font-size: 14px;
+      min-width: 180px;
+    }
+
+{% endblock %}
+
+{% block content %}
+      
+           <!-- Message -->
+          <div class="message">
+            <h2 style="margin-top: 0;">Welcome Dashboard Mail</h2>
+            <p><strong>Subject :</strong> Hi 👋 I am Nisha, your new zite69 business manager!</p>
+            <p>Dear <strong>[Seller Name]</strong>,</p>
+            <p>Wow, Congrats for completing your onboarding. We are good to go live now.<br>
+            I am Nisha Paraman here to help you to become a successful seller on zite69.<br>
+            I will be <strong>co-ordinating</strong> your team of managers, community exchange officers, member shoppers and of course; selling superfast!</p>
+            <p>Feel free to connect with me anytime for help..<br>
+            You can talk to me from your dashboard and chat.</p>
+            <p>See you soon!<br>
+            And please don't forget to add your first product 👇</p>
+            <p style="margin-top: 30px;">
+  <img
+    src="https://www.dropbox.com/scl/fi/9x1edsbax3fr05i7pv2mr/nisha.png?rlkey=7yhubol8zsjektcnvw1kn67p8&raw=1"
+    alt="Nisha Paraman"
+    width="80"
+    height="80"
+    style="border-radius: 50%; border: 1px solid #ccc; object-fit: cover;">
+</p>
+            <p><strong>Yours,<br>Nisha Paraman<br>Chief Mentor<br>Seller School</strong></p>
+
+            <!-- CTA Buttons -->
+            <div class="cta-buttons">
+              <a href="[TalkNow URL]">Talk Now</a>
+              <a href="[AddProduct URL]">Add Your First Product</a>
+            </div>
+          </div>
+
+
+         
+          
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'email/base.html' %}
+{% load static %}
+
+{% block content %}
+        <!-- Main Content -->
+            <tr>
+            <td style="padding: 30px 20px;">
+              <div class="content">
+                <h1>Order Summary</h1>
+                <p>Hello <strong>abhilashchamban</strong>,</p>
+                <p>Thank you for your order. We'll send a confirmation when your order ships.</p>
+                <p>Your estimated delivery date is indicated below. To view the status of your order or make changes, visit <a href="https://zite69.com" style="color:#f66569; text-decoration:underline;">Your Orders</a> on Zite69.</p>
+
+                <div class="order-summary">
+                  <p><span class="bold">Order #:</span> 406-4686401-5365944</p>
+                  <p><span class="bold">Arriving:</span> Monday, March 17</p>
+                  <p><span class="bold">Shipping Speed:</span> Delivery</p>
+                  <p><span class="bold">To:</span> Rani</p>
+                  <p>Kenichira/Wayanad, KERALA<br/>India</p>
+                  <p><span class="bold">Order Total:</span> ₹499.00</p>
+                  <p><span class="bold">Payment Pending:</span> ₹499.00</p>
+                </div>
+
+                <!-- Product Thumbnails -->
+                <h2>Your Items</h2>
+                <div class="product-list">
+                  <div class="product">
+                    <img src="https://via.placeholder.com/70x70.png?text=Product+1" alt="Product Image">
+                    <div class="product-details">
+                      <p><strong>Urban Minimal Tee</strong></p>
+                      <p>Qty: 1 &nbsp; | &nbsp; ₹499.00</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Billing Breakdown -->
+                <h2>Billing Summary</h2>
+                <div class="billing-summary">
+                  <p>Subtotal: ₹499.00</p>
+                  <p>Shipping: ₹0.00</p>
+                  <p>Tax: ₹0.00</p>
+                  <p class="bold">Total: ₹499.00</p>
+                </div>
+
+                <!-- CTA -->
+                <div style="text-align: center;">
+                  <a href="#" class="cta-button">View Order Details</a>
+                </div>
+
+                <!-- Safety Note -->
+                <p style="margin-top: 30px;">To ensure your safety, the Delivery Agent will drop the package at your doorstep, ring the doorbell, and then step back to maintain distance while waiting for you to collect your package.</p>
+
+                <!-- Referral Coupon -->
+                <div class="coupon-box">
+                  <p>Share the Zite69 experience with friends and get <strong>₹100 OFF</strong> on your next order!</p>
+                  <p>Use referral code: <strong>ZITEFRIEND100</strong></p>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+
+
+{% endblock %}

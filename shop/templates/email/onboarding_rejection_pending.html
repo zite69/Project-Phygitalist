@@ -1,0 +1,64 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+  .message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .cta-button {
+      display: block;
+      background-color: #79c6a4;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-align: center;
+      margin: 30px auto;
+      width: 60%;
+    }
+    .note-box {
+      background-color: #ffeb3b;
+      border-left: 5px solid #e74c3c;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 15px;
+      text-align: left;
+      border-radius: 5px;
+    }
+
+{% endblock %}
+
+{% block content %}
+      
+<!-- Onboarding Approval Message -->
+            <div class="message">
+            <h2>Onboarding Rejected / Pending</h2>
+            <p>Hi <strong>[User Name]</strong>,</p>
+            <p>The status of your seller onboarding process has been updated.</p>
+
+
+            <h2 style="
+            font-size: 20px;font-weight: bold;margin: 10px 0 20px;">Status :<span style="color: #f74225;"> Pending</span>
+        </h2>
+            <div class="note-box">
+              <strong>Admin Note:</strong>
+              <br />
+                <strong>Action Required</strong>
+
+            </div>
+
+            <p>Please contact our admin via mail or customer care phone number</p>
+          </div>
+         
+          
+{% endblock %}

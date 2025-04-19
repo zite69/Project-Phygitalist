@@ -1,0 +1,46 @@
+{% extends "email/base_seller.html" %}
+
+{% block style %}
+
+  {{ block.super }}
+
+
+  .message {
+      background-color: #f5f5f5;
+      padding: 25px;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .cta-button {
+      display: block;
+      background-color: #79c6a4;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 25px;
+      text-align: center;
+      margin: 30px auto;
+      width: 60%;
+    }
+
+{% endblock %}
+
+{% block content %}
+            <!-- Registration Approval Message -->
+          <div class="message">
+            <h2>Your Registration is Approved!</h2>
+            <p>Hi <strong>[User Name]</strong>,</p>
+            <p>We're excited to let you know that your registration with Zite69 has been approved! You're just one step away from getting started.</p>
+            <p>Click the button below to continue onboarding and start exploring the exciting features we have for you.</p>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="[Onboarding Link]" class="cta-button">Continue Onboarding</a>
+
+         
+          
+{% endblock %}
