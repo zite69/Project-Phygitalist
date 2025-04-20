@@ -1,5 +1,6 @@
 {% extends 'email/base.html' %}
 {% load static %}
+{% load site_urls %}
 
 {% block content %}
     <!-- OTP Container -->
@@ -82,7 +83,7 @@
                         Congratulations you have been approved. Please follow the link below to your Seller Dashboard
                     </div>
                     <div style="font-family: Ubuntu, Helvetica, Arial, sans-serif;font-size:12px;line-height:1;text-align:center;color:#333;">
-                        <a href="{% url 'dashboard:index' %}">
+                        <a href="{% site_url SITE_SELLER 'onboarding-wizard' %}">Onboarding link</a>
                     </div>
                 {% endif %}
                     <div style="font-family: Ubuntu, Helvetica, Arial, sans-serif;font-size:12px;line-height:1;text-align:center;color:#333;">

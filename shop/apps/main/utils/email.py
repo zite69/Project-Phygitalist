@@ -5,7 +5,7 @@ from django.utils.html import strip_tags
 from email.mime.image import MIMEImage
 from django.contrib.staticfiles import finders
 from functools import lru_cache
-from .urls import get_site_base_uri
+#from .urls import get_site_base_uri
 import logging
 
 def reset_template_cache():
@@ -33,7 +33,7 @@ def image_data(imgpath, imgcid):
 def send_waitlist_welcome(email):
     logger.debug(f"Called to send waitlist email to {email}")
     context = {
-        "base_uri": get_site_base_uri()
+        "base_uri": "https://www.zite69.com"
     }
     html_content = render_to_string("email/waitlist.html", context=context)
     text_content = strip_tags(html_content)
@@ -70,8 +70,10 @@ def send_email(email, **kwargs):
         "images": {},
         "cc": [],
         "bcc": [],
-        "base_uri": get_site_base_uri(),
-        "whatsapp_link": f"https://wa.me/{settings.WHATSAPP_NUMBER}"
+        "base_uri": "https://www.zite69.com",
+        "whatsapp_link": f"https://wa.me/{settings.WHATSAPP_NUMBER}",
+        "SITE_BUYER": settings.DEFAULT_SITE_ID,
+        "SITE_SELLER": settings.SELLER_SITE_ID
         } | kwargs)
     template = kwargs.get("template")
     logo = kwargs.get("logo")
@@ -140,7 +142,7 @@ def send_email_seller_welcome(user, **kwargs):
     #         "img/email/nl-logo.png": "<nl-logo>"
     #         }} | kwargs)
     kwargs = kwargs | ({
-        "template": "email/welcome-paidseller.html",
+        "template": "email/welcome_paidseller.html",
         "subject": "Welcome to zite69",
         } | kwargs)
     kwargs['user'] = user
@@ -149,7 +151,7 @@ def send_email_seller_welcome(user, **kwargs):
 
 def send_seller_approval(user, registration, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/seller-approval.html",
+        "template": "email/seller_approval.html",
         "subject": "Your Seller Registration status has changed"
         } | kwargs)
     kwargs['user'] = user
