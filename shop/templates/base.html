@@ -2,6 +2,7 @@
 {% load static %}
 {% load cms_tags sekizai_tags %}
 {% load sass_tags %}
+{% load site_urls %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en" }}" class="{% block html_class %}no-js{% endblock %}" data-bs-theme="light">
 <head>
@@ -74,7 +75,7 @@
             </label>
             <div class="nav-links">
                 <a href="/" class="active">Home</a>
-                <a href="https://seller.zite69.com/en/sellerschool/">Seller School</a>
+                <a href="{% site_url SITE_SELLER 'sellerschool' %}">Seller School</a>
                 <a href="https://szine.zite69.com/">Success Stories</a>
                 <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Support</a>
             </div>
@@ -99,9 +100,9 @@
     {% block footer %}
     <footer class="footer">
         <div class="footer-links">
-            <a href="https://seller.zite69.com/en/registration/" target="_blank">Sell on Z69</a> |
-            <a href="https://www.zite69.com/careers/" target="_blank">Work with Us</a> |
-            <a href="https://seller.zite69.com/mentor/" target="_blank">Join as Mentor</a> |
+            <a href="{% site_url SITE_SELLER 'registration:home' %}" target="_blank">Sell on Z69</a> |
+            <a href="{% site_url SITE_BUYER 'careers' %}" target="_blank">Work with Us</a> |
+            <a href="{% site_url SITE_SELLER 'mentor' %}" target="_blank">Join as Mentor</a> |
             <a href="https://szine.zite69.com/" target="_blank">Visit S/Z Blog</a> |
             <a href="https://www.zite69.com/demo/index.html" target="_blank">View Concept</a> |
             <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" target="_blank">Quick Connect</a>
