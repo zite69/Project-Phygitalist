@@ -69,6 +69,9 @@ class AbstractSeller(BaseLogModelMixin):
     approved_on = models.DateTimeField(_("When the Seller was approved"), null=True)
     approval_notes = models.TextField(_("Rejection Reasons"), blank=True, null=True)
 
+    read_terms = models.BooleanField(_("Read Terms"), blank=False, null=False, default=False)
+    accept_terms = models.BooleanField(_("Accept Terms"), blank=False, null=False, default=False)
+
     class Meta:
         abstract = True
         app_label = "seller"
