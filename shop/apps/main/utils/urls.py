@@ -11,7 +11,8 @@ def get_site_base_uri(site_id=settings.SITE_ID):
 
 def get_absolute_url(site_id=settings.SITE_ID, view_name=""):
     sbu = get_site_base_uri(site_id=site_id)
+    urlconf = 'shop.urls' if site_id == settings.DEFAULT_SITE_ID else 'shop.urls_seller'
     if view_name == "":
         return sbu
     else:
-        return f"{sbu}{reverse(view_name)}"
+        return f"{sbu}{reverse(view_name, urlconf=urlconf)}"

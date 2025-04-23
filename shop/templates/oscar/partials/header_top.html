@@ -34,7 +34,7 @@
                                     {% block nav_account_navbar_authenticated %}
                                     <li>   
                                         <i class="fi-rs-user"></i>
-                                        <a href="{% url 'customer:logout' %}">
+                                        <a href="{% url 'account_logout' %}">
                                             Logout
                                         </a>
                                     </li>
@@ -42,7 +42,7 @@
                                     {% else %}
                                     <li>
                                         <i class="fi-rs-user"></i>
-                                        <a href="{% url 'customer:login' %}">Sign In</a>
+                                        <a href="{% url 'account_login' %}">Sign In</a>
                                     </li>
                                     {% endif %}
                                 </li>

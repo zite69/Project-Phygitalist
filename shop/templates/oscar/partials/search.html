@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load category_tags %}
+{% load site_urls %}
 
-<form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'search:search' %}">
+<form class="form-inline my-2 my-lg-0" method="GET" action="{% site_url SITE_BUYER 'search:search' %}">
     <select class="select-active" name="category">
         {% category_tree depth=1 as tree_categories %}
         <option value="0">All Categories</option>

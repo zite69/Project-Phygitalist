@@ -1,9 +1,10 @@
 {% load currency_filters %}
 {% load i18n %}
 {% load static %}
+{% load site_urls %}
 
 <div class="header-action-icon-2">
-    <a class="mini-cart-icon" href="{% url 'basket:summary' %}">
+    <a class="mini-cart-icon" href="{% site_url SITE_BUYER 'basket:summary' %}">
         <img alt="zite69" src="{% static 'img/theme/icons/icon-cart.svg' %}">
         <span class="pro-count blue">{{ request.basket.num_lines }}</span>
     </a>
