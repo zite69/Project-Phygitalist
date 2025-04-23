@@ -74,6 +74,9 @@ def run(*args):
             toaddr = settings.SEND_TEST_EMAIL
             cc = ""
         if cc != "":
-            ctx['cc'] = list(cc)
+            ctx['cc'] = [cc]
         resp = send_email(toaddr, **ctx)
-        print(resp)
+        if resp == 1:
+            print("Sent email successfully")
+        else:
+            print(f"Failed to send email. Response code: {resp}")
