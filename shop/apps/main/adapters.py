@@ -5,6 +5,7 @@ from allauth.socialaccount.signals import social_account_added
 from phonenumber_field.formfields import PhoneNumberField as PhoneNumberFormField
 from allauth.socialaccount.models import SocialAccount, SocialToken, SocialLogin
 from django.contrib.auth import get_user, get_user_model
+from django.urls import reverse
 from shop.apps.main.utils.sms import send_phone_otp
 import requests
 import logging
@@ -14,6 +15,7 @@ import json
 from django.core.exceptions import FieldDoesNotExist, ImproperlyConfigured
 from django.core.files.base import ContentFile
 from django.core.serializers.json import DjangoJSONEncoder
+from django.conf import settings
 from django.db.models import FileField
 from django.db.models.fields import (
     BinaryField,
@@ -24,6 +26,7 @@ from django.db.models.fields import (
 from django.utils import dateparse
 from django.utils.encoding import force_bytes, force_str
 from phonenumber_field.modelfields import PhoneNumberField
+from shop.apps.main.utils.urls import get_absolute_url
 
 User = get_user_model()
 
@@ -141,6 +144,13 @@ class AccountAdapter(DefaultAccountAdapter):
     def phone_form_field(self, **kwargs):
         kwargs['region'] = 'IN'
         return PhoneNumberFormField(**kwargs)
+
+    def get_login_redirect_url(self, request):
+        logger.debug(request.user.is_staff)
+        if request.user.is_staff:
+            return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='dashboard:index')
+        else:
+            return get_absolute_url(site_id=settings.DEFAULT_SITE_ID)
 
     def get_phone_field(self, request):
         return PhoneNumberFormField(region='IN')
