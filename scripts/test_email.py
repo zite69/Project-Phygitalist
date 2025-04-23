@@ -68,5 +68,12 @@ def run(*args):
             ctx['subject'] = MAP_TO_SUBJECT[temp]
         else:
             ctx['subject'] = 'Please update scripts/test_email.py to add to MAP_TO_SUBJECT'
-        resp = send_email(settings.SEND_TEST_EMAIL, **ctx)
+        if ',' in settings.SEND_TEST_EMAIL:
+            toaddr, cc = settings.SEND_TEST_EMAIL.split(",")
+        else:
+            toaddr = settings.SEND_TEST_EMAIL
+            cc = ""
+        if cc != "":
+            ctx['cc'] = cc
+        resp = send_email(toaddr, **ctx)
         print(resp)
