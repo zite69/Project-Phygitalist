@@ -561,7 +561,7 @@ LOGGING = {
     'loggers': {
         '': {
             'handlers': ['console'],
-            'propagate': True,
+            'propagate': False,
             'level': 'DEBUG',
         },
         'root': {
