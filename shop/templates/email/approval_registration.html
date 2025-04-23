@@ -1,4 +1,5 @@
 {% extends "email/base_seller.html" %}
+{% load site_urls %}
 
 {% block style %}
 
@@ -33,13 +34,13 @@
             <!-- Registration Approval Message -->
           <div class="message">
             <h2>Your Registration is Approved!</h2>
-            <p>Hi <strong>[User Name]</strong>,</p>
+            <p>Hi <strong>{{ user.get_full_name }}</strong>,</p>
             <p>We're excited to let you know that your registration with Zite69 has been approved! You're just one step away from getting started.</p>
             <p>Click the button below to continue onboarding and start exploring the exciting features we have for you.</p>
           </div>
 
           <!-- CTA Button -->
-          <a href="[Onboarding Link]" class="cta-button">Continue Onboarding</a>
+          <a href="{% site_url SITE_SELLER 'onboarding-wizard' %}" class="cta-button">Continue Onboarding</a>
 
          
           

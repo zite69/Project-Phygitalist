@@ -29,7 +29,7 @@ from django.contrib.sitemaps.views import sitemap
 # from django.contrib.auth.decorators import permission_required
 from shop.apps.registration.sitemaps import SITEMAPS
 from shop.apps.registration.views import MultiFormView
-from shop.apps.registration.forms import BankDetailsForm, SellerPickupAddressForm, SellerRemainingForm
+from shop.apps.registration.forms import BankDetailsForm, SellerPickupAddressForm, SellerRemainingForm, TnCForm
 from shop.apps.seller.models import Seller
 from shop.apps.main.decorators import check_perm_404
 
@@ -47,7 +47,8 @@ handler403 = 'shop.apps.main.views.unauthorized'
 ONBOARDING_FORM_CLASSES = {
     "pickup": SellerPickupAddressForm,
     "bank": BankDetailsForm,
-    "seller": SellerRemainingForm
+    "seller": SellerRemainingForm,
+    "tnc": TnCForm
 }
 
 urlpatterns = i18n_patterns(

@@ -1104,6 +1104,24 @@ class SellerRemainingForm(OnboardingFormMixin):
 
         self.helper.add_input(Submit(name="seller", value="Save", css_class="btn btn-primary"))
 
+class TnCForm(OnboardingFormMixin):
+    form_id = 'form_tnc'
+
+    class Meta:
+        model = Seller
+        fields = ['read_terms', 'accept_terms']
+        labels = {
+                'read_terms': 'I have thoroughly reviewed the terms and conditions and acknowledge my responsibility to comply with them.',
+                'accept_terms': 'By proceeding, I confirm that I have read and accepted all the terms and conditions outlined.'
+                }
+
+    def __init__(self, request=None, *args, **kwargs):
+        super().__init__(request, *args, **kwargs)
+        self.helper.layout = Layout(
+            'read_terms',
+            'accept_terms'
+            )
+
 class OnboardingForm(forms.Form):
     street = forms.CharField(label=_("Street, Road, Local Area"), max_length=255, required=True)
     line2 = forms.CharField(label=_("Address Line 2"), max_length=255, required=True)

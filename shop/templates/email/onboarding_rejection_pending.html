@@ -39,26 +39,20 @@
 {% endblock %}
 
 {% block content %}
-      
 <!-- Onboarding Approval Message -->
-            <div class="message">
-            <h2>Onboarding Rejected / Pending</h2>
-            <p>Hi <strong>[User Name]</strong>,</p>
-            <p>The status of your seller onboarding process has been updated.</p>
+        <div class="message">
+        <h2>Onboarding Rejected / Pending</h2>
+        <p>Hi <strong>{{ user.get_full_name }}</strong>,</p>
+        <p>The status of your seller onboarding process has been updated.</p>
 
-
-            <h2 style="
-            font-size: 20px;font-weight: bold;margin: 10px 0 20px;">Status :<span style="color: #f74225;"> Pending</span>
+        <h2 style="
+        font-size: 20px;font-weight: bold;margin: 10px 0 20px;">Status :<span style="color: #f74225;">{{ registration.get_approval_status }} </span>
         </h2>
-            <div class="note-box">
-              <strong>Admin Note:</strong>
-              <br />
-                <strong>Action Required</strong>
-
-            </div>
-
-            <p>Please contact our admin via mail or customer care phone number</p>
-          </div>
-         
-          
+        <div class="note-box">
+          <strong>Admin Note:</strong>
+          <br />
+          <strong>{{ registration.approval_notes }}</strong>
+        </div>
+        <p>Please contact our admin via mail or customer care phone number</p>
+      </div>
 {% endblock %}

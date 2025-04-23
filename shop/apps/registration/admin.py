@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 from .models import SellerRegistration, SellerProduct
 from image_uploader_widget.admin import ImageUploaderInline
-from shop.apps.main.utils.email import send_seller_approval
+from shop.apps.main.utils.email import send_seller_approval, send_seller_rejection
 import logging
 
 logger = logging.getLogger("shop.apps.registration")
@@ -27,7 +27,10 @@ class SellerRegistrationForm(forms.ModelForm):
         logger.debug(instance.approval_status)
         if instance.approval_status in (SellerRegistration.STATUS_APPROVED, SellerRegistration.STATUS_REJECTED, SellerRegistration.STATUS_REJECTION_TEMPORARY):
             #Send an email notification
-            resp = send_seller_approval(instance.user, instance)
+            if instance.approval_status == SellerRegistration.STATUS_APPROVED:
+                resp = send_seller_approval(instance.user, instance)
+            else:
+                resp = send_seller_rejection(instance.user, instance)
             logger.debug("got response from send_seller_approval:")
             logger.debug(resp)
 
@@ -70,5 +73,4 @@ class SellerRegistrationAdmin(admin.ModelAdmin):
                 return v
 
         return ""
-
 

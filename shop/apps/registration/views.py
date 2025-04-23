@@ -59,6 +59,7 @@ class SellerRegistrationWizard(SessionWizardView):
     file_storage = seller_registration_filestorage
 
     def get_template_names(self):
+        print("inside here")
         logger.debug(f"Returning template: {REGISTRATION_FORM_TEMPLATES[self.steps.current]} for step {self.steps.current}")
         return [REGISTRATION_FORM_TEMPLATES[self.steps.current]]
 
@@ -549,9 +550,9 @@ class MultiFormView(TemplateView):
                 return BankAccount.objects.get(user=self.request.user)
             except BankAccount.DoesNotExist:
                 return None
-        elif key == "seller":
+        elif key == "seller" or key == "tnc":
             return self.seller
-        
+
         return None
 
     def get_form_kwargs(self, prefix=""):
@@ -630,10 +631,15 @@ class MultiFormView(TemplateView):
             elif form_key == "bank":
                 messages.success(self.request, "Bank Details saved successfully")
             elif form_key == 'seller':
-                messages.success(self.request, "Shipping Preferences, GST/PAN and Signature saved successfully. You will be notified via email when your Seller account is fully functional.")
+                messages.success(self.request, "Shipping Preferences, GST/PAN and Signature saved successfully. ")
+            elif form_key == 'tnc':
+                messages.success(self.request, "Thank you for completing your onboarding with us. You may start adding products to your store catalogue. You will be notified via email when your Seller account is fully functional.")
 
+            # if form_key == 'tnc':
+            #     instance.save(force_update=True)
+            # else:
             instance.save()
-            if form_key == 'seller':
+            if form_key == 'tnc':
                 logger.debug("At last step seller - checking if all forms are valid")
                 if self.all_forms_valid():
                     logger.debug("All forms valid redirecting to success_url")

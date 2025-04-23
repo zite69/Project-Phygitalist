@@ -129,18 +129,6 @@ def send_email_invite(email, ctx):
     return send_email(email, **ctx)
 
 def send_email_seller_welcome(user, **kwargs):
-    #Keeing the below commented out code in case we ever need to attach files to the email by default
-    #We are currently linking to these images directly online rather than referring to the attachment in the 
-    #mail template
-    # kwargs = kwargs | ({
-    #     "template": "email/welcome-paidseller.html", 
-    #     "subject": "Welcome to zite69",
-    #     "images": {
-    #         "img/email/1-offline.jpg": "<1-offline>",
-    #         "img/email/2-realtime.jpg": "<2-realtime>",
-    #         "img/email/3-ecommerce.jpg": "<3-ecommerce>",
-    #         "img/email/nl-logo.png": "<nl-logo>"
-    #         }} | kwargs)
     kwargs = kwargs | ({
         "template": "email/welcome_paidseller.html",
         "subject": "Welcome to zite69",
@@ -151,9 +139,20 @@ def send_email_seller_welcome(user, **kwargs):
 
 def send_seller_approval(user, registration, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/seller_approval.html",
-        "subject": "Your Seller Registration status has changed"
+        "template": "email/approval_registration.html",
+        "subject": "Your Seller Registration has been approved!"
         } | kwargs)
+    kwargs['user'] = user
+    kwargs['registration'] = registration
+
+    return send_email(user.email, **kwargs)
+
+def send_seller_rejection(user, registration, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/onboarding_rejection_pending.html",
+        "subject": "Your Seller Registration has been rejected"
+        } | kwargs)
+
     kwargs['user'] = user
     kwargs['registration'] = registration
 
