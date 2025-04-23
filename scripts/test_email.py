@@ -74,6 +74,6 @@ def run(*args):
             toaddr = settings.SEND_TEST_EMAIL
             cc = ""
         if cc != "":
-            ctx['cc'] = cc
+            ctx['cc'] = list(cc)
         resp = send_email(toaddr, **ctx)
         print(resp)
