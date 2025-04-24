@@ -157,3 +157,25 @@ def send_seller_rejection(user, registration, **kwargs):
     kwargs['registration'] = registration
 
     return send_email(user.email, **kwargs)
+
+def send_onboarding_approval(user, seller, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/add_product.html",
+        "subject": "Your Seller Onboarding has been approved"
+        } | kwargs)
+
+    kwargs['user'] = user
+    kwargs['seller'] = seller
+
+    return send_email(user.email, **kwargs)
+
+def send_onboarding_rejection(user, seller, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/pending_rejection.html",
+        "subject": "There were some issues with your Seller onboarding"
+        } | kwargs)
+
+    kwargs['user'] = user
+    kwargs['seller'] = seller
+
+    return send_email(user.email, **kwargs)

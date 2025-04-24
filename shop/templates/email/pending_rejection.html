@@ -4,11 +4,9 @@
 
   {{ block.super }}
 
-
-     .message {
+    .message {
       background-color: #fff;
       padding: 25px;
-
       text-align: center;
       line-height: 1.6;
       font-size: 16px;
@@ -28,24 +26,20 @@
 {% endblock %}
 
 {% block content %}
-           <!-- Registration Rejection/Pending Message -->
-                  <!-- Onboarding Rejection/Pending Message -->
-          <div class="message">
-            <h2>Onboarding Rejected / Pending</h2>
-            <p>Hi <strong>[User Name]</strong>,</p>
-            <p>The status of your seller onboarding process has been updated.</p>
-            <h2 style="font-size: 20px;font-weight: bold;margin: 10px 0 20px;">Status :<span style="color: #f74225;"> {Pending} </span>
-        </h2>
-            <div class="note-box">
-              <strong>Admin Note:</strong>
-              <br />
-                <p> { Please contact our admin via mail or customer care phone number } </p>
-            </div>
-          </div>
-
-          
-
-
-         
+      <!-- Registration Rejection/Pending Message -->
+      <!-- Onboarding Rejection/Pending Message -->
+      <div class="message">
+        <h2>Onboarding Rejected / Pending</h2>
+        <p>Hi <strong>{{ user.get_full_name }}</strong>,</p>
+        <p>The status of your seller onboarding process has been updated.</p>
+        <!-- <h2 style="font-size: 20px;font-weight: bold;margin: 10px 0 20px;">Status :<span style="color: #f74225;"> {{ seller.approval_notes }}</span>
+        </h2> -->
+        <div class="note-box">
+          <strong>Admin Note:</strong>
+          <br />
+            <p> {{ seller.approval_notes }}</p>
+            <p> { Please contact our admin via mail or customer care phone number } </p>
+        </div>
+      </div>
           
 {% endblock %}

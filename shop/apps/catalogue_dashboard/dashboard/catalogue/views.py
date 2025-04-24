@@ -1,5 +1,6 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.shortcuts import redirect
 from oscar.apps.dashboard.catalogue import views as originalviews
 from shop.apps.catalogue_dashboard.dashboard.catalogue.forms import ProductForm, ProductSearchForm
 from shop.apps.catalogue_dashboard.dashboard.catalogue.tables import ProductTable
@@ -9,6 +10,14 @@ from icecream import ic
 class ProductListView(originalviews.ProductListView):
     table_class = ProductTable
     form_class = ProductSearchForm
+
+    def get(self, request, *args, **kwargs):
+        ic("inside catalogue dashboard")
+        if not (request.user.is_superuser or request.user.groups.filter(name='Seller Admin').exists()):
+            if not hasattr(request.user, 'seller'):
+                return redirect('/dashboard/onboarding/')
+
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
