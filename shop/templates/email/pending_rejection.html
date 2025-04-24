@@ -5,42 +5,45 @@
   {{ block.super }}
 
 
-  .message {
-      background-color: #f5f5f5;
+     .message {
+      background-color: #fff;
       padding: 25px;
-      border-radius: 6px;
+
       text-align: center;
       line-height: 1.6;
       font-size: 16px;
+      border: 1px solid #f5f5f5;
     }
 
-    .cta-button {
-      display: block;
-      background-color: #79c6a4;
-      color: #ffffff;
-      font-weight: bold;
-      text-decoration: none;
-      padding: 15px 30px;
-      border-radius: 25px;
-      text-align: center;
-      margin: 30px auto;
-      width: 60%;
+    .note-box {
+      background-color: #ffeb3b;
+      border-left: 5px solid #e74c3c;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 15px;
+      text-align: left;
+      border-radius: 5px;
     }
 
 {% endblock %}
 
 {% block content %}
            <!-- Registration Rejection/Pending Message -->
+                  <!-- Onboarding Rejection/Pending Message -->
           <div class="message">
-            <h2>Registration Status: Pending or Rejected</h2>
+            <h2>Onboarding Rejected / Pending</h2>
             <p>Hi <strong>[User Name]</strong>,</p>
-            <p>We regret to inform you that your registration with Zite69 is either pending approval or has been rejected. Please see the admin note below:</p>
-            <p><strong>Admin Note:</strong> [Admin's Note Here]</p>
-            <p>If you believe this is an error or need further assistance, please reach out to our support team for clarification.</p>
+            <p>The status of your seller onboarding process has been updated.</p>
+            <h2 style="font-size: 20px;font-weight: bold;margin: 10px 0 20px;">Status :<span style="color: #f74225;"> {Pending} </span>
+        </h2>
+            <div class="note-box">
+              <strong>Admin Note:</strong>
+              <br />
+                <p> { Please contact our admin via mail or customer care phone number } </p>
+            </div>
           </div>
 
-          <!-- CTA Button (Optional for pending action) -->
-          <a href="[Support Link]" class="cta-button">Contact Support</a>
+          
 
 
          
