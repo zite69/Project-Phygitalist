@@ -6,7 +6,7 @@ def is_superuser(user):
 
 @rules.predicate
 def is_product_owner(user, product):
-    return product.seller == user.seller
+    return product is None or (product is not None and product.seller == user.seller)
 
 @rules.predicate
 def is_main_seller_admin(user):
@@ -14,6 +14,6 @@ def is_main_seller_admin(user):
 
 @rules.predicate
 def is_seller_admin(user, product):
-    return user.seller_admins.filter(pk__in=[product.seller.pk]).exists()
+    return product is not None and user.seller_admins.filter(pk__in=[product.seller.pk]).exists()
 
 rules.add_perm('products.can_edit_product', is_superuser | is_main_seller_admin | is_product_owner | is_seller_admin)
