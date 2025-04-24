@@ -60,13 +60,13 @@ class SellerAdmin(admin.ModelAdmin):
             logger.debug(f"Got Seller ModelAdmin custom action: {action}")
             if action == 'approved':
                 resp = send_onboarding_approval(obj.user, obj)
-                logger.debug(f"send onboarding approval email. got response: {resp}")
+                logger.debug(f"sent onboarding approval email. got response: {resp}")
                 if not obj.user.is_staff:
                     obj.user.is_staff = True
                     obj.user.save()
             elif action == 'rejected':
                 resp = send_onboarding_rejection(obj.user, obj)
-                logger.debug(f"send onboarding rejection email. got response: {resp}")
+                logger.debug(f"sent onboarding rejection email. got response: {resp}")
                 if obj.user.is_staff:
                     obj.user.is_staff = False
                     obj.user.save()
