@@ -46,6 +46,8 @@
 </head>
 
 <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
+    {% cms_toolbar %}
+
     {% block page_header %}
     <header>
         <div class="header-container">
