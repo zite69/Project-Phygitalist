@@ -19,7 +19,7 @@ class ProductTable(originaltables.ProductTable):
 
     class Meta(DashboardTable.Meta):
         model = Product
-        fields = ("upc", "is_public", "date_updated")
+        fields = ("upc", "qc_status", "is_public", "date_updated")
         sequence = (
             "seller",
             "title",
@@ -28,6 +28,7 @@ class ProductTable(originaltables.ProductTable):
             "product_class",
             "variants",
             "stock_records",
+            "qc_status",
             "...",
             "is_public",
             "date_updated",

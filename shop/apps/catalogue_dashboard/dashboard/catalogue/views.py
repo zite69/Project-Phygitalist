@@ -1,18 +1,89 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import redirect
+from django.views.generic import View
+from django.contrib import messages
+from django.http import JsonResponse
 from oscar.apps.dashboard.catalogue import views as originalviews
 from shop.apps.catalogue_dashboard.dashboard.catalogue.forms import ProductForm, ProductSearchForm
 from shop.apps.catalogue_dashboard.dashboard.catalogue.tables import ProductTable
+from shop.apps.catalogue.models import Product, Seller
+from shop.apps.main.utils.email import send_products_approved
 from rules.contrib.views import PermissionRequiredMixin
+import json
+# from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as OGProductCreateUpdateView
 from icecream import ic
+
+# class ProductCreateUpdateView(OGProductCreateUpdateView):
+#     pass
+
+class ProductQcApproveAll(View):
+    def post(self, request, *args, **kwargs):
+        if not (request.user.is_superuser or request.user.groups.filter(name='Seller Admin').exists()):
+            messages.warning(request, "You are not authorized to Approve these products")
+            return HttpResponseRedirect(reverse("dashboard:catalogue-product-list"))
+
+        seller_id = request.POST.get("seller_id", "")
+        upc = request.POST.get("upc", "")
+        title = request.POST.get("title", "")
+
+        if seller_id != "":
+            try:
+                seller = Seller.objects.get(id=seller_id)
+            except Seller.DoesNotExist:
+                messages.warning(request, "Incorrect Seller Provided")
+                return HttpResponseRedirect(reverse("dashboard:catalogue-product-list"))
+
+            products_filter = Q(qc_status=Product.QcStatus.SUBMITTED)
+            if upc != "":
+                products_filter &= Q(upc__icontains=upc)
+
+            if title != "":
+                products_filter &= Q(title__icontains=title)
+            
+            products_qs = seller.products.filter(products_filter)
+            products = list(products_qs)
+            products_qs.update(qc_status=Product.QcStatus.APPROVED)
+            resp = send_products_approved(seller, products)
+            logger.debug("Got back response from send_products_approved")
+            logger.debug(resp)
+            messages.info(request, f"You have approved {len(products)} products for the Seller: {seller.handle}")
+            return HttpResponseRedirect(reverse("dashboard:catalogue-product-list"))
+        
+        messages.warning(request, "You must select a Seller who's products you wish to approve")
+        return HttpResponseRedirect(reverse("dashboard:catalogue-product-list"))
+
+class ProductQcApprove(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON Input"})
+
+        if not (request.user.is_superuser or request.user.groups.filter(name='Seller Admin').exists()):
+            return JsonResponse({"error": "Unauthorized user"})
+
+        product_id = data.get('product_id', '')
+        if product_id == '':
+            return JsonResponse({"error": "Invalid Product ID was passed"})
+
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return JsonResponse({"error": "Product does not exist"})
+
+        product.qc_status = Product.QcStatus.APPROVED
+        product.save()
+        
+        return JsonResponse({"message": "Product has been approved"})
+
 
 class ProductListView(originalviews.ProductListView):
     table_class = ProductTable
     form_class = ProductSearchForm
 
     def get(self, request, *args, **kwargs):
-        ic("inside catalogue dashboard")
+        # ic("inside catalogue dashboard")
         if not (request.user.is_superuser or request.user.groups.filter(name='Seller Admin').exists()):
             if not hasattr(request.user, 'seller'):
                 return redirect('/dashboard/onboarding/')
@@ -22,9 +93,9 @@ class ProductListView(originalviews.ProductListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['seller'] = 'Main Seller'
-        ic("Inside get_context_data")
-        ic(ctx)
-        ic(ctx['products'])
+        # ic("Inside get_context_data")
+        # ic(ctx)
+        # ic(ctx['products'])
         return ctx
 
 

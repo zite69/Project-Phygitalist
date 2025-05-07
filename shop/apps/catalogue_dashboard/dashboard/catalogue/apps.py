@@ -1,4 +1,5 @@
 import oscar.apps.dashboard.catalogue.apps as apps
+from django.urls import path, re_path
 from icecream import ic
 
 class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
@@ -12,7 +13,7 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
             AttributeOptionGroupDeleteView, AttributeOptionGroupListView, AttributeOptionGroupUpdateView,
             CategoryListView, CategoryCreateView, CategoryDeleteView, CategoryDetailListView, CategoryUpdateView,
             StockAlertListView, OptionCreateView, OptionDeleteView, OptionListView,
-            OptionUpdateView
+            OptionUpdateView, ProductQcApprove, ProductQcApproveAll
         )
 
         ret = super().ready()
@@ -45,4 +46,18 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
         self.option_update_view = OptionUpdateView
         self.option_delete_view = OptionDeleteView
 
+        self.product_qc_approve = ProductQcApprove
+        self.product_qc_approve_all = ProductQcApproveAll
+
         return ret
+
+    def get_urls(self):
+        urls = super().get_urls()
+        urls += [
+                path("api/approve/",
+                    self.product_qc_approve.as_view(),
+                    name="catalogue-product-qc-approve"
+                )
+            ]
+
+        return urls
