@@ -58,8 +58,17 @@ if not is_model_registered("catalogue", "AttributeOption"):
 
 if not is_model_registered("catalogue", "Product"):
     class Product(AbstractProduct):
+        class QcStatus(models.TextChoices):
+            NOT_SUBMITTED = 'NOT', _("Not Submitted")
+            SUBMITTED = 'SUB', _("Submitted")
+            APPROVED = 'APP', _("Approved")
+
         seller = models.ForeignKey(Seller, verbose_name=_("Seller"), on_delete=models.CASCADE,
                 related_name="products", blank=False, null=False, default=settings.ZITE69_MAIN_SELLER_ID)
+        qc_status = models.CharField(max_length=3, choices=QcStatus.choices, default=QcStatus.NOT_SUBMITTED)
+
+        def get_qc_status(self):
+            return self.QcStatus(self.qc_status).label
 
 if not is_model_registered("catalogue", "ProductClass"):
     class ProductClass(AbstractProductClass):

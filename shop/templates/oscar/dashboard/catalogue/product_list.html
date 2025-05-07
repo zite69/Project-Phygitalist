@@ -1,6 +1,9 @@
 {% extends 'oscar/dashboard/layout.html' %}
 {% load i18n %}
 {% load render_table from django_tables2 %}
+{% load django_tables2 %}
+{% load rules %}
+
 
 {% block body_class %}{{ block.super }} catalogue{% endblock %}
 
@@ -27,6 +30,15 @@
     </div>
 {% endblock header %}
 
+{% block extrastyles %}
+    {{ block.super }}
+    <style>
+    /* .card {
+        flex-direction: row;
+    } */
+    </style>
+{% endblock %}
+
 {% block dashboard_content %}
     {% block create_product %}
         <div class="table-header">
@@ -46,7 +58,7 @@
         <div class="table-header">
             <h3><i class="fas fa-search"></i> {% trans "Search Products" %}</h3>
         </div>
-        <div class="card card-body">
+        <div class="card card-body flex-row">
             <form method="get" class="form-inline">
                 {% comment %}
                     Add the current query string to the search form so that the
@@ -61,6 +73,15 @@
                 {% include "oscar/dashboard/partials/form_fields_inline.html" with form=form %}
                 <button type="submit" class="btn btn-primary" data-loading-text="{% trans 'Searching...' %}"><i class="fas fa-search"></i> {% trans "Search" %}</button>
             </form>
+            {% has_perm 'products.can_qc_product' request.user as can_qc_product %}
+            {% if request.GET.seller and can_qc_product  %}
+                <form method="post" action="" class="form-inline mx-2">
+                    <input type="hidden" name="seller_id" value="{{ request.GET.seller }}">
+                    <input type="hidden" name="upc" value="{{ request.GET.upc }}">
+                    <input type="hidden" name="title" value="{{ request.GET.title }}">
+                    <button type="submit" id="approvebtn" class="btn btn-primary mx-2">Approve Products</button>
+                </form>
+            {% endif %}
         </div>
     {% endblock %}
 
@@ -89,6 +110,22 @@
     {% endif %}
 
 {% endblock dashboard_content %}
+
+{% block extrascripts %}
+{{ block.super }}
+<script>
+    function approveProducts(evt) {
+        console.log("Approving products");
+        evt.preventDefault();
+    }
+
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+
+        });
+    })();
+</script>
+{% endblock %}
 
 {% block onbodyload %}
     {{ block.super }}

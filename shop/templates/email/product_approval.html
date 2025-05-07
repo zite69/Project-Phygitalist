@@ -34,14 +34,14 @@
   <!-- Product Approval Message -->
           <div class="message">
             <h2>Your Product is Approved!</h2>
-            <p>Hi <strong>[Seller Name]</strong>,</p>
-            <p>Great news! Your submitted product has passed our quality checks and is now approved on the Zite69 platform.</p>
+            <p>Hi <strong>{{ user.get_full_name }}</strong>,</p>
+            <p>Great news! Your submitted product(s) has passed our quality checks and is now approved on the Zite69 platform.</p>
             <p>Click the button below to view your product live on the marketplace.</p>
           </div>
 
           <!-- CTA Button -->
-          <a href="[Product View Link]" class="cta-button">View Product</a>
-
-         
+          {% for product in products %}
+          <a href="{{ product.get_absolute_url }}" class="cta-button">View Product</a>
+          {% endfor %}
           
 {% endblock %}

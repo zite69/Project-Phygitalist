@@ -1,5 +1,6 @@
 {% extends 'oscar/dashboard/layout.html' %}
 {% load i18n %}
+{% load rules %}
 
 {% block body_class %}{{ block.super }} create-page catalogue{% endblock %}
 
@@ -28,7 +29,7 @@
      </nav>
 {% endblock %}
 
-{% block headertext %}{{ title }}{% endblock %}
+{% block headertext %}{{ title }} | QC Status: {{ product.get_qc_status }} {% endblock %}
 
 {% block dashboard_content %}
     <form action="{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}" method="post" class="form-stacked wysiwyg fixed-actions" enctype="multipart/form-data" data-behaviour="tab-nav-errors" autocomplete="off">
@@ -381,6 +382,12 @@
                         <button class="btn btn-primary" name="action" type="submit" value="save" data-loading-text="{% trans 'Saving...' %}">
                             {% trans "Save" %}
                         </button>
+                        {% has_perm 'products.can_qc_product' request.user as can_qc_product %}
+                        {% if can_qc_product and product.qc_status == 'SUB' %}
+                        <button class="btn btn-primary" type="button" id="approvebtn" onclick="approveProduct(event)" value="approve" data-loading-text="Approving...">
+                            Approve 
+                        </button>
+                        {% endif %}
                     </div>
                     {% if product %}
                         <a class="btn btn-success" href="{{ product.get_absolute_url }}">{% trans "View on site" %}</a>
@@ -390,3 +397,26 @@
         {% endblock fixed_actions_group %}
     </form>
 {% endblock dashboard_content %}
+
+{% block extrascripts %}
+{{ block.super }}
+<script>
+async function approveProduct(evt) {
+    const csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
+    const response = await fetch("{% url 'dashboard:catalogue-product-qc-approve' %}", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrf
+      },
+        body: JSON.stringify({ "product_id": "{{ product.id }}", "csrfmiddlewaretoken": csrf } )
+    });
+    if (!response.ok) {
+      console.log(`Response was not ok ${response}`);
+    }
+    const result = await response.json();
+    console.log(result);
+    location.reload();
+}
+</script>
+{% endblock %}
