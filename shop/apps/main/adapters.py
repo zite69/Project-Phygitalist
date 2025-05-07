@@ -156,7 +156,10 @@ class AccountAdapter(DefaultAccountAdapter):
         return PhoneNumberFormField(region='IN')
 
     def get_phone(self, user):
-        return user.phone.as_international, user.phone_verified
+        if user.phone is not None:
+            return user.phone.as_international, user.phone_verified
+        else:
+            return "", False
 
     def set_phone(self, user, phone_number, verified):
         user.phone = phone_number
