@@ -179,3 +179,17 @@ def send_onboarding_rejection(user, seller, **kwargs):
     kwargs['seller'] = seller
 
     return send_email(user.email, **kwargs)
+
+def send_products_approved(seller, products, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/product_approval.html",
+        "subject": "Your product(s) is/are approved!"
+        })
+    if type(products) != list:
+        products = [products]
+
+    kwargs['products'] = products
+    kwargs['seller'] = seller
+    kwargs['user'] = seller.user
+
+    return send_email(seller.user.email, **kwargs)
