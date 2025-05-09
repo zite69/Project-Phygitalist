@@ -1,10 +1,12 @@
 from django.http.request import is_same_domain
+from django.urls import reverse
 from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductClass, AbstractProductAttribute, AbstractCategory, AbstractOption, AbstractProductCategory, AbstractAttributeOptionGroup, AbstractAttributeOption, AbstractProductRecommendation, AbstractProductImage, AbstractProductAttribute, AbstractProductAttributeValue
 from oscar.core.loading import is_model_registered
 from shop.apps.seller.models import Seller
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from shop.apps.main.utils.urls import get_absolute_url
 
 """
 The following code is just meta code to create classes inside this file like
@@ -66,9 +68,32 @@ if not is_model_registered("catalogue", "Product"):
         seller = models.ForeignKey(Seller, verbose_name=_("Seller"), on_delete=models.CASCADE,
                 related_name="products", blank=False, null=False, default=settings.ZITE69_MAIN_SELLER_ID)
         qc_status = models.CharField(max_length=3, choices=QcStatus.choices, default=QcStatus.NOT_SUBMITTED)
+        
+        def get_full_domain_url(self):
+            return get_absolute_url(site_id=settings.DEFAULT_SITE_ID, view_name="catalogue:detail", 
+                        product_slug=self.slug, pk=self.id)
+
+        def get_absolute_url(self):
+            if settings.SITE_ID == settings.DEFAULT_SITE_ID:
+                return reverse(
+                    "catalogue:detail", kwargs={"product_slug": self.slug, "pk": self.id}
+                )
+            else:
+                return self.get_full_domain_url()    
+
+
 
         def get_qc_status(self):
             return self.QcStatus(self.qc_status).label
+
+        def is_qc_submitted(self):
+            return self.QcStatus(self.qc_status) == Product.QcStatus.SUBMITTED
+
+        def is_qc_not_submitted(self):
+            return self.QcStatus(self.qc_status) == Product.QcStatus.NOT_SUBMITTED
+
+        def is_qc_approved(self):
+            return self.QcStatus(self.qc_status) == Product.QcStatus.APPROVED
 
 if not is_model_registered("catalogue", "ProductClass"):
     class ProductClass(AbstractProductClass):

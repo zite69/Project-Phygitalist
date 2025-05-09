@@ -9,10 +9,10 @@ def get_site_base_uri(site_id=settings.SITE_ID):
     protocol = 'https' if settings.USE_HTTPS else 'http'
     return f"{protocol}://{site.domain}"
 
-def get_absolute_url(site_id=settings.SITE_ID, view_name=""):
+def get_absolute_url(site_id=settings.SITE_ID, view_name="", **kwargs):
     sbu = get_site_base_uri(site_id=site_id)
     urlconf = 'shop.urls' if site_id == settings.DEFAULT_SITE_ID else 'shop.urls_seller'
     if view_name == "":
         return sbu
     else:
-        return f"{sbu}{reverse(view_name, urlconf=urlconf)}"
+        return f"{sbu}{reverse(view_name, urlconf=urlconf, kwargs=kwargs)}"
