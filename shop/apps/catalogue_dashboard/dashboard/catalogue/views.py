@@ -11,11 +11,19 @@ from shop.apps.catalogue.models import Product, Seller
 from shop.apps.main.utils.email import send_products_approved
 from rules.contrib.views import PermissionRequiredMixin
 import json
-# from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as OGProductCreateUpdateView
+from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as OGProductCreateUpdateView
 from icecream import ic
+import logging
 
-# class ProductCreateUpdateView(OGProductCreateUpdateView):
-#     pass
+logger = logging.getLogger(__package__)
+
+class ProductCreateUpdateView(OGProductCreateUpdateView):
+    def post(self, request, *args, **kwargs):
+        if self.object.qc_status == Product.QcStatus.APPROVED:
+            self.object.qc_status = Product.QcStatus.NOT_SUBMITTED
+            self.object.save()
+
+        return super().post(request, *args, **kwargs)
 
 class ProductQcApproveAll(View):
     def post(self, request, *args, **kwargs):
@@ -72,10 +80,16 @@ class ProductQcApprove(View):
         except Product.DoesNotExist:
             return JsonResponse({"error": "Product does not exist"})
 
-        product.qc_status = Product.QcStatus.APPROVED
+        status = data.get('status', 'approved')
+        if status == 'approved':
+            product.qc_status = Product.QcStatus.APPROVED
+            resp = send_products_approved(product.seller, [product])
+            logger.debug(f"Got back response: {resp} after sending products approved email")
+        else:
+            product.qc_status = Product.QcStatus.SUBMITTED
         product.save()
         
-        return JsonResponse({"message": "Product has been approved"})
+        return JsonResponse({"message": f"Product QC Status has been updated to {status}"})
 
 
 class ProductListView(originalviews.ProductListView):

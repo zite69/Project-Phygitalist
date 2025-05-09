@@ -32,7 +32,7 @@
 {% block headertext %}{{ title }} | QC Status: {{ product.get_qc_status }} {% endblock %}
 
 {% block dashboard_content %}
-    <form action="{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}" method="post" class="form-stacked wysiwyg fixed-actions" enctype="multipart/form-data" data-behaviour="tab-nav-errors" autocomplete="off">
+    <form action="{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}" id="product_form" method="post" class="form-stacked wysiwyg fixed-actions" enctype="multipart/form-data" data-behaviour="tab-nav-errors" autocomplete="off">
         {% csrf_token %}
 
         {% if parent %}
@@ -382,9 +382,15 @@
                         <button class="btn btn-primary" name="action" type="submit" value="save" data-loading-text="{% trans 'Saving...' %}">
                             {% trans "Save" %}
                         </button>
+                        {% has_perm 'products.can_edit_product' request.user product as can_edit_product %}
+                        {% if can_edit_product and product %}
+                        <button class="btn btn-primary" type="button" id="approvebtn" onclick="updateQc(event, 'submit')" value="submitting" data-loading-text="Submitting...">
+                            Submit for QC
+                        </button>
+                        {% endif %}
                         {% has_perm 'products.can_qc_product' request.user as can_qc_product %}
                         {% if can_qc_product and product.qc_status == 'SUB' %}
-                        <button class="btn btn-primary" type="button" id="approvebtn" onclick="approveProduct(event)" value="approve" data-loading-text="Approving...">
+                        <button class="btn btn-primary" type="button" id="approvebtn" onclick="updateQc(event, 'approve')" value="approve" data-loading-text="Approving...">
                             Approve 
                         </button>
                         {% endif %}
@@ -401,7 +407,18 @@
 {% block extrascripts %}
 {{ block.super }}
 <script>
-async function approveProduct(evt) {
+    function submitForm(event) {
+        const status = "{{ product.qc_status }}";
+        alert(status);
+        event.preventDefault();
+    }
+
+(function() {
+    const productForm = document.getElementById("product_form");
+    productForm.addEventListener("submit", submitForm);
+})();
+
+async function updateQc(evt, state) {
     const csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
     const response = await fetch("{% url 'dashboard:catalogue-product-qc-approve' %}", {
       method: "POST",
@@ -409,10 +426,11 @@ async function approveProduct(evt) {
         "Content-Type": "application/json",
         "X-CSRFToken": csrf
       },
-        body: JSON.stringify({ "product_id": "{{ product.id }}", "csrfmiddlewaretoken": csrf } )
+        body: JSON.stringify({ "product_id": "{{ product.id }}", "state": state, "csrfmiddlewaretoken": csrf } )
     });
     if (!response.ok) {
-      console.log(`Response was not ok ${response}`);
+      console.log(`Response was not ok`);
+      console.log(response);
     }
     const result = await response.json();
     console.log(result);
