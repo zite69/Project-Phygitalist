@@ -41,7 +41,7 @@
   </div>
 
   <!-- CTA Button -->
-  <a href="{% site_url SITE_SELLER 'catalogue-product-create' %}" class="cta-button">
+  <a href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}" class="cta-button">
     {% if seller.products.exist %}
       Continue Adding Products
     {% else %}
