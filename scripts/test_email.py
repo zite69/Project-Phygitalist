@@ -46,7 +46,7 @@ def run(*args):
     base = get_template(base_name)
     for n in base.template.nodelist:
         variables.update(get_var_nodes(n))
-    variables = list(filter(lambda n: n != 'base_uri', variables))
+    variables = list(filter(lambda n: n != 'base_uri' and n != 'block.super' , variables))
     if cmd == 'list':
         print(f"Variables inside {temp}.html: {variables}")
     elif cmd == 'send':
