@@ -68,3 +68,8 @@ update `pip` using `pip install -U pip` before running the
 
 # Payment Testing
 Use following credit cards for testing razorpay payment gateway - https://razorpay.com/docs/payments/payments/test-card-details/
+
+# Email Templates
+We use mjml for the email templates. mjml requires the npm mjml library and binary to be installed. Use npm 
+or pnpm to install the packages needed:
+`$ pnpm i`
