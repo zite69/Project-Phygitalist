@@ -160,7 +160,7 @@ def send_seller_rejection(user, registration, **kwargs):
 
 def send_onboarding_approval(user, seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/add_product.html",
+        "template": "email/mjml/add_product.html",
         "subject": "Your Seller Onboarding has been approved"
         } | kwargs)
 

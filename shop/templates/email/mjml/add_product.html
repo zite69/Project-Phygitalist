@@ -1,4 +1,5 @@
 {% load mjml %}
+{% load site_urls %}
 
 {% mjml %}
 <mjml version="3.3.3">
@@ -50,7 +51,11 @@
                     border-radius="25px"
                     width="420px"
                     href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}">
-            Add to Products
+            {% if seller.products.exist %}
+              Continue Adding Products
+            {% else %}
+              Add Your First Product
+            {% endif %}
           </mj-button>
       </mj-column>
     </mj-section>
