@@ -1,0 +1,12 @@
+<mj-section css-class="footer-seller-section" background-color="#79c6a4" background-repeat="repeat" padding="25px 15px" text-align="center">
+    <mj-column>
+        <mj-text css-class="footer-links" mj-class="white-normal">
+            <a href="#">Help Center</a> |
+            <a href="#">Privacy Policy</a> |
+            <a href="#">Terms of Service</a>
+        </mj-text>
+        <mj-text mj-class="white-normal">69mm &amp; iCommerce LLP</mj-text>
+        <mj-text mj-class="white-normal">#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66</mj-text>
+        <mj-text mj-class="white-normal">Email Support: <a href="mailto:support@zite69.com">support@zite69.com</a></mj-text>
+    </mj-column>
+</mj-section>

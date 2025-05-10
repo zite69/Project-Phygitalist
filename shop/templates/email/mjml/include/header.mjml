@@ -1,0 +1,5 @@
+<mj-section background-color="#f66569" background-repeat="repeat" padding="20px 0" text-align="center">
+      <mj-column>
+        <mj-image align="center" padding="10px 25px" src="https://www.zite69.com/static/img/zite69_shop.png" width="128px"></mj-image>
+      </mj-column>
+</mj-section>

@@ -54,6 +54,7 @@ django-localflavor==4.0
 django-messages @ git+https://github.com/zite69/django-messages.git@ca7f095ac03e3142d44621c5de31d16106e39e86
 django-modelcluster==6.3
 django-money==3.5.3
+django-mjml==1.4
 django-oscar==4.0a1
 #django-oscar-elasticsearch==3.0.0
 django-oscar-odin==0.3.0

@@ -179,6 +179,7 @@ INSTALLED_APPS = [
     'shop.apps.webinar.apps.WebinarConfig',
     'shop.apps.search.apps.SearchConfig',
     'djangocms_forms',
+    'mjml',
 ]
 
 if DEBUG:
@@ -272,6 +273,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# MJML Settings
+MJML_BACKEND_MODE = 'cmd'
+MJML_EXEC_CMD = BASE_DIR / 'node_modules' / 'mjml' / 'bin' / 'mjml'
 
 #FORM_RENDERER = "django.forms.renderers.Jinja2DivFormRenderer"
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
