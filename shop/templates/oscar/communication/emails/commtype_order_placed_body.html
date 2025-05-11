@@ -1,0 +1,117 @@
+{% load mjml %}
+{% load site_urls %}
+
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+    <mj-style>
+
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+    
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+    
+    <!-- content section starts here -->
+    <mj-section background-color="#f5f5f5" background-repeat="repeat" padding="25px" text-align="center">
+        <mj-column>
+            <mj-text mj-class="black-bold">Order Summary</mj-text>
+            <mj-text>Hello <strong>{{ user.get_full_name }}</strong></mj-text>
+            <mj-text>Thank you for your order. We'll send a confirmation when your order ships.</mj-text>
+            <mj-text>Your estimated delivery date is indicated below. To view the status of your order or make changes, visit <a href="{% site_url SITE_BUYER 'customer:order-list' %}" style="color:#f66569; text-decoration:underline;">Your Orders</a> on zite69.</mj-text>
+        </mj-column>
+    </mj-section>
+    <mj-section>
+        <mj-column>
+            <mj-text><span class="bold">Order #:</span>{{ order.number }}</mj-text>
+            <mj-text><span class="bold">Arriving :</span></mj-text>
+            <mj-text><span class="bold">To: </span>{{ order.shipping_address.salutation }}</mj-text>
+            <mj-text>{{ order.shipping_address.summary }}</mj-text>
+            <mj-text>{{ order.basket_total_incl_tax|currency:order.currency }}</mj-text>
+        </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" background-repeat="repeat" background-size="auto" padding="20px 0px 20px 0px" text-align="center">
+      <mj-column>
+          <mj-button background-color="#79c6a4" 
+                    color="blue" 
+                    border-radius="25px"
+                    width="420px"
+                    href="{% site_url SITE_BUYER 'customer:order' order.number %}">
+            View Order Details 
+          </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- content section ends --> 
+    <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}
+{% comment %}
+{% extends "oscar/communication/emails/base.html" %}
+{% load currency_filters i18n url_tags %}
+
+{% block tbody %}
+<tr>
+    <td class="content-block">
+        <p xmlns="http://www.w3.org/1999/html">{% trans 'Hello,' %}</p>
+        <p>{% blocktrans with order_number=order.number %}We are pleased to confirm your order {{ order_number }} has been received and
+        will be processed shortly.{% endblocktrans %}</p>
+    </td>
+</tr>
+
+<tr>
+    <td class="content-block">
+        <table class="order">
+            <tbody><tr>
+                <td>{% trans 'Your order contains:' %}</td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="order-items" cellpadding="0" cellspacing="0">
+                        <tbody>
+                            {% for line in order.lines.all %}
+                                <tr>
+                                    <td>{{ line.title }} &times; {{ line.quantity }}</td>
+                                    <td class="alignright">{{ line.line_price_incl_tax|currency:order.currency }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td class="alignright">{% trans 'Basket total:' %}</td>
+                                <td class="alignright">{{ order.basket_total_incl_tax|currency:order.currency }}</td>
+                            </tr>
+                            <tr>
+                                <td class="alignright">{% trans 'Shipping:' %}</td>
+                                <td class="alignright">{{ order.shipping_incl_tax|currency:order.currency }}</td>
+                            </tr>
+                            <tr class="total">
+                                <td class="alignright" width="80%">{% trans 'Order Total:' %}</td>
+                                <td class="alignright">{{ order.total_incl_tax|currency:order.currency }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody></table>
+    </td>
+</tr>
+
+<tr>
+    <td class="content-block">
+        <p>{% trans 'Shipping address:' %}</p>
+        <p>{% for field in order.shipping_address.active_address_fields %}  {{ field }}<br/>
+        {% endfor %}</p>
+    </td>
+</tr>
+
+{% if status_url %}
+    <tr>
+        <td class="content-block">
+            {% absolute_url site.domain status_path as absolute_status_url %}
+            {% blocktrans %}You can view the status of this order by clicking <a href="{{ absolute_status_url }}" title="order status">here</a>{% endblocktrans %}
+        </td>
+    </tr>
+{% endif %}
+
+{% endblock %}
+{% endcomment %}
