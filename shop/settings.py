@@ -73,6 +73,8 @@ INSTALLED_APPS = [
     'djangocms_text_ckeditor',
     'djangocms_alias',
     'djangocms_versioning',
+    'djangocms_link',
+    'djangocms_icon',
     'django_select2',
 
     'sekizai',
@@ -178,6 +180,7 @@ INSTALLED_APPS = [
     'shop.apps.zitepayment.apps.ZitepaymentConfig',
     'shop.apps.webinar.apps.WebinarConfig',
     'shop.apps.search.apps.SearchConfig',
+    'shop.apps.cmsplugins.apps.CmspluginsConfig',
     'djangocms_forms',
     'mjml',
 ]
@@ -399,7 +402,7 @@ SESSION_COOKIE_DOMAIN = env("ROOT_DOMAIN", default=".zite69.com")
 # https://docs.django-cms.org/en/release-4.1.x/reference/configuration.html#cms-templates
 
 CMS_TEMPLATES = (
-    #("cms/home.html", _("Home")),
+    ("cms/home.html", _("Home")),
     ("cms/live_soon.html", _("Livesoon")),
     ("cms/landing.html", _("Landing")),
     ("cms/career.html", _("Career")),

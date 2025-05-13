@@ -1,5 +1,10 @@
 (function ($) {
     'use strict';
+    window.addToBasket = function(product_id) {
+        const form = document.getElementById(`add_to_basket_form_${product_id}`);
+        form.submit();
+    };
+
     /*Product Details*/
     var productDetails = function () {
         $('.product-image-slider').slick({

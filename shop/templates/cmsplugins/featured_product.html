@@ -1,0 +1,71 @@
+{% load cms_tags %}
+{% load array_index %}
+{% load currency_filters %}
+{% load reviews_tags %}
+{% load product_tags %}
+{% load display_tags %}
+{% load i18n %}
+{% load purchase_info_tags %}
+{% load basket_tags %}
+
+<div class="col-lg-4 col-md-4 col-12 col-sm-6">
+    <div class="product-cart-wrap mb-30">
+      <div class="product-img-action-wrap">
+        <div class="product-img product-img-zoom">
+          <a href="shop-product-right.html">
+              <img class="default-img" src="{{ instance.product.primary_image.original.url }}" alt="">
+              {% with instance.product.get_all_images|array_index:1 as second_image %}
+                  {% if second_image %}
+                    <img class="hover-img" src="{{ second_image.original.url }}" alt="">
+                  {% else %}
+                    <img class="hover-img" src="{{ instance.product.primary_image.original.url }}" alt="">
+                  {% endif %}
+              {% endwith %}
+          </a>
+        </div>
+        <div class="product-action-1">
+          <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+          <a aria-label="Add To Wishlist" class="action-btn hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+          <a aria-label="Compare" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+        </div>
+        <div class="product-badges product-badges-position product-badges-mrg">
+            <span class="{{ instance.label_type }}">{{ instance.label }}</span>
+        </div>
+      </div>
+      <div class="product-content-wrap">
+        <div class="product-category">
+            <a href="{{ instance.product.categories.first.get_absolute_url }}">{{ instance.product.categories.first.full_name }}</a>
+        </div>
+        <h2><a href="{{ instance.product.get_absolute_url }}">{{ instance.product.title }}</a></h2>
+        <div class="rating-result" title="90%">
+          <span>
+            <span>90%</span>
+          </span>
+        </div>
+        <div class="product-price">
+        {% purchase_info_for_product request instance.product as session %}
+          <span>
+        {% if session.price.exists %}
+            {% if session.price.is_tax_known %}
+                {{ session.price.incl_tax|currency:session.price.currency }}
+            {% else %}
+                {{ session.price.excl_tax|currency:session.price.currency }}
+            {% endif %}
+        {% endif %}
+            </span>
+            <span class="old-price">[Members only price]</span>
+        </div>
+        <div class="product-action-1 show">
+            {% basket_form request instance.product as basket_form %}
+            <form id="add_to_basket_form_{{instance.product.pk}}" action="{% url 'basket:add' pk=instance.product.pk  %}" method="post" class="add-to-basket mb-0">
+                {% csrf_token %}
+                {#% include "oscar/partials/form_fields.html" with form=basket_form %#}
+                {% for field in basket_form %}
+                <input type="hidden" name="{{ field.name }}" value="{% if field.value %}{{ field.value}}{% endif %}">
+                {% endfor %}
+                <a class="action-btn hover-up" onclick="addToBasket({{instance.product.pk}})"><i class="fi-rs-shopping-bag-add"></i></a>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

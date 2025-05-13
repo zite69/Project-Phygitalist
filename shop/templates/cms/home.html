@@ -1,16 +1,1934 @@
-{% extends "oscar/layout.html" %}
+{% extends "cms/base.html" %}
 {% load cms_tags %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <header class="header-area header-style-4 header-height-2">
+        {% include "oscar/partials/header_top.html" %}
+        {% include "oscar/partials/header_middle.html" %}
+        {% include "oscar/partials/header_bottom.html" %}
+    </header>
+    {% include "oscar/partials/header_mobile.html" %}
+{% endblock %}
+
 {% block content %}
     <main class="main">
-        <section class="home-slider position-relative mb-30">
-            {% placeholder "carousel" %}
+        <section class="home-slider position-relative pt-25 pb-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="position-relative">
+                            <div class="hero-slider-1 style-3 dot-style-1 dot-style-1-position-1">
+                                <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                        <div class="slider-1-height-3 slider-animated-1">
+                                            <div class="hero-slider-content-2">
+                                                <h4 class="animated">Trade-In Offer</h4>
+                                                <h2 class="animated fw-900">Supper Value Deals</h2>
+                                                <h1 class="animated fw-900 text-brand">On All Products</h1>
+                                                <p class="animated">Save more with coupons &amp; up to 70% off</p>
+                                                <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Shop Now </a>
+                                            </div>
+                                            <div class="slider-img">
+                                                <img src="{% static 'img/slider/slider-4.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                        <div class="slider-1-height-3 slider-animated-1">
+                                            <div class="hero-slider-content-2">
+                                                <h4 class="animated">Tech Promotions</h4>
+                                                <h2 class="animated fw-900">Tech Trending</h2>
+                                                <h1 class="animated fw-900 text-brand">Great Collection</h1>
+                                                <p class="animated">Save more with coupons &amp; up to 20% off</p>
+                                                <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Shop Now </a>
+                                            </div>
+                                            <div class="slider-img">
+                                                <img src="{% static 'img/slider/slider-5.png' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                        <div class="slider-1-height-3 slider-animated-1">
+                                            <div class="hero-slider-content-2">
+                                                <h4 class="animated">Trade-In Offer</h4>
+                                                <h2 class="animated fw-900">Supper Value Deals</h2>
+                                                <h1 class="animated fw-900 text-brand">On All Products</h1>
+                                                <p class="animated">Save more with coupons &amp; up to 70% off</p>
+                                                <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Shop Now </a>
+                                            </div>
+                                            <div class="slider-img">
+                                                <img src="{% static 'img/slider/slider-shoes.jpg' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                        <div class="slider-1-height-3 slider-animated-1">
+                                            <div class="hero-slider-content-2">
+                                                <h4 class="animated">Tech Promotions</h4>
+                                                <h2 class="animated fw-900">Tech Trending</h2>
+                                                <h1 class="animated fw-900 text-brand">Great Collection</h1>
+                                                <p class="animated">Save more with coupons &amp; up to 20% off</p>
+                                                <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Shop Now </a>
+                                            </div>
+                                            <div class="slider-img">
+                                                <img src="{% static 'img/slider/slider_fashion.jpg' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-hero-slider single-animation-wrap">
+                                    <div class="container">
+                                        <div class="slider-1-height-3 slider-animated-1">
+                                            <div class="hero-slider-content-2">
+                                                <h4 class="animated">Trade-In Offer</h4>
+                                                <h2 class="animated fw-900">Supper Value Deals</h2>
+                                                <h1 class="animated fw-900 text-brand">On All Products</h1>
+                                                <p class="animated">Save more with coupons &amp; up to 70% off</p>
+                                                <a class="animated btn btn-brush btn-brush-3" href="shop-product-right.html"> Shop Now </a>
+                                            </div>
+                                            <div class="slider-img">
+                                                <img src="{% static 'img/slider/slider_ai.jpg' %}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% placeholder "carousel" %}
+                            <div class="slider-arrow hero-slider-1-arrow style-3"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 d-md-none d-lg-block">
+                        <div class="banner-img banner-1 wow fadeIn  animated home-3">
+                            <img class="border-radius-10" src="{% static 'img/banner/banner-5.jpg' %}" alt="">
+                            <div class="banner-text">
+                                <span>Accessories</span>
+                                <h4>Save 17% on <br>Autumn Hat</h4>
+                                <a href="shop-grid-right.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="banner-img banner-2 wow fadeIn  animated mb-0">
+                            <img class="border-radius-10" src="{% static 'img/banner/banner-7.jpg' %}" alt="">
+                            <div class="banner-text">
+                                <span>Smart Offer</span>
+                                <h4>Save 20% on <br>Eardrop</h4>
+                                <a href="shop-grid-right.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
+        <section class="featured section-padding">
+          <div class="container pb-25">
+            <div class="row">
+              <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="banner-features wow fadeIn animated hover-up">
+                  <img src="{% static 'img/theme/icons/D2C_Hub.png' %}" alt="">
+                  <h4 class="bg-1">Community Retail </h4>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="banner-features wow fadeIn animated hover-up">
+                  <img src="{% static 'img/theme/icons/Offline_Salesforce.png' %}" alt="">
+                  <h4 class="bg-3">Offline Salesforce</h4>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="banner-features wow fadeIn animated hover-up">
+                  <img src="{% static 'img/theme/icons/Instant_Cash_Rewards.png' %}" alt="">
+                  <h4 class="bg-2">Refferal Cash</h4>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="banner-features wow fadeIn animated hover-up">
+                  <img src="{% static 'img/theme/icons/Video_Call_Shop.png' %}" alt="">
+                  <h4 class="bg-4">Video Call Shop</h4>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="banner-features wow fadeIn animated hover-up">
+                  <img src="{% static 'img/theme/icons/Group_Buy.png' %}" alt="">
+                  <h4 class="bg-5">Group Buy</h4>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
+                <div class="banner-features wow fadeIn animated hover-up">
+                  <img src="{% static 'img/theme/icons/Negotiate.png' %}" alt="">
+                  <h4 class="bg-6">Negotiate</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="banners mb-20">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 col-md-6">
+                <div class="banner-img wow fadeIn animated">
+                  <img src="{% static 'img/banner/banner-1.png' %}" alt="">
+                  <div class="banner-text">
+                    <span>Seller HQ</span>
+                    <h4>5 Reasons to become  <br>a Z69 seller now</h4>
+                    <a href="https://www.zite69.com/en/">Know Now <i class="fi-rs-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6">
+                <div class="banner-img wow fadeIn animated">
+                  <img src="{% static 'img/banner/banner-2.png' %}" alt="">
+                  <div class="banner-text">
+                    <span>69Mutual Club</span>
+                    <h4> Shopping is the  <br>new superpower?</h4>
+                    <a href="https://www.zite69.com/en/">Get It <i class="fi-rs-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 d-md-none d-lg-flex">
+                <div class="banner-img wow fadeIn animated  mb-sm-0">
+                  <img src="{% static 'img/banner/banner-3.png' %}" alt="">
+                  <div class="banner-text">
+                    <span>1000 CEO Hunt</span>
+                    <h4>Own a supermarket<br>online in your pincode</h4>
+                    <a href="https://docs.google.com/forms/d/13eQhzwoG9uwonRL1tn-NYpj8H0QlY4q7dSlte2wm6ZA/viewform?pli=1&pli=1&edit_requested=true"> Check it <i class="fi-rs-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="product-tabs pt-25 pb-20 wow fadeIn animated">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-3">
+                <div class="widget-category mb-30">
+                  <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category Focus</h5>
+                  {% placeholder "category_focus" %}
+                </div>
+                <div class="widget-category mb-30">
+                  <h5 class="section-title style-1 mb-30 wow fadeIn animated">Editors’ Direct </h5>
+                  {% placeholder "editors_direct" %}
+                </div>
+                <div class="widget-category mb-30">
+                  <h5 class="section-title style-1 mb-30 wow fadeIn animated">Everything Under</h5>
+                  {% placeholder "everything_under" %}
+                </div>
+                <div class="banner-img wow fadeIn mb-45mb-lg-0 animated d-lg-block d-none">
+                  <img src="{% static 'img/banner/banner_ad-11.jpg' %}" alt="">
+                  <div class="ad_banner_text">
+                    <span>Sleepwear</span>
+                    <h4>Cactus Pillow<br>Only ₹450 Now</h4>
+                    <a href="https://www.zite69.com/en/">Shop It <i class="fi-rs-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-9">
+                <div class="tab-header">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Seasons Best</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Hot on Socials </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Stuff Near Me</button>
+                    </li>
+                  </ul>
+                  <a href="index.html#" class="view-more d-none d-md-flex">View More<i class="fi-rs-angle-double-small-right"></i></a>
+                </div>
+                <!--End nav-tabs-->
+                <div class="tab-content wow fadeIn animated" id="myTabContent">
+                  <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                        {% placeholder "tabone" %}
+                    <!--End product-grid-4-->
+                  </div>
+                  <!--En tab one (Featured)-->
+                  <div class="tab-pane fade" id="tab-two" role="tabpanel" aria-labelledby="tab-two">
+                        {% placeholder "tabtwo" %} 
+                    <!--End product-grid-4-->
+                  </div>
+                  <!--En tab two (Popular)-->
+                  <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-three">
+                        {% placeholder "tabthree" %} 
+                    <!--End product-grid-4-->
+                  </div>
+                  <!--En tab three (New added)-->
+                </div>
+                <!--End tab-content-->
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="banner-2 section-padding pb-0">
+          <div class="container">
+            <div class="banner-img banner-big wow fadeIn animated f-none">
+              <img src="{% static 'img/banner/Follow_Socials.png' %}" alt="">
+              <div class="banner-text d-md-block d-none">
+                <h4 class="mb-15 mt-40 text-brand">Buy Nothing Get Your Thing!</h4>
+                <h1 class="fw-600 mb-20">Follow Us on Our Socials &<br>Get Your Z69 Tee Free</h1>
+                <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                  <!-- <a href="https://www.facebook.com/ZITE69" target="_blank"><img src="{% static 'img/theme/icons/icon-facebook.svg' %}" alt=""></a>
+                  <a href="https://x.com/ZITE69_" target="_blank"><img src="{% static 'img/theme/icons/icon-twitter.svg' %}" alt=""></a>
+                  <a href="https://www.instagram.com/zite69_live/" target="_blank"><img src="{% static 'img/theme/icons/icon-instagram.svg' %}" alt=""></a>
+                  <a href="https://www.linkedin.com/company/zite69/" target="_blank"><img src="{% static 'img/theme/icons/icon-linkedin.svg' %}" alt=""></a>
+                  <a href="https://www.youtube.com/@ZITE69_" target="_blank"><img src="{% static 'img/theme/icons/icon-youtube.svg' %}" alt=""></a> -->
+                  <a href="https://zite69.com" target="_blank">Notify Me</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="popular-categories section-padding mt-15">
+          <div class="container wow fadeIn animated">
+            <h3 class="section-title mb-20"><span>Sale</span> Starts Soon</h3>
+            <div class="carausel-6-columns-cover position-relative">
+              <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows"></div>
+              <div class="carausel-6-columns" id="carausel-6-columns">
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/1-Dress.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Dress</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"> <img src="{% static 'img/shop/2-Shoes.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Shoes</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/3-Care.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Care</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/4-Jewellery.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Jewellery</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/5-Sunglasses.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#l">Sunglasses</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/6-USB_Chargers.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">USB Chargers</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/7-Media-Gears.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Media Gears</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/8-Fragrances.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Fragrances</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/9-Food.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Food</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/10-Artisan_Drinks.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Artisan Drinks</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/11-Naturals.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Naturals</a></h5>
+                </div>
+                <div class="card-1">
+                  <figure class=" img-hover-scale overflow-hidden">
+                    <a href="index.html#"><img src="{% static 'img/shop/12-Travel.jpg' %}" alt=""></a>
+                  </figure>
+                  <h5><a href="index.html#">Travel</a></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="deals section-padding">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 deal-co">
+                <div class="deal wow fadeIn animated mb-md-4 mb-sm-4 mb-lg-0" style="background-image: url('assets/imgs/banner/Banner_1.jpg');">
+                  <div class="deal-top">
+                    <h2 class="text-brand">Dream Sales Everyday!</h2>
+                    <h5>Free  for Early Bird Sellers </h5>
+                  </div>
+                  <div class="deal-content">
+                    <h6 class="product-title"><a href="shop-product-right.html">Become a Seller on ZITE69 & <br> Earn Your Dream Income</a></h6>
+                    <div class="product-price"><span class="new-price">₹0000</span><span class="timer_old_price">₹1690</span></div>
+                  </div>
+                  <div class="deal-bottom">
+                    <p>Pre-Launch Offer Ends In :</p>
+                    <div class="deals-countdown" data-countdown="2025/03/25 00:00:00"></div>
+                    <a href="https://www.zite69.com/en/" class="btn hover-up">Get  Your Invite<i class="fi-rs-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 deal-co">
+                <div class="deal wow fadeIn animated" style="background-image: url('assets/imgs/banner/Banner_2.jpg');">
+                  <div class="deal-top">
+                    <h2 class="text-success">Join 69M Club</h2>
+                    <h5>Free  Membership Now</h5>
+                  </div>
+                  <div class="deal-content">
+                    <h6 class="product-title"><a href="shop-product-right.html">Become a Club  Member & <br>Earn Through Referral Cash </a></h6>
+                    <div class="product-price"><span class="new-price">₹000</span><span class="timer_old_price">₹690</span></div>
+                  </div>
+                  <div class="deal-bottom">
+                    <p>Pre-Launch Offer Ends In :</p>
+                    <div class="deals-countdown" data-countdown="2026/03/25 00:00:00"></div>
+                    <a href="https://www.zite69.com/en/" class="btn hover-up">Get  Your Invite<i class="fi-rs-arrow-right"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="pt-25 pb-15">
+          <div class="container wow fadeIn animated">
+            <h3 class="section-title mb-20"><span>Group</span> Buy</h3>
+            <div class="carausel-6-columns-cover position-relative">
+              <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
+              <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
+                <div class="product-cart-wrap small hover-up">
+                  <div class="product-img-action-wrap">
+                    <div class="product-img product-img-zoom">
+                      <a href="index.html#">
+                        <img class="default-img" src="{% static 'img/shop/jeans-top-2-1.jpg' %}" alt="">
+                        <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                      </a>
+                    </div>
+                      <div class="product-badges product-badges-position product-badges-mrg">
+                        <span class="hot">Hot</span>
+                      </div>
+                    </div>
+                    <div class="product-content-wrap">
+                      <h2><a href="index.html#">White Tee,Jeans..</a></h2>
+                      <div class="rating-result" title="90%">
+                        <span>
+                        </span>
+                      </div>
+                      <div class="product-price">
+                        <span>₹1200</span>
+                        <span class="old-price">₹1600</span>
+                      </div>
+                    </div>
+                  </div>
+              <!--End product-cart-wrap-2-->
+              <div class="product-cart-wrap small hover-up">
+                <div class="product-img-action-wrap">
+                  <div class="product-img product-img-zoom">
+                    <a href="shop-product-right.html">
+                      <img class="default-img" src="{% static 'img/shop/makeup-2-2.jpg' %}" alt="">
+                      <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                    </a>
+                  </div>
+                    <div class="product-badges product-badges-position product-badges-mrg">
+                      <span class="new">New</span>
+                    </div>
+                  </div>
+                  <div class="product-content-wrap">
+                    <h2><a href="index.html#">Full Face Grooming Kit</a></h2>
+                    <div class="rating-result" title="90%">
+                      <span>
+                      </span>
+                    </div>
+                    <div class="product-price">
+                      <span>₹950</span>
+                      <span class="old-price">₹1500</span>
+                    </div>
+                  </div>
+                </div>
+                <!--End product-cart-wrap-2-->
+                <div class="product-cart-wrap small hover-up">
+                  <div class="product-img-action-wrap">
+                    <div class="product-img product-img-zoom">
+                      <a href="shop-product-right.html">
+                        <img class="default-img" src="{% static 'img/shop/cap-2-3.jpg' %}" alt="">
+                        <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                      </a>
+                    </div>
+                      <div class="product-badges product-badges-position product-badges-mrg">
+                        <span class="sale">Sale</span>
+                      </div>
+                    </div>
+                    <div class="product-content-wrap">
+                      <h2><a href="index.html#">Multi Colour Hats</a></h2>
+                      <div class="rating-result" title="90%">
+                        <span>
+                        </span>
+                      </div>
+                      <div class="product-price">
+                        <span>₹130/P300</span>
+                        <span class="old-price">₹630</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!--End product-cart-wrap-2-->
+                  <div class="product-cart-wrap small hover-up">
+                    <div class="product-img-action-wrap">
+                      <div class="product-img product-img-zoom">
+                        <a href="shop-product-right.html">
+                          <img class="default-img" src="{% static 'img/shop/pearls-2-4.jpg' %}" alt="">
+                          <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                        </a>
+                      </div>
+                        <div class="product-badges product-badges-position product-badges-mrg">
+                          <span class="hot">33%</span>
+                        </div>
+                      </div>
+                      <div class="product-content-wrap">
+                        <h2><a href="index.html#">Jewelry Materials</a></h2>
+                        <div class="rating-result" title="90%">
+                          <span>
+                          </span>
+                        </div>
+                        <div class="product-price">
+                          <span>₹ 1 -₹ 100</span>
+                          <span class="old-price">₹5-₹500</span>
+                        </div>
+                      </div>
+                    </div>
+                    <!--End product-cart-wrap-2-->
+                    <div class="product-cart-wrap small hover-up">
+                      <div class="product-img-action-wrap">
+                        <div class="product-img product-img-zoom">
+                          <a href="shop-product-right.html">
+                            <img class="default-img" src="{% static 'img/shop/spices-2-5.jpg' %}" alt="">
+                            <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                          </a>
+                        </div>
+                          <div class="product-badges product-badges-position product-badges-mrg">
+                            <span class="hot">-25%</span>
+                          </div>
+                        </div>
+                        <div class="product-content-wrap">
+                          <h2><a href="index.html#">Food Ingredients</a></h2>
+                          <div class="rating-result" title="90%">
+                            <span>
+                            </span>
+                          </div>
+                          <div class="product-price">
+                            <span>₹300</span>
+                            <span class="old-price">₹900</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!--End product-cart-wrap-2-->
+          <div class="product-cart-wrap small hover-up">
+            <div class="product-img-action-wrap">
+              <div class="product-img product-img-zoom">
+                <a href="shop-product-right.html">
+                  <img class="default-img" src="{% static 'img/shop/needle-thread-2-6.jpg' %}" alt="">
+                  <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                </a>
+              </div>
+                <div class="product-badges product-badges-position product-badges-mrg">
+                  <span class="new">New</span>
+                </div>
+              </div>
+              <div class="product-content-wrap">
+                <h2><a href="index.html#">Tailoring Materials</a></h2>
+                <div class="rating-result" title="90%">
+                  <span>
+                  </span>
+                </div>
+                <div class="product-price">
+                  <span>₹300</span>
+                  <span class="old-price">₹700</span>
+                </div>
+              </div>
+            </div>
+            <!--End product-cart-wrap-2-->
+            <div class="product-cart-wrap small hover-up">
+              <div class="product-img-action-wrap">
+                <div class="product-img product-img-zoom">
+                  <a href="shop-product-right.html">
+                    <img class="default-img" src="{% static 'img/shop/stationory-2-7.jpg' %}" alt="">
+                    <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                  </a>
+                </div>
+                </div>
+                <div class="product-content-wrap">
+                  <h2><a href="index.html#">School/Office Supply</a></h2>
+                  <div class="rating-result" title="90%">
+                    <span>
+                    </span>
+                  </div>
+                  <div class="product-price">
+                    <span>₹ Custom Rates </span>
+                  </div>
+                </div>
+              </div>
+              <!--End product-cart-wrap-2-->
+              <div class="product-cart-wrap small hover-up">
+                <div class="product-img-action-wrap">
+                  <div class="product-img product-img-zoom">
+                    <a href="shop-product-right.html">
+                      <img class="default-img" src="{% static 'img/shop/cashewnuts-2-8.jpg' %}" alt="">
+                      <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                    </a>
+                  </div>
+                  </div>
+                  <div class="product-content-wrap">
+                    <h2><a href="index.html#">Naturals</a></h2>
+                    <div class="rating-result" title="90%">
+                      <span>
+                      </span>
+                    </div>
+                    <div class="product-price">
+                      <span>₹600</span>
+                      <span class="old-price">₹900</span>
+                    </div>
+                  </div>
+                </div>
+                <!--End product-cart-wrap-2-->
+                <div class="product-cart-wrap small hover-up">
+                  <div class="product-img-action-wrap">
+                    <div class="product-img product-img-zoom">
+                      <a href="shop-product-right.html">
+                        <img class="default-img" src="{% static 'img/shop/screenprntg-2-9.jpg' %}" alt="">
+                        <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                      </a>
+                    </div>
+                    </div>
+                    <div class="product-content-wrap">
+                      <h2><a href="index.html#">Screen Printing Bulk</a></h2>
+                      <div class="rating-result" title="90%">
+                        <span>
+                        </span>
+                      </div>
+                      <div class="product-price">
+                        <span>₹600</span>
+                        <span class="old-price">₹900</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!--End product-cart-wrap-2-->
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="section-padding">
+            <div class="container pb-20">
+              <h3 class="section-title mb-20 wow fadeIn animated"><span>Brand</span> Samples</h3>
+              <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
+                <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-3-arrows"></div>
+                <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-1.png' %}" alt="">
+                  </div>
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-2.png' %}" alt="">
+                  </div>
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-3.png' %}" alt="">
+                  </div>
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-4.png' %}" alt="">
+                  </div>
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-5.png' %}" alt="">
+                  </div>
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-6.png' %}" alt="">
+                  </div>
+                  <div class="brand-logo">
+                    <img class="img-grey-hover" src="{% static 'img/banner/brand-3.png' %}" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="bg-grey-9 section-padding">
+            <div class="container pt-15 pb-25">
+              <div class="heading-tab d-flex">
+                <div class="heading-tab-left wow fadeIn animated">
+                  <h3 class="section-title mb-20"><span>ZITE69 </span>ADA Collabs</h3>
+                </div>
+                <div class="heading-tab-right wow fadeIn animated">
+                  <ul class="nav nav-tabs right no-border" id="myTab-1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="nav-tab-one-1" data-bs-toggle="tab" data-bs-target="#tab-one-1" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Vegan</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="nav-tab-two-1" data-bs-toggle="tab" data-bs-target="#tab-two-1" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Animal</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="nav-tab-three-1" data-bs-toggle="tab" data-bs-target="#tab-three-1" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Leaf</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+      <div class="row">
+        <div class="col-lg-3 d-none d-lg-flex">
+          <div class="banner-img style-2 wow fadeIn animated">
+            <video style="width: auto; height: 100%;" controls autoplay><source src="{% static 'img/banner/Left-Image.mp4' %}" type="video/mp4"></video>
+            <div class="banner-ad">
+              <span class="text_ad"><span>Limited Edition</span</span>
+              <h4 class="mt-5">Artisans, Designers & <br>Artists Together </h4>
+              <a href="index.html#" class="text-white">Shop Now <i class="fi-rs-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-12">
+          <div class="tab-content wow fadeIn animated" id="myTabContent-1">
+            <div class="tab-pane fade show active" id="tab-one-1" role="tabpanel" aria-labelledby="tab-one-1">
+              <div class="carausel-4-columns-cover arrow-center position-relative">
+                <div class="slider-arrow slider-arrow-2 carausel-4-columns-arrow" id="carausel-4-columns-arrows"></div>
+                <div class="carausel-4-columns carausel-arrow-center" id="carausel-4-columns">
+                  <div class="product-cart-wrap">
+                    <div class="product-img-action-wrap">
+                      <div class="product-img product-img-zoom">
+                        <a href="index.html#">
+                          <img class="default-img" src="{% static 'img/shop/product-vegan-1.jpg' %}" alt="">
+                          <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                        </a>
+                      </div>
+                      <div class="product-action-1">
+                        <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                          <i class="fi-rs-eye"></i></a>
+                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                          <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                        </div>
+                        <div class="product-badges product-badges-position product-badges-mrg">
+                          <span class="hot">Runs Out</span>
+                        </div>
+                      </div>
+                      <div class="product-content-wrap">
+                        <div class="product-category">
+                          <a href="index.html#">Unisex Shirt</a>
+                        </div>
+                        <h2><a href="index.html#">Carrot Shirt</a></h2>
+                        <div class="rating-result" title="90%">
+
+                        </div>
+                        <div class="product-price">
+                          <span>₹600 </span>
+                          <span class="old-price">₹900</span>
+                        </div>
+                        <div class="product-action-1 show">
+                          <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="product-cart-wrap">
+                      <div class="product-img-action-wrap">
+                        <div class="product-img product-img-zoom">
+                          <a href="index.html#">
+                            <img class="default-img" src="{% static 'img/shop/product-vegan-2.jpg' %}" alt="">
+                            <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                          </a>
+                        </div>
+                        <div class="product-action-1">
+                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                            <i class="fi-rs-eye"></i></a>
+                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                            <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                          </div>
+                          <div class="product-badges product-badges-position product-badges-mrg">
+                            <span class="new">Runs Out</span>
+                          </div>
+                        </div>
+                        <div class="product-content-wrap">
+                          <div class="product-category">
+                            <a href="index.html#">Unisex Shirt</a>
+                          </div>
+                          <h2><a href="index.html#">Lemon Shirt</a></h2>
+                          <div class="rating-result" title="90%">
+                          </div>
+                          <div class="product-price">
+                            <span>₹600 </span>
+                            <span class="old-price">₹900</span>
+                          </div>
+                          <div class="product-action-1 show">
+                            <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-cart-wrap">
+                        <div class="product-img-action-wrap">
+                          <div class="product-img product-img-zoom">
+                            <a href="index.html#">
+                              <img class="default-img" src="{% static 'img/shop/product-vegan-3.jpg' %}" alt="">
+                              <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                            </a>
+                          </div>
+                          <div class="product-action-1">
+                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                              <i class="fi-rs-eye"></i></a>
+                              <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                              <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                            </div>
+                            <div class="product-badges product-badges-position product-badges-mrg">
+                              <span class="best">Runs Out</span>
+                            </div>
+                          </div>
+                          <div class="product-content-wrap">
+                            <div class="product-category">
+                              <a href="index.html#">Unisex Shirt</a>
+                            </div>
+                            <h2><a href="index.html#">Tomato Shirt</a></h2>
+                            <div class="rating-result" title="90%">
+
+                            </div>
+                            <div class="product-price">
+                              <span>₹600</span>
+                              <span class="old-price">₹900</span>
+                            </div>
+                            <div class="product-action-1 show">
+                              <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="product-cart-wrap">
+                          <div class="product-img-action-wrap">
+                            <div class="product-img product-img-zoom">
+                              <a href="index.html#">
+                                <img class="default-img" src="{% static 'img/shop/product-vegan-4.jpg' %}" alt="">
+                                <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                              </a>
+                            </div>
+                            <div class="product-action-1">
+                              <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                <i class="fi-rs-eye"></i></a>
+                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                              </div>
+                              <div class="product-badges product-badges-position product-badges-mrg">
+                                <span class="hot">Runs Out</span>
+                              </div>
+                            </div>
+                            <div class="product-content-wrap">
+                              <div class="product-category">
+                                <a href="index.html#">Unisex Shirt</a>
+                              </div>
+                              <h2><a href="index.html#">Watermelon Shirt</a></h2>
+                              <div class="rating-result" title="90%">
+
+                              </div>
+                              <div class="product-price">
+                                <span>₹600 </span>
+                                <span class="old-price">₹900</span>
+                              </div>
+                              <div class="product-action-1 show">
+                                <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="product-cart-wrap">
+                            <div class="product-img-action-wrap">
+                              <div class="product-img product-img-zoom">
+                                <a href="shop-product-right.html">
+                                  <img class="default-img" src="{% static 'img/shop/product-vegan-3.jpg' %}" alt="">
+                                  <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                </a>
+                              </div>
+                              <div class="product-action-1">
+                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                  <i class="fi-rs-eye"></i></a>
+                                  <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                  <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                </div>
+                                <div class="product-badges product-badges-position product-badges-mrg">
+                                  <span class="sale">Runs Out</span>
+                                </div>
+                              </div>
+                              <div class="product-content-wrap">
+                                <div class="product-category">
+                                  <a href="index.html#">Unisex Shirt</a>
+                                </div>
+                                <h2><a href="index.html#">Tomato Shirt</a></h2>
+                                <div class="rating-result" title="90%">
+
+                                </div>
+                                <div class="product-price">
+                                  <span>₹600</span>
+                                  <span class="old-price">₹900 </span>
+                                </div>
+                                <div class="product-action-1 show">
+                                  <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--End tab-pane-->
+                      <div class="tab-pane fade" id="tab-two-1" role="tabpanel" aria-labelledby="tab-two-1">
+                        <div class="carausel-4-columns-cover arrow-center position-relative">
+                          <div class="slider-arrow slider-arrow-2 carausel-4-columns-arrow" id="carausel-4-columns-2-arrows"></div>
+                          <div class="carausel-4-columns carausel-arrow-center" id="carausel-4-columns-2">
+                            <div class="product-cart-wrap">
+                              <div class="product-img-action-wrap">
+                                <div class="product-img product-img-zoom">
+                                  <a href="index.html#">
+                                    <img class="default-img" src="{% static 'img/shop/Animal-1-1.jpg' %}" alt="">
+                                    <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                  </a>
+                                </div>
+                                <div class="product-action-1">
+                                  <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                    <i class="fi-rs-eye"></i></a>
+                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                    <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                  </div>
+                                  <div class="product-badges product-badges-position product-badges-mrg">
+                                    <span class="hot">Limited Edition</span>
+                                  </div>
+                                </div>
+                                <div class="product-content-wrap">
+                                  <div class="product-category">
+                                    <a href="index.html#">Handmade</a>
+                                  </div>
+                                  <h2><a href="index.html#">Animal Theme Bag</a></h2>
+                                  <div class="rating-result" title="90%">
+                                  </div>
+                                  <div class="product-price">
+                                    <span>₹900</span>
+                                    <span class="old-price">₹1240</span>
+                                  </div>
+                                  <div class="product-action-1 show">
+                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="product-cart-wrap">
+                                <div class="product-img-action-wrap">
+                                  <div class="product-img product-img-zoom">
+                                    <a href="index.html#">
+                                      <img class="default-img" src="{% static 'img/shop/Animal-1-2.jpg' %}" alt="">
+                                      <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                    </a>
+                                  </div>
+                                  <div class="product-action-1">
+                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                      <i class="fi-rs-eye"></i></a>
+                                      <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                      <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                    </div>
+                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                      <span class="new">Limited Edition</span>
+                                    </div>
+                                  </div>
+                                  <div class="product-content-wrap">
+                                    <div class="product-category">
+                                      <a href="index.html#">Handmade</a>
+                                    </div>
+                                    <h2><a href="index.html#">Monkey Bag</a></h2>
+                                    <div class="rating-result" title="90%">
+                                    </div>
+                                    <div class="product-price">
+                                      <span>₹360</span>
+                                      <span class="old-price">₹480</span>
+                                    </div>
+                                    <div class="product-action-1 show">
+                                      <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="product-cart-wrap">
+                                  <div class="product-img-action-wrap">
+                                    <div class="product-img product-img-zoom">
+                                      <a href="index.html#">
+                                        <img class="default-img" src="{% static 'img/shop/Animal-1-3.jpg' %}" alt="">
+                                        <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                      </a>
+                                    </div>
+                                    <div class="product-action-1">
+                                      <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                        <i class="fi-rs-eye"></i></a>
+                                        <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                        <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                      </div>
+                                      <div class="product-badges product-badges-position product-badges-mrg">
+                                        <span class="best">Limited Edition</span>
+                                      </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                      <div class="product-category">
+                                        <a href="index.html#">Handmade</a>
+                                      </div>
+                                      <h2><a href="index.html#">Elephant Bag</a></h2>
+                                      <div class="rating-result" title="90%">
+
+                                      </div>
+                                      <div class="product-price">
+                                        <span>₹360</span>
+                                        <span class="old-price">₹480</span>
+                                      </div>
+                                      <div class="product-action-1 show">
+                                        <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="product-cart-wrap">
+                                    <div class="product-img-action-wrap">
+                                      <div class="product-img product-img-zoom">
+                                        <a href="index.html#">
+                                          <img class="default-img" src="{% static 'img/shop/Animal-1-4.jpg' %}" alt="">
+                                          <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                        </a>
+                                      </div>
+                                      <div class="product-action-1">
+                                        <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                          <i class="fi-rs-eye"></i></a>
+                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                          <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                          <span class="hot">Limited Edition</span>
+                                        </div>
+                                      </div>
+                                      <div class="product-content-wrap">
+                                        <div class="product-category">
+                                          <a href="index.html#">Handmade</a>
+                                        </div>
+                                        <h2><a href="index.html#">Wolf Bag</a></h2>
+                                        <div class="rating-result" title="90%">
+
+                                        </div>
+                                        <div class="product-price">
+                                          <span>₹360</span>
+                                          <span class="old-price">₹480</span>
+                                        </div>
+                                        <div class="product-action-1 show">
+                                          <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="product-cart-wrap">
+                                      <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                          <a href="index.html#">
+                                            <img class="default-img" src="{% static 'img/shop/Animal-1-2.jpg' %}" alt="">
+                                            <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                          </a>
+                                        </div>
+                                        <div class="product-action-1">
+                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                            <i class="fi-rs-eye"></i></a>
+                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                            <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                          </div>
+                                          <div class="product-badges product-badges-position product-badges-mrg">
+                                            <span class="sale">Limited Edition </span>
+                                          </div>
+                                        </div>
+                                        <div class="product-content-wrap">
+                                          <div class="product-category">
+                                            <a href="index.html#">Handmade</a>
+                                          </div>
+                                          <h2><a href="index.html#">Monkey Bag</a></h2>
+                                          <div class="rating-result" title="90%">
+                                          </div>
+                                          <div class="product-price">
+                                            <span>₹360</span>
+                                            <span class="old-price">₹360</span>
+                                          </div>
+                                          <div class="product-action-1 show">
+                                            <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-three-1" role="tabpanel" aria-labelledby="tab-three-1">
+                                  <div class="carausel-4-columns-cover arrow-center position-relative">
+                                    <div class="slider-arrow slider-arrow-2 carausel-4-columns-arrow" id="carausel-4-columns-3-arrows"></div>
+                                    <div class="carausel-4-columns carausel-arrow-center" id="carausel-4-columns-3">
+                                      <div class="product-cart-wrap">
+                                        <div class="product-img-action-wrap">
+                                          <div class="product-img product-img-zoom">
+                                            <a href="index.html#">
+                                              <img class="default-img" src="{% static 'img/shop/product-tea-1.jpg' %}" alt="">
+                                              <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                            </a>
+                                          </div>
+                                          <div class="product-action-1">
+                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                              <i class="fi-rs-eye"></i></a>
+                                              <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                              <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                            </div>
+                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                              <span class="hot">Source Direct</span>
+                                            </div>
+                                          </div>
+                                          <div class="product-content-wrap">
+                                            <div class="product-category">
+                                              <a href="index.html#">Small Farm Produce</a>
+                                            </div>
+                                            <h2><a href="index.html#">Green Tea</a></h2>
+                                            <div class="rating-result" title="90%">
+
+                                            </div>
+                                            <div class="product-price">
+                                              <span>₹120</span>
+                                              <span class="old-price">₹480</span>
+                                            </div>
+                                            <div class="product-action-1 show">
+                                              <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="product-cart-wrap">
+                                          <div class="product-img-action-wrap">
+                                            <div class="product-img product-img-zoom">
+                                              <a href="index.html#">
+                                                <img class="default-img" src="{% static 'img/shop/product-tea-2.jpg' %}" alt="">
+                                                <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                              </a>
+                                            </div>
+                                            <div class="product-action-1">
+                                              <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                <i class="fi-rs-eye"></i></a>
+                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                              </div>
+                                              <div class="product-badges product-badges-position product-badges-mrg">
+                                                <span class="new">Source Direct </span>
+                                              </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                              <div class="product-category">
+                                                <a href="index.html#">Small Farm Produce</a>
+                                              </div>
+                                              <h2><a href="index.html#">Yellow Tea</a></h2>
+                                              <div class="rating-result" title="90%">
+                                              </div>
+                                              <div class="product-price">
+                                                <span>₹280</span>
+                                                <span class="old-price"> ₹480</span>
+                                              </div>
+                                              <div class="product-action-1 show">
+                                                <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="product-cart-wrap">
+                                            <div class="product-img-action-wrap">
+                                              <div class="product-img product-img-zoom">
+                                                <a href="index.html#">
+                                                  <img class="default-img" src="{% static 'img/shop/product-tea-3.jpg' %}" alt="">
+                                                  <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                                </a>
+                                              </div>
+                                              <div class="product-action-1">
+                                                <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                  <i class="fi-rs-eye"></i></a>
+                                                  <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                                  <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                                </div>
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                  <span class="best">Source Direct</span>
+                                                </div>
+                                              </div>
+                                              <div class="product-content-wrap">
+                                                <div class="product-category">
+                                                  <a href="index.html#">Small Farm Produce </a>
+                                                </div>
+                                                <h2><a href="index.html#">Black Tea</a></h2>
+                                                <div class="rating-result" title="90%">
+
+                                                </div>
+                                                <div class="product-price">
+                                                  <span>₹60</span>
+                                                  <span class="old-price">₹480</span>
+                                                </div>
+                                                <div class="product-action-1 show">
+                                                  <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="product-cart-wrap">
+                                              <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                  <a href="index.html#">
+                                                    <img class="default-img" src="{% static 'img/shop/product-tea-4.jpg' %}" alt="">
+                                                    <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                                  </a>
+                                                </div>
+                                                <div class="product-action-1">
+                                                  <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                    <i class="fi-rs-eye"></i></a>
+                                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                                  </div>
+                                                  <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">Source Direct</span>
+                                                  </div>
+                                                </div>
+                                                <div class="product-content-wrap">
+                                                  <div class="product-category">
+                                                    <a href="index.html#">Small Farm Produce </a>
+                                                  </div>
+                                                  <h2><a href="index.html#">White Tea</a></h2>
+                                                  <div class="rating-result" title="90%">
+
+                                                  </div>
+                                                  <div class="product-price">
+                                                    <span>₹200 </span>
+                                                    <span class="old-price">₹480</span>
+                                                  </div>
+                                                  <div class="product-action-1 show">
+                                                    <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div class="product-cart-wrap">
+                                                <div class="product-img-action-wrap">
+                                                  <div class="product-img product-img-zoom">
+                                                    <a href="index.html#">
+                                                      <img class="default-img" src="{% static 'img/shop/product-tea-2.jpg' %}" alt="">
+                                                      <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
+                                                    </a>
+                                                  </div>
+                                                  <div class="product-action-1">
+                                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                      <i class="fi-rs-eye"></i></a>
+                                                      <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                                                      <a aria-label="Compare" class="action-btn small hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                                                    </div>
+                                                    <div class="product-badges product-badges-position product-badges-mrg">
+                                                      <span class="sale">Source Direct</span>
+                                                    </div>
+                                                  </div>
+                                                  <div class="product-content-wrap">
+                                                    <div class="product-category">
+                                                      <a href="index.html#">Small Farm Produce</a>
+                                                    </div>
+                                                    <h2><a href="index.html#">Yellow Tea</a></h2>
+                                                    <div class="rating-result" title="90%">
+
+                                                    </div>
+                                                    <div class="product-price">
+                                                      <span>₹280 </span>
+                                                      <span class="old-price">₹480</span>
+                                                    </div>
+                                                    <div class="product-action-1 show">
+                                                      <a aria-label="Add To Cart" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <!--End tab-content-->
+                                      </div>
+                                      <!--End Col-lg-9-->
+                                    </div>
+                                  </div>
+                                </section>
+                                <section class="section-padding">
+                                  <div class="container pt-25 pb-20">
+                                    <div class="row">
+                                      <div class="col-lg-6">
+                                        <h3 class="section-title mb-20"><span>From</span> MagSZine </h3>
+                                        <div class="post-list mb-4 mb-lg-0">
+                                          <article class="wow fadeIn animated">
+                                            <div class="d-md-flex d-block">
+                                              <div class="post-thumb d-flex mr-15">
+                                                <a class="color-white" href="index.html#">
+                                                  <img src="{% static 'img/blog/Article-1.png' %}" alt="">
+                                                </a>
+                                              </div>
+                                              <div class="post-content">
+                                                <div class="entry-meta mb-10 mt-10">
+                                                  <a class="entry-meta meta-2" href="index.html#"><span class="post-in font-x-small">Daily Self</span></a>
+                                                </div>
+                                                <h4 class="post-title mb-25 text-limit-2-row">
+                                                  <a href="index.html#">Sleepless About Sleep? 7 ‘Mind Pills’ to Try</a>
+                                                </h4>
+                                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                                  <div>
+                                                    <span class="post-on">Nisha Paraman</span>
+                                                  </div>
+                                                  <a href="index.html#">Full Story</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="wow fadeIn animated">
+                                            <div class="d-md-flex d-block">
+                                              <div class="post-thumb d-flex mr-15">
+                                                <a class="color-white" href="index.html#">
+                                                  <img src="{% static 'img/blog/Article-2.jpg' %}" alt="">
+                                                </a>
+                                              </div>
+                                              <div class="post-content">
+                                                <div class="entry-meta mb-10 mt-10">
+                                                  <a class="entry-meta meta-2" href="index.html#"><span class="post-in font-x-small">Kreative Cook</span></a>
+                                                </div>
+                                                <h4 class="post-title mb-25 text-limit-2-row">
+                                                  <a href="https://szine.zite69.com/meet-bafat-from-mangalore-rechad-from-goa-and-another-hot-guy-from-mumbai/">Meet Bafat from Mangalore,Rechad from... </a>
+                                                </h4>
+                                                <div class="entry-meta meta-1 font-xs color-grey mt-10 pb-10">
+                                                  <div>
+                                                    <span class="post-on">Editors’ Club </span>
+                                                  </div>
+                                                  <a href="blog-post-right.html">Full Story</a>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </article>
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-6">
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <div class="banner-img banner-1 wow fadeIn animated">
+                                              <video style="max-width: 100%; height: auto;" width="261" height="322" controls autoplay loop>
+                                                <source src="{% static 'img/banner/Big-Box.mp4' %}" type="video/mp4"></video>
+                                              <div class="banner-text">
+                                                <span>Fashion Accessories</span>
+                                                <h4 class="blog_banner_text">More Style Less Spend <br>Upto 20% Off <br>on Jewellery </h4>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <div class="banner-img mb-15 wow fadeIn animated">
+                                              <img src="{% static 'img/banner/Box-1.png' %}" alt="">
+                                              <div class="banner-text">
+                                                <span>Ecosthetics</span>
+                                                <h4>Bamboo Theme <br>Shoes | ₹1000 </h4>
+                                                <a href="https://www.zite69.com/en/">Sale on Demand <i class="fi-rs-arrow-right"></i></a>
+                                              </div>
+                                            </div>
+                                            <div class="banner-img banner-2 wow fadeIn animated">
+                                              <img src="{% static 'img/banner/Box-Small-2.png' %}" alt="">
+                                              <div class="banner-text">
+                                                <span>Product of the Month</span>
+                                                <h4>Drop Earrings<br>on Fast Sale </h4>
+                                                <a href="https://www.zite69.com/en/">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </section>
+                                <section class="mb-50">
+                                  <div class="container">
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <div class="banner-bg wow fadeIn animated" style="background-image: url('assets/imgs/banner/Therapy.png')">
+                                          <div class="banner-content">
+                                            <h5 class="text-grey-4 mb-15">We are hiring </h5>
+                                            <h2 class="fw-600 brand_ad">Shopping is a Therapy. We Need Therapists.<br>Looking for Product Curators</h2>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </section>
+                                <section>
+                                  <div class="container">
+                                    <div class="row">
+                                      <div class="col-lg-3 col-md-6 mb-sm-5 mb-md-0">
+                                        <div class="banner-img style-2 wow fadeIn animated">
+                                          <video style="width: auto; height: 100%;" controls autoplay><source src="{% static 'img/banner/Giftzine69.mp4' %}" type="video/mp4"></video>
+                                            <div class="banner-ad_gift">
+                                              <div class="text_ad_gift">Gifts &amp; Games</div>
+                                              <div class="text_ad_gift"><span style="font-weight:bold; font-size:18px;">Creative Collections <br>for the <br>Art of Gifting</span></div>
+                                              <a href="index.html#">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                                            </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-lg-3 col-md-6 mb-sm-5 mb-md-0">
+                                        <h4 class="section-title style-1 mb-30 wow fadeIn animated">For Her</h4>
+                                        <div class="product-list-small wow fadeIn animated">
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Fullfoot_Intimate_Anklet-1.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Fullfoot Intimate Anklet</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹3000</span>
+                                                <span class="old-price">₹3000</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Special-Travles-Trips-2.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Surprise Her Stays </a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹3000</span>
+                                                <span class="old-price">₹4000</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Luxuary-Artisan-Perfumes-3.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Luxury Artisan Perfumes </a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹2000</span>
+                                                <span class="old-price">₹3000</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-3 col-md-6 mb-sm-5 mb-md-0">
+                                        <h4 class="section-title style-1 mb-30 wow fadeIn animated">For Him</h4>
+                                        <div class="product-list-small wow fadeIn animated">
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Rainbow-shirt-short-1.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Rainbow Shirt & Short</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹1000</span>
+                                                <span class="old-price">₹1450</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Themed-artworks-2.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Custom Artworks</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹500</span>
+                                                <span class="old-price">₹800</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Hand-carved-rings3.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Handcarved Rings</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹4500</span>
+                                                <span class="old-price">₹7000</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-3 col-md-6">
+                                        <h4 class="section-title style-1 mb-30 wow fadeIn animated">For Children</h4>
+                                        <div class="product-list-small wow fadeIn animated">
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Mother-made-Baby-Shoes-1.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Mothermade Baby Shoes</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹700</span>
+                                                <span class="old-price">₹1000</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Goblin-Dolls-2.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="index.html#">Goblin Dolls</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹300</span>
+                                                <span class="old-price">₹500</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                          <article class="row align-items-center">
+                                            <figure class="col-md-4 mb-0">
+                                              <a href="index.html#"><img src="{% static 'img/shop/Cowgirl-Jeans-Bags-3.jpg' %}" alt=""></a>
+                                            </figure>
+                                            <div class="col-md-8 mb-0">
+                                              <h4 class="title-small">
+                                                <a href="http://www.moksharoutesholidays.com/demo/z69/s#">Cowgirl Jeans Bag</a>
+                                              </h4>
+                                              <div class="product-price">
+                                                <span>₹280</span>
+                                                <span class="old-price">₹390</span>
+                                              </div>
+                                            </div>
+                                          </article>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                  </section>
+
         {% placeholder "content" %}
         <section class="whatsapp-chat">
             <a aria-label="Chat on WhatsApp" href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}"> <img alt="Chat on WhatsApp" src="{% static 'img/WhatsAppButtonGreenSmall.svg' %}" />
             </a> 
         </section>
     </main>
+{% endblock %}
+
+{% block footer %}
+    <footer class="main">
+      <section class="newsletter p-30 text-white wow fadeIn animated animated animated" style="visibility: visible;">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-7 mb-md-3 mb-lg-0">
+              <div class="row align-items-center">
+                <div class="col flex-horizontal-center">
+                  <img class="icon-email" src="{% static 'img/theme/icons/icon-email.svg' %}" alt="">
+                  <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
+                </div>
+                <div class="col my-4 my-md-0 des">
+                  <h5 class="font-size-15 ml-4 mb-0">We respect your inbox</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <!-- Subscribe Form -->
+              <form class="form-subcriber d-flex wow fadeIn animated animated animated" style="visibility: visible;">
+                <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
+                <button class="btn bg-dark text-white" type="submit">Subscribe</button>
+              </form>
+              <!-- End Subscribe Form -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+          <div class="footer-content">
+              <div class="footer-section">
+                  <h3>NEED HELP</h3>
+                  <ul>
+                      <li><a href="index.html#">Contact Us</a></li>
+                      <li><a href="index.html#">Track Order</a></li>
+                      <li><a href="index.html#">Returns & Refunds</a></li>
+                      <li><a href="index.html#">FAQs</a></li>
+                      <li><a href="index.html#">My Account</a></li>
+                  </ul>
+                  <div class="feature-item">
+                      <div class="feature-icon">₹</div>
+                      <div class="feature-text">COD Available</div>
+                  </div>
+                  <div class="feature-item">
+                      <div class="feature-icon">↻</div>
+                      <div class="feature-text">30 Days Easy Returns</div>
+                  </div>
+              </div>
+              <div class="footer-section">
+                  <h3>COMPANY</h3>
+                  <ul>
+                      <li><a href="index.html#">About Us</a></li>
+                      <li><a href="index.html#">Careers</a></li>
+                      <li><a href="index.html#">Gift Vouchers</a></li>
+                      <li><a href="index.html#">Community Initiatives</a></li>
+                  </ul>
+              </div>
+              <div class="footer-section">
+                  <h3>MORE INFO</h3>
+                  <ul>
+                      <li><a href="index.html#">T&C</a></li>
+                      <li><a href="index.html#">Privacy Policy</a></li>
+                      <li><a href="index.html#">Sitemap</a></li>
+                      <li><a href="index.html#">Blogs</a></li>
+                  </ul>
+              </div>
+              <div class="footer-section">
+                  <h3>OTHER LINKS</h3>
+                  <ul>
+                      <li><a href="index.html#">1</a></li>
+                      <li><a href="index.html#">2</a></li>
+                      <li><a href="index.html#">3</a></li>
+                      <li><a href="index.html#">4</a></li>
+                      <li><a href="index.html#" class="view-more">View More</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div class="social-links">
+              <span>Follow Us:</span>
+                <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
+                <a href="index.html#" target="_blank"><img src="{% static 'img/theme/icons/icon-facebook.svg' %}" alt=""></a>
+                <a href="index.html#" target="_blank"><img src="{% static 'img/theme/icons/icon-twitter.svg' %}" alt=""></a>
+                <a href="index.html#" target="_blank"><img src="{% static 'img/theme/icons/icon-instagram.svg' %}" alt=""></a>
+                <a href="index.html#" target="_blank"><img src="{% static 'img/theme/icons/icon-linkedin.svg' %}" alt=""></a>
+                <a href="index.html#" target="_blank"><img src="{% static 'img/theme/icons/icon-youtube.svg' %}" alt=""></a>
+              </div>
+          </div>
+          <div class="accordion">
+              <div class="accordion-header">
+                  <h3>NAVIGATION LINKS</h3>
+                  <span>-</span>
+              </div>
+              <div class="accordion-content">
+                  <div class="nav-grid">
+                      <!-- Fashion Section -->
+                      <div class="nav-category">
+                          <h3>Fashion</h3>
+                          <h4> <strong>For Everyone</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Women's Western Dress</a></li>
+                              <li><a href="index.html#">Women's Festive Wear</a></li>
+                              <li><a href="index.html#">Men's Modern Dress</a></li>
+                              <li><a href="index.html#">Men's Indian Wear</a></li>
+                              <li><a href="index.html#">Unisex Adult Clothing</a></li>
+                              <li><a href="index.html#">Children's Clothing</a></li>
+                              <li><a href="index.html#">Active & Athleisure</a></li>
+                              <li><a href="index.html#">Handcrafted & Designer Wear</a></li>
+                              <li><a href="index.html#">Everything Else in Fabrics</a></li>
+                              <li><a href="index.html#">Daily Workwear</a></li>
+                          </ul>
+                        </div>
+                          <h4><strong>Most Picked</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Flavoured Shirts</a></li>
+                              <li><a href="index.html#">Wedding Group Buy</a></li>
+                              <li><a href="index.html#">Ten Tee Bundle</a></li>
+                              <li><a href="index.html#">Saree by Kilo</a></li>
+                              <li><a href="index.html#">Viral Jeans</a></li>
+                              <li><a href="index.html#">Cut Through Shirt</a></li>
+                              <li><a href="index.html#">Fan Tees</a></li>
+                              <li><a href="index.html#">Local Prints</a></li>
+                              <li><a href="index.html#">Tomato Shirt</a></li>
+                              <li><a href="index.html#">Watermelon Shirt</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <!-- Accessorize Section -->
+                      <div class="nav-category">
+                          <h3>Accessorize</h3>
+                          <h4><strong>Styler Collection</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Jewelry</a></li>
+                              <li><a href="index.html#">Footwear</a></li>
+                              <li><a href="index.html#">Bags</a></li>
+                              <li><a href="index.html#">Sunglasses</a></li>
+                              <li><a href="index.html#">Trench</a></li>
+                              <li><a href="index.html#">Caps & Hats</a></li>
+                              <li><a href="index.html#">Belts</a></li>
+                              <li><a href="index.html#">Phone Cases</a></li>
+                              <li><a href="index.html#">Gadgets</a></li>
+                              <li><a href="index.html#">Wallets & Purses</a></li>
+                              <li><a href="index.html#">Personal Gears</a></li>
+                          </ul>
+                        </div>
+                          <h4><strong>Pick of the Day</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Love Shake Ring</a></li>
+                              <li><a href="index.html#">Bamboo Theme Shoes</a></li>
+                              <li><a href="index.html#">Rainbow Tote</a></li>
+                              <li><a href="index.html#">69 Special Edition Sunglass</a></li>
+                              <li><a href="index.html#">Cowgirl Caps</a></li>
+                              <li><a href="index.html#">Retro Belts</a></li>
+                              <li><a href="index.html#">Joker Theme Phone Case</a></li>
+                              <li><a href="index.html#">Men Bracelet</a></li>
+                              <li><a href="index.html#">Party Masks</a></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Beauty Section -->
+                      <div class="nav-category">
+                          <h3>Beauty for beYoutiful</h3>
+                          <h4><strong>Toe 2 Top</strong></h4>
+                          <div class="inline-list">
+                            <ul>
+                              <li><a href="index.html#">Face wash</a></li>
+                              <li><a href="index.html#">Facial kits</a></li>
+                              <li><a href="index.html#">Sunscreen</a></li>
+                              <li><a href="index.html#">Face oils</a></li>
+                              <li><a href="index.html#">Face bleach</a></li>
+                              <li><a href="index.html#">Face cream</a></li>
+                              <li><a href="index.html#">Night cream</a></li>
+                              <li><a href="index.html#">Cleanser</a></li>
+                              <li><a href="index.html#">Moisturizer</a></li>
+                              <li><a href="index.html#">Shampoo</a></li>
+                              <li><a href="index.html#">Hair Oil</a></li>
+                              <li><a href="index.html#">Hair Colour</a></li>
+                              <li><a href="index.html#">Hair Tools</a></li>
+                              <li><a href="index.html#">Body Lotion</a></li>
+                              <li><a href="index.html#">Body Scrub</a></li>
+                            </ul>
+                          </div>
+                          <h4><strong>Wellness & Health</strong>:</h4>
+                          <div class="inline-list">
+                              <ul>
+                              <li><a href="index.html#">Anti-Aging</a></li>
+                              <li><a href="index.html#">Hair Fall</a></li>
+                              <li><a href="index.html#">Weight Management</a></li>
+                              <li><a href="index.html#">Weight Gain</a></li>
+                              <li><a href="index.html#">Weight Loss</a></li>
+                            </ul>
+                          </div>
+                      </div>
+                      <!-- Food & Kitchen Section -->
+                      <div class="nav-category">
+                          <h3>Food & Kitchen 2 Kitchen</h3>
+                          <h4><strong>Homemade</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Pickles</a></li>
+                              <li><a href="index.html#">Chutney Powder</a></li>
+                              <li><a href="index.html#">Snacks</a></li>
+                              <li><a href="index.html#">Seed Balls</a></li>
+                              <li><a href="index.html#">Dried Leaves</a></li>
+                              <li><a href="index.html#">Smoked Meat</a></li>
+                              <li><a href="index.html#">Ethnic Masalas</a></li>
+                              <li><a href="index.html#">Jackfruit Halwa</a></li>
+                              <li><a href="index.html#">Calicut Halwa</a></li>
+                              <li><a href="index.html#">Eternal Bakery</a></li>
+                          </ul>
+                        </div>
+                          <h4><strong>Buy from Source</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Total Tea Shop</a></li>
+                              <li><a href="index.html#">Coffee Cocktails</a></li>
+                              <li><a href="index.html#">Honey</a></li>
+                              <li><a href="index.html#">Herbals</a></li>
+                              <li><a href="index.html#">Oils</a></li>
+                              <li><a href="index.html#">Herbs & Spices</a></li>
+                              <li><a href="index.html#">Jams & Spreads</a></li>
+                              <li><a href="index.html#">Pulses & Cereals</a></li>
+                              <li><a href="index.html#">Cookies</a></li>
+                              <li><a href="index.html#">Bread</a></li>
+                              <li><a href="index.html#">Brownies</a></li>
+                              <li><a href="index.html#">Cakes</a></li>
+                              <li><a href="index.html#">Cupcakes</a></li>
+                              <li><a href="index.html#">Pastries</a></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Home & Living Section -->
+                      <div class="nav-category">
+                          <h3>Home & Living Spaces</h3>
+                          <h4><strong>Indoor</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Wall Decor</a></li>
+                              <li><a href="index.html#">Bathroom Decor</a></li>
+                              <li><a href="index.html#">Living Room</a></li>
+                              <li><a href="index.html#">Sleepware</a></li>
+                              <li><a href="index.html#">Organizers</a></li>
+                              <li><a href="index.html#">Pet Supplies</a></li>
+                          </ul>
+                        </div>
+                          <h4><strong>Outdoor</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Garden Decor</a></li>
+                              <li><a href="index.html#">Artificial Potted Plants</a></li>
+                              <li><a href="index.html#">Candle Holders</a></li>
+                              <li><a href="index.html#">Wall Hooks</a></li>
+                              <li><a href="index.html#">Lanterns</a></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Mother, Kid & Toys Section -->
+                      <div class="nav-category">
+                          <h3>Mother, Kid & Toys</h3>
+                          <h4><strong>Creative Mom</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">DIY Story Books</a></li>
+                              <li><a href="index.html#">Mobile Deaddiction Kits</a></li>
+                              <li><a href="index.html#">Games & Puzzles</a></li>
+                              <li><a href="index.html#">Children's Books</a></li>
+                          </ul>
+                        </div>
+                          <h4><strong>Happy Childhood</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Retro Toys</a></li>
+                              <li><a href="index.html#">Kids Jewelry</a></li>
+                              <li><a href="index.html#">Kids Accessories</a></li>
+                              <li><a href="index.html#">Kids Games</a></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Shop the Trip Section -->
+                      <div class="nav-category">
+                          <h3>Shop the Trip: Stays & Fun</h3>
+                          <h4><strong>Buy from Source</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Affordable Stays (Wayanad, Kumarakom, Hampi)</a></li>
+                              <li><a href="index.html#">Organize a Member Trip</a></li>
+                              <li><a href="index.html#">Travel Gifts</a></li>
+                              <li><a href="index.html#">Books for Travelers</a></li>
+                              <li><a href="index.html#">Destination Kits</a></li>
+                              <li><a href="index.html#">Trekking Accessories</a></li>
+                              <li><a href="index.html#">Tickets, Coupons & Vouchers</a></li>
+                          </ul>
+                        </div>
+                          <h4><strong>Affordable Stays</strong></h4>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Bangalore</a></li>
+                              <li><a href="index.html#">Mysore</a></li>
+                              <li><a href="index.html#">Vagamon</a></li>
+                              <li><a href="index.html#">Coorg</a></li>
+                              <li><a href="index.html#">Munnar</a></li>
+                              <li><a href="index.html#">Masinagudi</a></li>
+                              <li><a href="index.html#">Ooty</a></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Other Categories Section -->
+                      <div class="nav-category">
+                          <h3>Other Categories</h3>
+                            <div class="inline-list">
+                          <ul>
+                              <li><a href="index.html#">Books, Films & Music</a></li>
+                              <li><a href="index.html#">Art & Collectibles</a></li>
+                              <li><a href="index.html#">Gifts & Games</a></li>
+                              <li><a href="index.html#">Events & Workshops</a></li>
+                              <li><a href="index.html#">Lifegoods for Goodlife</a></li>
+                              <li><a href="index.html#">Queerated for LGBTQGA+</a></li>
+                              <li><a href="index.html#">Digital Street Market</a></li>
+                              <li><a href="index.html#">Project GO</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="accordion">
+              <div class="accordion-header">
+                  <h3>OTHER DETAILS</h3>
+                  <span>+</span>
+              </div>
+              <div class="accordion-content" style="max-height: 0; padding: 0 15px;">
+                  <p>Other details content here</p>
+              </div>
+          </div>
+          <div class="payment-section">
+              <div class="payment-methods">
+                  <span>100% Secure Payment:</span>
+                  <div class="payment-logos">
+                      <img src="{% static 'img/theme/icons/phonepe.svg' %}" alt="PhonePe" class="payment-logo">
+                      <img src="{% static 'img/theme/icons/gpay.svg' %}" alt="Google Pay" class="payment-logo">
+                      <img src="{% static 'img/theme/icons/amazon.svg' %}" alt="Amazon Pay" class="payment-logo">
+                      <img src="{% static 'img/theme/icons/mastercard.svg' %}" alt="Mastercard" class="payment-logo">
+                      <img src="{% static 'img/theme/icons/paytm.svg' %}" alt="Paytm" class="payment-logo">
+                      <img src="{% static 'img/theme/icons/cod.svg' %}" alt="Cash on Delivery" class="payment-logo">
+                  </div>
+              </div>
+              <!-- <div class="shipping-partners">
+                  <span>Shipping Partners:</span>
+                  <div class="shipping-logos">
+                      <img src="/api/placeholder/40/20" alt="DTDC" class="shipping-logo">
+                      <img src="/api/placeholder/40/20" alt="Delhivery" class="shipping-logo">
+                      <img src="/api/placeholder/40/20" alt="India Post" class="shipping-logo">
+                      <img src="/api/placeholder/40/20" alt="Xpressbees" class="shipping-logo">
+                  </div>
+              </div> -->
+          </div>
+          <div class="copyright">
+              © 2025 69mm &amp; iCom LLP | E-mail <a href="mailto:hello@zite69.com">hello@zite69.com</a>
+          </div>
+      </footer>
+      <script>
+          // Simple accordion functionality
+          document.querySelectorAll('.accordion-header').forEach(header => {
+              header.addEventListener('click', function() {
+                  const content = this.nextElementSibling;
+                  if (content.style.maxHeight !== "0px" && content.style.maxHeight !== "") {
+                      content.style.maxHeight = "0px";
+                      content.style.padding = "0 15px";
+                      this.querySelector('span').textContent = '+';
+                  } else {
+                      content.style.maxHeight = "2000px"; // A large value to accommodate all content
+                      content.style.padding = "15px";
+                      this.querySelector('span').textContent = '-';
+                  }
+              });
+          });
+      </script>
+
+    </footer>
+{% endblock %}
+
+{% block extrascripts %}
+    <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-migrate-3.3.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/plugins/slick.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.syotimer.min.js' %}"></script>
+    <script src="{% static 'js/plugins/wow.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/plugins/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'js/plugins/magnific-popup.js' %}"></script>
+    <script src="{% static 'js/plugins/select2.min.js' %}"></script>
+    <script src="{% static 'js/plugins/waypoints.js' %}"></script>
+    <script src="{% static 'js/plugins/counterup.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/plugins/images-loaded.js' %}"></script>
+    <script src="{% static 'js/plugins/isotope.js' %}"></script>
+    <script src="{% static 'js/plugins/scrollup.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.vticker-min.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.theia.sticky.js' %}"></script>
+    <script src="{% static 'js/plugins/jquery.elevatezoom.js' %}"></script>
+    <!-- Template  JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/shop.js' %}"></script>
+
 {% endblock %}
