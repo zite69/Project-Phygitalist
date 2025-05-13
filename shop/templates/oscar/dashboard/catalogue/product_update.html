@@ -409,8 +409,15 @@
 <script>
     function submitForm(event) {
         const status = "{{ product.qc_status }}";
-        alert(status);
-        event.preventDefault();
+        if (status == 'APP') {
+            if (window.confirm("This Product is already Approved. Saving it will change its status to Not Submitted. Proceed?")) {
+                return true;
+            } else {
+                event.preventDefault();
+                return false;
+            }
+        }
+        return true;
     }
 
 (function() {
