@@ -32,6 +32,7 @@ from shop.apps.registration.views import MultiFormView
 from shop.apps.registration.forms import BankDetailsForm, SellerPickupAddressForm, SellerRemainingForm, TnCForm
 from shop.apps.seller.models import Seller
 from shop.apps.main.decorators import check_perm_404
+from shop.apps.main.views import LoginView
 
 import logging
 from django_downloadview import ObjectDownloadView
@@ -57,6 +58,7 @@ urlpatterns = i18n_patterns(
     path('dashboard/onboarding/', MultiFormView.as_view(form_classes=ONBOARDING_FORM_CLASSES), name="onboarding-wizard"),
     path('select2/', include('django_select2.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/login/', LoginView.as_view()),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
     path('mentor/', TemplateView.as_view(template_name='main/mentor.html'), name="mentor"),
