@@ -112,7 +112,7 @@ def send_email_otp(email, otp, **kwargs):
     return send_email(email, otp=otp, template="email/otp.html", subject="Your OTP to login to our site", **kwargs)
 
 def send_email_verification(email, otp, **kwargs):
-    return send_email(email, otp=otp, template="email/verification.html", subject="Verify your email address", **kwargs)
+    return send_email(email, otp=otp, template="email/otp_sellers.html", subject="Verify your email address", **kwargs)
 
 def send_email_invite(email, ctx):
     #Default context values
