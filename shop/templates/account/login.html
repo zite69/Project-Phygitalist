@@ -56,7 +56,7 @@
                         <form action="{% url 'account_request_login_code' %}" method="POST" id="request-code-form">
                             {% csrf_token %}
                             {{ request_code_form }}
-                            <button type="button" class="proceed-btn" name="submit" onclick="requestOtpFormSubmit()" value="Request OTP">
+                            <button type="submit" class="proceed-btn" name="submit" value="Request OTP">
                                 Request OTP
                             </button>
                         </form>
@@ -343,13 +343,16 @@
     return regex.test(email);
   }
 
-    function requestOtpFormSubmit() {
+    function requestOtpFormSubmit(event) {
         const requestForm = document.getElementById("request-code-form");
-        const email = document.getElementById("id_email").value.trim();
-        const phone = document.getElementById("id_phone").value.trim();
+        const email = document.querySelector("#request-code-form #id_email").value.trim();
+        const phone = document.querySelector("#request-code-form #id_phone").value.trim();
         if (email == '' && phone == '') {
             alert("You must specify either your phone number or email address that you have used to register your account with us");
+            event.preventDefault();
+            return false;
         }
+        return true;
     }
 
     async function requestOtp(emailPhone) {
