@@ -2,6 +2,10 @@
     document.addEventListener('DOMContentLoaded', () => {
         let currentForm = null;
 
+        const shippingPref = document.querySelector("#id_seller-shipping_preference_1");
+        console.log(shippingPref);
+        if (shippingPref && shippingPref != undefined)
+            shippingPref.disabled = true;
           // Attach the same focus (or click) listener to every input
           document.querySelectorAll('form input').forEach(inputEl => {
             inputEl.addEventListener('focus', onFocusInput);
