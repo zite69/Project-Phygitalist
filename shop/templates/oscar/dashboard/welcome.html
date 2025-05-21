@@ -1,0 +1,39 @@
+{% extends 'oscar/dashboard/layout.html' %}
+{% load i18n %}
+
+{% block headertext %}
+    {% trans "Dashboard" %}
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block dashboard_content %}
+  <div class="pgfx-body">
+    <div class="pgfx-bg"></div>
+    <div class="pgfx-box">
+      <div class="pgfx-title">Welcome to Your Dashboard</div>
+      <div class="pgfx-subtitle">We are building amazing things for you here!</div>
+      <div class="pgfx-progressbar">
+        <div class="pgfx-progress" id="pgfxProgress"></div>
+      </div>
+      <div class="pgfx-btnwrap">
+          <form id="welcome-form" action="" method="POST">
+                {% csrf_token %}
+                <button id="pgfxEnterBtn" type="submit" name="submit" value="Enter">Enter</button>
+          </form>
+      </div>
+    </div>
+  </div>
+  <script>
+    const progressEl = document.getElementById('pgfxProgress');
+    let progress = 0;
+    const updateProgress = () => {
+      progress += Math.random() * 3;
+      if (progress > 100) progress = 100;
+      progressEl.style.width = progress + '%';
+      if (progress < 100) requestAnimationFrame(updateProgress);
+    };
+    requestAnimationFrame(updateProgress);
+  </script>
+{% endblock %}

@@ -14,6 +14,7 @@ from django.core.exceptions import SuspiciousOperation
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
+from django.views.generic.edit import FormMixin
 from django.utils.decorators import classonlymethod
 from django.contrib import messages
 from django.core import serializers
@@ -25,7 +26,7 @@ from django.views.generic.edit import FormView
 from shop.apps.address.utils import get_default_country
 from shop.apps.main.errors import ConfigurationError
 from shop.apps.main.utils.sms import send_phone_otp
-from shop.apps.main.utils.email import send_email_verification
+from shop.apps.main.utils.email import send_email_verification, send_mail_mentor
 from shop.apps.main.utils.urls import get_site_base_uri
 from shop.apps.otp.utils import generate_otp
 from phonenumber_field.phonenumber import PhoneNumber
@@ -464,7 +465,7 @@ class MultiFormView(TemplateView):
     # an example key_property_lookup is {"pickup": {"user": "request.user.seller.sellerpickupaddress"}}
     key_property_lookup = {}
     template_name = "oscar/dashboard/wizard.html"
-    success_url = reverse_lazy("dashboard:index")
+    success_url = reverse_lazy("dashboard-welcome")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -733,3 +734,14 @@ class MultiFormView(TemplateView):
         initkwargs['form_classes'] = form_classes
         return super().as_view(**initkwargs)
 
+class WelcomePage(View):
+    template_name = "oscar/dashboard/welcome.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        logger.debug("inside WelcomePage.post")
+        resp = send_mail_mentor(request.user.seller)
+        logger.debug(f"Response after sending send_mail_mentor: {resp}")
+        return HttpResponseRedirect(reverse_lazy("dashboard:index"))

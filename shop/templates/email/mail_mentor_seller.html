@@ -1,9 +1,8 @@
 {% extends "email/base_seller.html" %}
+{% load site_urls %}
 
 {% block style %}
-
   {{ block.super }}
-
 
   .message {
       background-color: #f5f5f5;
@@ -14,7 +13,7 @@
       font-size: 16px;
     }
 
-      .cta-buttons {
+   .cta-buttons {
       margin-top: 20px;
       display: flex;
       gap: 10px;
@@ -43,7 +42,7 @@
           <div class="message">
             <h2 style="margin-top: 0;">Welcome Dashboard Mail</h2>
             <p><strong>Subject :</strong> Hi 👋 I am Nisha, your new zite69 business manager!</p>
-            <p>Dear <strong>[Seller Name]</strong>,</p>
+            <p>Dear <strong>{{ user.get_full_name }}</strong>,</p>
             <p>Wow, Congrats for completing your onboarding. We are good to go live now.<br>
             I am Nisha Paraman here to help you to become a successful seller on zite69.<br>
             I will be <strong>co-ordinating</strong> your team of managers, community exchange officers, member shoppers and of course; selling superfast!</p>
@@ -64,11 +63,7 @@
             <!-- CTA Buttons -->
             <div class="cta-buttons">
               <a href="[TalkNow URL]">Talk Now</a>
-              <a href="[AddProduct URL]">Add Your First Product</a>
+              <a href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}">Add Your First Product</a>
             </div>
           </div>
-
-
-         
-          
 {% endblock %}

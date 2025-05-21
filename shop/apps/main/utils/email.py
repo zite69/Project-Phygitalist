@@ -180,6 +180,17 @@ def send_onboarding_rejection(user, seller, **kwargs):
 
     return send_email(user.email, **kwargs)
 
+def send_mail_mentor(seller, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/mail_mentor_seller.html",
+        "subject": "Welcome to your Seller Dashboard!"
+        })
+
+    kwargs['user'] = seller.user
+    kwargs['seller'] = seller
+
+    return send_email(seller.user.email, **kwargs)
+
 def send_products_approved(seller, products, **kwargs):
     kwargs = kwargs | ({
         "template": "email/product_approval.html",

@@ -176,35 +176,4 @@
         {% endif %}
     </div>
 </div>
-
-  <div class="pgfx-body">
-    <div class="pgfx-bg"></div>
-    <div class="pgfx-box">
-      <div class="pgfx-title">Welcome to Your Dashboard</div>
-      <div class="pgfx-subtitle">We are building amazing things for you here!</div>
-      <div class="pgfx-progressbar">
-        <div class="pgfx-progress" id="pgfxProgress"></div>
-      </div>
-      <div class="pgfx-btnwrap">
-        <button id="pgfxEnterBtn">Enter</button>
-      </div>
-    </div>
-  </div>
-  <script>
-    const progressEl = document.getElementById('pgfxProgress');
-    let progress = 0;
-    const updateProgress = () => {
-      progress += Math.random() * 3;
-      if (progress > 100) progress = 100;
-      progressEl.style.width = progress + '%';
-      if (progress < 100) requestAnimationFrame(updateProgress);
-    };
-    requestAnimationFrame(updateProgress);
-
-    document.getElementById('pgfxEnterBtn').onclick = () => {
-      window.location.href = 'next-page.html';
-    };
-  </script>
- 
-<h1>my content</h1>
 {% endblock %}
