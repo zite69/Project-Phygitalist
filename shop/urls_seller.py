@@ -28,7 +28,7 @@ from django.conf.urls import (handler404, handler500, handler403)
 from django.contrib.sitemaps.views import sitemap
 # from django.contrib.auth.decorators import permission_required
 from shop.apps.registration.sitemaps import SITEMAPS
-from shop.apps.registration.views import MultiFormView
+from shop.apps.registration.views import MultiFormView, WelcomePage
 from shop.apps.registration.forms import BankDetailsForm, SellerPickupAddressForm, SellerRemainingForm, TnCForm
 from shop.apps.seller.models import Seller
 from shop.apps.main.decorators import check_perm_404
@@ -66,6 +66,7 @@ urlpatterns = i18n_patterns(
     path('invitation/', include((apps.get_app_config('invitation').urls[0], 'invitation'), namespace='invitation')),
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
+    path('dashboard/welcome/', WelcomePage.as_view(), name="dashboard-welcome"),
     path('dashboard/', apps.get_app_config('dashboard').urls),
     path('catalog/', apps.get_app_config('catalogue').urls),
     path('customer/', apps.get_app_config('customer').urls),
