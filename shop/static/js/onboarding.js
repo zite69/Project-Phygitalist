@@ -1,9 +1,27 @@
 (function() {
+    function scrollTo(hash) {
+        location.hash = '#' + hash + '-section';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         let currentForm = null;
 
+        const pickupPincode = document.getElementById("id_pickup-pincode");
+        const pickupPostcode = document.getElementById("id_pickup-postcode");
+        pickupPostcode.value = pickupPincode.value;
+        const msgDiv = document.querySelector(".alert.alert-success div.alertinner")
+        if (msgDiv && msgDiv != undefined) {
+            const msgContent = msgDiv.textContent.trim();
+            if (msgContent.startsWith("Your pickup address"))
+                scrollTo('bank');
+            if (msgContent.startsWith("Your bank"))
+                scrollTo('seller')
+            if (msgContent.startsWith("Your shipping"))
+                scrollTo('tnc');
+        }
+        
+        /* Disable the zite69 shipping preference */
         const shippingPref = document.querySelector("#id_seller-shipping_preference_1");
-        console.log(shippingPref);
         if (shippingPref && shippingPref != undefined)
             shippingPref.disabled = true;
           // Attach the same focus (or click) listener to every input

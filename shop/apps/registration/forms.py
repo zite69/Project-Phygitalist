@@ -19,7 +19,7 @@ from shop.apps.main.errors import ConfigurationError
 from shop.apps.otp.utils import authenticate_otp
 from shop.apps.user.models import Profile
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import HTML, MultiField, Submit, Layout, Row, Column, Div, Field, Fieldset
+from crispy_forms.layout import HTML, MultiField, Submit, Layout, Row, Column, Div, Field, Fieldset, Hidden
 from crispy_forms.bootstrap import AppendedText, StrictButton, InlineRadios
 from localflavor.in_.forms import INPANCardNumberFormField
 from .models import SellerRegistration, SellerProduct
@@ -982,7 +982,7 @@ class SellerPickupAddressForm(OnboardingFormMixin):
 
     class Meta:
         model = SellerPickupAddress
-        fields = ['line1', 'line2', 'line3', 'line4', 'state']
+        fields = ['line1', 'line2', 'line3', 'line4', 'state', 'postcode']
 
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1001,6 +1001,7 @@ class SellerPickupAddressForm(OnboardingFormMixin):
                ),
                Field('line4', placeholder="City"),
                'state',
+               Field('postcode', type="hidden")
                )
         self.helper.add_input(Submit(name="pickup", value="Save", css_class="btn btn-primary"))
 

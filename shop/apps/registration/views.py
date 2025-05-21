@@ -481,9 +481,13 @@ class MultiFormView(TemplateView):
 
     def update_forms(self):
         # Prepare forms with submit_id
+        submit_form = self.get_submit_form()
         for k, form_class in self.form_classes.items():
             # Try to get existing instance for ModelForms
             instance = self.get_existing_instance(form_class, k)
+            # logger.debug(f"Key: {k}")
+            # logger.debug("Instance")
+            # logger.debug(instance)
 
             # Initialize form with potential instance
             form_kwargs = {
@@ -500,7 +504,13 @@ class MultiFormView(TemplateView):
                 form_kwargs['instance'] = instance
 
             self.form_instances[k] = instance
-            self.forms[k] = form_class(**form_kwargs)
+            if self.request.method == "POST":
+                if submit_form == k:
+                    self.forms[k] = form_class(**form_kwargs)
+                else:
+                    self.forms[k] = form_class(**{k:v for k, v in form_kwargs.items() if k not in ['data', 'files']})
+            else:
+                self.forms[k] = form_class(**form_kwargs)
 
             self.forms[k].fields['submit_id'] = forms.CharField(initial=k)
             self.forms[k].helper.layout.append(Field('submit_id', type="hidden", template="registration/widgets/unprefixed_field.html"))
@@ -523,9 +533,11 @@ class MultiFormView(TemplateView):
         """
         # Check if this is a ModelForm
         if not issubclass(form_class, forms.ModelForm):
+            logger.debug("Returning None because form_class is not a ModelForm")
             return None
 
         if not hasattr(self.request.user, 'seller'):
+            logger.debug("Creating a seller for the current logged in user")
             try:
                 registration = SellerRegistration.objects.get(user=self.request.user)
             except SellerRegistration.DoesNotExist:
@@ -541,11 +553,14 @@ class MultiFormView(TemplateView):
         else:
             self.seller = self.request.user.seller
         if key == "pickup":
+            logger.debug("Returning instance for key = pickup")
             try:
                 return SellerPickupAddress.objects.get(seller=self.seller)
             except SellerPickupAddress.DoesNotExist:
                 return None
         elif key == "bank":
+            logger.debug("Returning instance for key = bank")
+            logger.debug(f"User: {self.request.user}")
             try:
                 return BankAccount.objects.get(user=self.request.user)
             except BankAccount.DoesNotExist:
@@ -581,10 +596,14 @@ class MultiFormView(TemplateView):
     def all_forms_valid(self):
         return all([form.is_valid() for _, form in self.forms.items()])
 
+    def get_submit_form(self):
+        return self.request.POST.get('submit_id', '') if self.request.method == "POST" else ""
+
     def post(self, request, *args, **kwargs):
         # Determine which form was submitted
-        key = request.POST.get('submit_id')
+        key = self.get_submit_form()
 
+        logger.debug(f"key: {key}")
         # Reinitialize forms with POST data
         #self.forms = OrderedDict()
         form_class = self.form_classes.get(key)
@@ -627,11 +646,11 @@ class MultiFormView(TemplateView):
             if form_key == "pickup":
                 instance.seller = self.seller
                 instance.country = india
-                messages.success(self.request, "Pickup Address saved successfully")
+                messages.success(self.request, "Your pickup address has been saved successfully, please continue with adding your bank details")
             elif form_key == "bank":
-                messages.success(self.request, "Bank Details saved successfully")
+                messages.success(self.request, "Your bank details have been saved successfully, please continue with adding your signature, GST doc & shipping")
             elif form_key == 'seller':
-                messages.success(self.request, "Shipping Preferences, GST/PAN and Signature saved successfully. ")
+                messages.success(self.request, "Your shipping preferences, GST/PAN and signature have been saved successfully. Please accept the Terms & Conditions")
             elif form_key == 'tnc':
                 messages.success(self.request, "Thank you for completing your onboarding with us. You may start adding products to your store catalogue. You will be notified via email when your Seller account is fully functional.")
 

@@ -105,21 +105,20 @@
             <section>
                 <div class="input-group">
                     <label>Pickup Pincode</label><span class="help-icon" data-bs-toggle="tooltip" title="Shop name requirements: • Must be between 4-30 characters • Can contain letters, numbers, and hyphens • Must be unique • Cannot contain special characters or spaces • Cannot start or end with a hyphen">?</span>
-                    <!-- <input type="number" placeholder="000000" /> -->
-                    <input type="text" value="{{ registration.postoffice.pincode }}" readonly="true">
+                    <input type="text" id="id_pickup-pincode" value="{{ registration.postoffice.pincode }}" readonly="true">
                      
                 </div>
             </section>
-            <section>
+            <section id="pickup-section">
                 {% crispy forms.pickup %}
             </section>
-            <section>
+            <section id="bank-section">
                 {% crispy forms.bank %}
             </section>
-            <section>
+            <section id="seller-section">
                 {% crispy forms.seller %}
             </section>
-            <section>
+            <section id="tnc-section">
                   <div class="box_terms">
                     <h2 class="terms-link">Terms and Condition</h2>
                     <button type="button" class="btn btn-primary" id="termsLink">Read &amp; Accept</a>
