@@ -7,7 +7,7 @@ def is_superuser(user):
 
 @rules.predicate
 def is_product_owner(user, product):
-    return product is None or (product is not None and product.seller == user.seller)
+    return product is None or product == '' or (product is not None and product.seller == user.seller)
 
 @rules.predicate
 def is_main_seller_admin(user):
