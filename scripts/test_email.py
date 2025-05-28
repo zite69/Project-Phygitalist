@@ -4,8 +4,8 @@ from django.template.base import VariableNode
 from shop.apps.main.utils.email import send_email
 
 MAP_TO_SUBJECT = {
-    'otp_buyer': 'Your OTP to login to our site',
-    'otp_seller': 'Your OTP to login to our site',
+    'otp_buyers': 'Your OTP to login to our site',
+    'otp_sellers': 'Your OTP to login to our site',
     'item_shipped': 'Item shipped to you',
     'invitation':  'Your Invitation link',
     'approval_registration': 'Approval Registration',
