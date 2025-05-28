@@ -383,14 +383,14 @@
                             {% trans "Save" %}
                         </button>
                         {% has_perm 'products.can_edit_product' request.user product as can_edit_product %}
-                        {% if can_edit_product and product %}
-                        <button class="btn btn-primary" type="button" id="approvebtn" onclick="updateQc(event, 'submit')" value="submitting" data-loading-text="Submitting...">
+                        {% if can_edit_product and product and product.qc_status == 'NOT' %}
+                        <button class="btn btn-primary" type="button" id="approvebtn" name="action" onclick="updateQc(event, 'submit')" value="submitqc" data-loading-text="Submitting...">
                             Submit for QC
                         </button>
                         {% endif %}
                         {% has_perm 'products.can_qc_product' request.user as can_qc_product %}
                         {% if can_qc_product and product.qc_status == 'SUB' %}
-                        <button class="btn btn-primary" type="button" id="approvebtn" onclick="updateQc(event, 'approve')" value="approve" data-loading-text="Approving...">
+                        <button class="btn btn-primary" type="button" id="approvebtn" name="action" onclick="updateQc(event, 'approved')" value="approve" data-loading-text="Approving...">
                             Approve 
                         </button>
                         {% endif %}
@@ -426,6 +426,7 @@
 })();
 
 async function updateQc(evt, state) {
+    const form = document.getElementById("product_form");
     const csrf = document.querySelector("input[name='csrfmiddlewaretoken']").value;
     const response = await fetch("{% url 'dashboard:catalogue-product-qc-approve' %}", {
       method: "POST",
@@ -433,7 +434,7 @@ async function updateQc(evt, state) {
         "Content-Type": "application/json",
         "X-CSRFToken": csrf
       },
-        body: JSON.stringify({ "product_id": "{{ product.id }}", "state": state, "csrfmiddlewaretoken": csrf } )
+        body: JSON.stringify({ "product_id": "{{ product.id }}", "status": state, "csrfmiddlewaretoken": csrf } )
     });
     if (!response.ok) {
       console.log(`Response was not ok`);
@@ -441,7 +442,12 @@ async function updateQc(evt, state) {
     }
     const result = await response.json();
     console.log(result);
-    location.reload();
+    if (result.hasOwnProperty("error")) {
+        alert(result['error']);
+        return;
+    } else {
+        location.reload();
+    }
 }
 </script>
 {% endblock %}

@@ -4,9 +4,10 @@ from icecream import ic
 
 class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
     name = 'shop.apps.catalogue_dashboard.dashboard.catalogue'
+    label = "catalogue_dashboard"
 
     def ready(self):
-        from .views import ( 
+        from shop.apps.catalogue_dashboard.dashboard.catalogue.views import ( 
             ProductListView, ProductClassCreateUpdateView, ProductClassCreateView, ProductClassDeleteView,
             ProductClassListView, ProductClassUpdateView, ProductCreateRedirectView, ProductCreateUpdateView,
             ProductDeleteView, ProductLookupView, AttributeOptionGroupCreateUpdateView, AttributeOptionGroupCreateView,
@@ -16,7 +17,6 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
             OptionUpdateView, ProductQcApprove, ProductQcApproveAll
         )
 
-        ret = super().ready()
         self.product_list_view = ProductListView
         self.product_lookup_view = ProductLookupView
         self.product_create_redirect_view = ProductCreateRedirectView
@@ -48,8 +48,6 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
 
         self.product_qc_approve = ProductQcApprove
         self.product_qc_approve_all = ProductQcApproveAll
-
-        return ret
 
     def get_urls(self):
         urls = super().get_urls()

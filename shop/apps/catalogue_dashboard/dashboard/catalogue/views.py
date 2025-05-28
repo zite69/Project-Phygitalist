@@ -18,7 +18,14 @@ import logging
 logger = logging.getLogger(__package__)
 
 class ProductCreateUpdateView(OGProductCreateUpdateView):
+    def dispatch(self, request, *args, **kwargs):
+        logger.debug("inside dispatch")
+        print("in here!!!")
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
+        logger.debug("Inside ProductCreateUpdateView")
+        logger.debug(request.POST)
         if self.object.qc_status == Product.QcStatus.APPROVED:
             self.object.qc_status = Product.QcStatus.NOT_SUBMITTED
             self.object.save()
@@ -61,15 +68,16 @@ class ProductQcApproveAll(View):
         messages.warning(request, "You must select a Seller who's products you wish to approve")
         return HttpResponseRedirect(reverse("dashboard:catalogue-product-list"))
 
+def has_permission(user, product):
+    return (user.is_superuser or user.groups.filter(name='Seller Admin').exists() 
+            or product.seller.user == user or product.seller.admin == user)
+
 class ProductQcApprove(View):
     def post(self, request, *args, **kwargs):
         try:
             data = json.loads(request.body)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON Input"})
-
-        if not (request.user.is_superuser or request.user.groups.filter(name='Seller Admin').exists()):
-            return JsonResponse({"error": "Unauthorized user"})
 
         product_id = data.get('product_id', '')
         if product_id == '':
@@ -80,7 +88,11 @@ class ProductQcApprove(View):
         except Product.DoesNotExist:
             return JsonResponse({"error": "Product does not exist"})
 
+        if not has_permission(request.user, product):
+            return JsonResponse({"error": "Unauthorized user"})
+
         status = data.get('status', 'approved')
+        logger.debug(f"product: {product} status: {status}")
         if status == 'approved':
             product.qc_status = Product.QcStatus.APPROVED
             resp = send_products_approved(product.seller, [product])
