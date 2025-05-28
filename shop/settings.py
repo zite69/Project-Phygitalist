@@ -636,7 +636,42 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': False
-        }
+        },
+        'shop.apps.catalogue': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.catalogue_dashboard.dashboard.catalogue': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.address': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.wishlist': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.checkout': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.partner': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
+        'shop.apps.zitepayment': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False
+        },
     }
 }
 
