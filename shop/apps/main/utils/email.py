@@ -204,3 +204,14 @@ def send_products_approved(seller, products, **kwargs):
     kwargs['user'] = seller.user
 
     return send_email(seller.user.email, **kwargs)
+
+def send_order_placed_to_seller(seller, order, **kwargs):
+    kwargs = kwargs | ({
+        "template": "email/order_notification.html",
+        "subject": "You have received a new order!"
+        })
+
+    kwargs['seller'] = seller
+    kwargs['order'] = order
+
+    return send_email(seller.user.email, **kwargs)

@@ -7,3 +7,7 @@ class CatalogueConfig(apps.CatalogueConfig):
     namespace = 'catalogue'
     verbose_name = 'Catalogue'
 
+
+    def ready(self):
+        import shop.apps.catalogue.signals
+        return super().ready()

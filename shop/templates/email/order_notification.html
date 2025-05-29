@@ -1,4 +1,5 @@
 {% extends "email/base_seller.html" %}
+{% load site_urls %}
 
 {% block style %}
 
@@ -34,14 +35,11 @@
   <!-- Order Notification Message -->
           <div class="message">
             <h2>You've Received a New Order!</h2>
-            <p>Hi <strong>[Seller Name]</strong>,</p>
+            <p>Hi <strong>{{ seller.user.get_full_name }}</strong>,</p>
             <p>You have a new order placed through Zite69.</p>
             <p>Click the button below to view the order details and manage it from your dashboard.</p>
           </div>
 
           <!-- CTA Button -->
-          <a href="[Order Page Link]" class="cta-button">View Order</a>
-
-         
-          
+          <a href="{% site_url SITE_SELLER 'dashboard:order-detail' number=order.number %}" class="cta-button">View Order</a>
 {% endblock %}
