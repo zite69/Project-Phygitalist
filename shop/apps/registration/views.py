@@ -743,5 +743,7 @@ class WelcomePage(View):
     def post(self, request, *args, **kwargs):
         logger.debug("inside WelcomePage.post")
         resp = send_mail_mentor(request.user.seller)
+        request.user.is_staff = True
+        request.user.save()
         logger.debug(f"Response after sending send_mail_mentor: {resp}")
         return HttpResponseRedirect(reverse_lazy("dashboard:index"))
