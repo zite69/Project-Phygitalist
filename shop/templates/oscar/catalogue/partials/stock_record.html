@@ -1,5 +1,6 @@
 {% load currency_filters %}
 {% load i18n %}
+{% load basket_tags %}
 {% load purchase_info_tags %}
 {% load static %}
 
@@ -10,16 +11,16 @@
         <p class="price_color">{% trans "Free" %}</p>
     {% elif session.price.is_tax_known %}
          <div class="clearfix product-price-cover">
-                                            <div class="product-price primary-color float-left">
-                                                <ins><span class="text-brand">{{ session.price.excl_tax|currency:session.price.currency }}</span></ins>
-                                                <span>[Member Only Price]</span><span class="original_price font-md ml-15">Original Price : ₹800 {{ session.price.retail }}</span>
-                                                <div class="super_line">
-                                                <span><img src="{% static 'img/icons/icon-luckyspin.svg' %}" alt="" class="icon_special">Luckydraw</span>
-                                                <span><img src="{% static 'img/icons/icon-superlink.svg' %}" alt="" class="icon_special">Referral Cash</span>
-                                                <span><img src="{% static 'img/icons/group_buy.svg' %}" alt="" class="icon_special">Group Buy</span>
-                                                </div>
-                                            </div>
-                                        </div>
+            <div class="product-price primary-color float-left">
+                <ins><span class="text-brand">{{ session.price.excl_tax|currency:session.price.currency }}</span></ins>
+                <span>[Member Only Price]</span><span class="original_price font-md ml-15">Original Price : ₹ {{ product.stockrecords.first.price }}</span>
+                <div class="super_line">
+                <span><img src="{% static 'img/icons/icon-luckyspin.svg' %}" alt="" class="icon_special">Luckydraw</span>
+                <span><img src="{% static 'img/icons/icon-superlink.svg' %}" alt="" class="icon_special">Referral Cash</span>
+                <span><img src="{% static 'img/icons/group_buy.svg' %}" alt="" class="icon_special">Group Buy</span>
+                </div>
+            </div>
+        </div>
     {% else %}
         <p class="price_color">{{ session.price.excl_tax|currency:session.price.currency }}</p>
     {% endif %}
@@ -97,60 +98,80 @@
         </div>
     </div>
     <div class="product_sort_info font-xs mb-30">
-                                            <ul>
-                                                <li class="mb-10"><i class="fi-rs-crown mr-5"></i> Free delivery for members </li>
-                                                <li class="mb-10"><i class="fi-rs-time-forward mr-5"></i> Delivering in 10 Days</li>
-                                                <li><i class="fi-rs-refresh mr-5"></i> 15 Day Returns</li>
-                                            </ul>
-                                        </div>
+        <ul>
+            <li class="mb-10"><i class="fi-rs-crown mr-5"></i> Free delivery for members </li>
+            <li class="mb-10"><i class="fi-rs-time-forward mr-5"></i> Delivering in 10 Days</li>
+            <li><i class="fi-rs-refresh mr-5"></i> 15 Day Returns</li>
+        </ul>
+    </div>
     {% if session.availability.is_available_to_buy %}
        <div class="attr-detail attr-color mb-15">
-                                            <strong class="mr-10">Color</strong>
-                                            <ul class="list-filter color-filter">
-                                                <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
-                                                <li class="active"><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
-                                                <li class=""><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
-                                                <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
-                                                <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
-                                                <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
-                                                <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
-                                            </ul>
-                                        </div>
-<div class="attr-detail attr-size">
-                                            <strong class="mr-10">Size</strong>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">S</a></li>
-                                                <li class="active"><a href="#">M</a></li>
-                                                <li><a href="#">L</a></li>
-                                                <li><a href="#">XL</a></li>
-                                                <li><a href="#">XXL</a></li>
-                                            </ul>
-                                        </div>
-<div class="bt-1 border-color-1 mt-30 mb-30"></div>
-<div class="detail-extralink">
-                                            <div class="detail-qty border radius">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                            <div class="product-extra-link2">
-                                                <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                                 <button type="buy" class="button button-custom">Buy Quick</button>
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            </div>
-                                        </div>
-<div class="detail-extralink">
-                                            <div class="product-extra-link2">
-                                                <button type="Personalisation" class="button button-custom">Add Personalisation</button>
-                                                <button type="video" class="button button-custom">Video Call Shop</button>
-                                                <button type="live" class="button button-custom">Join Live Sales</button>  
-                                            </div>
-</div>
-<div class="pincode_box">
-    <label for="pincode">Estimated Delivery Date</label>
-    <input type="text" id="pincode" placeholder="Enter pincode">
-    <button>Check</button>
-</div>
+        {% for av in product.get_attribute_values %}
+            <tr>
+                <th>{{ av.attribute.name }}</th>
+                <td>{{ av.value_as_html }}</td>
+            </tr>
+        {% endfor %}
+        </div>
+        <!--
+            <strong class="mr-10">Color</strong>
+            <ul class="list-filter color-filter">
+                <li><a href="#" data-color="Red"><span class="product-color-red"></span></a></li>
+                <li class="active"><a href="#" data-color="Yellow"><span class="product-color-yellow"></span></a></li>
+                <li class=""><a href="#" data-color="White"><span class="product-color-white"></span></a></li>
+                <li><a href="#" data-color="Orange"><span class="product-color-orange"></span></a></li>
+                <li><a href="#" data-color="Cyan"><span class="product-color-cyan"></span></a></li>
+                <li><a href="#" data-color="Green"><span class="product-color-green"></span></a></li>
+                <li><a href="#" data-color="Purple"><span class="product-color-purple"></span></a></li>
+            </ul>
+        </div>
+        <div class="attr-detail attr-size">
+            <strong class="mr-10">Size</strong>
+            <ul class="list-filter size-filter font-small">
+                <li><a href="#">S</a></li>
+                <li class="active"><a href="#">M</a></li>
+                <li><a href="#">L</a></li>
+                <li><a href="#">XL</a></li>
+                <li><a href="#">XXL</a></li>
+            </ul>
+        </div>
+        -->
+        <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+        {% basket_form request product quantity_type="multiple" as basket_form %}
+
+        <div class="detail-extralink">
+        <form id="add_to_basket_form" action="{% url 'basket:add' pk=product.pk  %}" method="post" class="add-to-basket mb-0">
+            {% csrf_token %}
+            <!--div class="detail-qty border radius">
+                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                <span class="qty-val">1</span>
+                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+            </div -->
+            <div class="product-extra-link2">
+                {% include "oscar/partials/form_fields.html" with form=basket_form style="horizontal" %}
+                <button type="submit" class="button button-add-to-cart" value="{% trans "Add to basket" %}" data-loading-text="{% trans 'Adding...' %}">{% trans "Add to basket" %}</button>
+                <!--button type="submit" class="button button-add-to-cart">Add to cart</button-->
+                 <button type="buy" class="button button-custom">Buy Quick</button>
+                <!--a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a-->
+                <form id="add_to_wishlist_form" action="{% url 'customer:wishlists-add-product' product_pk=product.pk %}" method="post" class="btn-wishlist align-bottom">
+                {% csrf_token %}
+                <button type="submit" class="action-btn hover-up" data-loading-text="{% trans 'Adding...' %}"><i class="fi-rs-heart"></i></button>
+                </form>
+            </div>
+        </form>
+        </div>
+        <div class="detail-extralink">
+            <div class="product-extra-link2">
+                <button type="Personalisation" class="button button-custom">Add Personalisation</button>
+                <button type="video" class="button button-custom">Video Call Shop</button>
+                <button type="live" class="button button-custom">Join Live Sales</button>  
+            </div>
+        </div>
+    <div class="pincode_box">
+        <label for="pincode">Estimated Delivery Date</label>
+        <input type="text" id="pincode" placeholder="Enter pincode">
+        <button>Check</button>
+    </div>
 
 <ul class="product-meta font-xs color-grey mt-50">
                                             <li class="mb-5">Group Order Quote: <a href="#">Available</a></li>
@@ -161,6 +182,7 @@
     {% else %}
         <i class="fas fa-ban"></i>
     {% endif %}
+
     {% if verbose %}
         {{ session.availability.message }}
     {% else %}
