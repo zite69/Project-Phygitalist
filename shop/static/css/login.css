@@ -9,7 +9,10 @@ h2#page-title {
     font-family: 'Urbanist', Arial, sans-serif; /* Urbanist as primary font */
 }
 
-
+ .container {
+        max-width: 600px;
+        width: 100%;
+    }
 .tabs {
     display: flex;
     border: 1px solid #ddd;
@@ -61,6 +64,12 @@ h2#page-title {
     position: relative;
     opacity: 1;
 }
+ .login-container {
+        max-width: 600px;
+        width: 100%;
+        margin: auto;
+    }
+
 
 .social-login {
     display: flex;
@@ -322,7 +331,7 @@ input:focus {
         flex-direction: column;
     }
 
-    .container {
+    .login-container {
         width: 100%;
     }
 
