@@ -5,7 +5,7 @@ from oscar.apps.catalogue.views import (
     ProductDetailView as OGProductDetailView, CatalogueView as OGCatalogueView,
     ProductCategoryView as OGProductCategoryView
     )
-from shop.apps.catalogue.models import Product
+from shop.apps.catalogue.models import Product, Category
 import logging
 logger = logging.getLogger(__package__)
 
@@ -21,6 +21,11 @@ class ProductCategoryView(ListView):
     paginate_by = 1
     template_name = 'oscar/catalogue/category.html'
     context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['category'] = Category.objects.get(id=self.kwargs.get('pk'))
+        return ctx
 
     def get_queryset(self):
         return Product.objects.filter(categories__in=[self.kwargs['pk']])
