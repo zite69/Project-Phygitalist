@@ -13,6 +13,7 @@
     {{ block.super }}
 {% addtoblock "css" %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/catalogue.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/magnifier.css' %}">
 {% endaddtoblock %}
 <style>
 .add-to-basket {
@@ -624,6 +625,8 @@ button[type="buy"].button-buy-quick {
 
 {% block extrascripts %}
     {{ block.super }}
+    <script src="{% static 'js/Event.js' %}"></script>
+    <script src="{% static 'js/Magnifier.js' %}"></script>
   <script>
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelector('.coupon-slides');
@@ -664,5 +667,31 @@ button[type="buy"].button-buy-quick {
                 }
             });
         });
+        /*
+    function zoomIn(event) {
+      var element = document.getElementById("overlay");
+      element.style.display = "inline-block";
+      var img = document.getElementById("imgZoom");
+      var posX = event.offsetX ? (event.offsetX) : event.pageX - img.offsetLeft;
+      var posY = event.offsetY ? (event.offsetY) : event.pageY - img.offsetTop;
+      element.style.backgroundPosition = (-posX * 4) + "px " + (-posY * 4) + "px";
+    }
+
+    function zoomOut() {
+      var element = document.getElementById("overlay");
+      element.style.display = "none";
+    }
+
+    #overlay {
+      border: 1px solid black;
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      background-image: url('https://via.placeholder.com/400.png');
+      background-repeat: no-repeat;
+    }
+<img id="imgZoom" width="200px" height="200px" onmousemove="zoomIn(event)" onmouseout="zoomOut()" src="https://via.placeholder.com/200.png">
+<div id="overlay" onmousemove="zoomIn(event)"></div>
+*/
     </script>
 {% endblock %}
