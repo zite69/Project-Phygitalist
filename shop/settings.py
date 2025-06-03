@@ -723,7 +723,7 @@ SOCIALACCOUNT_STORE_TOKENS = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http' # This is for the redirect URI for allauth. We set it to https for production below
 ACCOUNT_LOGIN_METHODS = {"phone", "email", "username"}
 ACCOUNT_SIGNUP_FIELDS = [
-    "phone*",
+    "phone",
     "email*",
     "username*",
     "password1",
