@@ -96,7 +96,7 @@ def deserialize_instance(model, data):
                     if isinstance(v, dict):
                         v = ContentFile(base64.b64decode(v["content"]), name=v["name"])
                 elif isinstance(f, PhoneNumberField):
-                    v = PhoneNumberField(v)
+                    v = PhoneNumberField(v).to_python(v)
                 elif is_db_value:
                     try:
                         # This is quite an ugly hack, but will cover most
