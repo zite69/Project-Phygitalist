@@ -14,7 +14,23 @@
 {% addtoblock "css" %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/catalogue.css' %}">
 {% endaddtoblock %}
+<style>
+.add-to-basket {
+    display: inline-block;
+}
+.add-to-wishlist {
+    display: inline-block;
+}
+.button-add-to-cart {
+    margin-left: 20px;
+    margin-right: 20px;
+}
 
+button[type="buy"].button-buy-quick {
+    padding: 8px 40px;
+    margin-right: 20px;
+}
+</style>
 {% endblock %}
 
 {% block title %}
@@ -54,9 +70,7 @@
 {% block content %}
 
 <article class="product_page"><!-- Start of product page -->
-
     <div class="row">
-
         {% block product_gallery %}
         <div class="col-sm-6">
             {% include "oscar/catalogue/partials/gallery.html" %}
@@ -140,7 +154,7 @@
             <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+            <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews ({{ product.num_approved_reviews }})</a>
         </li>
     </ul>
     <div class="tab-content shop_info_tab entry-main-content">
@@ -362,6 +376,7 @@
     {% endblock %}
 
     {% block product_info %}
+    {% comment %}
     <div class="sub-header">
         <h2>{% trans "Product Information" %}</h2>
     </div>
@@ -408,6 +423,7 @@
             </tr>
         {% endiffeature %}
     </table>
+    {% endcomment %}
     {% endblock %}
 
     {% iffeature "reviews" %}

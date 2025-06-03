@@ -140,25 +140,28 @@
         {% basket_form request product quantity_type="multiple" as basket_form %}
 
         <div class="detail-extralink">
-        <form id="add_to_basket_form" action="{% url 'basket:add' pk=product.pk  %}" method="post" class="add-to-basket mb-0">
-            {% csrf_token %}
             <!--div class="detail-qty border radius">
                 <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                 <span class="qty-val">1</span>
                 <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
             </div -->
             <div class="product-extra-link2">
+                <form id="add_to_basket_form" action="{% url 'basket:add' pk=product.pk  %}" method="post" class="add-to-basket mb-0">
+                {% csrf_token %}
                 {% include "oscar/partials/form_fields.html" with form=basket_form style="horizontal" %}
+                <div style="display: flex; justify-conent: space-between; width: 100%;">
                 <button type="submit" class="button button-add-to-cart" value="{% trans "Add to basket" %}" data-loading-text="{% trans 'Adding...' %}">{% trans "Add to basket" %}</button>
                 <!--button type="submit" class="button button-add-to-cart">Add to cart</button-->
-                 <button type="buy" class="button button-custom">Buy Quick</button>
+                 <button type="buy" class="button button-buy-quick">Buy Quick</button>
                 <!--a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a-->
-                <form id="add_to_wishlist_form" action="{% url 'customer:wishlists-add-product' product_pk=product.pk %}" method="post" class="btn-wishlist align-bottom">
+
+                </form>
+                <form id="add_to_wishlist_form" action="{% url 'customer:wishlists-add-product' product_pk=product.pk %}" method="post" class="add-to-wishlist align-bottom">
                 {% csrf_token %}
                 <button type="submit" class="action-btn hover-up" data-loading-text="{% trans 'Adding...' %}"><i class="fi-rs-heart"></i></button>
                 </form>
+                </div>
             </div>
-        </form>
         </div>
         <div class="detail-extralink">
             <div class="product-extra-link2">
