@@ -607,6 +607,16 @@ LOGGING = {
             'propagate': False,
             'level': 'WARNING',
         },
+        'allauth': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'DEBUG'
+        },
+        'allauth.account': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'DEBUG'
+        },
         'shop.apps.main': {
             'handlers': ['console'],
             'propagate': False,
@@ -720,9 +730,10 @@ ACCOUNT_SIGNUP_FIELDS = [
     "password2"
 ]
 ACCOUNT_FORMS = {
-    'request_login_code': 'shop.apps.main.forms.RequestLoginCodeForm'
+    'request_login_code': 'shop.apps.main.forms.RequestLoginCodeForm',
+    'signup': 'shop.apps.user.forms.Zite69SignupForm'
 }
-
+#ACCOUNT_SIGNUP_FORM_CLASS = 'shop.apps.user.forms.Zite69SignupForm'
 ACCOUNT_EMAIL_VERIFICATION = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_LOGIN_BY_CODE_ENABLED = True
