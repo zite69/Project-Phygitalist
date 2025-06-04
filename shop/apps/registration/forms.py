@@ -376,7 +376,7 @@ class EmailAndOtp(FormWithRequest):
         valid_user.save()
 
         allauth_email = EmailAddress.objects.create(user=user, email=email, primary=True, verified=True)
-        allauth_email.save()
+        logger.debug("Saved EmailAddress for allauth")
 
         return form_data
 
