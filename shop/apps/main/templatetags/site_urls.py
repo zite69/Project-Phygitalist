@@ -8,7 +8,10 @@ from django.template.base import TemplateSyntaxError, kwarg_re
 class SiteURLNode(URLNode):
     def __init__(self, site_id, view_name, args, kwargs, asvar):
         super().__init__(view_name, args, kwargs, asvar)
-        self.site_id = site_id
+        if site_id == '':
+            self.site_id = settings.DEFAULT_SITE_ID
+        else:
+            self.site_id = site_id
 
     def __repr__(self):
         return "<%s view_name='%s' args=%s kwargs=%s as=%s>" % (
