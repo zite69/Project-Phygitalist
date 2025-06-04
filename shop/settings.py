@@ -607,6 +607,21 @@ LOGGING = {
             'propagate': False,
             'level': 'WARNING',
         },
+        'sorl': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'WARNING',
+        },
+        'PIL': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'WARNING',
+        },
+        'urllib3': {
+            'handlers': ['console'],
+            'propagate': False,
+            'level': 'WARNING',
+        },
         'allauth': {
             'handlers': ['console'],
             'propagate': False,
@@ -865,6 +880,10 @@ if DEBUG == False:
         LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
         LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
     
+    for module in ['sorl', 'PIL', 'urllib3']:
+        LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
+        LOGGING['loggers'][module]['level'] = "WARNING"
+
     #Asynchronous queues - Celery, RabbitMQ, Valkey settings
     CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="")
     CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", default="")
