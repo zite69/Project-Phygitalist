@@ -326,6 +326,8 @@ class MobileAndOtp(FormWithRequest):
 
         return form_data
 
+from allauth.account.models import EmailAddress
+
 class EmailAndOtp(FormWithRequest):
     form_id = 'id_form_email'
     form_name = 'email'
@@ -372,6 +374,9 @@ class EmailAndOtp(FormWithRequest):
         logger.debug("Saving validated user")
         valid_user.email_verified = True
         valid_user.save()
+
+        allauth_email = EmailAddress.objects.create(user=user, email=email, primary=True, verified=True)
+        logger.debug("Saved EmailAddress for allauth")
 
         return form_data
 
