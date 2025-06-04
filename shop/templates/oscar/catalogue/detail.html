@@ -8,6 +8,7 @@
 {% load display_tags %}
 {% load i18n %}
 {% load purchase_info_tags %}
+{% load array_index %}
 
 {% block head %}
     {{ block.super }}
@@ -68,6 +69,9 @@ button[type="buy"].button-buy-quick {
 {% block header %}
 {% endblock header %}
 
+{% block messages %}
+{% endblock %}
+
 {% block content %}
 
 <article class="product_page"><!-- Start of product page -->
@@ -112,6 +116,9 @@ button[type="buy"].button-buy-quick {
                             </div>
                         </div>
                 </div>
+            {% if messages|added_to_cart %}
+                <h1>Added to Cart</h1>
+            {% endif %}
             {% block product_stock_record %}
                 {% include "oscar/catalogue/partials/stock_record.html" with verbose=1 %}
             {% endblock %}

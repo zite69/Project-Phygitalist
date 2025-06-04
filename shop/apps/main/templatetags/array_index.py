@@ -8,3 +8,10 @@ def array_index(collection, index):
         return collection[index]
     except IndexError:
         return collection[0] if len(collection) > 0 else ""
+
+@register.filter
+def added_to_cart(messages):
+    for message in messages:
+        if 'added to your' in message.message:
+            return True
+    return False
