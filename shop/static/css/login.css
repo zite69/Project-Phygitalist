@@ -73,9 +73,10 @@ h2#page-title {
 
 
 .social-login {
+    width: 200px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin:0 auto 20px;
     gap: 10px;
 }
 
