@@ -15,6 +15,9 @@ from icecream import ic
 
 from shop.apps.zitepayment.models import RazorpayOrder
 from .gateway import RazorpayGateway
+import logging
+
+logger = logging.getLogger(__package__)
 
 SourceType = get_model('payment', 'SourceType')
 Source = get_model('payment', 'Source')
@@ -26,24 +29,24 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        print(ctx)
-        print(self.request.basket)
-        print(self.request.strategy)
+        logger.debug(ctx)
+        logger.debug(self.request.basket)
+        logger.debug(self.request.strategy)
         basket = self.request.basket
-        # print(dir(ctx))
-        # print(dir(ctx['basket']))
+        # logger.debug(dir(ctx))
+        # logger.debug(dir(ctx['basket']))
         # line = ctx['basket'].lines.all()[0]
-        # print(dir(line))
-        # ic(line)
-        # ic(line.product)
-        # ic(dir(line.product))
-        # ic(line.product.primary_image())
-        # ic(dir(line.product.primary_image()))
-        ic(basket)
-        ic(basket.strategy)
+        # logger.debug(dir(line))
+        # logger.debug(line)
+        # logger.debug(line.product)
+        # logger.debug(dir(line.product))
+        # logger.debug(line.product.primary_image())
+        # logger.debug(dir(line.product.primary_image()))
+        logger.debug(basket)
+        logger.debug(basket.strategy)
         basket.strategy = strategy.Default()
         basket.save()
-        ic(basket.strategy)
+        logger.debug(basket.strategy)
         order_number = self.generate_order_number(ctx['basket'])
         gateway = RazorpayGateway()
         receipt = f"order_{order_number}"
@@ -80,29 +83,29 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
         return ctx
 
     def post(self, request, *args, **kwargs):
-        print("Inside payment details post method")
+        logger.debug("Inside payment details post method")
         payment_id = request.POST.get('razorpay_payment_id', '')
         order_id = request.POST.get('razorpay_order_id')
         signature = request.POST.get('razorpay_signature', '')
         error = request.POST.get('error', '')
-        ic(payment_id, order_id, signature, error)
-        ic(request.POST)
-        ic(request.basket)
-        ic(request.strategy)
+        logger.debug(payment_id, order_id, signature, error)
+        logger.debug(request.POST)
+        logger.debug(request.basket)
+        logger.debug(request.strategy)
         if not payment_id or not order_id:
             return HttpResponseBadRequest(b"Missing payment details from the site")
 
         gateway = RazorpayGateway()
         if not gateway.verify_payment_signature(payment_id, order_id, signature, error):
-            ic("Failed to verify payment signature")
+            logger.debug("Failed to verify payment signature")
             return self.handle_payment_error(request)
 
         try:
             razorpay_order = RazorpayOrder.objects.get(razorpay_order_id=order_id)
-            ic(razorpay_order)
+            logger.debug(razorpay_order)
             basket = razorpay_order.basket
-            ic(basket)
-            ic(basket == request.basket)
+            logger.debug(basket)
+            logger.debug(basket == request.basket)
             basket.strategy = request.strategy
 
             source_type, _ = SourceType.objects.get_or_create(name="Razorpay")
@@ -113,13 +116,13 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
                 reference=payment_id
                 )
             self.add_payment_source(source)
-            print("Added payment source")
+            logger.debug("Added payment source")
             self.add_payment_event("Paid", basket.total_incl_tax, reference=payment_id)
-            print("Added payment event")
+            logger.debug("Added payment event")
 
             return self.submit(**self.build_submission())
         except Exception as e:
-            ic("Got payment exception", e)
+            logger.debug("Got payment exception", e)
             return self.handle_payment_error(f"Failed to finish payment process {str(e)}")
 
     def handle_payment_error(self, request, error_msg="Payment Failed"):
@@ -131,13 +134,13 @@ class RazorpayCallbackView(OrderPlacementMixin, TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print(request)
-        print(request.POST)
+        logger.debug(request)
+        logger.debug(request.POST)
         payment_id = request.POST.get('razorpay_payment_id', '')
         order_id = request.POST.get('razorpay_order_id', '')
         signature = request.POST.get('razorpay_signature', '')
         error = request.POST.get('error', '')
-        print(f"Got payment_id: {payment_id} , order_id: {order_id}, signature: {signature}, error: {error}")
+        logger.debug(f"Got payment_id: {payment_id} , order_id: {order_id}, signature: {signature}, error: {error}")
 
         gateway = RazorpayGateway()
         result, message = gateway.verify_payment_signature(payment_id, order_id, signature, error)
