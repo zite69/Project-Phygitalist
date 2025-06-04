@@ -17,21 +17,91 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/magnifier.css' %}">
 {% endaddtoblock %}
 <style>
+
 .add-to-basket {
     display: inline-block;
 }
+
 .add-to-wishlist {
-    display: inline-block;
+    /* display: inline-block; */
+    margin-right: 20px;
 }
+
 .button-add-to-cart {
-    margin-left: 20px;
+    /*margin-left: 20px;*/
     margin-right: 20px;
 }
 
 button[type="buy"].button-buy-quick {
     padding: 8px 40px;
-    margin-right: 20px;
+    margin: 0px 5px;
+    height: 52px;
 }
+
+.notification-container {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 40px;
+    max-width: 850px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    position: relative;  
+}
+
+
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #79c6a4 0%, #6bb394 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.icon-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #79c6a4;
+    opacity: 0.2;
+    animation: ripple 2s infinite;
+}
+
+.checkmark {
+    color: white;
+    font-size: 36px;
+    font-weight: 600;
+    z-index: 1;
+    position: relative;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: #64748b;
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+      @media (max-width: 480px) {
+.notification-container {
+    padding: 28px 20px;
+            }
 </style>
 {% endblock %}
 
@@ -70,6 +140,22 @@ button[type="buy"].button-buy-quick {
 {% endblock header %}
 
 {% block messages %}
+    {% if messages|added_to_cart %}
+        <div class="notification-container">
+        <div class="icon-wrapper">
+            <div class="checkmark">✓</div>
+        </div>
+
+        <h1 class="title">Product Added Successfully!</h1>
+        <p class="subtitle">Your product has been added to the inventory and is now available for customers.</p>
+
+        <div class="product-info">
+            {% for message in messages %}
+                {{ message|capfirst }}
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -116,9 +202,6 @@ button[type="buy"].button-buy-quick {
                             </div>
                         </div>
                 </div>
-            {% if messages|added_to_cart %}
-                <h1>Added to Cart</h1>
-            {% endif %}
             {% block product_stock_record %}
                 {% include "oscar/catalogue/partials/stock_record.html" with verbose=1 %}
             {% endblock %}
@@ -502,7 +585,7 @@ button[type="buy"].button-buy-quick {
                                         <div class="product-action-1">
                                           <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal
                                           "><i class="fi-rs-search"></i></a>
-                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                          <a aria-label="Add To Wishlist" class="action-btn small" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
                                           <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">

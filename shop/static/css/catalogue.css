@@ -885,7 +885,7 @@ h5.widget-title {
 button.submit, button[type='submit'] {
   font-size: 15px;
   font-weight: 500;
-  padding: 12px 40px;
+  padding: px 40px;
   color: #ffffff;
   border: none;
   border: 1px solid #f5575c;
@@ -4642,6 +4642,7 @@ table .product-thumbnail img {
 
 .button.button-add-to-cart {
   padding: 8px 40px;
+  margin: 0;
 }
 
 .product-extra-link2 a {
