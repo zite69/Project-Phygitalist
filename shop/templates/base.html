@@ -88,9 +88,11 @@
 
     {% block messages %}
         {% if messages %}
-            <ul class="text-center messages">{% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
-        {% endfor %}</ul>
+            <ul class="text-center messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
     {% endblock %}
 
