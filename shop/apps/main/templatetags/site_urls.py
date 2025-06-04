@@ -29,6 +29,8 @@ class SiteURLNode(URLNode):
         kwargs = {k: v.resolve(context) for k, v in self.kwargs.items()}
         view_name = self.view_name.resolve(context)
         site_id = self.site_id.resolve(context)
+        if site_id == '':
+            site_id = settings.DEFAULT_SITE_ID
         urlconf = 'shop.urls' if site_id == settings.DEFAULT_SITE_ID else 'shop.urls_seller'
         site = Site.objects.get(id=site_id)
         try:
