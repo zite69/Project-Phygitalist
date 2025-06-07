@@ -65,7 +65,7 @@
                             {% csrf_token %}
                             {{ request_code_form }}
                             <button type="submit" class="proceed-btn" name="submit" value="Request OTP">
-                                Request OTP
+                                Request OTP test
                             </button>
                         </form>
                     </div>
@@ -76,6 +76,23 @@
                     </div>
                     <button class="proceed-btn" onclick="showLoginOtp()">Request OTP</button>
                     -->
+            <div id="phoneSection">
+            <label for="phone" class="loginb-label">Phone:</label>
+            <input type="tel" id="phone" class="loginb-input" placeholder="Enter your phone number">
+            <button onclick="requestOTP()" class="loginb-button">Request OTP</button>
+            </div>
+        
+            <div id="otpSection" class="loginb-hidden">
+            <label for="otp" class="loginb-label">Enter OTP:</label>
+            <input type="text" id="otp" class="loginb-input" placeholder="Enter 6-digit OTP" maxlength="6">
+            <button onclick="verifyOTP()" class="loginb-button">Verify OTP</button>
+            <button onclick="resendOTP()" class="loginb-button loginb-secondary">Resend OTP</button>
+            </div>
+        
+            <div id="successMessage" class="loginb-hidden loginb-success">
+            ✓ OTP Verified Successfully!
+            </div>
+
                     <div class="col-md-12 justify-content-center text-center"><h4>OR login with password</h4></div>
                     <div class="col-md-12">
                         <form action="{% url 'account_login' %}" method="POST">
@@ -576,4 +593,21 @@
         });
     });
     </script>
+        
+      <script>
+        function requestOTP() {
+            document.getElementById('phoneSection').classList.add('loginb-hidden');
+            document.getElementById('otpSection').classList.remove('loginb-hidden');
+        }
+        
+        function verifyOTP() {
+            document.getElementById('otpSection').classList.add('loginb-hidden');
+            document.getElementById('successMessage').classList.remove('loginb-hidden');
+        }
+        
+        function resendOTP() {
+            document.getElementById('otp').value = '';
+        }
+    </script>  
+        
 {% endblock %}

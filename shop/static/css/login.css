@@ -60,6 +60,8 @@ h2#page-title {
     transition: opacity 0.3s ease;
 }
 
+
+
 .tab-content.active {
     display: block;
     position: relative;
@@ -70,7 +72,64 @@ h2#page-title {
         width: 100%;
         margin:30px auto;
     }
+/*updated css for the New OTP Request*/
 
+        .loginb-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .loginb-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        
+        .loginb-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        
+        .loginb-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #f66569;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .loginb-button:hover {
+            background-color: #f66569;
+            transition: background-color 0.2s ease;
+        }
+        
+        .loginb-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .loginb-hidden {
+            display: none;
+        }
+        
+        .loginb-success {
+            color: #28a745;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .loginb-secondary {
+            background-color: #6c757d;
+        }
 
 .social-login {
     width: 200px;
