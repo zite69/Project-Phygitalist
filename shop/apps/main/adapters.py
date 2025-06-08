@@ -147,6 +147,11 @@ class AccountAdapter(DefaultAccountAdapter):
 
     def get_login_redirect_url(self, request):
         logger.debug(request.user.is_staff)
+        next_url = request.POST.get('next') or request.GET.get('next', '')
+        logger.debug("next_url: ")
+        logger.debug(next_url)
+        if next_url != '':
+            return next_url
         if request.user.is_staff:
             return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='dashboard:index')
         else:
