@@ -60,12 +60,12 @@
                         </form>
                     </div>
                     <div class="divider">OR</div>
-                    <div class="col-md-12">
-                        <form action="{% url 'account_request_login_code' %}" method="POST" id="request-code-form">
+                    <div id="phoneSection" class="col-md-12">
+                        <form action="{% url 'otp:request' %}" method="POST" id="request-code-form">
                             {% csrf_token %}
                             {{ request_code_form }}
-                            <button type="submit" class="proceed-btn" name="submit" value="Request OTP">
-                                Request OTP test
+                            <button type="button" onclick="requestOTP()" class="proceed-btn" name="submit" value="Request OTP">
+                                Request OTP
                             </button>
                         </form>
                     </div>
@@ -75,18 +75,32 @@
                         <input type="text" id="login-phone" class="phone-input" placeholder="Enter Phone Number">
                     </div>
                     <button class="proceed-btn" onclick="showLoginOtp()">Request OTP</button>
-                    -->
             <div id="phoneSection">
             <label for="phone" class="loginb-label">Phone:</label>
             <input type="tel" id="phone" class="loginb-input" placeholder="Enter your phone number">
             <button onclick="requestOTP()" class="loginb-button">Request OTP</button>
             </div>
-        
+            -->
+            <div id="loadingSection" class="loginb-hidden">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
             <div id="otpSection" class="loginb-hidden">
+                <form action="{% url 'otp:login' %}" method="POST" id="otp-login">
+                    {% csrf_token %}
+                    {{ verify_code_form }}
+                    <button type="submit" class="loginb-button">Verify OTP</button>
+                    <button onclick="resendOTP()" class="loginb-button loginb-secondary">Resend OTP</button>
+                </form>
+                <!--
             <label for="otp" class="loginb-label">Enter OTP:</label>
             <input type="text" id="otp" class="loginb-input" placeholder="Enter 6-digit OTP" maxlength="6">
             <button onclick="verifyOTP()" class="loginb-button">Verify OTP</button>
             <button onclick="resendOTP()" class="loginb-button loginb-secondary">Resend OTP</button>
+                -->
             </div>
         
             <div id="successMessage" class="loginb-hidden loginb-success">
@@ -592,22 +606,54 @@
             input.setAttribute('type', type);
         });
     });
-    </script>
-        
-      <script>
-        function requestOTP() {
-            document.getElementById('phoneSection').classList.add('loginb-hidden');
-            document.getElementById('otpSection').classList.remove('loginb-hidden');
+
+    function requestOTP() {
+        const requestForm = document.getElementById("request-code-form");
+        const formData = new FormData(requestForm);
+        let nextUrl = '{{ request.GET.next }}';
+        if (nextUrl == '')
+            nextUrl = '/';
+        const emailPhoneInput = document.querySelector("#request-code-form #id_email_phone").value;
+        let type = '';
+        if (validatePhone(emailPhoneInput))
+            type = 'phone';
+        if (validateEmail(emailPhoneInput))
+            type = 'email';
+        if (type == '') {
+            alert(`The text you entered: ${emailPhoneInput} neither matches a phone number or email address. Please re-enter a correct value`);
+            return;
         }
-        
-        function verifyOTP() {
-            document.getElementById('otpSection').classList.add('loginb-hidden');
-            document.getElementById('successMessage').classList.remove('loginb-hidden');
-        }
-        
-        function resendOTP() {
-            document.getElementById('otp').value = '';
-        }
-    </script>  
+
+        document.getElementById('phoneSection').classList.add('loginb-hidden');
+        document.getElementById('loadingSection').classList.remove('loginb-hidden');
+        fetch('{% url "otp:request" %}', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                console.log(response);
+                const emailPhone = document.querySelector("#otp-login #id_email_phone");
+                emailPhone.value = emailPhoneInput;
+                const typeInput = document.querySelector("#otp-login #id_type");
+                typeInput.value = type;
+                document.querySelector("#otp-login #id_field_next").value = nextUrl;
+                document.getElementById('loadingSection').classList.add('loginb-hidden');
+                document.getElementById('otpSection').classList.remove('loginb-hidden');
+            })
+            .catch(error => {
+                console.error("Error submitting the form: ", error);
+            });
+    }
+    
+    function verifyOTP() {
+        document.getElementById('otpSection').classList.add('loginb-hidden');
+        document.getElementById('successMessage').classList.remove('loginb-hidden');
+    }
+    
+    function resendOTP() {
+        document.getElementById('otp').value = '';
+    }
+
+</script>  
         
 {% endblock %}

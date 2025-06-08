@@ -7,7 +7,7 @@ from allauth.account.forms import RequestLoginCodeForm
 from allauth.utils import get_form_class
 from allauth.account import app_settings
 from shop.apps.user.forms import Zite69SignupForm
-
+from shop.apps.otp.forms import EmailPhoneOtpRequestForm, OtpVerificationForm
 logger = logging.getLogger("shop.apps.main")
 
 # Create your views here.
@@ -16,8 +16,9 @@ class LoginView(OGLoginView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['request_code_form'] = RequestLoginCodeForm()
+        ctx['request_code_form'] = EmailPhoneOtpRequestForm()
         ctx['signup_form'] = Zite69SignupForm()
+        ctx['verify_code_form'] = OtpVerificationForm()
 
         return ctx
 
