@@ -20,9 +20,9 @@
 {% block title %}{{ shop_name }} - {% page_attribute "page_title" as page_title %}{% if page_title and page_title.strip %}{{ page_title.strip|safe }}{% else %}{{ block.super }}{% endif %}{% endblock %}
 
 {% block head %}
-{% addtoblock "css" %}
-    <link rel="stylesheet" type="text/css" href="{% sass_src "scss/cms.scss" %}" />
-{% endaddtoblock %}
+    {% addtoblock "css" %}
+        <link rel="stylesheet" type="text/css" href="{% sass_src "scss/cms.scss" %}" />
+    {% endaddtoblock %}
 {% endblock %}
 
 {% block page_header %}
