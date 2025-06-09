@@ -98,10 +98,12 @@ button[type="buy"].button-buy-quick {
     margin-bottom: 32px;
     line-height: 1.6;
 }
-      @media (max-width: 480px) {
-.notification-container {
-    padding: 28px 20px;
-            }
+
+@media (max-width: 480px) {
+    .notification-container {
+        padding: 28px 20px;
+    }
+}
 </style>
 {% endblock %}
 
@@ -251,9 +253,7 @@ button[type="buy"].button-buy-quick {
     <div class="tab-content shop_info_tab entry-main-content">
         <div class="tab-pane fade show active" id="Description">
             <div class="">
-                <p> {{ product.description|safe }}
-</p>
-                <p>content</p>
+                <p> {{ product.description|safe }} </p>
 
                 <hr class="wp-block-separator is-style-dots">
 
@@ -520,13 +520,14 @@ button[type="buy"].button-buy-quick {
     {% iffeature "reviews" %}
         {% block product_review %}
         <section>  
+            <!--
             <div id="reviews" class="sub-header">
                 {% if product.num_approved_reviews > 3 %}
                     <a href="{% url 'catalogue:reviews-list' product_slug=product.slug product_pk=product.id %}" class="btn float-right">{% trans "See all reviews" %}</a>
                 {% endif %}
                 <h2>{% trans "Customer Reviews" %}</h2>
             </div>
-
+            -->
             {% if product.num_approved_reviews == 0 %}
                 <p>
                     {% if product|is_review_permitted:user %}
@@ -565,151 +566,6 @@ button[type="buy"].button-buy-quick {
             </ul>
         {% endif %}
     {% endwith %}
-
-    {% recently_viewed_products current_product=product %}
-    <div class="row mt-60">
-                              <div class="col-12">
-                                <h3 class="section-title style-1 mb-30">Group Buy</h3>
-                              </div>
-                              <div class="col-12">
-                                <div class="row related-products">
-                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap small hover-up">
-                                      <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                          <a href="shop-product-right.html" tabindex="0">
-                                              <img class="default-img" src="{% static 'img/shop/jeans-top-2-1.jpg' %}" alt="">
-                                              <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
-                                          </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal
-                                          "><i class="fi-rs-search"></i></a>
-                                          <a aria-label="Add To Wishlist" class="action-btn small" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                          <span class="hot">Hot</span>
-                                        </div>
-                                      </div>
-                                      <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">White Tee,Jeans..</a></h2>
-                                        <div class="rating-result" title="90%">
-                                          <span>
-                                          </span>
-                                        </div>
-                                        <div class="product-price">
-                                          <span>₹1200</span>
-                                          <span class="old-price">₹1600 </span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap small hover-up">
-                                      <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                          <a href="shop-product-right.html" tabindex="0">
-                                              <img class="default-img" src="{% static 'img/shop/makeup-2-2.jpg' %}" alt="">
-                                              <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
-                                          </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                          <span class="sale">New</span>
-                                        </div>
-                                      </div>
-                                      <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Full Face Grooming Kit</a></h2>
-                                        <div class="rating-result" title="90%">
-                                          <span>
-                                          </span>
-                                        </div>
-                                        <div class="product-price">
-                                          <span>₹950</span>
-                                          <span class="old-price">₹1500</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap small hover-up">
-                                      <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                          <a href="shop-product-right.html" tabindex="0">
-                                              <img class="default-img" src="{% static 'img/shop/cap-2-3.jpg' %}" alt="">
-                                              <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
-                                          </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                          <span class="new">New</span>
-                                        </div>
-                                      </div>
-                                      <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Multi Colour Hats</a></h2>
-                                        <div class="rating-result" title="90%">
-                                          <span>
-                                          </span>
-                                        </div>
-                                        <div class="product-price">
-                                          <span>₹130/P300</span>
-                                          <span class="old-price">₹630</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap small hover-up mb-0">
-                                      <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                          <a href="shop-product-right.html" tabindex="0">
-                                              <img class="default-img" src="{% static 'img/shop/pearls-2-4.jpg' %}" alt="">
-                                              <img class="hover-img" src="{% static 'img/shop/zine69-hover.jpg' %}" alt="">
-                                          </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                          <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                          <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                          <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                          <span class="hot">Hot</span>
-                                        </div>
-                                      </div>
-                                      <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Jewelry Materials</a></h2>
-                                        <div class="rating-result" title="90%">
-                                          <span>
-                                          </span>
-                                        </div>
-                                        <div class="product-price">
-                                          <span>₹ 1 -₹ 100</span>
-                                          <span class="old-price">₹5-₹500</span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-    
-    <div class="banner-img banner-big wow fadeIn f-none animated mt-50 animated animated" style="visibility: visible;">
-        <img class="border-radius-10" src="{% static 'img/banner/Therapy.png' %}" alt="">
-                                <div class="banner-text">
-                                    <h4 class="mb-15 mt-40">We are hiring</h4>
-                                    <h2 class="fw-600 mb-20">Shopping is a Therapy.We Need Therapists.<br>Looking for Product Curators</h2>
-                                </div>
-                            </div>
-
 </article><!-- End of product page -->
 {% endblock content %}
 
