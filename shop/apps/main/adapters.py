@@ -150,8 +150,16 @@ class AccountAdapter(DefaultAccountAdapter):
         next_url = request.POST.get('next') or request.GET.get('next', '')
         logger.debug("next_url: ")
         logger.debug(next_url)
-        if next_url != '':
+        if next_url != '' and next_url is not None:
             return next_url
+        else:
+            next_url = request.session['next']
+        
+        logger.debug("next_url session:")
+        logger.debug(next_url)
+        if next_url != '' and next_url is not None:
+            return next_url
+
         if request.user.is_staff:
             return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='dashboard:index')
         else:

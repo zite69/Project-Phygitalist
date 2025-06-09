@@ -13,6 +13,16 @@ logger = logging.getLogger("shop.apps.main")
 # Create your views here.
 
 class LoginView(OGLoginView):
+    
+    def dispatch(self, request, *args, **kwargs):
+        next_url = self.get_next_url()
+        logger.debug("login dispatch: next_url: ")
+        logger.debug(next_url)
+        if next_url != '' and next_url is not None:
+            request.session['next'] = next_url
+            request.session.save()
+
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
