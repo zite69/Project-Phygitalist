@@ -32,10 +32,11 @@
     margin-right: 20px;
 }
 
-button[type="buy"].button-buy-quick {
+button.button.button-buy-quick {
     padding: 8px 40px;
     margin: 0px 5px;
     height: 52px;
+    background-color: #f66569;
 }
 
 .notification-container {
@@ -580,6 +581,9 @@ button[type="buy"].button-buy-quick {
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
             let currentSlide = 0;
+
+            const product_id = document.getElementById("id_product_id");
+            product_id.value = "{{ product.id }}";
 
             function updateSlide() {
                 slides.style.transform = `translateX(-${currentSlide * 50}%)`;

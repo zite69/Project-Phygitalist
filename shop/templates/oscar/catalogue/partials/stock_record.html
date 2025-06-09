@@ -155,9 +155,12 @@
                 <div style="display: flex; justify-conent: space-between; width: 100%;">
                 <button type="submit" class="button button-add-to-cart" value="{% trans "Add to basket" %}" data-loading-text="{% trans 'Adding...' %}">{% trans "Add to basket" %}</button>
                 <!--button type="submit" class="button button-add-to-cart">Add to cart</button-->
-                 <button type="buy" class="button button-buy-quick">Buy Quick</button>
+                </form>
+                <form id="buy_quick_form" action="{% url 'buy-quick' %}" method="post">
+                    {% csrf_token %}
+                    {{ buyquick_form }}
+                 <button type="submit" class="button button-buy-quick">Buy Quick</button>
                 <!--a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a-->
-
                 </form>
                 <form id="add_to_wishlist_form" action="{% url 'customer:wishlists-add-product' product_pk=product.pk %}" method="post" class="add-to-wishlist align-bottom">
                 {% csrf_token %}

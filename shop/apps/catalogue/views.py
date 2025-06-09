@@ -6,11 +6,18 @@ from oscar.apps.catalogue.views import (
     ProductCategoryView as OGProductCategoryView
     )
 from shop.apps.catalogue.models import Product, Category
+from shop.apps.main.forms import BuyQuickForm
+
 import logging
+
 logger = logging.getLogger(__package__)
 
 class ProductDetailView(OGProductDetailView):
-    pass
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['buyquick_form'] = BuyQuickForm()
+
+        return ctx
 
 class CatalogueView(ListView):
     template_name = 'oscar/catalogue/browse.html'

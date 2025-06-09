@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import widgets
 from allauth.account.adapter import get_adapter
 from allauth.account import app_settings
 from allauth.core import ratelimit, context
@@ -20,3 +21,6 @@ class RequestLoginCodeForm(OGRequestLoginCodeForm):
             ):
                 raise adapter.validation_error("too_many_login_attempts")
         return phone
+
+class BuyQuickForm(forms.Form):
+    product_id = forms.IntegerField(widget=widgets.HiddenInput())

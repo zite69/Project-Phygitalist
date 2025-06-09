@@ -1,5 +1,8 @@
 from django.db.models.functions import Sign
 from django.shortcuts import render
+from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from .utils.email import send_email_otp
 import logging
 from allauth.account.views import LoginView as OGLoginView
@@ -8,6 +11,9 @@ from allauth.utils import get_form_class
 from allauth.account import app_settings
 from shop.apps.user.forms import Zite69SignupForm
 from shop.apps.otp.forms import EmailPhoneOtpRequestForm, OtpVerificationForm
+from shop.apps.catalogue.models import Product
+from shop.apps.main.forms import BuyQuickForm
+
 logger = logging.getLogger("shop.apps.main")
 
 # Create your views here.
@@ -31,6 +37,22 @@ class LoginView(OGLoginView):
         ctx['verify_code_form'] = OtpVerificationForm()
 
         return ctx
+
+class BuyQuickView(FormView):
+    form_class = BuyQuickForm
+    template_name = "oscar/catalogue/buyquick.html"
+    success_url = reverse_lazy("checkout:index")
+
+    def form_valid(self, form):
+        product_id = form.cleaned_data.get('product_id')
+        logger.debug("product_id")
+        logger.debug(product_id)
+        product = Product.objects.get(id=product_id)
+        logger.debug(product)
+        logger.debug(self.request.basket)
+        self.request.basket.add_product(product, 1)
+        logger.debug(self.success_url)
+        return HttpResponseRedirect(self.success_url)
 
 def home(request):
     context = {}

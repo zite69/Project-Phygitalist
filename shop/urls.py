@@ -30,7 +30,7 @@ from django.contrib.sitemaps.views import sitemap
 from shop.apps.main.sitemaps import SITEMAPS
 from shop.apps.webinar.views import CreateRegistrationView
 from django.views.generic import TemplateView
-from shop.apps.main.views import LoginView
+from shop.apps.main.views import LoginView, BuyQuickView
 
 from shop.apps.zitepayment.views import RazorpayCallbackView
 
@@ -47,6 +47,7 @@ urlpatterns = i18n_patterns(
     path('accounts/login/', LoginView.as_view()),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
+    path('buyquick/', BuyQuickView.as_view(), name="buy-quick"),
     path('careers/', TemplateView.as_view(template_name='main/career.html'), name="careers"),
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('membership/', include((apps.get_app_config('membership').urls[0], 'membership'), namespace='membership')),
