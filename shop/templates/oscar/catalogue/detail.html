@@ -149,7 +149,7 @@ button[type="buy"].button-buy-quick {
         </div>
 
         <h1 class="title">Product Added Successfully!</h1>
-        <p class="subtitle">Your product has been added to the inventory and is now available for customers.</p>
+        <!--<p class="subtitle">Your product has been added to the inventory and is now available for customers.</p>-->
 
         <div class="product-info">
             {% for message in messages %}
@@ -161,7 +161,7 @@ button[type="buy"].button-buy-quick {
 {% endblock %}
 
 {% block content %}
-
+{% if not messages|added_to_cart %}
 <article class="product_page"><!-- Start of product page -->
     <div class="row">
         {% block product_gallery %}
@@ -567,6 +567,7 @@ button[type="buy"].button-buy-quick {
         {% endif %}
     {% endwith %}
 </article><!-- End of product page -->
+{% endif %}
 {% endblock content %}
 
 {% block extrascripts %}
