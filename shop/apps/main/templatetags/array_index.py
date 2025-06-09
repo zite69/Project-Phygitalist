@@ -12,6 +12,6 @@ def array_index(collection, index):
 @register.filter
 def added_to_cart(messages):
     for message in messages:
-        if 'added to your' in message.message:
+        if 'added to your cart' in message.message:
             return True
     return False
