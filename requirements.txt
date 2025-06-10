@@ -55,7 +55,7 @@ django-messages @ git+https://github.com/zite69/django-messages.git@ca7f095ac03e
 django-modelcluster==6.3
 django-money==3.5.4
 django-mjml==1.4
-django-oscar==4.0a1
+django-oscar==4.0
 #django-oscar-elasticsearch==3.0.0
 django-oscar-odin==0.3.0
 django-parler==2.3
