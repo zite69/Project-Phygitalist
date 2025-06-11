@@ -574,14 +574,23 @@ button.button.button-buy-quick {
 
 {% block extrascripts %}
     {{ block.super }}
+    <!--
     <script src="{% static 'js/Event.js' %}"></script>
     <script src="{% static 'js/Magnifier.js' %}"></script>
+    -->
   <script>
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelector('.coupon-slides');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
             let currentSlide = 0;
+
+            const product_gallery = document.getElementById("product_gallery");
+
+            const carousel = new bootstrap.Carousel(product_gallery, {
+                interval: 2000,
+                touch: true
+            });
 
             const product_id = document.getElementById("id_product_id");
             product_id.value = "{{ product.id }}";
