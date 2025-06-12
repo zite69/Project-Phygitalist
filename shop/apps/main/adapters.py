@@ -153,7 +153,7 @@ class AccountAdapter(DefaultAccountAdapter):
         if next_url != '' and next_url is not None:
             return next_url
         else:
-            next_url = request.session['next']
+            next_url = request.session.get('next', '')
         
         logger.debug("next_url session:")
         logger.debug(next_url)
