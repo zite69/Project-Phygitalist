@@ -10,7 +10,7 @@
 {% load purchase_info_tags %}
 {% load array_index %}
 
-{% block head %}
+{% block extrahead %}
     {{ block.super }}
 {% addtoblock "css" %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/catalogue.css' %}">
@@ -49,8 +49,6 @@ button.button.button-buy-quick {
     text-align: center;
     position: relative;  
 }
-
-
 
 .icon-wrapper {
     width: 80px;
@@ -105,6 +103,36 @@ button.button.button-buy-quick {
         padding: 28px 20px;
     }
 }
+
+form#add_to_basket_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#id_sizes.form-control {
+    height: auto;
+    overflow: visible;
+}
+
+.form-group input {
+    height: 20px;
+    width: 20px;
+}
+
+input[type='radio'].form-check-input {
+    height: 20px;
+    width: 20px;
+}
+
+.form-check-input:checked,
+.form-check-input:checked:focus,
+.form-check-input:checked:active {
+    background-image: var(--bs-form-check-bg-image);
+    background-color: var(--bs-form-check-checked-bg-color, #0d6efd);
+    border-color: var(--bs-form-check-checked-bg-color, #0d6efd);
+}
+
 </style>
 {% endblock %}
 
@@ -592,6 +620,20 @@ button.button.button-buy-quick {
                 touch: true
             });
 
+            document.querySelectorAll("input[type='radio'].form-check-input").forEach(el => {
+                el.addEventListener('click', (evt) => {
+                    console.log('input radio clicked');
+                    console.log(el);
+                    document.querySelectorAll("input[type='radio'].form-check-input").forEach(e => ( e.checked = false));
+                    el.checked = true;
+                    console.log(el);
+                    console.log(evt.target.checked);
+                });
+                el.addEventListener('change', (evt) => {
+                    console.log("Radio changed");
+                    console.log(evt.target.checked);
+                });
+            })
             const product_id = document.getElementById("id_product_id");
             product_id.value = "{{ product.id }}";
 
