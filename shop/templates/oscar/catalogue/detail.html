@@ -9,8 +9,10 @@
 {% load i18n %}
 {% load purchase_info_tags %}
 {% load array_index %}
+{% load basket_tags %}
+{% load image_tags %}
 
-{% block head %}
+{% block extrahead %}
     {{ block.super }}
 {% addtoblock "css" %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/catalogue.css' %}">
@@ -49,8 +51,6 @@ button.button.button-buy-quick {
     text-align: center;
     position: relative;  
 }
-
-
 
 .icon-wrapper {
     width: 80px;
@@ -105,6 +105,42 @@ button.button.button-buy-quick {
         padding: 28px 20px;
     }
 }
+
+form#add_to_basket_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#id_sizes.form-control {
+    height: auto;
+    overflow: visible;
+}
+
+/*
+.form-group input {
+    height: 20px;
+    width: 20px;
+}
+*/
+
+input[type='radio'].form-check-input {
+    height: 20px;
+    width: 20px;
+}
+
+.form-check-input:checked,
+.form-check-input:checked:focus,
+.form-check-input:checked:active {
+    background-image: var(--bs-form-check-bg-image);
+    background-color: var(--bs-form-check-checked-bg-color, #0d6efd);
+    border-color: var(--bs-form-check-checked-bg-color, #0d6efd);
+}
+
+.button-disabled:hover {
+    background-color: #a8a7a7 !important;
+}
+
 </style>
 {% endblock %}
 
@@ -557,13 +593,74 @@ button.button.button-buy-quick {
     {% with recommended_products=product.sorted_recommended_products|slice:":6" %}
         {% if recommended_products %}
             <div class="sub-header">
-                <h2>{% trans "Recommended items" %}</h2>
+                <h2>{% trans "Group Buy" %}</h2>
             </div>
             <ul class="row list-unstyled mx-0">
                 {% for product in recommended_products %}
-                <li class="col-sm-4 col-md-3 col-lg-3">
-                    {% render_product product %}
-                </li>
+                <div class="col-lg-4 col-md-4 col-12 col-sm-6">
+                    <div class="product-cart-wrap mb-30">
+                      <div class="product-img-action-wrap">
+                        <div class="product-img product-img-zoom">
+                          <a href="{{ product.get_absolute_url }}">
+                              {% oscar_thumbnail product.primary_image.original "320x240" upscale=False as thumb_primary %}
+                              <img class="default-img" src="{{ thumb_primary.url }}" alt="{{ product.get_title }}">
+                              {% with product.get_all_images|array_index:1 as second_image %}
+                                  {% if second_image %}
+                                    {% oscar_thumbnail second_image.original "320x240" upscale=False as thumb_secondary %}
+                                    <img class="hover-img" src="{{ thumb_secondary.url }}" alt="{{ product.get_title }}">
+                                  {% else %}
+                                  <img class="hover-img" src="{{ thumb_primary.url }}" alt="{{ product.get_title }}">
+                                  {% endif %}
+                              {% endwith %}
+                          </a>
+                        </div>
+                        <div class="product-action-1">
+                          <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                          <a aria-label="Add To Wishlist" class="action-btn hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                          <a aria-label="Compare" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
+                        </div>
+                        <div class="product-badges product-badges-position product-badges-mrg">
+                            <span class="hot">Hot</span>
+                        </div>
+                      </div>
+                      <div class="product-content-wrap">
+                        <div class="product-category">
+                            <a href="{{ product.categories.first.get_absolute_url }}">{{ product.categories.first.full_name }}</a>
+                        </div>
+                        <h2><a href="{{ product.get_absolute_url }}">{{ product.title }}</a></h2>
+                        <div class="rating-result" title="90%">
+                          <span>
+                            <span>90%</span>
+                          </span>
+                        </div>
+                        <div class="product-price">
+                        {% purchase_info_for_product request product as session %}
+                          <span>
+                        {% if session.price.exists %}
+                            {% if session.price.is_tax_known %}
+                                {{ session.price.incl_tax|currency:session.price.currency }}
+                            {% else %}
+                                {{ session.price.excl_tax|currency:session.price.currency }}
+                            {% endif %}
+                        {% endif %}
+                            </span>
+                            <span class="old-price">[Members only price]</span>
+                        </div>
+                        <div class="product-action-1 show">
+                            {% basket_form request product as basket_form %}
+                            <form id="add_to_basket_form_{{product.pk}}" action="{% url 'basket:add' pk=product.pk  %}" method="post" class="add-to-basket mb-0">
+                                {% csrf_token %}
+                                {#% include "oscar/partials/form_fields.html" with form=basket_form %#}
+                                {% for field in basket_form %}
+                                <input type="hidden" name="{{ field.name }}" value="{% if field.value %}{{ field.value}}{% endif %}">
+                                {% endfor %}
+                                <a class="action-btn hover-up" onclick="addToBasket({{ product.pk }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                            </form>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                    {#% render_product product %#}
                 {% endfor %}
             </ul>
         {% endif %}
@@ -574,15 +671,46 @@ button.button.button-buy-quick {
 
 {% block extrascripts %}
     {{ block.super }}
+    <!--
     <script src="{% static 'js/Event.js' %}"></script>
     <script src="{% static 'js/Magnifier.js' %}"></script>
+    -->
   <script>
+      function addToBasket(product_id) {
+        const form = document.getElementById(`add_to_basket_form_${product_id}`);
+        form.submit();
+      }
+
         document.addEventListener('DOMContentLoaded', () => {
             const slides = document.querySelector('.coupon-slides');
             const prevBtn = document.querySelector('.prev-btn');
             const nextBtn = document.querySelector('.next-btn');
             let currentSlide = 0;
 
+            const product_gallery = document.getElementById("product_gallery");
+
+            const carousel = new bootstrap.Carousel(product_gallery, {
+                interval: 2000,
+                touch: true
+            });
+
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+            document.querySelectorAll("input[type='radio'].form-check-input").forEach(el => {
+                el.addEventListener('click', (evt) => {
+                    console.log('input radio clicked');
+                    console.log(el);
+                    document.querySelectorAll("input[type='radio'].form-check-input").forEach(e => ( e.checked = false));
+                    el.checked = true;
+                    console.log(el);
+                    console.log(evt.target.checked);
+                });
+                el.addEventListener('change', (evt) => {
+                    console.log("Radio changed");
+                    console.log(evt.target.checked);
+                });
+            })
             const product_id = document.getElementById("id_product_id");
             product_id.value = "{{ product.id }}";
 

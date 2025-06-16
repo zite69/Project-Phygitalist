@@ -910,7 +910,7 @@ button.Personalisation, button[type='Personalisation'] {
 }
 
 button.Personalisation:hover, button[type='Personalisation']:hover {
-  background-color: #f87f85 !important;
+  background-color: #a8a7a7 !important;
 }
 
 button.video, button[type='video'] {
@@ -926,7 +926,7 @@ button.video, button[type='video'] {
 }
 
 button.video:hover, button[type='video']:hover {
-  background-color: #f87f85 !important;
+  background-color: #a8a7a7 !important;
 }
 
 button.live, button[type='live'] {
@@ -943,8 +943,9 @@ button.live, button[type='live'] {
 }
 
 button.live:hover, button[type='live']:hover {
-  background-color: #f87f85 !important;
+  background-color: #a8a7a7 !important;
 }
+
 button.buy, button[type='buy'] {
   width: 170px;
   font-size: 15px;

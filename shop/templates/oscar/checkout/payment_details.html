@@ -78,36 +78,41 @@
     {{ options|json_script:"razorpay-options" }}
     <script>
         const opts = JSON.parse(document.getElementById('razorpay-options').textContent);
-        console.log(opts);
         opts.modal = {
             ondismiss: function () {
                 window.location.href = "{% url 'checkout:payment-details' %}";
             }
         }
+        console.log(opts);
+        /*
         const options = {
-            'key': "{{ options.key }}",
-            'amount': "{{ options.amount }}",
-            'currency': "{{ options.currency }}",
-            'name': "{{ options.name }}",
-            'description': "{{ options.description }}",
-            'image': "{{ options.image }}",
-            'order_id': "{{ options.order_id }}",
-            'callback_url': "{{ options.callback_url }}",
+            'key': "{{ opts.key }}",
+            'amount': "{{ opts.amount }}",
+            'currency': "{{ opts.currency }}",
+            'name': "{{ opts.name }}",
+            'description': "{{ opts.description }}",
+            'image': "{{ opts.image }}",
+            'order_id': "{{ opts.order_id }}",
+            'callback_url': "{{ opts.callback_url }}",
             'prefill': {
-                'name': "{{ options.customer_name}}",
-                'email': "{{ options.customer_email }}",
-                'contact': "{{ options.customer_phone }}"
+                'name': "{{ opts.customer_name}}",
+                'email': "{{ opts.customer_email }}",
+                'contact': "{{ opts.customer_phone }}"
             },
             'theme': {
                 'color': '#f66569'
             }
         };
+        console.log(options);
+        */
         const rzrpay = new Razorpay(opts);
         document.getElementById('rzp-button1').onclick = function (e) {
             const modal = document.getElementById("loadingModal");
             const modalInstance = new bootstrap.Modal(modal);
             modalInstance.show();
             rzrpay.open();
+            console.log("after rzrpay.open call");
+            console.log(rzrpay);
             e.preventDefault();
         }
     </script>

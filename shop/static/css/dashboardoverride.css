@@ -15,7 +15,7 @@
   display: block;
 }
 .active .page-link, .pagination-area .page-item:hover .page-link {
-  color: #fff;
+  color: #111;
   background: #f66569;
 }
 .active, .nav-pills .show > .nav-link {
@@ -26,17 +26,17 @@
   color: #f66569;
 }
 .active .icon {
-  color: #fff;
+  color: #111;
 }
 .active .menu-link {
   background-color: #383e50;
 }
 .active {
   background-color: #383e50;
-  color: #fff;
+  color: #111;
 }
 .active {
-  color: #fff;
+  color: #111;
   background-color: #383e50;
 }
 

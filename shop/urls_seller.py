@@ -67,6 +67,7 @@ urlpatterns = i18n_patterns(
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
     path('dashboard/welcome/', WelcomePage.as_view(), name="dashboard-welcome"),
+    path('offers/', apps.get_app_config('offer').urls),
     path('dashboard/', apps.get_app_config('dashboard').urls),
     path('catalog/', apps.get_app_config('catalogue').urls),
     path('customer/', apps.get_app_config('customer').urls),

@@ -26,7 +26,7 @@ decorator==5.1.1
 defusedxml==0.7.1
 deptry==0.23.0
 dill==0.3.9
-Django==5.2.1
+Django==5.2.3
 django-admin-volt==1.0.14
 django-allauth==65.6.0
 django-appconf==1.0.6
@@ -55,7 +55,7 @@ django-messages @ git+https://github.com/zite69/django-messages.git@ca7f095ac03e
 django-modelcluster==6.3
 django-money==3.5.4
 django-mjml==1.4
-django-oscar==4.0a1
+django-oscar==4.0
 #django-oscar-elasticsearch==3.0.0
 django-oscar-odin==0.3.0
 django-parler==2.3
@@ -141,7 +141,7 @@ pytz==2024.1
 razorpay==1.4.2
 rcssmin==1.1.2
 reportlab==4.2.2
-requests==2.32.3
+requests==2.32.4
 requests-oauthlib==2.0.0
 rjsmin==1.2.2
 rules==3.5
