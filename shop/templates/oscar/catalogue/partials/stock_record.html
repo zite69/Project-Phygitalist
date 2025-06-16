@@ -186,10 +186,9 @@
     </div>
 
 <ul class="product-meta font-xs color-grey mt-50">
-                                            <li class="mb-5">Group Order Quote: <a href="#">Available</a></li>
-                                            <li>Personalisation:<span class="in-stock text-success ml-5">Yes </span></li>
-                                            <li class="mb-5">Tags: <a href="#" rel="tag">Creative Tees, </a>, <a href="#" rel="tag">Women Dress</a>, <a href="#" rel="tag">Dress</a> </li>
-                                        </ul>
+    <li class="mb-5">Group Order: Quote from <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER}}">Whatsapp</a></li>
+    <li class="mb-5">Product Code: {{ product.upc }}</li>
+</ul>
 
     {% else %}
         <i class="fas fa-ban"></i>
