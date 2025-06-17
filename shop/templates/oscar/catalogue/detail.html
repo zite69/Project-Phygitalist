@@ -140,7 +140,10 @@ input[type='radio'].form-check-input {
 .button-disabled:hover {
     background-color: #a8a7a7 !important;
 }
-
+.carousel-control-prev,
+    .carousel-control-next{
+        color: #000;
+    }   
 </style>
 {% endblock %}
 
@@ -663,6 +666,9 @@ input[type='radio'].form-check-input {
                     {#% render_product product %#}
                 {% endfor %}
             </ul>
+    
+
+    
         {% endif %}
     {% endwith %}
 </article><!-- End of product page -->
