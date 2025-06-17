@@ -38,17 +38,29 @@ h2#page-title {
     color: white;
 }
 
+/*
 .tab-content-container {
     position: relative;
-    height: 600px; /* Fixed height to prevent jumping */
+    min-height:950px; 
     border: 1px solid #ddd;
     border-top: none;
     border-radius: 0 0 5px 5px;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Prevent content overflow */
+    overflow: hidden; 
 }
-
+*/
+.tab-content-container {
+    position: relative;
+    /*padding: 30px 20px;  Add spacing inside instead of min-height */
+    min-height:950px; 
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 .tab-content {
     display: none;
     padding: 30px;
@@ -59,7 +71,6 @@ h2#page-title {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-
 
 
 .tab-content.active {
