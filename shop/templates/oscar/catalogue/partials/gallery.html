@@ -6,6 +6,7 @@
 
     {% if all_images|length > 1 %}
 
+        <!--
         <div id="product_gallery" class="carousel slide">
 
             <div class="carousel-indicators">
@@ -41,6 +42,53 @@
                 {% endfor %}
             </ol>
         </div>
+
+<div id="product_gallery" class="carousel slide">
+    <!-- Carousel Indicators (dots/buttons) -->
+    <div class="carousel-indicators">
+        {% for image in all_images %}
+            <button type="button" data-bs-target="#product_gallery" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+        {% endfor %}
+    </div>
+
+    <!-- Main Image Slider -->
+    <div class="img-thumbnail mb-3">
+        <div class="carousel-inner">
+            {% for image in all_images %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    {% oscar_thumbnail image.original "440x400" upscale=False as thumb %}
+                    <img src="{{ thumb.url }}" class="img-fluid" alt="{{ product.get_title }}" />
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Prev/Next Controls -->
+        <a class="carousel-control-prev" data-bs-target="#product_gallery" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">{% trans "Previous" %}</span>
+        </a>
+        <a class="carousel-control-next" data-bs-target="#product_gallery" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">{% trans "Next" %}</span>
+        </a>
+    </div>
+
+    <!-- 📌 Thumbnail Gallery Below -->
+    <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+        {% for image in all_images %}
+            {% oscar_thumbnail image.original "65x55" crop="center" as thumb %}
+            <img src="{{ thumb.url }}"
+                 class="img-thumbnail"
+                 style="cursor: pointer; width: 65px; height: 55px;"
+                 data-bs-target="#product_gallery"
+                 data-bs-slide-to="{{ forloop.counter0 }}"
+                 alt="{{ product.get_title }}" />
+        {% endfor %}
+    </div>
+</div>
+
+
+        -->
 
     {% else %}
 

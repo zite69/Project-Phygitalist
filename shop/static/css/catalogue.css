@@ -10170,11 +10170,15 @@ span.fi-rs-apps {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background-color: #f9f9f9;
+    background-color: #f66569;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+    
 }
 
 .coupon-code {
-    background-color: #f1f1f1;
+    background-color: #fff;
+    color: #f66569;
     padding: 5px 10px;
     border-radius: 4px;
     font-family: monospace;
