@@ -23,9 +23,9 @@ class MainShop(config.Shop):
     def get_urls(self):
         urls = super().get_urls()
         urls.pop(0) #Remove the RedirectView that redirects the home page, Our CMS will handle this view
-        urls.pop(0) #Remove the url spelled /catalogue/ and replace with /catalog/ below
+        #urls.pop(0) #Remove the url spelled /catalogue/ and replace with /catalog/ below
         # urls.pop(4) #Remove the dashboard urls because the CMS Apphook will handle this
-        urls.insert(0, path('catalog/', self.catalogue_app.urls))
+        # urls.insert(0, path('catalog/', self.catalogue_app.urls))
         # urls.insert(0, path('test/', self.test_view))
         # urls.insert(0, path('error/', self.fivehundred))
 
