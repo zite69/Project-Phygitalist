@@ -45,6 +45,7 @@
             <div id="login" class="tab-content active">
                 <!-- Phone Input Section -->
                 <div id="login-phone-section" class="active">
+                    <!--
                     <div class="col-4 mx-auto social-login-title"><strong>Login with Google:</strong></div>
                     <div class="social-login">
                         <form action="{% provider_login_url 'google' next=request.GET.next %}" method="POST">
@@ -59,6 +60,7 @@
                             </div>
                         </form>
                     </div>
+                    -->
                     <div class="divider">OR</div>
                     <div id="phoneSection" class="col-md-12">
                         <form action="{% url 'otp:request' %}" method="POST" id="request-code-form">
@@ -155,6 +157,20 @@
                     <button class="verify-btn" onclick="verifyLoginOtp()">VERIFY &amp; PROCEED</button>
                     <button class="resend-btn" id="login-resend-btn" disabled>RESEND OTP</button>
                 </div>
+                    <div class="col-4 mx-auto social-login-title"><strong>Login with Google:</strong></div>
+                    <div class="social-login">
+                        <form action="{% provider_login_url 'google' next=request.GET.next %}" method="POST">
+                            {% csrf_token %}
+                            <div class="social-login">
+                                <div class="social-btn">
+                                    <button type="submit" class="icon-button d-inline-flex justify-content-around align-items-center">
+                                        <img src="{% static 'img/google.png' %}" alt="Google">
+                                        Google
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
             </div>
 
             <!-- Register Tab -->

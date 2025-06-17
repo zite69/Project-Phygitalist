@@ -6,102 +6,57 @@
 
     {% if all_images|length > 1 %}
 
-        <!--
-        <div id="product_gallery" class="carousel slide">
+  <!-- Main Carousel -->
+    <div id="product_gallery" class="carousel slide img-thumbnail mb-3" data-bs-ride="carousel">
+ 
 
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#product_gallery" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#product_gallery" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#product_gallery" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="img-thumbnail mb-3">
-                <div class="carousel-inner">
-                {% for image in all_images %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        {% oscar_thumbnail image.original "440x400" upscale=False as thumb %}
-                        <img src="{{ thumb.url }}" class="img-fluid" alt="{{ product.get_title }}" />
-                    </div>
-                {% endfor %}
-                </div>
-                <a class="carousel-control-prev" data-bs-target="#product_gallery" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden sr-only">{% trans "Previous" %}</span>
-                </a>
-                <a class="carousel-control-next" data-bs-target="#product_gallery" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden sr-only">{% trans "Next" %}</span>
-                </a>
-            </div>
-
-            <ol class="carousel-indicators img-thumbnail">
-                {% for image in all_images %}
-                    <li data-target="#product_gallery" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}">
-                        {% oscar_thumbnail image.original "65x55" crop="center" as thumb %}
-                        <img src="{{ thumb.url }}" class="img-fluid" alt="{{ product.get_title }}" />
-                    </li>
-                {% endfor %}
-            </ol>
-        </div>
-
-<div id="product_gallery" class="carousel slide">
-    <!-- Carousel Indicators (dots/buttons) -->
-    <div class="carousel-indicators">
-        {% for image in all_images %}
-            <button type="button" data-bs-target="#product_gallery" data-bs-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
-        {% endfor %}
-    </div>
-
-    <!-- Main Image Slider -->
-    <div class="img-thumbnail mb-3">
+        <!-- Carousel Images -->
         <div class="carousel-inner">
             {% for image in all_images %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
                     {% oscar_thumbnail image.original "440x400" upscale=False as thumb %}
-                    <img src="{{ thumb.url }}" class="img-fluid" alt="{{ product.get_title }}" />
+                    <img src="{{ thumb.url }}" class="d-block w-100 img-fluid" alt="{{ product.get_title }}">
                 </div>
             {% endfor %}
         </div>
 
-        <!-- Prev/Next Controls -->
-        <a class="carousel-control-prev" data-bs-target="#product_gallery" role="button" data-bs-slide="prev">
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#product_gallery" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">{% trans "Previous" %}</span>
-        </a>
-        <a class="carousel-control-next" data-bs-target="#product_gallery" role="button" data-bs-slide="next">
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#product_gallery" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">{% trans "Next" %}</span>
-        </a>
+        </button>
     </div>
 
-    <!-- 📌 Thumbnail Gallery Below -->
+    <!-- Thumbnail Navigation -->
     <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
         {% for image in all_images %}
             {% oscar_thumbnail image.original "65x55" crop="center" as thumb %}
             <img src="{{ thumb.url }}"
                  class="img-thumbnail"
-                 style="cursor: pointer; width: 65px; height: 55px;"
+                 style="cursor:pointer; width:65px; height:55px;"
                  data-bs-target="#product_gallery"
                  data-bs-slide-to="{{ forloop.counter0 }}"
-                 alt="{{ product.get_title }}" />
+                 alt="{{ product.get_title }}">
         {% endfor %}
     </div>
 
-
     {% else %}
 
-        {# Only one image to show #}
-        <div id="product_gallery" class="carousel">
-            <div class="img-thumbnail">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                    {% with image=product.primary_image %}
-                        {% oscar_thumbnail image.original "440x400" upscale=False as thumb %}
-                        <img src="{{ thumb.url }}" class="img-fluid" alt="{{ product.get_title }}" />
-                    {% endwith %}
-                    </div>
-                </div>
+    <!-- Fallback if only one image -->
+    <div class="img-thumbnail mb-3">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                {% with image=product.primary_image %}
+                    {% oscar_thumbnail image.original "440x400" upscale=False as thumb %}
+                    <img src="{{ thumb.url }}" class="img-fluid" alt="{{ product.get_title }}">
+                {% endwith %}
             </div>
         </div>
+    </div>
 
     {% endif %}
 {% endwith %}
