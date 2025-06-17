@@ -74,6 +74,7 @@ urlpatterns = i18n_patterns(
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),
     path('volt/', include('admin_volt.urls')),
+    prefix_default_language=False,
 )
 
 urlpatterns = [
