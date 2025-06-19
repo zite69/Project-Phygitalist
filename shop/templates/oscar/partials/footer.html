@@ -1,40 +1,19 @@
 {% load static %}
+{% load site_urls %}
 
 {% block footer %}
   <footer class="main">
-  <!--section class="newsletter p-30 text-white wow fadeIn animated animated animated" style="visibility: visible;">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-7 mb-md-3 mb-lg-0">
-          <div class="row align-items-center">
-            <div class="col flex-horizontal-center">
-              <img class="icon-email" src="{% static 'img/theme/icons/icon-email.svg' %}" alt="">
-              <h4 class="font-size-20 mb-0 ml-3">Sign up to Newsletter</h4>
-            </div>
-            <div class="col my-4 my-md-0 des">
-              <h5 class="font-size-15 ml-4 mb-0">We respect your inbox</h5>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <form class="form-subcriber d-flex wow fadeIn animated animated animated" style="visibility: visible;">
-            <input type="email" class="form-control bg-white font-small" placeholder="Enter your email">
-            <button class="btn bg-dark text-white" type="submit">Subscribe</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section-->
   <footer class="footer">
       <div class="footer-content">
           <div class="footer-section">
               <h3>NEED HELP</h3>
               <ul>
-                  <li><a href="index.html#">Contact Us</a></li>
+                  <li><a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">zite69</a></li>
+                  <li><a href="{% url 'account_login' %}">My Account</a></li>
+                  <li><a href="https://we.zite69.com/shipping-return/">Shipping &amp; Returns</a></li>
+                  <li><a href="https://we.zite69.com/contact-us/">Contact Us</a></li>
                   <li><a href="index.html#">Track Order</a></li>
-                  <li><a href="index.html#">Returns & Refunds</a></li>
                   <li><a href="index.html#">FAQs</a></li>
-                  <li><a href="index.html#">My Account</a></li>
               </ul>
               <div class="feature-item">
                   <div class="feature-icon">₹</div>
@@ -48,29 +27,30 @@
           <div class="footer-section">
               <h3>COMPANY</h3>
               <ul>
-                  <li><a href="index.html#">About Us</a></li>
-                  <li><a href="index.html#">Careers</a></li>
-                  <li><a href="index.html#">Gift Vouchers</a></li>
-                  <li><a href="index.html#">Community Initiatives</a></li>
+                  <li><a href="https://we.zite69.com/about/">About Us</a></li>
+                  <li><a href="https://www.zite69.com/careers/">Careers</a></li>
+                  <li><a href="https://chat.zite69.com/">zite69 AI</a></li>
+                  <li><a href="https://we.zite69.com/minvest-program/">mInvest Program</a></li>
               </ul>
           </div>
           <div class="footer-section">
-              <h3>MORE INFO</h3>
+              <h3>Platform</h3>
               <ul>
-                  <li><a href="index.html#">T&C</a></li>
-                  <li><a href="index.html#">Privacy Policy</a></li>
-                  <li><a href="index.html#">Sitemap</a></li>
-                  <li><a href="index.html#">Blogs</a></li>
+                  <li><a href="https://we.zite69.com/">Stories</a></li>
+                  <li><a href="https://we.zite69.com/privacy-policy/">Privacy Policy</a></li>
+                  <li><a href="https://we.zite69.com/terms-of-use/">Terms of Use</a></li>
+                  <li><a href="https://docs.google.com/document/d/1lkuvv2H1BRMPP62QH6SQFvbeA1rJNuGT2pHUNkU4HyY/edit?usp=sharing">Get Notified</a></li>
+                  <li><a href="https://we.zite69.com/69mutual-club/69m-buyer-clu">69M Buyer Club</a></li>
               </ul>
           </div>
           <div class="footer-section">
-              <h3>OTHER LINKS</h3>
+              <h3>Seller</h3>
               <ul>
-                  <li><a href="index.html#">1</a></li>
-                  <li><a href="index.html#">2</a></li>
-                  <li><a href="index.html#">3</a></li>
-                  <li><a href="index.html#">4</a></li>
-                  <li><a href="index.html#" class="view-more">View More</a></li>
+                  <li><a href="https://seller.zite69.com/registration/">Be a Seller in 8 Minutes!</a></li>
+                  <li><a href="{% site_url SITE_SELLER 'account_login' %}">Seller Login</a></li>
+                  <li><a href="https://seller.zite69.com/sellerschool/">Seller School</a></li>
+                  <li><a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}">Connect with Seller HQ</a></li>
+                  <li><a href="#">Download Seller Handbook</a></li>
               </ul>
           </div>
       </div>
