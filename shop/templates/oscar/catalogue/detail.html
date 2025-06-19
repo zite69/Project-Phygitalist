@@ -238,9 +238,9 @@ input[type='radio'].form-check-input {
                                 <ul class="text-grey-5 d-inline-block"> 
                                     <li class="social-rupees"><a href="#"><img src="{% static 'img/icons/icon-rupees.svg'%}" alt=""></a></li>
                                     <li><strong class="mr-10">Share  &amp; Earn :</strong></li>
-                                    <li class="social-facebook"><a href="#"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt=""></a></li>
-                                    <li class="social-twitter"> <a href="#"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt=""></a></li>
-                                    <li class="social-instagram"><a href="#"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt=""></a></li>
+                                    <li class="social-facebook"><a href="https://www.facebook.com/ZITE69"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt=""></a></li>
+                                    <li class="social-twitter"> <a href="https://x.com/ZITE69_"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt=""></a></li>
+                                    <li class="social-instagram"><a href="https://www.instagram.com/zite69_live/"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt=""></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -596,7 +596,7 @@ input[type='radio'].form-check-input {
     {% with recommended_products=product.sorted_recommended_products|slice:":6" %}
         {% if recommended_products %}
             <div class="sub-header">
-                <h2>{% trans "Group Buy" %}</h2>
+                <h3 class="section-title style-1 mb-30">{% trans "Handpicked for You" %}</h3>
             </div>
             <ul class="row list-unstyled mx-0">
                 {% for product in recommended_products %}
@@ -672,6 +672,13 @@ input[type='radio'].form-check-input {
         {% endif %}
     {% endwith %}
 </article><!-- End of product page -->
+<div class="banner-img banner-big wow fadeIn f-none animated mt-50 animated animated "> 
+<img class="border-radius-10" src="{% static 'img/banner/Therapy.png' %}">
+    <div class="banner-text">
+                        <h4 class="mb-15 mt-40">We are hiring</h4>
+                        <h2 class="fw-600 mb-20">Shopping is a Therapy.We Need Therapists.<br>Looking for Product Curators</h2>
+    </div>
+</div>
 {% endif %}
 {% endblock content %}
 

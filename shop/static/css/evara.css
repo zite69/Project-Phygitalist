@@ -894,6 +894,7 @@ button.submit, button[type='submit'] {
   border: 1px solid #f5575c;
   background-color: #f66569;
   border-radius: 5px;
+  margin: 5px 0;
 }
 
 button.submit:hover, button[type='submit']:hover {
