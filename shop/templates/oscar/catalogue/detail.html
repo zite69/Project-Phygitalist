@@ -23,21 +23,27 @@
 .add-to-basket {
     display: inline-block;
 }
-
+.wishlist-btn{
+  padding: 12px 15px;
+}
+/*
 .add-to-wishlist {
-    /* display: inline-block; */
-    margin-right: 20px;
+    margin:0;
 }
+*/
 
+/*
 .button-add-to-cart {
-    /*margin-left: 20px;*/
+   margin-left: 20px;
     margin-right: 20px;
 }
+*/
+
+
 
 button.button.button-buy-quick {
-    padding: 8px 40px;
-    margin: 0px 5px;
-    height: 52px;
+    padding: 12px 40px;
+    margin-right:5px;
     background-color: #f66569;
 }
 
@@ -373,11 +379,13 @@ You can also connect with the local CEO ( Community Exchange Officer ) for in pe
                               {% endwith %}
                           </a>
                         </div>
+                        <!--
                         <div class="product-action-1">
                           <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                          <a aria-label="Add To Wishlist" class="action-btn hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
+                          <a aria-label="Add To Wishlist" class="ction-btn hover-up" href="index.html#"><i class="fi-rs-heart"></i></a>
                           <a aria-label="Compare" class="action-btn hover-up" href="index.html#"><i class="fi-rs-shuffle"></i></a>
                         </div>
+                        -->
                         <div class="product-badges product-badges-position product-badges-mrg">
                             <span class="hot">Hot</span>
                         </div>
@@ -413,7 +421,7 @@ You can also connect with the local CEO ( Community Exchange Officer ) for in pe
                                 {% for field in basket_form %}
                                 <input type="hidden" name="{{ field.name }}" value="{% if field.value %}{{ field.value}}{% endif %}">
                                 {% endfor %}
-                                <a class="action-btn hover-up" onclick="addToBasket({{ product.pk }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                <a class="wish_btn" onclick="addToBasket({{ product.pk }})"><i class="fi-rs-shopping-bag-add"></i></a>
                             </form>
                         </div>
                     </div>
