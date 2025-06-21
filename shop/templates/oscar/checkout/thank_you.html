@@ -25,16 +25,24 @@
     .thanks_gap{
         margin: 20px 0;
     }
+    .title_thanks{
+        color:#b8b8b2;       
+    }
+    .thanks_bold{
+        font-weight: bold;
+    }
+    .thanks_text{
+        font-size: 14px;
+    }
 </style>
 {% endblock %}
 {% block content %}
-    <p class="lead">
+    <p class="thanks_text">
         {% blocktrans with number=order.number %}
         Your order has been placed.Please check your email/sms 
         {% endblocktrans %}
       
     </p>
-
     <div class="row thanks_gap shipping-payment">
         <div class="col-sm-6">
             {% block shipping_info %}
@@ -42,20 +50,19 @@
                 <div class="sub-header">
                     <h2>{% trans "Shipping" %}</h2>
                 </div>
-                -->
+                --> 
                 <div class="card card-body">
                     <h4>{% trans "Address" %}</h4>
                     {% if order.shipping_address %}
-                        <address>
+                        <address class="thanks_text">
                             {% for field in order.shipping_address.active_address_fields %}
                                 {{ field }}<br/>
                             {% endfor %}
                         </address>
-
                         {% if order.shipping_address.phone_number %}
                             <h4>{% trans "Contact" %}</h4>
                             <p>
-                                {% trans "Phone" %}: {{ order.shipping_address.phone_number }}
+                                {% trans "Phone" %}: {{ order.shipping_address.phone_number.as_international }}
                                 {% if order.guest_email %}
                                     <br/>{% trans "Email" %}: {{ order.guest_email }}
                                 {% endif %}
@@ -80,14 +87,13 @@
                 -->
             {% endblock %}
         </div>
-
         <div class="col-sm-6">
             {% block payment_info %}
               
                 <div class="card card-body">
-                    <h3>{% trans "Payment" %}</h3>
+                    <h4 class="title_thanks">{% trans "Payment" %}</h4>
                     {% for source in order.sources.all %}
-                        <p>
+                        <p class="thanks_text">
                         {% if source.reference %}
                             {% blocktrans with amount=source.amount_allocated|currency:source.currency type=source.source_type.name reference=source.reference %}
                                 Allocation of {{ amount }} from type {{ type }} (reference: {{ reference }})
@@ -113,16 +119,13 @@
                         </address>
                     {% endif %}
                 </div>
-
             {% endblock %}
         </div>
     </div>
-
     {% block order_contents %}
         <div class="sub-header">
             <!--<h4>{% trans "Order contents" %}</h4>-->
         </div>
-
         <div class="basket-title">
             <div class="row">
                 <p class="col-sm-9 h5">{% trans "Items purchased" %}</p>
@@ -130,7 +133,6 @@
                 <p class="col-sm-2 h5 text-right">{% trans "Total" %}</p>
             </div>
         </div>
-
         {% for line in order.lines.all %}
             <div class="basket-items">
                 <div class="row">
@@ -163,10 +165,8 @@
                 </div>
             </div>
         {% endfor %}
-
         {% block basket_totals %}
             <div class="row">
-                
                 <div class="col-sm-12">
                     <div class="sub-header">
                         <h4>{% trans 'Totals' %}</h4>
@@ -187,16 +187,14 @@
                 <a class="btn btn-primary" href="{% url 'customer:anon-order' order_number=order.number hash=order.verification_hash %}">{% trans "View order status" %}</a>.</p>
         {% endif %}
     {% endblock %}
-
-
     {% block order_actions %}
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-4">
-                    <p><a onclick="window.print()" href="#" class="btn btn-primary btn-block btn-lg">{% trans "Print this page" %}</a></p>
+                    <p><a onclick="window.print()" href="#" class="thanks_bold">{% trans "Print this page" %}</a></p>
                 </div>
                 <div class="col-sm-4 offset-sm-4">
-                    <p><a href="{{ homepage_url }}" class="btn btn-primary btn-block btn-lg">{% trans "Continue shopping" %}</a></p>
+                    <p><a href="{{ homepage_url }}" class="thanks_bold">{% trans "Continue shopping" %}</a></p>
                 </div>
             </div>
         </div>
