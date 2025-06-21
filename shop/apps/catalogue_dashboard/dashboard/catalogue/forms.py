@@ -12,6 +12,7 @@ class ProductForm(originalforms.ProductForm):
         model = Product
         fields = [
             "seller",
+            "mrp",
             "title",
             "upc",
             "description",
