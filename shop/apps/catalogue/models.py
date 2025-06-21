@@ -68,6 +68,8 @@ if not is_model_registered("catalogue", "Product"):
         seller = models.ForeignKey(Seller, verbose_name=_("Seller"), on_delete=models.CASCADE,
                 related_name="products", blank=False, null=False, default=settings.ZITE69_MAIN_SELLER_ID)
         qc_status = models.CharField(max_length=3, choices=QcStatus.choices, default=QcStatus.NOT_SUBMITTED)
+
+        mrp = models.DecimalField(_("MRP"), decimal_places=2, max_digits=12, blank=True, null=True)
         
         def get_full_domain_url(self):
             return get_absolute_url(site_id=settings.DEFAULT_SITE_ID, view_name="catalogue:detail", 
