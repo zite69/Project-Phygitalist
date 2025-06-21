@@ -24,6 +24,11 @@ class CatalogueView(ListView):
     context_object_name = 'products'
     model = Product
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(stockrecords__num_in_stock__gt=0)
+        return qs
+
 class ProductCategoryView(ListView):
     paginate_by = 1
     template_name = 'oscar/catalogue/category.html'
@@ -35,5 +40,5 @@ class ProductCategoryView(ListView):
         return ctx
 
     def get_queryset(self):
-        return Product.objects.filter(categories__in=[self.kwargs['pk']])
+        return Product.objects.filter(categories__in=[self.kwargs['pk']], stockrecords__num_in_stock__gt=0)
 
