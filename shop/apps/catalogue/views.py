@@ -26,7 +26,7 @@ class CatalogueView(ListView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        qs = qs.filter(stockrecords__num_in_stock__gt=0)
+        qs = qs.filter(qc_status=Product.QcStatus.APPROVED, stockrecords__num_in_stock__gt=0)
         return qs
 
 class ProductCategoryView(ListView):
@@ -40,5 +40,5 @@ class ProductCategoryView(ListView):
         return ctx
 
     def get_queryset(self):
-        return Product.objects.filter(categories__in=[self.kwargs['pk']], stockrecords__num_in_stock__gt=0)
+        return Product.objects.filter(qc_status=Product.QcStatus.APPROVED, categories__in=[self.kwargs['pk']], stockrecords__num_in_stock__gt=0)
 
