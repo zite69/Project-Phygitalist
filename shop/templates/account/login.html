@@ -7,7 +7,7 @@
     {% trans "Sign In" %}
 {% endblock head_title %}
 
-{% block styles %}
+{% block extrahead %}
     {{ block.super }}
     {% addtoblock "css" %}
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
@@ -39,11 +39,14 @@ button.icon-button[type="submit"] {
     font-weight: normal;
     cursor: pointer;
 }
-    #id_remember{
-        width: 13px;
-        height: 13px;
-    }
-    }
+
+#id_remember{
+    width: 13px;
+    height: 13px;
+}
+.social-btn button[type='submit']:hover {
+    background-color: #f8f8f8 !important;
+}
 </style>
 {% endblock %}
 
