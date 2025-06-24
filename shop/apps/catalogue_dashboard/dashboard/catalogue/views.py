@@ -116,6 +116,13 @@ class ProductListView(originalviews.ProductListView):
 
         return super().get(request, *args, **kwargs)
 
+    def filter_queryset(self, queryset):
+        if not (self.request.user.is_superuser or self.request.user.groups.filter(name='Seller Admin').exists()):
+            qs = queryset.filter(seller=self.request.user.seller)
+            return qs
+
+        return queryset
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['seller'] = 'Main Seller'
@@ -123,7 +130,6 @@ class ProductListView(originalviews.ProductListView):
         # ic(ctx)
         # ic(ctx['products'])
         return ctx
-
 
     def apply_search(self, queryset):
         qs = super().apply_search(queryset)
