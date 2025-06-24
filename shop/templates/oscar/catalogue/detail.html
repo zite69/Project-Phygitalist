@@ -195,14 +195,12 @@ input[type='radio'].form-check-input {
         </div>
 
         <h1 class="title">Product Added Successfully!</h1>
-        <!--<p class="subtitle">Your product has been added to the inventory and is now available for customers.</p>-->
-
         <div class="product-info">
             {% for message in messages %}
                 {{ message|capfirst }}
             {% endfor %}
         </div>
-    <a href="/"><strong>Continue the Shopping</strong></a>
+        <a href="/"><strong>Continue Shopping</strong></a>
     </div>
     {% endif %}
 {% endblock %}
@@ -236,8 +234,6 @@ input[type='radio'].form-check-input {
                                     From: {{ product.seller.name }} <a href="#">Connect</a>
                                   {% endif %}
                             </span>
-                           <!--span>  TailorMade with Love <span class="fi-rs-location-alt">  8 km </span>  <a href="#">Connect</a>
-                            </span-->
                         </div>
                         <div class="product-rate-cover text-end">
                             <div class="social-icons single-share">
@@ -467,6 +463,12 @@ You can also connect with the local CEO ( Community Exchange Officer ) for in pe
             const product_gallery = document.getElementById("product_gallery");
 
             const carousel = new bootstrap.Carousel(product_gallery, {
+                interval: 2000,
+                touch: true
+            });
+
+            const couponDiv = document.querySelector('.coupon-carousel');
+            const carouselCoupon = new bootstrap.Carousel(couponDiv, {
                 interval: 2000,
                 touch: true
             });
