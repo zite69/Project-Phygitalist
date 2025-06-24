@@ -1,58 +1,83 @@
 {% load static %}
 {% load cms_tags djangocms_alias_tags %}
 <style>
-    .user-menu {
-      position: relative;
-      display: inline-block;
+.user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.auth-button {
+  color: #222;
+  padding: 10px 14px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 6px;
+  border: none;
+  border-radius: 6px;
+}
+
+.account-links {
+    background-color: #f66569;
+  display: none;
+  position: absolute;
+  top: 85%;
+  left: 0;
+  color: #000;
+  min-width: 180px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  flex-direction: column;
+}
+
+.account-links a {
+  padding: 12px 16px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+  transition: background 0.2s;
+}
+
+.account-links a:hover {
+    color: #000;
+  background-color: #f0f0f0;
+}
+.header-info > ul > li a {
+    color: #000;
+    font-weight: 500;
     }
 
-    .user-button {
-      background: #fff;
-      color: #222;
-      padding: 10px 15px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+/* Show on hover for desktop */
+.user-menu:hover .account-links {
+  display: block;
+}
 
-    .account-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #fff;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-      min-width: 150px;
-    }
+/* Show on tap for mobile */
+#user-toggle:checked ~ .account-links {
+  display: flex;
+}
 
-    .account-links a {
-      display: block;
-      padding: 10px;
-      text-decoration: none;
-      color: #222;
-    }
+/* Responsive styles */
+@media (max-width: 768px) {
+  .auth-button {
+    width: 100%;
+    justify-content: space-between;
+  }
 
-    .account-links a:hover {
-      background: #f0f0f0;
-    }
+  .account-links {
+    position: static;
+    box-shadow: none;
+  }
 
-    /* Show menu on hover (desktop) */
-    .user-menu:hover .account-links {
-      display: block;
-    }
+  .account-links a {
+    border-top: 1px solid #eee;
+  }
+}
 
-    /* Show menu on tap (mobile) */
-    @media (max-width: 768px) {
-      .user-menu:hover .account-links {
-        display: none;
-      }
-
-      .user-button:focus + .account-links,
-      .account-links:focus-within {
-        display: block;
-      }
-    }
 </style>
+
+
 <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
@@ -69,6 +94,7 @@
                                 {% static_alias "flashnews" %}
                             </div>
                     </div>
+                    <!--
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
                             <ul>
@@ -82,12 +108,14 @@
                                 <a href="{% url 'account_logout' %}">
                                 <i class="fi-rs-user"></i> Logout
                                 </a>
-                                    <ul class="account-links">
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">My Orders</a></li>
-                                    <li><a href="#">Settings</a></li>
-                                </ul>
+                                     <ul>
+                                       <li>My Account</li>
+                                       <li>My Orders</li>
+                                       <li>Settings</li>
+                                    </ul>
+                                
                                 </li>
+                                  
 {% else %}
     <li>
         <a href="{% url 'account_login' %}">
@@ -99,6 +127,42 @@
                         </ul>
                         </div>
                     </div>
+                    -->
+
+<div class="col-xl-3 col-lg-4">
+  <div class="header-info header-info-right">
+    <ul>
+      <li>
+        <a href="https://szine.zite69.com/69mutual-club/69mutual-club-membership-join/">
+          <i class=""></i> Become a Member
+        </a>
+      </li>
+
+      {% if user.is_authenticated %}
+      <li class="user-menu">
+        <input type="checkbox" id="user-toggle" style="display: none;">
+        <label for="user-toggle" class="auth-button">
+          <i class="fi-rs-user"></i> Logout
+        </label>
+        <div class="account-links">
+          <a href="/profile">My Profile</a>
+          <a href="/orders">My Orders</a>
+          <a href="/settings">Settings</a>
+        </div>
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'account_login' %}">
+          <i class="fi-rs-user"></i> Sign In
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
+
+
                 </div>
             </div>
         </div>
