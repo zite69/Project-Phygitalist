@@ -14,19 +14,31 @@
         <link rel="stylesheet" href="{% static 'css/login.css' %}">
     {% endaddtoblock %}
 <style>
-    button.icon-button[type="submit"] {
-       
-        background-color: white;
-        color: darkgray;
-        border: none;
+button.icon-button[type="submit"] {
+    background-color: white;
+    color: darkgray;
+    border: none;
+}
+.helptext {
+    display: inline;
+}
+.social-login-title {
+    text-align: center;
+    margin-bottom: 5px;
+}
+.remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
     }
-    .helptext {
-        display: inline;
-    }
-    .social-login-title {
-        text-align: center;
-        margin-bottom: 5px;
-    }
+.remember-me input[type="checkbox"] {
+    margin-right: 8px;
+}
+.remember-me label {
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
 </style>
 {% endblock %}
 
@@ -47,44 +59,19 @@
                 <!-- Phone Input Section -->
                 <div id="login-phone-section" class="active">
                 <p style="font-size: 14px;font-style: italic;text-align: center;">Use your phone number, email ID, Google account, or password to login. If you're a new user, please register <a href="#" onclick="switchTab('register')">here</a>.</p>
-                    <!--
-                    <div class="col-4 mx-auto social-login-title"><strong>Login with Google:</strong></div>
-                    <div class="social-login">
-                        <form action="{% provider_login_url 'google' next=request.GET.next %}" method="POST">
-                            {% csrf_token %}
-                            <div class="social-login">
-                                <div class="social-btn">
-                                    <button type="submit" class="icon-button d-inline-flex justify-content-around align-items-center">
-                                        <img src="{% static 'img/google.png' %}" alt="Google">
-                                        Google
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    -->
                     <div class="divider">OR</div>
                     <div id="phoneSection" class="col-md-12">
                         <form action="{% url 'otp:request' %}" method="POST" id="request-code-form">
                             {% csrf_token %}
-                            {{ request_code_form }}
+                            <div>
+                                <label for="id_email_phone">Email or Phonenumber:</label>
+                                <input type="text" name="email_phone" maxlength="128" required="" aria-describedby="id_email_phone_helptext" id="id_email_phone" placeholder="Enter email or phone">
                             <button type="button" onclick="requestOTP()" class="proceed-btn" name="submit" value="Request OTP">
                                 Request OTP
                             </button>
+                            </div>
                         </form>
                     </div>
-                    <!-- >
-                    <div>Enter your mobile number/email address</div>
-                    <div class="phone-field">
-                        <input type="text" id="login-phone" class="phone-input" placeholder="Enter Phone Number">
-                    </div>
-                    <button class="proceed-btn" onclick="showLoginOtp()">Request OTP</button>
-            <div id="phoneSection">
-            <label for="phone" class="loginb-label">Phone:</label>
-            <input type="tel" id="phone" class="loginb-input" placeholder="Enter your phone number">
-            <button onclick="requestOTP()" class="loginb-button">Request OTP</button>
-            </div>
-            -->
             <div id="loadingSection" class="loginb-hidden">
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
@@ -111,16 +98,28 @@
             ✓ OTP Verified Successfully!
             </div>
 
-                    <div class="col-md-12 justify-content-center text-center"><h4>OR</h4></div>
-                    <div class="col-md-12">
-                        <form action="{% url 'account_login' %}" method="POST">
-                            {% csrf_token %}
-                            {{ form }}
-                            <div>
-                                <button class="proceed-btn" type="submit" name="submit" value="login">Login</button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="col-md-12 justify-content-center text-center"><h4>OR</h4></div>
+                <div class="col-md-12">
+                    <form action="{% url 'account_login' %}" method="POST">
+                        {% csrf_token %}
+                        <div>
+                            <label for="id_login">Login:</label>
+                            <input id="id_login" type="text" name="login" placeholder="Username, email or phone" autocomplete="email" required="">
+                        </div>
+                        <div>
+                            <label for="id_password" class="helptext">Password:</label>
+                            <input type="password" name="password" placeholder="Password" autocomplete="current-password" required="" aria-describedby="id_password_helptext" id="id_password">
+                            <div class="helptext" id="id_password_helptext"><a href="{% url 'account_reset_password' %}">Forgot your password?</a></div>
+                        </div>
+                        <div class="remember-me">
+                            <input type="checkbox" id="id_remember" name="remember">
+                            <label for="id_remember">Remember Me</label>
+                        </div>
+                        <div>
+                            <button class="proceed-btn" type="submit" name="submit" value="login">Login</button>
+                        </div>
+                    </form>
+                </div>
                     <!--
                     <div class="account-link">
                         New User? <a href="#" onclick="switchTab('register')">Create Account</a>
