@@ -75,6 +75,9 @@
   }
 }
 
+.menu_profile_picture {
+    width: 42px;
+}
 </style>
 
 
@@ -94,41 +97,6 @@
                                 {% static_alias "flashnews" %}
                             </div>
                     </div>
-                    <!--
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="header-info header-info-right">
-                            <ul>
-                                <li>
-                                    <li>
-                                        <a href="https://szine.zite69.com/69mutual-club/69mutual-club-membership-join/"> <i class=""></i> Become a Member </a>
-                                    </li>
-                                    
-                                   {% if user.is_authenticated %}
-                                <li class="user-menu">
-                                <a href="{% url 'account_logout' %}">
-                                <i class="fi-rs-user"></i> Logout
-                                </a>
-                                     <ul>
-                                       <li>My Account</li>
-                                       <li>My Orders</li>
-                                       <li>Settings</li>
-                                    </ul>
-                                
-                                </li>
-                                  
-{% else %}
-    <li>
-        <a href="{% url 'account_login' %}">
-            <i class="fi-rs-user"></i> Sign In
-        </a>
-    </li>
-{% endif %}
-               
-                        </ul>
-                        </div>
-                    </div>
-                    -->
-
 <div class="col-xl-3 col-lg-4">
   <div class="header-info header-info-right">
     <ul>
@@ -142,12 +110,16 @@
       <li class="user-menu">
         <input type="checkbox" id="user-toggle" style="display: none;">
         <label for="user-toggle" class="auth-button">
-          <i class="fi-rs-user"></i> Logout
+            {% if user.socialaccount_set.exists %}
+                <img class="rounded-circle img-thumbnail menu_profile_picture" src="{{ user.socialaccount_set.first.extra_data.picture }}">
+            {% else %}
+                <i class="fi-rs-user"></i>
+            {% endif %}
         </label>
         <div class="account-links">
-          <a href="/profile">My Profile</a>
-          <a href="/orders">My Orders</a>
-          <a href="/settings">Settings</a>
+            <a href="{% url 'customer:profile-view' %}">My Profile</a>
+            <a href="{% url 'customer:order-list' %}">My Orders</a>
+            <a href="{% url 'account_logout' %}">Logout</a>
         </div>
       </li>
       {% else %}
