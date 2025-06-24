@@ -27,9 +27,11 @@
         <div class="basket-title d-none d-md-block">
             <div class="row">
                 <h4 class="col-md-6">{% trans "Items to buy now" %}</h4>
+                <!--
                 <h4 class="col-md-3">{% trans "Quantity" %}</h4>
                 <h4 class="col-md-1 text-right">{% trans "Price" %}</h4>
                 <h4 class="col-md-2 text-right">{% trans "Total" %}</h4>
+                -->
             </div>
         </div>
     {% endblock %}
@@ -57,6 +59,7 @@
                                 <h3><a href="{{ product.get_absolute_url }}">{{ line.description }}</a></h3>
                                 <p class="availability {{ session.availability.code }}">{{ session.availability.message }}</p>
                             </div>
+                            <!--
                             <div class="col-md-3">
                                 <div class="checkout-quantity">
                                     <div class="input-group {% if form.errors %}error{% endif %}">
@@ -84,6 +87,8 @@
                                     </div>
 
                             </div>
+                            -->
+                            <!--
                             <div class="col-md-1">
                                 {% if not line.unit_price_incl_tax and not line.unit_tax_excl_tax %}
                                     <p class="text-right">&mdash;</p>
@@ -98,6 +103,8 @@
                                     </p>
                                 {% endif %}
                             </div>
+                            -->
+                            <!--
                             <div class="col-md-2">
 
                                 {% if not line.line_price_incl_tax and not line_price_excl_tax %}
@@ -113,6 +120,7 @@
                                     </p>
                                 {% endif %}
                             </div>
+                            -->
                         </div>
                     </div>
                 {% endwith %}
@@ -124,11 +132,12 @@
         {% block vouchers %}
             {# Hide the entire section if a custom BasketView doesn't pass in a voucher form #}
             {% if voucher_form %}
+                <!--
                 <div class="col-sm-6">
                     <div class="sub-header">
                         <h2>{% trans "Voucher/promo code" %}</h2>
                     </div>
-                    <!--p id="voucher_form_link"><a href="#voucher" class="btn btn-secondary btn-full">{% trans "I have a voucher code..." %}</a></p-->
+                    <p id="voucher_form_link"><a href="#voucher" class="btn btn-secondary btn-full">{% trans "I have a voucher code..." %}</a></<p>
 
                     <div id="voucher_form_container" style="display:block">
                         <form id="voucher_form" action="{% url 'basket:vouchers-add' %}" method="post">
@@ -139,6 +148,7 @@
                         </form>
                     </div>
                 </div>
+                -->
             {% endif %}
         {% endblock vouchers %}
 
@@ -156,7 +166,7 @@
     {% block formactions %}
         <div class="form-group clearfix">
             <div class="row">
-                <div class="col-sm-4 offset-sm-8">
+                <div class="col-sm-4 offset-sm-2">
                     <a href="{% url 'checkout:index' %}" class="btn btn-lg btn-primary btn-block">{% trans "Proceed to checkout" %}</a>
                 </div>
             </div>
