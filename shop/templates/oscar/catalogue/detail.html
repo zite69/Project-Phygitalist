@@ -462,10 +462,11 @@ You can also connect with the local CEO ( Community Exchange Officer ) for in pe
 
             const product_gallery = document.getElementById("product_gallery");
 
-            const carousel = new bootstrap.Carousel(product_gallery, {
-                interval: 2000,
-                touch: true
-            });
+            if (product_gallery != undefined)
+                const carousel = new bootstrap.Carousel(product_gallery, {
+                    interval: 2000,
+                    touch: true
+                });
 
             const couponDiv = document.querySelector('.coupon-carousel');
             const carouselCoupon = new bootstrap.Carousel(couponDiv, {
@@ -491,7 +492,8 @@ You can also connect with the local CEO ( Community Exchange Officer ) for in pe
                 });
             })
             const product_id = document.getElementById("id_product_id");
-            product_id.value = "{{ product.id }}";
+            if (product_id != undefined)
+                product_id.value = "{{ product.id }}";
 
             function updateSlide() {
                 slides.style.transform = `translateX(-${currentSlide * 50}%)`;
