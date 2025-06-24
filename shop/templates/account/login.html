@@ -72,7 +72,7 @@ button.icon-button[type="submit"] {
                         <form action="{% url 'otp:request' %}" method="POST" id="request-code-form">
                             {% csrf_token %}
                             <div>
-                                <label for="id_email_phone">Email or Phonenumber:</label>
+                                <label for="id_email_phone">Email or Phone number. New User? <a href="#" onclick="switchTab('register')">Register</a></label>
                                 <input type="text" name="email_phone" maxlength="128" required="" aria-describedby="id_email_phone_helptext" id="id_email_phone" placeholder="Enter email or phone">
                             <button type="button" onclick="requestOTP()" class="proceed-btn" name="submit" value="Request OTP">
                                 Request OTP
@@ -359,7 +359,7 @@ button.icon-button[type="submit"] {
         document.querySelectorAll('.tab')[index].classList.add('active');
 
         // Update page title based on active tab
-        document.getElementById('page-title').textContent = tabId === 'login' ? 'Login with Zite69' : 'Register with Zite69';
+        //document.getElementById('page-title').textContent = tabId === 'login' ? 'Login with Zite69' : 'Register with Zite69';
 
         // Adjust the container height
         setTimeout(setContainerHeight, 10);
