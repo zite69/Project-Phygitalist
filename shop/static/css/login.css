@@ -206,7 +206,7 @@ input[type="email"],
 input[type="tel"],
 input[type="date"] {
     width: 100%;
-    padding: 15px;
+    padding: 22px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
