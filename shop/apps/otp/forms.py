@@ -159,7 +159,7 @@ class EmailPhoneOtpRequestForm(forms.Form):
 
 class OtpVerificationForm(forms.Form):
     email_phone = forms.CharField(label=_("Email or Phone number"), max_length=256, required=True)
-    otp = forms.CharField(max_length=10)
+    otp = forms.CharField(max_length=10, label=_("OTP"))
     type = forms.CharField(widget=forms.HiddenInput())
     field_next = forms.CharField(widget=forms.HiddenInput())
 
