@@ -159,6 +159,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'image_uploader_widget',
     'macros',
+    'import_export',
     #'pinax.referrals',
     #'pinax.invitations',
     #'account',
