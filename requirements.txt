@@ -107,7 +107,7 @@ libsass==0.23.0
 lsprotocol==2023.0.1
 lxml==5.2.2
 MarkupSafe==2.1.5
-manticoresearch-devel @ git+https://github.com/manticoresoftware/manticoresearch-python.git
+manticoresearch-devel
 matplotlib-inline==0.1.7
 oauthlib==3.2.2
 odin==2.10
