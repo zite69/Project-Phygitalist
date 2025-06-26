@@ -48,6 +48,7 @@ django-formtools==2.5.1
 django-fsm==2.8.2
 #django-haystack==3.3.0
 django-image-uploader-widget==1.0.0
+django-import-export==4.3.8
 django-ipware==7.0.1
 django-libsass==0.9
 django-localflavor==4.0
