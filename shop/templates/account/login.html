@@ -7,7 +7,7 @@
     {% trans "Sign In" %}
 {% endblock head_title %}
 
-{% block extrahead %}
+{% block styles %}
     {{ block.super }}
     {% addtoblock "css" %}
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700&display=swap" rel="stylesheet">
@@ -39,14 +39,11 @@ button.icon-button[type="submit"] {
     font-weight: normal;
     cursor: pointer;
 }
-
-#id_remember{
-    width: 13px;
-    height: 13px;
-}
-.social-btn button[type='submit']:hover {
-    background-color: #f8f8f8 !important;
-}
+    #id_remember{
+        width: 13px;
+        height: 13px;
+    }
+    }
 </style>
 {% endblock %}
 
@@ -54,6 +51,8 @@ button.icon-button[type="submit"] {
 {% block content %}
 
     <div class="login-container">
+        
+
         <div class="tabs">
             <div class="tab active" onclick="switchTab('login')">LOGIN</div>
             <div class="tab" onclick="switchTab('register')">REGISTER</div>
@@ -64,15 +63,14 @@ button.icon-button[type="submit"] {
             <div id="login" class="tab-content active">
                 <!-- Phone Input Section -->
                 <div id="login-phone-section" class="active">
-                    <div> 
-                        <img src="{% static 'img/offer_login.png' %}">
+                 <div> <img src="{% static 'img/offer_login.png' %}">
                     </div>
                     <div class="divider">OR</div>
                     <div id="phoneSection" class="col-md-12">
                         <form action="{% url 'otp:request' %}" method="POST" id="request-code-form">
                             {% csrf_token %}
                             <div>
-                                <label for="id_email_phone">Email or Phone number. New User? <a href="#" onclick="switchTab('register')">Register</a></label>
+                                <label for="id_email_phone">Email or Phonenumber:</label>
                                 <input type="text" name="email_phone" maxlength="128" required="" aria-describedby="id_email_phone_helptext" id="id_email_phone" placeholder="Enter email or phone">
                             <button type="button" onclick="requestOTP()" class="proceed-btn" name="submit" value="Request OTP">
                                 Request OTP
@@ -297,7 +295,56 @@ button.icon-button[type="submit"] {
                     </div>
         </div>
     </div>
-</div>
+
+    {% comment %}
+    {% element h1 %}
+        {% trans "Sign In" %}
+    {% endelement %}
+    {% if not SOCIALACCOUNT_ONLY %}
+        {% setvar link %}
+            <a href="{{ signup_url }}">
+            {% endsetvar %}
+            {% setvar end_link %}
+            </a>
+        {% endsetvar %}
+        {% element p %}
+            {% blocktranslate %}If you have not created an account yet, then please {{ link }}sign up{{ end_link }} first.{% endblocktranslate %}
+        {% endelement %}
+        {% url 'account_login' as login_url %}
+        {% element form form=form method="post" action=login_url tags="entrance,login" %}
+            {% slot body %}
+                {% element fields form=form unlabeled=True %}
+                {% endelement %}
+                {{ redirect_field }}
+            {% endslot %}
+            {% slot actions %}
+                {% element button type="submit" tags="prominent,login" %}
+                    {% trans "Sign In" %}
+                {% endelement %}
+            {% endslot %}
+        {% endelement %}
+    {% endif %}
+    {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
+        {% element hr %}
+        {% endelement %}
+        {% element button_group vertical=True %}
+            {% if PASSKEY_LOGIN_ENABLED %}
+                {% element button type="submit" form="mfa_login" id="passkey_login" tags="prominent,login,outline,primary" %}
+                    {% trans "Sign in with a passkey" %}
+                {% endelement %}
+            {% endif %}
+            {% if LOGIN_BY_CODE_ENABLED %}
+                {% element button href=request_login_code_url tags="prominent,login,outline,primary" %}
+                    {% trans "Mail me a sign-in code" %}
+                {% endelement %}
+            {% endif %}
+        {% endelement %}
+    {% endif %}
+    {% if SOCIALACCOUNT_ENABLED %}
+        
+        {# include "socialaccount/snippets/login.html" with page_layout="entrance" #}
+    {% endif %}
+{% endcomment %}
 {% endblock content %}
 
 {% block extra_body %}
@@ -359,7 +406,7 @@ button.icon-button[type="submit"] {
         document.querySelectorAll('.tab')[index].classList.add('active');
 
         // Update page title based on active tab
-        //document.getElementById('page-title').textContent = tabId === 'login' ? 'Login with Zite69' : 'Register with Zite69';
+        document.getElementById('page-title').textContent = tabId === 'login' ? 'Login with Zite69' : 'Register with Zite69';
 
         // Adjust the container height
         setTimeout(setContainerHeight, 10);
