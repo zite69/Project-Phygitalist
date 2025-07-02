@@ -16,6 +16,9 @@
         width: 550px;
         margin: 15px 0;  
     }
+.shipping-content{
+  margin: 25px 0;
+}
 </style>
 {% endblock %}
 
@@ -27,6 +30,8 @@
 {% endblock %}
 
 {% block shipping_address %}
+<div class="shipping-content">
+
 <div class="col-sm-12">
     <div class="sub-header">
         <!--<h2>{% trans "Where should we ship to?" %}</h2>-->
@@ -92,6 +97,7 @@
             </form>
         </div>
     {% endblock %}
+</div>
 </div>
 {% endblock shipping_address %}
 
