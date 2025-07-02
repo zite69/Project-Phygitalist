@@ -402,7 +402,9 @@ input:focus {
 
 @media (max-width: 480px) {
     .social-login {
-        flex-direction: column;
+       flex-direction: column;
+        max-width: 340px; /* optional: to prevent it from growing too big on slightly larger screens */
+        margin: 0 auto; /* optional: center the element horizontally */
     }
 
     .login-container {
