@@ -1,53 +1,50 @@
-{% load static %}
-{% load cms_tags %}
-{% load site_urls %}
-{% load djangocms_alias_tags %}
-
+{% load static %} 
+{% load cms_tags %} 
+{% load site_urls %} 
+{% load djangocms_alias_tags %} 
 {% block footer %}
-    <footer class="main">
-       <footer class="footer">
-          <div class="footer-content">
-              {% static_alias "footercol1" %}
-              {% static_alias "footercol2" %}
-              {% static_alias "footercol3" %}
-              {% static_alias "footercol4" %}
-          </div>
-          {% static_alias "social-links" %}
-          <div class="payment-section">
-              <div class="payment-methods">
-                  <span>100% Secure:</span>
-                  <div class="payment-logos">
-                      <img src="{% static 'img/theme/icons/phonepe.svg' %}" alt="PhonePe" class="payment-logo">
-                      <img src="{% static 'img/theme/icons/gpay.svg' %}" alt="Google Pay" class="payment-logo">
-                      <img src="{% static 'img/theme/icons/amazon.svg' %}" alt="Amazon Pay" class="payment-logo">
-                      <img src="{% static 'img/theme/icons/mastercard.svg' %}" alt="Mastercard" class="payment-logo">
-                      <img src="{% static 'img/theme/icons/paytm.svg' %}" alt="Paytm" class="payment-logo">
-                  </div>
-              </div>
-          </div>
-          <div class="copyright">
-              © 2025 69mm &amp; iCommerce LLP | E-mail <a href="mailto:hello@zite69.com">hello@zite69.com</a>
-          </div>
-      </footer>
-      <script>
-          // Simple accordion functionality
-          document.querySelectorAll('.accordion-header').forEach(header => {
-              header.addEventListener('click', function() {
-                  const content = this.nextElementSibling;
-                  if (content.style.maxHeight !== "0px" && content.style.maxHeight !== "") {
-                      content.style.maxHeight = "0px";
-                      content.style.padding = "0 15px";
-                      this.querySelector('span').textContent = '+';
-                  } else {
-                      content.style.maxHeight = "2000px"; // A large value to accommodate all content
-                      content.style.padding = "15px";
-                      this.querySelector('span').textContent = '-';
-                  }
-              });
-          });
-      </script>
+<footer class="main">
+    <footer class="footer">
+        <div class="footer-content">
+            {% static_alias "footercol1" %} {% static_alias "footercol2" %} {% static_alias "footercol3" %} {%
+            static_alias "footercol4" %}
+        </div>
+        {% static_alias "social-links" %}
+        <div class="payment-section">
+            <div class="payment-methods">
+                <span>100% Secure:</span>
+                <div class="payment-logos">
+                    <img src="{% static 'img/theme/icons/phonepe.svg' %}" alt="PhonePe" class="payment-logo" />
+                    <img src="{% static 'img/theme/icons/gpay.svg' %}" alt="Google Pay" class="payment-logo" />
+                    <img src="{% static 'img/theme/icons/upi.svg' %}" alt="UPI" class="payment-logo" />
+                    <img src="{% static 'img/theme/icons/amazon.svg' %}" alt="Amazon Pay" class="payment-logo" />
+                    <img src="{% static 'img/theme/icons/mastercard.svg' %}" alt="Mastercard" class="payment-logo" />
+                    <img src="{% static 'img/theme/icons/visa.svg' %}" alt="Visa" class="payment-logo" />
+                    <img src="{% static 'img/theme/icons/paytm.svg' %}" alt="Paytm" class="payment-logo" />
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 69mm &amp; iCommerce LLP | E-mail <a href="mailto:hello@zite69.com">hello@zite69.com</a>
+        </div>
     </footer>
-    {% comment %}
-        Could be used for displaying links to privacy policy, terms of service, etc.
-    {% endcomment %}
+    <script>
+        // Simple accordion functionality
+        document.querySelectorAll(".accordion-header").forEach((header) => {
+            header.addEventListener("click", function () {
+                const content = this.nextElementSibling;
+                if (content.style.maxHeight !== "0px" && content.style.maxHeight !== "") {
+                    content.style.maxHeight = "0px";
+                    content.style.padding = "0 15px";
+                    this.querySelector("span").textContent = "+";
+                } else {
+                    content.style.maxHeight = "2000px"; // A large value to accommodate all content
+                    content.style.padding = "15px";
+                    this.querySelector("span").textContent = "-";
+                }
+            });
+        });
+    </script>
+</footer>
+{% comment %} Could be used for displaying links to privacy policy, terms of service, etc. {% endcomment %} 
 {% endblock %}
