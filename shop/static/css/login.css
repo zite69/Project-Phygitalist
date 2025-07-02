@@ -425,4 +425,10 @@ input:focus {
         height: 40px;
         font-size: 20px;
     }
+
+    .social-login {
+        flex-direction: column;
+        max-width: 340px;
+        margin: 0 auto;
+    }
 }
