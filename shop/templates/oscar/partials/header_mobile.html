@@ -1,4 +1,6 @@
 {% load static %}
+{% load site_urls %}
+
 <div class="mobile-header-active mobile-header-wrapper-style">
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
@@ -185,8 +187,8 @@
         </li>
         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="https://www.zite69.com/">JOIN</a>
           <ul class="dropdown">
-            <li><a href="https://beta.zite69.com/accounts/login/">Become a Member </a></li>
-            <li><a href="https://seller.zite69.com/registration/">Become a Seller</a></li>
+            <li><a href="{% url 'account_login' %}">Become a Member </a></li>
+            <li><a href="{% site_url SITE_SELLER 'registration:home' %}">Become a Seller</a></li>
             <li><a href="https://forms.gle/62F9C7zH3HovrWB26">We are Hiring </a></li>
           </ul>
         </li>
@@ -199,7 +201,11 @@
                     <a  href="https://forms.gle/oY5kSZV7tMD5F7TX7"> Start Selling </a>
                 </div>
                 <div class="single-mobile-header-info">
-                    <a href="{% url 'customer:login' %}">Log In / Sign Up </a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'customer:logout' %}">Log Out</a>
+                    {% else %}
+                        <a href="{% url 'customer:login' %}">Log In / Sign Up </a>
+                    {% endif %}
                 </div>
                 <!--
                 <div class="single-mobile-header-info">
