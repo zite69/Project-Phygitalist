@@ -878,9 +878,16 @@ if DEBUG == False:
             'interval': 1,
     }
     for module in LOGGING_ENV.keys():
-        LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
-        LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
-    
+        if module not in LOGGING['loggers']:
+            LOGGING['loggers'][module] = {
+                    'handlers': ['file', 'mail_admins'],
+                    'level': LOGGING_ENV.get(module, "WARNING"),
+                    'propagate': False
+            }
+        else:
+            LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
+            LOGGING['loggers'][module]['level'] = LOGGING_ENV.get(module, "WARNING")
+
     for module in ['sorl', 'PIL', 'urllib3']:
         LOGGING['loggers'][module]['handlers'] = ['file', 'mail_admins']
         LOGGING['loggers'][module]['level'] = "WARNING"
