@@ -10268,7 +10268,9 @@ span.fi-rs-apps {
             }
         }
 
-
+#content_inner{
+  padding: 20px 0;
+}
 /*phone landscape*/
 @media only screen and (min-width: 480px) and (max-width: 667px) {
   .header-bottom-bg-color {
