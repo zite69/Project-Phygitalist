@@ -970,6 +970,7 @@ button.buy:hover, button[type='buy']:hover {
 
 .button.button-custom {
   padding: 12px 15px;
+  margin: 5px 0;
 }
 
 .btn-login {
@@ -4650,6 +4651,7 @@ table .product-thumbnail img {
 .button.button-add-to-cart {
   padding: 12px 40px;
   margin-right:5px;
+  margin-bottom: 5px;
 }
 
 .product-extra-link2 a {
