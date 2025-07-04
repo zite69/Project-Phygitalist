@@ -26,9 +26,9 @@
     {% block basket_form_headers %}
         <div class="basket-title d-none d-md-block">
             <div class="row">
-                <h4 class="col-md-6">{% trans "Items to buy now" %}</h4>
+                <h5 class="col-md-6" style="font-weight: normal;">{% trans "Items to buy now" %}</h5>
+                <h5 class="col-md-3" style="font-weight: normal;">{% trans "Quantity" %}</h5>
                 <!--
-                <h4 class="col-md-3">{% trans "Quantity" %}</h4>
                 <h4 class="col-md-1 text-right">{% trans "Price" %}</h4>
                 <h4 class="col-md-2 text-right">{% trans "Total" %}</h4>
                 -->
@@ -59,13 +59,12 @@
                                 <h3><a href="{{ product.get_absolute_url }}">{{ line.description }}</a></h3>
                                 <p class="availability {{ session.availability.code }}">{{ session.availability.message }}</p>
                             </div>
-                            <!--
                             <div class="col-md-3">
                                 <div class="checkout-quantity">
                                     <div class="input-group {% if form.errors %}error{% endif %}">
                                         {% render_field form.quantity class+="form-control" %}
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="submit" data-loading-text="{% trans 'Updating...' %}">{% trans "Update" %}</button>
+                                        <button class="btn btn-primary" type="submit" data-loading-text="{% trans 'Updating...' %}">{% trans "Update" %}</button>
                                     </div>
                                     </div>
                                 </div>
@@ -87,7 +86,6 @@
                                     </div>
 
                             </div>
-                            -->
                             <!--
                             <div class="col-md-1">
                                 {% if not line.unit_price_incl_tax and not line.unit_tax_excl_tax %}
@@ -132,12 +130,11 @@
         {% block vouchers %}
             {# Hide the entire section if a custom BasketView doesn't pass in a voucher form #}
             {% if voucher_form %}
-                <!--
                 <div class="col-sm-6">
                     <div class="sub-header">
                         <h2>{% trans "Voucher/promo code" %}</h2>
                     </div>
-                    <p id="voucher_form_link"><a href="#voucher" class="btn btn-secondary btn-full">{% trans "I have a voucher code..." %}</a></<p>
+                    <!--p id="voucher_form_link"><a href="#voucher" class="btn btn-secondary btn-full">{% trans "I have a voucher code..." %}</a></p-->
 
                     <div id="voucher_form_container" style="display:block">
                         <form id="voucher_form" action="{% url 'basket:vouchers-add' %}" method="post">
@@ -148,7 +145,6 @@
                         </form>
                     </div>
                 </div>
-                -->
             {% endif %}
         {% endblock vouchers %}
 

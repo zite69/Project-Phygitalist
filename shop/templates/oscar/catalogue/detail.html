@@ -182,12 +182,7 @@ input[type='radio'].form-check-input {
             {% endwith %}
         </ol>
     </nav>
-{% endblock %}
 
-{% block header %}
-{% endblock header %}
-
-{% block messages %}
     {% if messages|added_to_cart %}
         <div class="notification-container">
         <div class="icon-wrapper">
@@ -203,6 +198,13 @@ input[type='radio'].form-check-input {
         <a href="/"><strong>Continue Shopping</strong></a>
     </div>
     {% endif %}
+
+{% endblock %}
+
+{% block header %}
+{% endblock header %}
+
+{% block messages %}
 {% endblock %}
 
 {% block content %}
