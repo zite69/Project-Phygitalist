@@ -1,26 +1,28 @@
 {% extends "oscar/checkout/checkout.html" %}
 {% load sekizai_tags %}
 {% load i18n %}
+{% load purchase_info_tags %}
+{% load image_tags %}
+{% load currency_filters %}
 
 {% block title %}
     {% trans "Payment details" %} | {{ block.super }}
 {% endblock %}
 
 {% block extrahead %}
-    {{ block.super }}
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <style>
-        .product-table {
-            max-width: 100%;
-            overflow-x: auto;
+{{ block.super }}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+    .product-table {
+        max-width: 100%;
+        overflow-x: auto;
 
-            th, td {
-                text-align: center !important;
-            } 
-        }
-   </style>
+        th, td {
+            text-align: center !important;
+        } 
+    }
+</style>
 {% endblock %}
-
 
 {% block checkout_nav %}
     {% include 'oscar/checkout/nav.html' with step=3 %}
@@ -29,27 +31,71 @@
 {% block checkout_title %}{% trans "Enter payment details" %}{% endblock %}
 
 {% block order_contents %}
-<table class="table table-bordered product-table">
-    <thead>
-        <tr>
-            <th class="col-lg-5 col-md-6 col-sm-7">Product Name</th>
-            <th class="col-lg-1 col-md-1 col-sm-2">Quantity</th>
-            <th class="col-lg-6 col-md-5 col-sm-5">Image</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="basket-title d-none d-md-block">
+    <div class="row">
+        <h5 class="col-md-6">Product Name</h5>
+        <h5 class="col-md-3">{% trans "Quantity" %}</h5>
+    </div>
+</div>
+ 
     {% for line in basket.lines.all %}
-    <tr>
-        <td class="line-product">{{ line.product }}</td>
-        <td class="line-quantity">{{ line.quantity }}</td>
-        <td class="line-image">
-            <img style="width: 120px; height: auto;" src="{{ line.product.primary_image.original.url }}"></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class="basket-items">
+        <div class="row">
+            <div class="col-md-2">
+                {% with image=line.product.primary_image %}
+                    {% oscar_thumbnail line.product.primary_image.original "100x100" upscale=False as thumb %}
+                    <a href="{{ line.product.get_absolute_url }}">
+                        <img class="img-thumbnail w-auto mx-auto my-0" src="{{ thumb.url }}" alt="{{ line.product.get_title }}"/>
+                    </a>
+                {% endwith %}
+            </div>
 
+            {% purchase_info_for_line request line as session %}
+            <div class="col-md-4">
+                <h3><a href="{{ line.product.get_absolute_url }}">{{ line.description }}</a></h3>
+                <p class="availability {{ session.availability.code }}">{{ session.availability.message }}</p>
+            </div>
+            <div class="col-md-2">
+                <p>{{ line.quantity }}</p>
+            </div>
+            <!--
+            <div class="col-md-1">
+                {% if not line.unit_price_incl_tax and not line.unit_tax_excl_tax %}
+                    <p class="text-right">&mdash;</p>
+                {% else %}
+                    <p class="price_color text-right">
+                        <span class="price-title d-md-none">{% trans "Price" %}:</span>
+                        {% if line.is_tax_known %}
+                            {{ line.unit_price_incl_tax|currency:line.price_currency }}
+                        {% else %}
+                            {{ line.unit_price_excl_tax|currency:line.price_currency }}
+                        {% endif %}
+                    </p>
+                {% endif %}
+            </div>
+            -->
+            <!--
+            <div class="col-md-2">
+
+                {% if not line.line_price_incl_tax and not line_price_excl_tax %}
+                    <p class="text-right">&mdash;</p>
+                {% else %}
+                    <p class="price_color text-right">
+                        <span class="price-title d-md-none">{% trans "Total" %}:</span>
+                        {% if line.is_tax_known %}
+                            {{ line.line_price_incl_tax|currency:line.price_currency }}
+                        {% else %}
+                            {{ line.line_price_excl_tax|currency:line.price_currency }}
+                        {% endif %}
+                    </p>
+                {% endif %}
+            </div>
+            -->
+        </div>
+    </div>
+    {% endfor %}
 {% endblock %}
+
 {% block shipping_address %}{% endblock %}
 {% block shipping_method %}{% endblock %}
 {% block payment_method %}{% endblock %}
