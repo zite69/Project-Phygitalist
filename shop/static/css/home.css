@@ -9918,6 +9918,10 @@ span.fi-rs-apps {
     max-width: unset;
     margin-right: 0 !important;
   }
+  .logo.logo-width-1 a img {
+        width: 46px;
+        height: auto; /* keeps the aspect ratio */
+    }
   .entry-meta.meta-2 a.btn {
     display: inline-block;
     -webkit-box-align: center;
