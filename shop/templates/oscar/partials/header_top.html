@@ -121,7 +121,7 @@
         <div class="account-links">
             <a href="{% url 'customer:profile-view' %}">My Profile</a>
             <a href="{% url 'customer:order-list' %}">My Orders</a>
-            <a href="{% url 'account_logout' %}">Logout</a>
+            <form id="logoutform" action="{% url 'account_logout' %}" method="post">{% csrf_token %}<a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit()">Logout</a></form>
         </div>
       </li>
       {% else %}
