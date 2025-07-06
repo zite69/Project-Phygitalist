@@ -10269,16 +10269,17 @@ span.fi-rs-apps {
             }
         }
 
-#content_inner{
+#content_inner {
   padding: 20px 0;
 }
-#allauth_inner{
-  padding: 20px 0;
+
+#allauth_inner {
+  padding: 30px 0;
   margin: 0 auto;
   max-width: 600px;
   text-align: center;
-  
 }
+
 /*phone landscape*/
 @media only screen and (min-width: 480px) and (max-width: 667px) {
   .header-bottom-bg-color {
