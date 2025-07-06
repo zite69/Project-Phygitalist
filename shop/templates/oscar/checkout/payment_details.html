@@ -21,6 +21,14 @@
             text-align: center !important;
         } 
     }
+
+    #instructions {
+        font-size: 14px;
+    }
+
+    #instructions p {
+        font-size: 14px;
+    }
 </style>
 {% endblock %}
 
@@ -119,6 +127,15 @@
         <div class="d-flex flex-column">
             <div>Order Total: ₹{{ order_total.incl_tax }}</div>
             <button class="btn btn-primary" id="rzp-button1">Proceed to Payment</button>
+            <div id="instructions">
+                We are currently in Test Payment mode. Please use the following Test Credit Card details to complete payment.
+                <p>Credit Card Number: 4386 2894 0766 0153</p>
+                <p>Expiry Date: Any future month/year</p>
+                <p>CVV: Any random 3 digit number</p>
+                <p>In the final step of the payment checkout when it asks you for an OTP, please 
+                    enter any random 3-6 digit number
+                </p>
+            </div>
         </div>
     </div>
     {{ options|json_script:"razorpay-options" }}
