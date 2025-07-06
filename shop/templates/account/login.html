@@ -22,28 +22,40 @@ button.icon-button[type="submit"] {
 .helptext {
     display: inline;
 }
+
 .social-login-title {
     text-align: center;
     margin-bottom: 5px;
 }
+
 .remember-me {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .remember-me input[type="checkbox"] {
     margin-right: 8px;
 }
+
 .remember-me label {
     margin: 0;
     font-weight: normal;
     cursor: pointer;
 }
-    #id_remember{
-        width: 13px;
-        height: 13px;
-    }
-    }
+
+#id_remember{
+    width: 13px;
+    height: 13px;
+}
+
+#tncbox {
+    width: 13px;
+    height: 13px;
+    margin-right: 8px;
+    font-style: italic;
+}
+
 </style>
 {% endblock %}
 
@@ -70,7 +82,7 @@ button.icon-button[type="submit"] {
                         <form action="{% url 'otp:request' %}" method="POST" id="request-code-form">
                             {% csrf_token %}
                             <div>
-                                <label for="id_email_phone">Email or Phonenumber:</label>
+                                <label for="id_email_phone">Email or Phonenumber: New User? <a href="#" onclick="switchTab('register')">Click Here...</a></label>
                                 <input type="text" name="email_phone" maxlength="128" required="" aria-describedby="id_email_phone_helptext" id="id_email_phone" placeholder="Enter email or phone">
                             <button type="button" onclick="requestOTP()" class="proceed-btn" name="submit" value="Request OTP">
                                 Request OTP
@@ -207,9 +219,15 @@ button.icon-button[type="submit"] {
                     <div class="col-12"><p style="font-size: 14px;font-style: italic;text-align: center;">Signup and create an account with us</p>
                         <div> <img src="{% static 'img/offer_login.png' %}">
                     </div>
-                    <form method="post" action="{% url 'account_signup' %}">
+                    <form method="post" action="{% url 'account_signup' %}" id="register_form">
                         {% csrf_token %}
                         {{ signup_form }}
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" name="agree" value="" id="tncbox">
+                            <label for="tncbox">By continuing, I agree to the <a href="https://we.zite69.com/terms-of-use/">Terms of Use</a>
+                                &amp; <a href="https://we.zite69.com/privacy-policy/">Privacy Policy</a> and I am above 18 years old.
+                            </label>
+                        </div>
                         <button class="register-btn" type="submit">REGISTER</button>
                     <!--
                     <div class="name-container">
@@ -373,6 +391,15 @@ button.icon-button[type="submit"] {
         requestForm.addEventListener('submit', requestOtpFormSubmit);
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+        const register_form = document.getElementById("register_form");
+        register_form.addEventListener('submit', function(event) {
+            const tncbox = document.getElementById("tncbox");
+            if (!tncbox.checked) {
+                alert("Please agree to the Terms of Use checkbox");
+                event.preventDefault();
+                return;
+            }
+        });
     });
 
     function switchTab(tabId) {
@@ -406,7 +433,7 @@ button.icon-button[type="submit"] {
         document.querySelectorAll('.tab')[index].classList.add('active');
 
         // Update page title based on active tab
-        document.getElementById('page-title').textContent = tabId === 'login' ? 'Login with Zite69' : 'Register with Zite69';
+        //document.getElementById('page-title').textContent = tabId === 'login' ? 'Login with Zite69' : 'Register with Zite69';
 
         // Adjust the container height
         setTimeout(setContainerHeight, 10);
