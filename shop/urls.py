@@ -29,7 +29,6 @@ from django.conf.urls import (handler404, handler500, handler403)
 from django.contrib.sitemaps.views import sitemap
 from shop.apps.main.sitemaps import SITEMAPS
 from shop.apps.webinar.views import CreateRegistrationView
-from django.views.generic import TemplateView
 from shop.apps.main.views import LoginView, BuyQuickView
 
 from shop.apps.zitepayment.views import RazorpayCallbackView
