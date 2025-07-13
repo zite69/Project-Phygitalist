@@ -56,6 +56,7 @@ urlpatterns = i18n_patterns(
     path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="seller.sitemap"),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('notapproved/', TemplateView.as_view(template_name='registration/notapproved.html'), name="notapproved"),
+    path('dashboard/demo/', TemplateView.as_view(template_name='demo/index.html'), name="demo"),
     path('dashboard/onboarding/', MultiFormView.as_view(form_classes=ONBOARDING_FORM_CLASSES), name="onboarding-wizard"),
     path('select2/', include('django_select2.urls')),
     path('admin/', admin.site.urls),
