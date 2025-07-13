@@ -590,6 +590,10 @@ class MultiFormView(TemplateView):
         if not hasattr(self.request.user, 'seller_registration'):
             messages.warning(self.request, 'You must first register as a seller')
             return redirect("registration:home")
+        if not self.request.user.seller_registration.approved:
+            messages.warning(self.request, 'Your registration is not approved')
+            return redirect("notapproved")
+
         context = self.get_context_data(**kwargs)
         #context['forms'] = self.forms
         logger.debug("forms:")

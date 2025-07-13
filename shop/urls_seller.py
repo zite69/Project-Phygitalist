@@ -55,6 +55,7 @@ ONBOARDING_FORM_CLASSES = {
 urlpatterns = i18n_patterns(
     path('sitemap.xml', sitemap, { "sitemaps": SITEMAPS }, name="seller.sitemap"),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('notapproved/', TemplateView.as_view(template_name='registration/notapproved.html'), name="notapproved"),
     path('dashboard/onboarding/', MultiFormView.as_view(form_classes=ONBOARDING_FORM_CLASSES), name="onboarding-wizard"),
     path('select2/', include('django_select2.urls')),
     path('admin/', admin.site.urls),
@@ -81,7 +82,7 @@ urlpatterns = [
     path("protected/seller/<int:pk>/gstin/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="gstin_file")), name="gtstin-file-protected-view"),
     path("protected/seller/<int:pk>/pan/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="pan_file")), name="pan-file-protected-view"),
     path("protected/seller/<int:pk>/signature/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="signature_file")), name="signature-file-protected-view"),
-        ] + urlpatterns
+    ] + urlpatterns
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
