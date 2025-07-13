@@ -104,12 +104,6 @@ button.icon-button[type="submit"] {
                     <button type="submit" class="loginb-button">Verify OTP</button>
                     <button onclick="resendOTP()" class="loginb-button loginb-secondary">Resend OTP</button>
                 </form>
-                <!--
-            <label for="otp" class="loginb-label">Enter OTP:</label>
-            <input type="text" id="otp" class="loginb-input" placeholder="Enter 6-digit OTP" maxlength="6">
-            <button onclick="verifyOTP()" class="loginb-button">Verify OTP</button>
-            <button onclick="resendOTP()" class="loginb-button loginb-secondary">Resend OTP</button>
-                -->
             </div>
         
             <div id="successMessage" class="loginb-hidden loginb-success">
@@ -178,19 +172,6 @@ button.icon-button[type="submit"] {
                     <button class="resend-btn" id="login-resend-btn" disabled>RESEND OTP</button>
                 </div>
                     <!--<div class="col-4 mx-auto social-login-title"><strong>Login with Google:</strong></div>-->
-                    <div class="social-login">
-                        <form action="{% provider_login_url 'google' next=request.GET.next %}" method="POST">
-                            {% csrf_token %}
-                            <div class="social-login">
-                                <div class="social-btn">
-                                    <button type="submit" class="icon-button d-inline-flex justify-content-around align-items-center">
-                                        <img src="{% static 'img/google.png' %}" alt="Google">
-                                       Login with Google
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
             </div>
 
             <!-- Register Tab -->
@@ -229,42 +210,6 @@ button.icon-button[type="submit"] {
                             </label>
                         </div>
                         <button class="register-btn" type="submit">REGISTER</button>
-                    <!--
-                    <div class="name-container">
-                        <input type="text" placeholder="First Name *" style="flex: 1;">
-                        <input type="text" placeholder="Last Name" style="flex: 1;">
-                    </div>
-
-                    <input type="email" placeholder="Email ID *">
-
-                    <div class="password-field">
-                        <input type="password" placeholder="Choose New Password *">
-                        <div class="toggle-password">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="password-field">
-                        <input type="password" placeholder="Confirm Password *">
-                        <div class="toggle-password">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                        </div>
-                    </div>
-                
-                    <div class="phone-field">
-
-                        <input type="tel" id="register-phone" class="phone-input" placeholder="Mobile Number (For order status update) *">
-                    </div>
-
-
-                    <button class="register-btn" onclick="showRegisterOtp()">REGISTER</button>
-                    -->
 
                     <div class="account-link">
                         Already a User? <a href="#" onclick="switchTab('login')">Login</a>
@@ -296,73 +241,8 @@ button.icon-button[type="submit"] {
                     <button class="resend-btn" id="register-resend-btn" disabled>RESEND OTP</button>
                 </div>
             </div>
-                
-                <!--<div class="col-12 mx-auto social-login-title"><strong>Signup with Google:</strong></div>-->
-                    <div class="social-login">
-                        <form action="{% provider_login_url 'google' %}" method="POST">
-                            {% csrf_token %}
-                            <div class="social-login">
-                                <div class="social-btn">
-                                    <button type="submit" class="icon-button d-inline-flex justify-content-around align-items-center">
-                                        <img src="{% static 'img/google.png' %}" alt="Google">
-                                       Signup with Google
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-        </div>
+       </div>
     </div>
-
-    {% comment %}
-    {% element h1 %}
-        {% trans "Sign In" %}
-    {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
-        {% setvar link %}
-            <a href="{{ signup_url }}">
-            {% endsetvar %}
-            {% setvar end_link %}
-            </a>
-        {% endsetvar %}
-        {% element p %}
-            {% blocktranslate %}If you have not created an account yet, then please {{ link }}sign up{{ end_link }} first.{% endblocktranslate %}
-        {% endelement %}
-        {% url 'account_login' as login_url %}
-        {% element form form=form method="post" action=login_url tags="entrance,login" %}
-            {% slot body %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
-            {% endslot %}
-            {% slot actions %}
-                {% element button type="submit" tags="prominent,login" %}
-                    {% trans "Sign In" %}
-                {% endelement %}
-            {% endslot %}
-        {% endelement %}
-    {% endif %}
-    {% if LOGIN_BY_CODE_ENABLED or PASSKEY_LOGIN_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button_group vertical=True %}
-            {% if PASSKEY_LOGIN_ENABLED %}
-                {% element button type="submit" form="mfa_login" id="passkey_login" tags="prominent,login,outline,primary" %}
-                    {% trans "Sign in with a passkey" %}
-                {% endelement %}
-            {% endif %}
-            {% if LOGIN_BY_CODE_ENABLED %}
-                {% element button href=request_login_code_url tags="prominent,login,outline,primary" %}
-                    {% trans "Mail me a sign-in code" %}
-                {% endelement %}
-            {% endif %}
-        {% endelement %}
-    {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        
-        {# include "socialaccount/snippets/login.html" with page_layout="entrance" #}
-    {% endif %}
-{% endcomment %}
 {% endblock content %}
 
 {% block extra_body %}
