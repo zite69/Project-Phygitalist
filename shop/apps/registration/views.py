@@ -3,7 +3,8 @@ from re import T
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django import forms
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.utils.html import urlencode
 from django.views.generic import TemplateView, View
 from django.http import HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ValidationError
@@ -54,14 +55,12 @@ india = None
 class HomeView(TemplateView):
     template_name = 'registration/home.html'
 
-
 class SellerRegistrationWizard(SessionWizardView):
     template_name = 'registration/seller.html'
     file_storage = seller_registration_filestorage
 
     def get_template_names(self):
-        print("inside here")
-        logger.debug(f"Returning template: {REGISTRATION_FORM_TEMPLATES[self.steps.current]} for step {self.steps.current}")
+        # logger.debug(f"Returning template: {REGISTRATION_FORM_TEMPLATES[self.steps.current]} for step {self.steps.current}")
         return [REGISTRATION_FORM_TEMPLATES[self.steps.current]]
 
     def get_form_kwargs(self, step=None):
@@ -585,6 +584,9 @@ class MultiFormView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         logger.debug("Inside get")
+        if not self.request.user.is_authenticated:
+            reverse_url = reverse('account_login')
+            return redirect(f"{reverse_url}?next=/dashboard/onboarding/")
         if not hasattr(self.request.user, 'seller_registration'):
             messages.warning(self.request, 'You must first register as a seller')
             return redirect("registration:home")
