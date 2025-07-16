@@ -30,6 +30,11 @@ def run(*args):
                 print(user)
             except User.DoesNotExist:
                 print("Unable to find user with email: ", arg)
+                print("Trying to find username with: ", arg)
+                try:
+                    user = User.objects.get(username=arg)
+                except User.DoesNotExist:
+                    continue
                 continue
 
             delete_user_records(user) 
@@ -50,7 +55,7 @@ def run(*args):
                 user = User.objects.get(username=arg)
                 print(user)
             except User.DoesNotExist:
-                print("Unable to find user with phone: ", arg)
+                print("Unable to find user with username: ", arg)
                 continue
 
             delete_user_records(user)
