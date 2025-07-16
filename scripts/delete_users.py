@@ -35,7 +35,6 @@ def run(*args):
                     user = User.objects.get(username=arg)
                 except User.DoesNotExist:
                     continue
-                continue
 
             delete_user_records(user) 
             print("Deleted user")
