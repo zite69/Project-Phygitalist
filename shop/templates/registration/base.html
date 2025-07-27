@@ -31,7 +31,7 @@
                         <button class="btn btn-login" type="submit">Logout</button>
                     </form>
                 {% else %}
-                    <a href="{% url 'otp:request' %}" class="btn btn-login">Login</a>
+                    <a href="{% url 'account_login' %}" class="btn btn-login">Login</a>
                 {% endif %}
             </div>
         </div>
@@ -56,7 +56,7 @@
                         <button class="btn btn-login mx-auto" type="submit">Logout</button>
                     </form>
                 {% else %}
-                    <a href="{% url 'otp:request' %}" class="btn btn-login">Login</a>
+                    <a href="{% url 'account_login' %}" class="btn btn-login">Sign In / Sign Up</a>
                 {% endif %}
             </div>
         </div>
