@@ -37,7 +37,7 @@ Seller First Marketplace for Small Town India | Sell your product offline, onlin
                     <button class="btn btn-login" type="submit">Logout</button>
                 </form>
             {% else %}
-                <a href="{% url 'otp:request' %}" class="btn btn-login" aria-label="Login Button">Login</a>
+                <a href="{% url 'account_login' %}" class="btn btn-login" aria-label="Login Button">Login</a>
             {% endif %}
             <button class="btn btn-sell"><a href="{% url 'registration:home' %}">Start Selling</a></button>
         </div>
@@ -55,7 +55,7 @@ Seller First Marketplace for Small Town India | Sell your product offline, onlin
                     <button class="btn btn-login" type="submit">Logout</button>
                 </form>
         {% else %}
-            <a class="btn btn-login" href="{% url 'otp:request' %}" aria-label="Login Button">Login</a>
+            <a class="btn btn-login" href="{% url 'account_login' %}" aria-label="Login Button">Sign In / Signup</a>
         {% endif %}
         <a href="{% url 'registration:home' %}" class="btn btn-sell">Start Selling</a>
     </div>
