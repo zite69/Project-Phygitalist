@@ -1,6 +1,8 @@
 {% load crispy_forms_field %}
 <input type="{{ field.field.widget.input_type }}"
        name="{{ field.name }}"
-       {% if field.value %}value="{{ field.value }}"{% endif %}
+       {% if field.value %}value="{{ field.value }}"
+        {% elif field.initial %}value="{{ field.initial }}"
+       {% endif %}
        class="{{ field.field.widget.attrs.class}}"
        id="{{ field.id_for_label }}"/>
