@@ -163,6 +163,13 @@ class AccountAdapter(DefaultAccountAdapter):
         if request.user.is_staff:
             return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='dashboard:index')
         else:
+            # Handle user is a Seller scenarios
+            if hasattr(request.user, 'seller_registration'):
+                if request.user.seller_registration.approved:
+                    return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='onboarding-wizard')
+                else:
+                    return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='notapproved')
+
             return get_absolute_url(site_id=settings.DEFAULT_SITE_ID)
 
     def get_phone_field(self, request):
