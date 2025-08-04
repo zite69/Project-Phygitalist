@@ -27,7 +27,9 @@
     {% endblock %}
 
     {# Block where global CSS will go. #}
-    {% block styles %}{% endblock %}
+    {% block styles %}
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    {% endblock %}
 
     {# Additional CSS - specific to certain pages #}
     {% block extrastyles %}{% endblock %}
@@ -103,16 +105,7 @@
     {% endblock %}
 
     {% block footer %}
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="{% site_url SITE_SELLER 'registration:home' %}" target="_blank">Sell on Z69</a> |
-            <a href="{% site_url SITE_BUYER 'careers' %}" target="_blank">Work with Us</a> |
-            <a href="{% site_url SITE_SELLER 'mentor' %}" target="_blank">Join as Mentor</a> |
-            <a href="https://szine.zite69.com/" target="_blank">Visit S/Z Blog</a> |
-            <a href="https://www.zite69.com/demo/index.html" target="_blank">View Concept</a> |
-            <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" target="_blank">Quick Connect</a>
-        </div>
-    </footer>
+        {% include "oscar/partials/footer.html" %}
     {% endblock %}
     {% include "includes/revision-tag.html" %}
 
