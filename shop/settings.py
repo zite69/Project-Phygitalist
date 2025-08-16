@@ -433,7 +433,14 @@ STATICFILES_DIRS = [
     BASE_DIR / "shop" / "static",
 ]
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+    }
+}
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
