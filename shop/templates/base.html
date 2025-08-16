@@ -36,8 +36,8 @@
     
     {% block head %}{% endblock %}
 
-    {#% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %#}
-    {% render_block "css" %}
+    {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+    {#% render_block "css" %#}
 
     {% block extrahead %}{% endblock %}
 
