@@ -922,3 +922,6 @@ if DEBUG == False:
         }
     ]
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
+
+    COMPRESS_ENABLED = True
+    COMPRESS_ONLINE = True
