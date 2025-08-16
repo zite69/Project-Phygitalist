@@ -12,7 +12,7 @@
     <meta name="description" content="{% block description %}ZITE69 is a rising social marketplace with a super social income sharing model. 
     Fashion | Beauty | Food | Wellness | Gifts | Arts | Crafts |  Games |  Life Goods | Digital Goods; all good stuff you needed  in your  life & life changing new stuff you didn’t know you needed!
     {% endblock %}" />
-    <meta name="viewport" content="{% block viewport %}width=device-width{% endblock %}" />
+    <meta name="viewport" content="{% block viewport %}width=device-width, initial-scale=1{% endblock %}" />
 
     {{ settings.PLAUSIBLE_TAG | safe }}
 
@@ -50,7 +50,7 @@
 
 <body id="{% block body_id %}default{% endblock %}" class="{% block body_class %}default{% endblock %}">
     {% cms_toolbar %}
-
+    <div class="container-fluid">
     {% block page_header %}
     <header>
         <div class="header-container">
@@ -108,7 +108,7 @@
         {% include "oscar/partials/footer.html" %}
     {% endblock %}
     {% include "includes/revision-tag.html" %}
-
+    </div>
     {# Scripts loaded from a CDN. #}
     {% block cdn_scripts %}
         <!-- jQuery -->
