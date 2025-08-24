@@ -99,7 +99,7 @@
                 </ul>
 {% endcomment %}
               </li>
-              <li class="menu-item-has-children"><span class="menu-expand"></span><a href="https://www.zite69.com/en/">SHOP</a>
+              <li class="menu-item-has-children"><span class="menu-expand"></span><a href="https://www.zite69.com/">SHOP</a>
 {% comment %}
                 <ul class="dropdown">
                   <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -204,7 +204,7 @@
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
                 <div class="single-mobile-header-info mt-30">
-                    <a  href="https://forms.gle/oY5kSZV7tMD5F7TX7"> Start Selling </a>
+                    <a  href="{% site_url SITE_SELLER 'registration:home' %}"> Start Selling </a>
                 </div>
                 <div class="single-mobile-header-info">
                     {% if user.is_authenticated %}
