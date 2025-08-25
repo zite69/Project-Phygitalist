@@ -10345,6 +10345,7 @@ span.fi-rs-apps {
 
 .footer-section ul {
     list-style: none;
+    padding-left: 0 !important;
 }
 
 .footer-section ul li {
