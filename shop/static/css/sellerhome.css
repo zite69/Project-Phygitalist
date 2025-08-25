@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 80px; /1* Adjust for fixed navbar *1/ */
+  /* margin-top: 80px;  Adjust for fixed navbar */
 }
 h1 {
     font-weight: bold; /* Bold font for main heading */
@@ -97,7 +97,7 @@ h5 {
 
 .btn-sell:hover {
     background: #ffd700;
-    color #333;
+    color: #333;
 }
 
  .btn-lgn {
@@ -133,27 +133,6 @@ h5 {
   border-top: 1px solid #ddd;
   display: block;
   width: 100%;
-}
-
-/* Hero Section */
-.hero {
-  padding: 4rem 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  width: 100%;
-}
-
-.hero-content {
-  flex: 1;
-  text-align: center;
-}
-
-.hero-image img {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
 }
 
 /* Stats Section */
@@ -335,5 +314,82 @@ h5 {
 
   .stats {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.hero,
+.hero * {
+  box-sizing: border-box;
+}
+
+.hero-content,
+.hero-image,
+.hero h1,
+.hero h2,
+.hero h3 {
+  position: static !important;
+  float: none !important;
+  clear: none !important;
+  z-index: auto !important;
+}
+
+.hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 5%;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+.hero-content {
+  width: 100% !important;
+  text-align: left;
+  order: 2;
+}
+
+.hero-image {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  order: 1;
+}
+
+.hero-image img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .hero-content {
+    text-align: center;
+    order: 1;
+  }
+
+  .hero-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 4.2vw, 1.25rem);
+  }
+
+  .hero-image {
+    order: 2;
+  }
+
+  .hero-image img {
+    max-width: 360px;
+    margin: 0 auto;
   }
 }
