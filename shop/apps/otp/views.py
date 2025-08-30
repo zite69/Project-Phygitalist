@@ -125,7 +125,7 @@ class OtpLoginView(FormView):
         login(self.request, form.get_user())
         next_url = form.cleaned_data.get('field_next', '')
         logger.debug(f"Form valid logged in, next_url: {next_url}")
-        if next_url == '':
+        if next_url == '' or next_url == '/':
             next_url = self.get_success_url()
             logger.debug(f"next_url from get_success_url: {next_url}")
         # return HttpResponseRedirect(self.get_success_url())
