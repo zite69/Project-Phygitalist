@@ -6,6 +6,7 @@ from django.views.generic import View
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import login
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
@@ -19,6 +20,7 @@ import logging
 import json
 from django.core.validators import validate_email
 from phonenumber_field.validators import validate_international_phonenumber
+from shop.apps.main.utils.urls import get_absolute_url
 
 logger = logging.getLogger('shop.apps.otp.views')
 
@@ -136,4 +138,13 @@ class OtpLoginView(FormView):
         if next_url != '':
             url = next_url
         logger.debug(f"success_url: {url}")
+        if self.request.user.is_staff:
+            return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='dashboard:index')
+        else:
+            if hasattr(self.request.user, 'seller_registration'):
+                if self.request.user.seller_registration.approved:
+                    return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='onboarding-wizard')
+                else:
+                    return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='notapproved')
+
         return url
