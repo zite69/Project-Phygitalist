@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.sitemaps',
+    'django.contrib.humanize',
     'dynamic_preferences',
     'dynamic_preferences.users.apps.UserPreferencesConfig',
     'djmoney',
@@ -929,4 +930,4 @@ if DEBUG == False:
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
     COMPRESS_ENABLED = True
-    COMPRESS_OFFLINE = True
+    COMPRESS_OFFLINE = False
