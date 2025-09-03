@@ -607,6 +607,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': False,
         },
+        'django.contrib.auth': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False
+        },
         'oscar.checkout': {
             'handlers': ['console'],
             'propagate': True,
