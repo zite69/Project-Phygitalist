@@ -182,8 +182,10 @@ class OtpVerificationForm(forms.Form):
         auth_kw_args = {"otp": otp}
         if field_type == "email":
             auth_kw_args.update({"email": email_phone})
-        else:
+        elif field_type == 'phone':
             auth_kw_args.update({"phone": email_phone})
+        else:
+            raise ValidationError(_("Invalid Type"))
 
         if email_phone is not None and otp is not None:
             self.user_cache = authenticate(self.request, **auth_kw_args)
