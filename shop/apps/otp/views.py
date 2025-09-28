@@ -133,6 +133,7 @@ class OtpLoginView(FormView):
 
     def get_success_url(self):
         #url = super().get_success_url()
+        url = ''
         next_url = self.request.GET.get('next', '')
         if next_url == '':
             next_url = self.request.session.get('next', '')
