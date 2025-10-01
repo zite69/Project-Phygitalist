@@ -1,5 +1,5 @@
 #!/usr/bin/osascript
 
 tell app "Terminal" 
-    do script "cd ~/Documents/Zite69/shop-cms && mac/launch.sh"
+    do script "cd ~/Documents/ZITE69/Project-Phygitalist && mac/launch.sh"
 end tell
