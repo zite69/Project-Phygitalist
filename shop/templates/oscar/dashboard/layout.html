@@ -95,7 +95,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">
-                        <a href="{% url 'dashboard:index' %}">{% trans "Dashboard" %}</a>
+                        <a href="{% url 'dashboard:index' %}">{% trans "Seller Dashboard" %}</a>
                     </li>
                 </ol>
             </nav>
@@ -111,7 +111,7 @@
             <div class="page-content">
                 {% block content %}
                     {% block sidebar %}
-                <h1>Sidebar</h1>
+                <!-- <h1>Sidebar</h1> -->
                        <aside class="navbar-aside ps ps--active-y" id="offcanvas_aside">
         <div class="aside-top">
             <a href="index.html" class="brand-wrap">
@@ -125,7 +125,7 @@
             <ul class="menu-aside">
                 <li class="menu-item active">
                     <a class="menu-link" href="index.html"> <i class="icon material-icons md-home"></i>
-                        <span class="text">Dashboard</span>
+                        <span class="text">Your Dashboard</span>
                     </a>
                 </li>
                 <li class="menu-item has-submenu">
