@@ -387,6 +387,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # This is a django CMS 4 template
 
 CMS_CONFIRM_VERSION4 = True
+CMS_TOOLBAR_HIDE = [
+    r'^/dashboard/.*'
+]
 
 # django CMS requires the site framework
 # https://docs.django-cms.org/en/release-4.1.x/how_to/multi-site.html
