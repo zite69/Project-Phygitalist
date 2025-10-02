@@ -147,6 +147,6 @@ class OtpLoginView(FormView):
                 if self.request.user.seller_registration.approved:
                     return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='onboarding-wizard')
                 else:
-                    return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='notapproved')
+                    return get_absolute_url(site_id=settings.SELLER_SITE_ID, view_name='registration-review')
 
         return url
