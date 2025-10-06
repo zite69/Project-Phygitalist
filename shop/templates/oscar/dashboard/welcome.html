@@ -1,9 +1,15 @@
 {% extends 'oscar/dashboard/layout.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block headertext %}
     {% trans "Dashboard" %}
 {% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'oscar/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+{% endblock %} 
 
 {% block sidebar %}
 {% endblock %}

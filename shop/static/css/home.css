@@ -10560,15 +10560,16 @@ gap: 10px;
     font-size: 14px;
 }
 
-.payment-logos, .shipping-logos {
+.payment-logo, .shipping-logo {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.payment-logo, .shipping-logo {
-    height: 25px;
-    object-fit: contain;
+.payment-logos, .shipping-logos {
+  flex-direction: column; 
+  height:25px;
+  object-fit: contain;
 }
 
 .copyright {
