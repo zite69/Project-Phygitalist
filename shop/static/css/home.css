@@ -10567,7 +10567,7 @@ gap: 10px;
 }
 
 .payment-logos, .shipping-logos {
-  flex-direction: column; 
+  flex-direction: row; 
   height:25px;
   object-fit: contain;
 }
