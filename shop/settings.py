@@ -877,6 +877,11 @@ if ZITE69_SELLER_DOMAIN not in ALLOWED_HOSTS:
 
 PLAUSIBLE_TAG = env.str("PLAUSIBLE_TAG", default="", multiline=True)
 
+# Shipping
+
+SHIPROCKET_EMAIL = env.str("SHIPROCKET_EMAIL", default="system@zite69.com")
+SHIPROCKET_PASSWORD = env.str("SHIPROCKET_PASSWORD", default="")
+
 DOWNLOADVIEW_BACKEND = 'django_downloadview.nginx.XAccelRedirectMiddleware'
 DOWNLOADVIEW_RULES = [
     {
