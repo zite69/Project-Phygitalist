@@ -1,4 +1,5 @@
 -r requirements.txt 
+Celery
 django-debug-toolbar==4.4.6
 ipython==8.26.0
-Celery
+pygraphviz==1.13
