@@ -132,9 +132,9 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.apps.DashboardConfig',
     'oscar.apps.dashboard.reports.apps.ReportsDashboardConfig',
     'oscar.apps.dashboard.users.apps.UsersDashboardConfig',
-    #'shop.apps.dashboard.orders.apps.OrdersDashboardConfig',
+    'oscar.apps.dashboard.orders.apps.OrdersDashboardConfig',
     # 'oscar.apps.dashboard.catalogue.apps.CatalogueDashboardConfig',
-    #'oscar.apps.dashboard.offers.apps.OffersDashboardConfig',
+    'oscar.apps.dashboard.offers.apps.OffersDashboardConfig',
     # 'oscar.apps.dashboard.partners.apps.PartnersDashboardConfig',
     'oscar.apps.dashboard.pages.apps.PagesDashboardConfig',
     'oscar.apps.dashboard.ranges.apps.RangesDashboardConfig',
@@ -545,6 +545,11 @@ DJANGOCMS_FORMS_TEMPLATES = (
 DJANGOCMS_FORMS_WIDGET_CSS_CLASSES = {'__all__': ('form-control', ) }
 DJANGOCMS_FORMS_USE_HTML5_REQUIRED = True
 
+if DEBUG:
+    shop_handlers = ['console']
+else:
+    shop_handlers = ['console', 'file']
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -586,7 +591,7 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'propagate': False,
             'level': 'DEBUG',
         },
@@ -617,7 +622,7 @@ LOGGING = {
             'propagate': False
         },
         'oscar.checkout': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'propagate': True,
             'level': 'INFO',
         },
@@ -642,83 +647,83 @@ LOGGING = {
             'level': 'WARNING',
         },
         'allauth': {
-            'handlers': ['console'],
+            'handlers': shop_handlers,
             'propagate': False,
             'level': 'DEBUG'
         },
         'allauth.account': {
-            'handlers': ['console'],
+            'handlers': shop_handlers,
             'propagate': False,
             'level': 'DEBUG'
         },
         'shop.apps.main': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'propagate': False,
             'level': 'DEBUG',
         },
         'shop': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.otp': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.user': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.registration': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.seller': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.catalogue': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.catalogue_dashboard.dashboard.catalogue': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.address': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.wishlist': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.checkout': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.partner': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.zitepayment': {
-            'handlers': ['console', 'file'],
+            'handlers': shop_handlers,
             'level': 'DEBUG',
             'propagate': False
         },
     },
     'root': {
-        'handlers': ['console', 'file'],
+        'handlers': shop_handlers,
         'propagate': True,
         'level': 'DEBUG',
     },
