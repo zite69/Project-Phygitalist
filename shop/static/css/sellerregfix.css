@@ -387,3 +387,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Override home.css .hero-content which sets position:absolute and width:100%,
+   causing it to stretch over the registration form */
+.hero-section .hero-content {
+  position: static;
+  width: auto;
+  z-index: auto;
+}
