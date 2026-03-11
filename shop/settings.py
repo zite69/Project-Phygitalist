@@ -226,13 +226,14 @@ AUTH_USER_MODEL = 'user.User'
 
 if DEBUG:
     MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',
-                   'django_downloadview.nginx.XAccelRedirectMiddleware',
                    ]
 else:
     #Enable caching only for non-DEBUG environments - Testing and Production
     MIDDLEWARE = ['django.middleware.cache.UpdateCacheMiddleware',] + MIDDLEWARE
-    MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware', 
-                   'django_downloadview.nginx.XAccelRedirectMiddleware',
+    MIDDLEWARE += ['django.middleware.cache.FetchFromCacheMiddleware',
+                   # SmartDownloadMiddleware reads DOWNLOADVIEW_BACKEND + DOWNLOADVIEW_RULES
+                   # and converts DownloadResponse to X-Accel-Redirect for nginx
+                   'django_downloadview.middlewares.SmartDownloadMiddleware',
                   ]
 
 INTERNAL_IPS = [
@@ -936,15 +937,6 @@ if DEBUG == False:
     EMAIL_BACKEND = env("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
     MESSAGE_STORAGE = "django.contrib.messages.storage.fallback.FallbackStorage"
 
-    # Settings for protected storage and use of X-Accel-Redirect for nginx to serve 
-    # sensitive files
-    DOWNLOADVIEW_BACKEND = 'django_downloadview.nginx.XAccelRedirectMiddleware'
-    DOWNLOADVIEW_RULES = [
-        {
-            'source_url': '/protected/',
-            'destination_url': '/django-protected/'
-        }
-    ]
     ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
     COMPRESS_ENABLED = True
