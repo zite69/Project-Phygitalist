@@ -206,6 +206,10 @@ class AccountAdapter(DefaultAccountAdapter):
         # Phonenumber sent to unknown account
         pass
 
+    def get_client_ip(self, request):
+        ip, is_routable = get_client_ip(request)
+        return ip
+
 class SocialAccountAdapter(DefaultSocialAccountAdapter):
     def on_authentication_error(self, request, provider, error=None, exception=None, extra_context=None):
         logger.debug('Social Auth Failure')
