@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.models import Site
 from django.urls import reverse
 from django.utils import timezone
+from shop.apps.referrals.signals import user_linked_to_response
 import random
 
 def generate_code(referral_class, referral):
@@ -77,7 +78,7 @@ class Referral(models.Model):
 
     @property
     def url(self):
-        path = reverse("pinax_referrals:process_referral", kwargs={"code": self.code})
+        path = reverse("referrals:process_referral", kwargs={"code": self.code})
         domain = Site.objects.get_current().domain
         protocol = "https" if settings.USE_HTTPS else "http"
         return f"{protocol}://{domain}{path}"

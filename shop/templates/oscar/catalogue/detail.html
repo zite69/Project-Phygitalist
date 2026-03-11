@@ -3,6 +3,7 @@
 {% load static sekizai_tags %}
 {% load history_tags %}
 {% load currency_filters %}
+{% load referral_tags %}
 {% load reviews_tags %}
 {% load product_tags %}
 {% load display_tags %}
@@ -248,12 +249,16 @@ input[type='radio'].form-check-input {
                         </div>
                         <div class="product-rate-cover text-end">
                             <div class="social-icons single-share">
-                                <ul class="text-grey-5 d-inline-block"> 
+                                {% referral_share_url product.get_absolute_url as share_url %}
+                                {% facebook_share share_url as fb_url %}
+                                {% twitter_share share_url product.get_title as tw_url %}
+                                {% whatsapp_share share_url product.get_title as wa_url %}
+                                <ul class="text-grey-5 d-inline-block">
                                     <li class="social-rupees"><a href="#"><img src="{% static 'img/icons/icon-rupees.svg'%}" alt=""></a></li>
                                     <li><strong class="mr-10">Share  &amp; Earn :</strong></li>
-                                    <li class="social-facebook"><a href="https://www.facebook.com/ZITE69"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt=""></a></li>
-                                    <li class="social-twitter"> <a href="https://x.com/ZITE69_"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt=""></a></li>
-                                    <li class="social-instagram"><a href="https://www.instagram.com/zite69_live/"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt=""></a></li>
+                                    <li class="social-facebook"><a href="{{ fb_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt="Facebook"></a></li>
+                                    <li class="social-twitter"><a href="{{ tw_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt="X / Twitter"></a></li>
+                                    <li class="social-instagram"><a href="{{ wa_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt="WhatsApp"></a></li>
                                 </ul>
                             </div>
                         </div>
