@@ -12,7 +12,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class SellerAdminForm(forms.ModelForm):
-    action = forms.CharField(widget=forms.HiddenInput())
+    action = forms.CharField(widget=forms.HiddenInput(), required=False)
 
     class Meta:
         model = Seller
