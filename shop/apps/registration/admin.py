@@ -33,6 +33,10 @@ class SellerRegistrationForm(forms.ModelForm):
                             handle=instance.shop_handle, 
                             user=instance.user
                         )
+                if instance.pan != '':
+                    seller.pan = instance.pan
+                if instance.gstin != '':
+                    seller.gstin = instance.gstin
                 logger.debug("created Seller upon Approval")
                 logger.debug(seller)
                 resp = send_seller_approval(instance.user, instance)
