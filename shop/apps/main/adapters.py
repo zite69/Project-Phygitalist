@@ -27,6 +27,7 @@ from django.utils import dateparse
 from django.utils.encoding import force_bytes, force_str
 from phonenumber_field.modelfields import PhoneNumberField
 from shop.apps.main.utils.urls import get_absolute_url
+from ipware import get_client_ip
 
 User = get_user_model()
 
