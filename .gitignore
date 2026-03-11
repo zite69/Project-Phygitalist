@@ -4,6 +4,7 @@
 .idea
 pyrightconfig.json
 .phcode.json
+requirements.current.txt
 
 *.log
 *.pot
