@@ -30,7 +30,7 @@ from shop.apps.main.utils.urls import get_absolute_url
 
 User = get_user_model()
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 SERIALIZED_DB_FIELD_PREFIX = "_db_"
 

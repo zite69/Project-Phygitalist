@@ -15,7 +15,7 @@ from oscar.apps.dashboard.catalogue.views import ProductCreateUpdateView as OGPr
 from icecream import ic
 import logging
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 class ProductCreateUpdateView(OGProductCreateUpdateView):
     def dispatch(self, request, *args, **kwargs):

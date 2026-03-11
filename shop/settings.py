@@ -116,7 +116,7 @@ INSTALLED_APPS = [
     'oscar.apps.analytics.apps.AnalyticsConfig',
     #'oscar.apps.checkout.apps.CheckoutConfig',
     #'oscar.apps.address.apps.AddressConfig',
-    'oscar.apps.shipping.apps.ShippingConfig',
+    'shop.apps.shipping.apps.ShippingConfig',
     #'oscar.apps.catalogue.apps.CatalogueConfig',
     'oscar.apps.catalogue.reviews.apps.CatalogueReviewsConfig',
     'oscar.apps.communication.apps.CommunicationConfig',
@@ -132,7 +132,7 @@ INSTALLED_APPS = [
     'oscar.apps.dashboard.apps.DashboardConfig',
     'oscar.apps.dashboard.reports.apps.ReportsDashboardConfig',
     'oscar.apps.dashboard.users.apps.UsersDashboardConfig',
-    'oscar.apps.dashboard.orders.apps.OrdersDashboardConfig',
+    'shop.apps.dashboard.orders.apps.OrdersDashboardConfig',
     # 'oscar.apps.dashboard.catalogue.apps.CatalogueDashboardConfig',
     'oscar.apps.dashboard.offers.apps.OffersDashboardConfig',
     # 'oscar.apps.dashboard.partners.apps.PartnersDashboardConfig',
@@ -164,6 +164,7 @@ INSTALLED_APPS = [
     #'pinax.referrals',
     #'pinax.invitations',
     #'account',
+    'shop.apps.referrals.apps.ReferralsConfig',
     'shop.apps.main',
     'shop.apps.wishlist',
     'shop.apps.catalogue.apps.CatalogueConfig',
@@ -203,6 +204,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     #'pinax.referrals.middleware.SessionJumpingMiddleware',
+    # Referral cookie must be read after session and auth middleware:
+    'shop.apps.referrals.middleware.ReferralCookieMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
@@ -268,6 +271,7 @@ TEMPLATES = [
                 'cms.context_processors.cms_settings',
                 'shop.apps.wishlist.context_processors.wishlists',
                 'shop.apps.main.context_processors.settings',
+                'shop.apps.referrals.context_processors.user_referral',
                 'oscar.core.context_processors.metadata',
                 'dynamic_preferences.processors.global_preferences',
                 'dealer.contrib.django.context_processor',
@@ -582,15 +586,11 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'propagate': False,
             'level': 'DEBUG',
         },
-        'root': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'DEBUG',
-        },
+
         'django': {
             'handlers': ['null'],
             'propagate': True,
@@ -617,7 +617,7 @@ LOGGING = {
             'propagate': False
         },
         'oscar.checkout': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'propagate': True,
             'level': 'INFO',
         },
@@ -652,71 +652,76 @@ LOGGING = {
             'level': 'DEBUG'
         },
         'shop.apps.main': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'propagate': False,
             'level': 'DEBUG',
         },
         'shop': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.otp': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.user': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False,
         },
         'shop.apps.registration': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.seller': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.catalogue': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.catalogue_dashboard.dashboard.catalogue': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.address': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.wishlist': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.checkout': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.partner': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
         'shop.apps.zitepayment': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': False
         },
-    }
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'propagate': True,
+        'level': 'DEBUG',
+    },
 }
 
 SHOW_REVISION = env("SHOW_REVISION", default=True)

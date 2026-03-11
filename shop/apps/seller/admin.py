@@ -9,7 +9,7 @@ from shop.apps.main.utils.email import send_onboarding_approval, send_onboarding
 
 import logging
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 class SellerAdminForm(forms.ModelForm):
     action = forms.CharField(widget=forms.HiddenInput())

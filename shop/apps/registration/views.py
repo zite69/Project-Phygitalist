@@ -47,7 +47,7 @@ import logging
 import os
 import traceback
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 User = get_user_model()
 india = None

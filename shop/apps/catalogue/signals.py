@@ -2,7 +2,7 @@ from oscar.apps.order.signals import order_placed
 from shop.apps.main.utils.email import send_order_placed_to_seller
 import logging
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 def notify_seller(**kwargs):
     order = kwargs['order']

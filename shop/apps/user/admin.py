@@ -5,7 +5,7 @@ from phonenumber_field.widgets import PhoneNumberPrefixWidget
 import logging
 from .forms import Zite69UserCreationForm, Zite69UserChangeForm
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 @admin.register(get_user_model())
 class CustomUserAdmin(UserAdmin):

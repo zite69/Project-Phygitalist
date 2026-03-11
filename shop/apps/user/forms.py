@@ -6,7 +6,7 @@ from allauth.account.forms import SignupForm, PasswordField
 import logging
 from django.utils.translation import gettext_lazy as _
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 class Zite69UserCreationForm(UserCreationForm):
     phone = PhoneNumberField(required=False)

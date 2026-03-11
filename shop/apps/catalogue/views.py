@@ -10,7 +10,7 @@ from shop.apps.main.forms import BuyQuickForm
 
 import logging
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 class ProductDetailView(OGProductDetailView):
     def get_context_data(self, **kwargs):

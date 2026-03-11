@@ -17,7 +17,7 @@ from shop.apps.zitepayment.models import RazorpayOrder
 from .gateway import RazorpayGateway
 import logging
 
-logger = logging.getLogger(__package__)
+logger = logging.getLogger(__name__)
 
 SourceType = get_model('payment', 'SourceType')
 Source = get_model('payment', 'Source')

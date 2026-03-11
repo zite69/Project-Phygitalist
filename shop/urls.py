@@ -53,6 +53,7 @@ urlpatterns = i18n_patterns(
     path('e-meet/', CreateRegistrationView.as_view(), name='webinar'),
     path('e-meet/thanks/', TemplateView.as_view(template_name='webinarthanks.html'), name='webinarthanks'),
     path('checkout/callback/', RazorpayCallbackView.as_view(), name='payment-callback'),
+    path('referrals/', include('shop.apps.referrals.urls', namespace='referrals')),
     path('', include(apps.get_app_config('main').urls[0])),
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),
