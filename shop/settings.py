@@ -901,6 +901,8 @@ DOWNLOADVIEW_RULES = [
     }
 ]
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 if DEBUG == False:
     #Setup production logging
     LOGGING['handlers']['file'] = {
