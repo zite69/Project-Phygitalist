@@ -20,6 +20,7 @@ MAP_TO_SUBJECT = {
     'message_mentor_seller': 'Welcome message from Chief Mentor Seller School',
     'complete_onboarding': 'Complete Your Onboarding Form',
     'welcome_buyers': 'Welcome to Zite69!-Buyers',
+    'welcome_paidseller': 'Welcome to Zite69! - Sellers',
     'order_details_buyers':'Buyers Order Summary',
 }
 
