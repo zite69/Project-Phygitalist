@@ -36,7 +36,11 @@ class ProductCategoryView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['category'] = Category.objects.get(id=self.kwargs.get('pk'))
+        try:
+            ctx['category'] = Category.objects.get(id=self.kwargs.get('pk'))
+        except Category.DoesNotExist:
+            pass
+
         return ctx
 
     def get_queryset(self):
