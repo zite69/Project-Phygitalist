@@ -6,6 +6,10 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
     name = 'shop.apps.catalogue_dashboard.dashboard.catalogue'
     label = "catalogue_dashboard"
 
+    permissions_map = {
+        'category_create_view': (['is_superuser'])
+    }
+
     def ready(self):
         from shop.apps.catalogue_dashboard.dashboard.catalogue.views import ( 
             ProductListView, ProductClassCreateUpdateView, ProductClassCreateView, ProductClassDeleteView,
