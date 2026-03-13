@@ -1,4 +1,4 @@
-{% extends "email/base_seller.html" %}
+{% extends "email/base.html" %}
 
 {% block style %}
   {{ block.super }}
@@ -12,9 +12,9 @@
     }
 
     .otp-code {
-      font-size: 24px;
+      font-size: 35px;
       font-weight: bold;
-      color: #79c6a4;
+      color: #f66569;
       margin-top: 10px;
       letter-spacing: 2px;
     }
@@ -24,10 +24,10 @@
   <!-- OTP Message -->
   <div class="otp-message">
     <h2>Your OTP for Zite69</h2>
-    <p>Hi <strong>{{ user.username }}</strong>,</p>
+    <p>Hi <strong>{{ otp }}</strong>,</p>
     <p>Use the One-Time Password (OTP) below to complete your verification:</p>
     <div class="otp-code">
-        <strong>{{ otp }}</strong>
+        <strong>{{ user.username }}</strong>
     </div>
     <p>The OTP is valid for 10 minutes. Please do not share it with anyone.</p>
   </div>
