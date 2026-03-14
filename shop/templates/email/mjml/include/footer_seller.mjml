@@ -1,9 +1,12 @@
 <mj-section css-class="footer-seller-section" background-color="#79c6a4" background-repeat="repeat" padding="25px 15px" text-align="center">
     <mj-column>
         <mj-text css-class="footer-links" mj-class="white-normal">
-            <a href="#">Help Center</a> |
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Terms of Service</a>
+        <a href="https://api.whatsapp.com/send/?phone=%2B918547299569&text&type=phone_number&app_absent=0" style="color: white; text-decoration: none;">Help Center</a> |
+      
+        <a href="https://we.zite69.com/privacy-policy/" style="color: white; text-decoration: none;">Privacy Policy</a> |
+      
+        <a href="https://we.zite69.com/terms-of-use/" style="color: white; text-decoration: none;">Terms of Service</a>
+    </mj-text>
         </mj-text>
         <mj-text mj-class="white-normal">69mm &amp; iCommerce LLP</mj-text>
         <mj-text mj-class="white-normal">#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66</mj-text>
