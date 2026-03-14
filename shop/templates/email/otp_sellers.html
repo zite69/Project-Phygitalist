@@ -24,10 +24,10 @@
   <!-- OTP Message -->
   <div class="otp-message">
     <h2>Your OTP for Zite69</h2>
-    <p>Hi <strong>{{ otp }}</strong>,</p>
+    <p>Hi <strong>{{ user.username }}</strong>,</p>
     <p>Use the One-Time Password (OTP) below to complete your verification:</p>
     <div class="otp-code">
-        <strong>{{ user.username }}</strong>
+        <strong>{{ otp }}</strong>
     </div>
     <p>The OTP is valid for 10 minutes. Please do not share it with anyone.</p>
   </div>
