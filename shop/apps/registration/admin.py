@@ -29,7 +29,7 @@ class SellerRegistrationForm(forms.ModelForm):
         if instance.approval_status in (SellerRegistration.STATUS_APPROVED, SellerRegistration.STATUS_REJECTED, SellerRegistration.STATUS_REJECTION_TEMPORARY):
             #Send an email notification
             if instance.approval_status == SellerRegistration.STATUS_APPROVED:
-                seller = Seller.objects.get_or_create(name=instance.shop_name, 
+                seller, _ = Seller.objects.get_or_create(name=instance.shop_name, 
                             handle=instance.shop_handle, 
                             user=instance.user
                         )

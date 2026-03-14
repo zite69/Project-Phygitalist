@@ -132,14 +132,47 @@ class ProductListView(originalviews.ProductListView):
         return ctx
 
     def apply_search(self, queryset):
-        qs = super().apply_search(queryset)
+        self.form = self.form_class(self.request.GET)
+        user = self.request.user
+        if not (user.is_superuser or user.groups.filter(name='Seller Admin').exists()):
+            self.form.fields.pop('seller', None)
+
+        if not self.form.is_valid():
+            return queryset
+
         data = self.form.cleaned_data
-        seller = data['seller']
 
+        upc = data.get('upc')
+        if upc:
+            matches_upc = Product.objects.filter(
+                Q(upc__iexact=upc) | Q(children__upc__iexact=upc)
+            )
+            qs_match = queryset.filter(
+                Q(id__in=matches_upc.values('id'))
+                | Q(id__in=matches_upc.values('parent_id'))
+            )
+            if qs_match.exists():
+                queryset = qs_match
+            else:
+                matches_upc = Product.objects.filter(
+                    Q(upc__icontains=upc) | Q(children__upc__icontains=upc)
+                )
+                queryset = queryset.filter(
+                    Q(id__in=matches_upc.values('id'))
+                    | Q(id__in=matches_upc.values('parent_id'))
+                )
+
+        title = data.get('title')
+        if title:
+            queryset = queryset.filter(
+                Q(title__icontains=title) | Q(children__title__icontains=title)
+            )
+
+        seller = data.get('seller')
         if seller:
-            qs = qs.filter(seller=seller)
+            queryset = queryset.filter(seller=seller)
 
-        return qs
+        return queryset.distinct()
 
 class ProductCreateRedirectView(originalviews.ProductCreateRedirectView):
     pass
