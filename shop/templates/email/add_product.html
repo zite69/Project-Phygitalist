@@ -1,4 +1,4 @@
-{% extends "email/base_seller.html" %}
+{% extends "email/base.html" %}
 {% load site_urls %}
 
 {% block style %}
@@ -15,16 +15,16 @@
     }
 
     .cta-button {
-      display: block;
-      background-color: #79c6a4;
-      color: #ffffff;
-      font-weight: bold;
+      background-color: #f66569;
+      color: white;
       text-decoration: none;
-      padding: 15px 30px;
-      border-radius: 25px;
-      text-align: center;
-      margin: 30px auto;
-      width: 60%;
+      padding: 12px 25px;
+      display: inline-block;
+      border-radius: 5px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding-left: 20px;
     }
 
 {% endblock %}
@@ -32,8 +32,8 @@
 {% block content %}
       
 <!-- Onboarding Approval Message -->
-  <div class="message">
-    <h2>You're Approved for Onboarding!</h2>
+  <div class="message"> 
+    <h1>You're Approved for Onboarding!</h1>
     <p>Hi <strong>{{ user.get_full_name }}</strong>,</p>
     <p>Your onboarding with Zite69 is now complete. Welcome aboard!</p>
     <p>You can now start listing your products and make them available for the world to see.</p>

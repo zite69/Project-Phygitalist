@@ -2,7 +2,142 @@
 
 {% block style %}
 
-    .footer-seller {
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      font-family: 'Urbanist', sans-serif;
+    }
+    .main-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    h1 {
+      font-size: 30px;
+      color: #f66569;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+      .content {
+      padding: 30px;
+    }
+      .referral-banner {
+      background-color: #fff5f5;
+      padding: 25px;
+      text-align: center;
+      border: 2px dashed #f66569;
+      margin: 0 30px 30px 30px;
+      border-radius: 8px;
+    }
+    .referral-banner h2 {
+      color: #f66569;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .referral-banner p {
+      margin-bottom: 15px;
+    }
+    .referral-banner a {
+      display: inline-block;
+      background-color: #f66569;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 5px;
+    }
+    .status-box {
+      background-color: #e8f5e9;
+      padding: 25px;
+      border-left: 5px solid #f66569;
+      font-size: 16px;
+      border-radius: 6px;
+      margin: 30px 0;
+      color: #8f3a3d;
+    }
+    .cta-button {
+      background-color: #f66569;
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      display: inline-block;
+      border-radius: 5px;
+      font-weight: 600;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    .cta-content {
+      align-items: center;
+    }
+    .footer {
+      background-color: #F0F0F0;
+      color: black;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 10px;
+    }
+    .footer a {
+      color: black;
+      text-decoration: underline;
+      text-decoration-color: blue;
+    }
+    .social-icons {
+      margin-top: 15px;
+    }
+    .social-icons a {
+      display: inline-block;
+      margin: 0 8px;
+    }
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+    }
+    .product-table td {
+      vertical-align: top;
+      padding: 10px;
+    }
+    .product-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .billing-table {
+      width: 100%;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    .billing-table td {
+      padding: 5px 0;
+    }
+    .billing-table .label {
+      color: #666;
+    }
+    .billing-table .value {
+      text-align: right;
+      font-weight: 600;
+    }
+    @media screen and (max-width: 620px) {
+      .product-img {
+        width: 100%;
+        height: auto;
+      }
+    }
+        .otp-code {
+      font-size: 35px;
+      font-weight: bold;
+      color: #f66569;
+      margin-top: 10px;
+      letter-spacing: 2px;
+    }
+
+.footer-seller {
       text-align: center;
       padding: 20px;
       font-size: 12px;
@@ -48,9 +183,11 @@
             <td>
           <!-- Footer Links -->
           <div class="footer-seller-links">
-            <a href="#">Help Center</a> |
-            <a href="#">Privacy Policy</a> |
-            <a href="#">Terms of Service</a>
+            <a href="https://api.whatsapp.com/send/?phone=%2B918547299569&text&type=phone_number&app_absent=0" style="color: black; text-decoration: none;">Help Center</a> |
+      
+            <a href="https://we.zite69.com/privacy-policy/" style="color: black; text-decoration: none;">Privacy Policy</a> |
+      
+            <a href="https://we.zite69.com/terms-of-use/" style="color: black; text-decoration: none;">Terms of Service</a>
           </div>
               
           <!-- Footer Section -->
