@@ -1,4 +1,4 @@
-<mj-section css-class="footer-seller-section" background-color="#79c6a4" background-repeat="repeat" padding="25px 15px" text-align="center">
+<mj-section css-class="footer-seller-section" background-color="#f4f4f4" background-repeat="repeat" padding="25px 15px" text-align="center">
     <mj-column>
         <mj-text css-class="footer-links" mj-class="white-normal">
         <a href="https://api.whatsapp.com/send/?phone=%2B918547299569&text&type=phone_number&app_absent=0" style="color: black; text-decoration: none;">Help Center</a> |

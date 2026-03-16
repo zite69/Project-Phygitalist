@@ -1,4 +1,4 @@
-<mj-section css-class="footer-section" background-color="#79c6a4" background-repeat="repeat" padding="25px 15px" text-align="center">
+<mj-section css-class="footer-section" background-color="#f4f4f4" background-repeat="repeat" padding="25px 15px" text-align="center">
     <mj-column css-class="footer-column">
       <mj-text mj-class="white-normal">69mm &amp; iCommerce LLP</mj-text>
       <mj-text mj-class="white-normal">#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66</mj-text>
