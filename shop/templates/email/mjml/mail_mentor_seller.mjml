@@ -1,7 +1,5 @@
-{% load mjml %}
 {% load site_urls %}
 {% load static %}
-{% mjml %}
 <mjml version="3.3.3">
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
@@ -52,4 +50,3 @@
     <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
   </mj-body>
 </mjml>
-{% endmjml %}

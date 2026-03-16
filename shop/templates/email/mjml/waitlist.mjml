@@ -1,5 +1,3 @@
-{% load mjml %}
-{% mjml %}
 <mjml version="3.3.3">
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
@@ -27,4 +25,3 @@
     <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
   </mj-body>
 </mjml>
-{% endmjml %}

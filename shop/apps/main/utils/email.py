@@ -83,8 +83,9 @@ def send_email(email, **kwargs):
     cc = kwargs.get("cc")
     bcc = kwargs.get("bcc")
  
-    html_template = "email/mjml/" + template + ".mjml"
+    html_template = "email/mjml/" + template + ".html"
     txt_template = "email/" + template + ".txt"
+    print(html_template)
     html_content = render_to_string(html_template, context=kwargs)
     # return html_content
     #text_content = strip_tags(html_content)
