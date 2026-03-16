@@ -1,0 +1,115 @@
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="30px 20px">
+      <mj-column>
+        <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
+          Order Summary
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Hello <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Thank you for your order. We'll send a confirmation when your order ships.
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          To view the status of your order or make changes, visit
+          <a href="https://zite69.com" style="color:#f66569; text-decoration:underline;">Your Orders</a> on Zite69.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Order Details -->
+    <mj-section background-color="#f8f8f8" padding="20px 25px">
+      <mj-column>
+        <mj-text align="left" color="#222" font-size="15px">
+          <strong>Order #:</strong> {{ order.number }}<br/>
+          <strong>Arriving:</strong> {{ order.estimated_delivery }}<br/>
+          <strong>Shipping Speed:</strong> {{ order.shipping_method }}<br/>
+          <strong>Order Total:</strong> {{ order.total_incl_tax }}<br/>
+          <strong>Payment Status:</strong> {{ order.status }}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Product Items -->
+    <mj-section background-color="#ffffff" padding="20px 25px">
+      <mj-column>
+        <mj-text align="left" color="#222" font-size="18px" font-weight="bold">
+          Your Items
+        </mj-text>
+        {% for line in order.lines.all %}
+        <mj-table>
+          <tr>
+            <td style="width:90px; padding:10px; vertical-align:top;">
+              <img src="{{ line.product.primary_image.original.url }}" alt="{{ line.product.get_title }}" width="80" height="80" style="object-fit:cover; border-radius:6px;" />
+            </td>
+            <td style="padding:10px; vertical-align:top;">
+              <strong>{{ line.product.get_title }}</strong><br/>
+              Qty: {{ line.quantity }} &nbsp;|&nbsp; {{ line.line_price_incl_tax }}
+            </td>
+          </tr>
+        </mj-table>
+        {% endfor %}
+      </mj-column>
+    </mj-section>
+
+    <!-- Billing Summary -->
+    <mj-section background-color="#f8f8f8" padding="20px 25px">
+      <mj-column>
+        <mj-text align="left" color="#222" font-size="18px" font-weight="bold">
+          Billing Summary
+        </mj-text>
+        <mj-table>
+          <tr>
+            <td style="color:#666; padding:5px 0; font-size:15px;">Subtotal</td>
+            <td style="text-align:right; font-weight:600; font-size:15px;">{{ order.basket_total_incl_tax }}</td>
+          </tr>
+          <tr>
+            <td style="color:#666; padding:5px 0; font-size:15px;">Shipping</td>
+            <td style="text-align:right; font-weight:600; font-size:15px;">{{ order.shipping_incl_tax }}</td>
+          </tr>
+          <tr>
+            <td style="color:#666; padding:5px 0; font-size:15px;">Tax</td>
+            <td style="text-align:right; font-weight:600; font-size:15px;">{{ order.total_tax }}</td>
+          </tr>
+          <tr>
+            <td style="padding:5px 0; font-size:15px;"><strong>Total</strong></td>
+            <td style="text-align:right; font-weight:600; font-size:15px;"><strong>{{ order.total_incl_tax }}</strong></td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px">
+          View Order Details
+        </mj-button>
+        <mj-text align="left" color="#222" font-size="15px">
+          To ensure your safety, the Delivery Agent will drop the package at your doorstep, ring the doorbell, and then step back to maintain distance while waiting for you to collect your package.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Referral Coupon -->
+    <mj-section background-color="#f8f8f8" padding="20px 25px" border-left="5px solid #f66569">
+      <mj-column>
+        <mj-text align="center" color="#222" font-size="16px">
+          Share the Zite69 experience with friends and get <strong>&#8377;100 OFF</strong> on your next order!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Use referral code: <strong>ZITEFRIEND100</strong>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

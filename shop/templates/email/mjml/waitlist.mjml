@@ -1,0 +1,30 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="40px 20px">
+      <mj-column>
+        <mj-text align="center" color="#444a5b" font-size="18px" line-height="150%">
+          Dear friend,
+        </mj-text>
+        <mj-text align="center" color="#444a5b" font-size="18px" line-height="150%">
+          You have been added to our invitee list. We respect your inbox like ours.
+          So expect something valuable from us soon!
+        </mj-text>
+        <mj-text align="center" color="#444a5b" font-size="18px" line-height="150%">
+          Thank you<br/>
+          <a href="https://www.zite69.com/en/" style="text-decoration:underline; color:#f66569; font-weight:600;">Team Z69</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

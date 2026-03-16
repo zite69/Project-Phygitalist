@@ -1,0 +1,39 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#f5f5f5" padding="25px">
+      <mj-column border-radius="6px">
+        <mj-text align="left" color="#222" font-size="20px" font-weight="bold">
+          Complete Your Onboarding Form
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Hi <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Welcome to Zite69! To get started, please fill out the onboarding form with your business and product details.
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          This will help us verify and activate your seller profile faster.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-button background-color="#79c6a4" color="#ffffff" border-radius="25px" href="{{ onboarding_url }}" padding="15px 30px" width="420px">
+          Fill Onboarding Form
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

@@ -63,7 +63,7 @@ def send_email(email, **kwargs):
     # base_uri = kwargs.get("base_uri", get_site_base_uri())
     # kwargs['base_uri'] = base_uri
     kwargs = kwargs | ({
-        "template": "email/otp",
+        "template": "otp",
         "logo": False,
         "from_email": settings.DEFAULT_FROM_EMAIL,
         "subject": "Your OTP to login to our site",
@@ -83,8 +83,8 @@ def send_email(email, **kwargs):
     cc = kwargs.get("cc")
     bcc = kwargs.get("bcc")
  
-    html_template = template + ".html"
-    txt_template = template + ".txt"
+    html_template = "email/mjml/" + template + ".mjml"
+    txt_template = "email/" + template + ".txt"
     html_content = render_to_string(html_template, context=kwargs)
     # return html_content
     #text_content = strip_tags(html_content)

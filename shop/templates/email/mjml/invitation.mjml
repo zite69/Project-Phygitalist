@@ -1,0 +1,31 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="20px 0">
+      <mj-column>
+        <mj-text align="center" color="#003DA5" font-size="20px" font-weight="bold">
+          Invitation to join our site
+        </mj-text>
+        <mj-text align="center" color="#333333" font-size="16px">
+          Please click the following link to join our site:
+        </mj-text>
+        <mj-button background-color="#003DA5" color="#ffffff" border-radius="5px" href="{{ signup_url }}" padding="15px 25px">
+          Join Now
+        </mj-button>
+        <mj-text align="center" color="#888888" font-size="14px">
+          This link is valid for {{ expiry }}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}
