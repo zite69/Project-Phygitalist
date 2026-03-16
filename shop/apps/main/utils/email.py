@@ -174,7 +174,7 @@ def send_onboarding_approval(user, seller, **kwargs):
 
 def send_onboarding_rejection(user, seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/pending_rejection.html",
+        "template": "email/pending_rejection",
         "subject": "There were some issues with your Seller onboarding"
         } | kwargs)
 
@@ -185,7 +185,7 @@ def send_onboarding_rejection(user, seller, **kwargs):
 
 def send_mail_mentor(seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/mail_mentor_seller.html",
+        "template": "email/mail_mentor_seller",
         "subject": "Welcome to your Seller Dashboard!"
         })
 
@@ -196,7 +196,7 @@ def send_mail_mentor(seller, **kwargs):
 
 def send_products_approved(seller, products, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/product_approval.html",
+        "template": "email/product_approval",
         "subject": "Your product(s) is/are approved!"
         })
     if type(products) != list:
@@ -210,7 +210,7 @@ def send_products_approved(seller, products, **kwargs):
 
 def send_order_placed_to_seller(seller, order, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/order_notification.html",
+        "template": "email/order_notification",
         "subject": "You have received a new order!"
         })
 
