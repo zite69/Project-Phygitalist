@@ -6,9 +6,11 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
     name = 'shop.apps.catalogue_dashboard.dashboard.catalogue'
     label = "catalogue_dashboard"
 
-    permissions_map = {
-        'category_create_view': (['is_superuser'])
-    }
+    def configure_permissions(self):
+        super().configure_permissions()
+        self.permissions_map['catalogue-category-create'] = ['is_superuser']
+        self.permissions_map['catalogue-category-create-child'] = ['is_superuser']
+        self.permissions_map['catalogue-category-update'] = ['is_superuser']
 
     def ready(self):
         from shop.apps.catalogue_dashboard.dashboard.catalogue.views import ( 
@@ -52,6 +54,8 @@ class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
 
         self.product_qc_approve = ProductQcApprove
         self.product_qc_approve_all = ProductQcApproveAll
+
+        self.configure_permissions()
 
     def get_urls(self):
         urls = super().get_urls()
