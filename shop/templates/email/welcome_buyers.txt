@@ -1,0 +1,27 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Welcome to Zite69!
+
+Hey [Buyer Name],
+
+We're thrilled to have you onboard! You've just joined a vibrant community of fashion-forward individuals who appreciate unique, thoughtfully designed pieces.
+
+Explore handpicked collections and exclusive drops from creative sellers around the country.
+
+To celebrate, here's a little something for you:
+
+Use code WELCOME10 for 10% off your first purchase!
+
+Start Shopping: #
+
+If you have any questions, we're just an email away. Happy shopping!
+
+Cheers,
+Team Zite69
+
+---
+Refer & Earn!
+Share your love for Zite69 with your friends. Get Rs.100 off for every friend who signs up & shops!
+Invite Friends: #
+{% endblock %}

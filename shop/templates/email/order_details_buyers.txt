@@ -1,0 +1,36 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Order Summary
+
+Hello abhilashchamban,
+
+Thank you for your order. We'll send a confirmation when your order ships.
+
+Your estimated delivery date is indicated below. To view the status of your order or make changes, visit Your Orders on https://zite69.com.
+
+Order #: 406-4686401-5365944
+Arriving: Monday, March 17
+Shipping Speed: Delivery
+To: Rani
+    Kenichira/Wayanad, KERALA
+    India
+Order Total: Rs.499.00
+Payment Pending: Rs.499.00
+
+Your Items:
+- Urban Minimal Tee | Qty: 1 | Rs.499.00
+
+Billing Summary:
+Subtotal: Rs.499.00
+Shipping: Rs.0.00
+Tax: Rs.0.00
+Total: Rs.499.00
+
+View Order Details: #
+
+To ensure your safety, the Delivery Agent will drop the package at your doorstep, ring the doorbell, and then step back to maintain distance while waiting for you to collect your package.
+
+Share the Zite69 experience with friends and get Rs.100 OFF on your next order!
+Use referral code: ZITEFRIEND100
+{% endblock %}

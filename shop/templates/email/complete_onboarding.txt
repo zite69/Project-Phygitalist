@@ -1,0 +1,13 @@
+{% extends "email/base_seller.txt" %}
+
+{% block content %}
+Complete Your Onboarding Form
+
+Hi [Seller Name],
+
+Welcome to Zite69! To get started, please fill out the onboarding form with your business and product details.
+
+This will help us verify and activate your seller profile faster.
+
+Fill Onboarding Form: [Onboarding Form URL]
+{% endblock %}

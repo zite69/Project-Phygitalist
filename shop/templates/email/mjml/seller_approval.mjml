@@ -1,0 +1,42 @@
+{% load mjml %}
+{% load site_urls %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="20px 0">
+      <mj-column>
+        <mj-text align="center" color="#003DA5" font-size="20px" font-weight="bold">
+          The status of your Seller Registration process has been updated: {{ registration.get_approval_status }}
+        </mj-text>
+        <mj-text align="center" color="#333333" font-size="16px">
+          Please read the notes of our Seller Admin for further actions on your part:
+        </mj-text>
+
+        {% if registration.approval_status == 'A' %}
+        <mj-text align="center" color="#333333" font-size="14px">
+          Congratulations you have been approved. Please follow the link below to your Seller Dashboard.
+        </mj-text>
+        <mj-button background-color="#79c6a4" color="#ffffff" border-radius="5px" href="{% site_url SITE_SELLER 'onboarding-wizard' %}" padding="12px 25px">
+          Onboarding Link
+        </mj-button>
+        {% endif %}
+
+        <mj-text align="center" color="#333333" font-size="16px" font-weight="bold">
+          Admin Notes:
+        </mj-text>
+        <mj-text align="center" color="#333333" font-size="14px">
+          {{ registration.approval_notes }}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

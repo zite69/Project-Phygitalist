@@ -41,7 +41,7 @@
 
           <!-- CTA Button -->
           {% for product in products %}
-          <a href="{{ product.get_absolute_url }}" class="cta-button">View Product</a>
+          <a href="{{ base_url }}{{ product.get_absolute_url }}" class="cta-button">View Product</a>
           {% endfor %}
           
 {% endblock %}

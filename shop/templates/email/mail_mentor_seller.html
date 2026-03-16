@@ -1,5 +1,6 @@
 {% extends "email/base_seller.html" %}
 {% load site_urls %}
+{% load static %}
 
 {% block style %}
   {{ block.super }}
@@ -52,7 +53,7 @@
             And please don't forget to add your first product 👇</p>
             <p style="margin-top: 30px;">
   <img
-    src="https://www.dropbox.com/scl/fi/9x1edsbax3fr05i7pv2mr/nisha.png?rlkey=7yhubol8zsjektcnvw1kn67p8&raw=1"
+    src="{{ base_url }}{% static 'img/nisha.png' %}"
     alt="Nisha Paraman"
     width="80"
     height="80"
@@ -62,7 +63,6 @@
 
             <!-- CTA Buttons -->
             <div class="cta-buttons">
-              <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER}}">Talk Now</a>
               <a href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}">Add Your First Product</a>
             </div>
           </div>

@@ -1,0 +1,31 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="30px 20px">
+      <mj-column>
+        <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
+          Welcome, {{ user.name }}!
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Thanks for creating your zite69 account. See how it can make selling and growing with zite69 even easier, online or offline &amp; direct.
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Start your new success journey here with confidence &amp; responsibility.
+        </mj-text>
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="{{ whatsapp_link }}" padding="12px 25px">
+          Contact Your Account Manager
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

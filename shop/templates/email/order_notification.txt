@@ -1,0 +1,14 @@
+{% extends "email/base_seller.txt" %}
+{% load site_urls %}
+
+{% block content %}
+You've Received a New Order!
+
+Hi {{ seller.user.get_full_name }},
+
+You have a new order placed through Zite69.
+
+Click the link below to view the order details and manage it from your dashboard.
+
+View Order: {% site_url SITE_SELLER 'dashboard:order-detail' number=order.number %}
+{% endblock %}

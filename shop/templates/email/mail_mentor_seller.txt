@@ -1,0 +1,27 @@
+{% extends "email/base_seller.txt" %}
+{% load site_urls %}
+
+{% block content %}
+Welcome Dashboard Mail
+Subject: Hi I am Nisha, your new zite69 business manager!
+
+Dear {{ user.get_full_name }},
+
+Wow, Congrats for completing your onboarding. We are good to go live now.
+I am Nisha Paraman here to help you to become a successful seller on zite69.
+I will be co-ordinating your team of managers, community exchange officers, member shoppers and of course; selling superfast!
+
+Feel free to connect with me anytime for help..
+You can talk to me from your dashboard and chat.
+
+See you soon!
+And please don't forget to add your first product!
+
+Yours,
+Nisha Paraman
+Chief Mentor
+Seller School
+
+Talk Now: https://wa.me/{{ settings.WHATSAPP_NUMBER}}
+Add Your First Product: {% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}
+{% endblock %}

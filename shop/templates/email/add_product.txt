@@ -1,0 +1,20 @@
+{% extends "email/base_seller.txt" %}
+{% load site_urls %}
+
+{% block content %}
+You're Approved for Onboarding!
+
+Hi {{ user.get_full_name }},
+
+Your onboarding with Zite69 is now complete. Welcome aboard!
+
+You can now start listing your products and make them available for the world to see.
+
+Click the link below to add your first product and begin your seller journey.
+
+{% if seller.products.exist %}
+Continue Adding Products: {% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}
+{% else %}
+Add Your First Product: {% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}
+{% endif %}
+{% endblock %}

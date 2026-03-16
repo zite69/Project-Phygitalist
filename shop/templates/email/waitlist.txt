@@ -1,0 +1,11 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Dear friend,
+
+You have been added to our invitee list. We respect your inbox like ours.
+So expect something valuable from us soon!
+
+Thank you
+Team Z69 - https://www.zite69.com/en/
+{% endblock %}

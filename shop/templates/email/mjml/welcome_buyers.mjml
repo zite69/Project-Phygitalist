@@ -1,0 +1,61 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="30px 20px">
+      <mj-column>
+        <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
+          Welcome to Zite69!
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Hey <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          We're thrilled to have you onboard! You've just joined a vibrant community of fashion-forward individuals who appreciate unique, thoughtfully designed pieces.
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Explore handpicked collections and exclusive drops from creative sellers around the country.
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          To celebrate, here's a little something for you:
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="18px">
+          <strong>Use code <span style="color:#f66569;">WELCOME10</span> for 10% off your first purchase!</strong>
+        </mj-text>
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px">
+          Start Shopping
+        </mj-button>
+        <mj-text align="left" color="#222" font-size="16px">
+          If you have any questions, we're just an email away. Happy shopping!
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Cheers,<br/>Team Zite69
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Referral Banner -->
+    <mj-section background-color="#fff5f5" padding="25px" border="2px dashed #f66569">
+      <mj-column>
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
+          Refer &amp; Earn!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Share your love for Zite69 with your friends. Get &#8377;100 off for every friend who signs up &amp; shops!
+        </mj-text>
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="10px 20px">
+          Invite Friends
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

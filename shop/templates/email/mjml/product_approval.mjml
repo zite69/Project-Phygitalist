@@ -1,0 +1,41 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#f5f5f5" padding="25px">
+      <mj-column border-radius="6px">
+        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+          Your Product is Approved!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Hi <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Great news! Your submitted product(s) has passed our quality checks and is now approved on the Zite69 platform.
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Click the button below to view your product live on the marketplace.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    {% for product in products %}
+    <mj-section background-color="#ffffff" padding="10px 20px">
+      <mj-column>
+        <mj-button background-color="#79c6a4" color="#ffffff" border-radius="25px" href="{{ base_url }}{{ product.get_absolute_url }}" padding="15px 30px" width="420px">
+          View Product
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    {% endfor %}
+
+    <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

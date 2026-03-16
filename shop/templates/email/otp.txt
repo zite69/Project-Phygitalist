@@ -1,0 +1,11 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Verify & Login
+
+OTP to Login to Your ZITE69 Account is:
+
+{{otp}}
+
+This OTP is valid for 10 Minutes
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "email/base_seller.txt" %}
+
+{% block content %}
+Your Product is Pending/Rejected
+
+Hi [User Name],
+
+The status of your seller onboarding process has been updated.
+
+Your recently submitted product is currently pending approval or has been rejected by our team.
+
+Please review the note from the admin team below for further details.
+
+Admin Note:
+{ Please contact our admin via mail or customer care phone number }
+{% endblock %}

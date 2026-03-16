@@ -219,11 +219,19 @@ class StockAlertListView(originalviews.StockAlertListView):
 
 
 class CategoryListView(originalviews.CategoryListView):
-    pass
+    def get_table_class(self):
+        if not self.request.user.is_superuser:
+            from shop.apps.catalogue_dashboard.dashboard.catalogue.tables import CategoryTableReadOnly
+            return CategoryTableReadOnly
+        return super().get_table_class()
 
 
 class CategoryDetailListView(originalviews.CategoryDetailListView):
-    pass
+    def get_table_class(self):
+        if not self.request.user.is_superuser:
+            from shop.apps.catalogue_dashboard.dashboard.catalogue.tables import CategoryTableReadOnly
+            return CategoryTableReadOnly
+        return super().get_table_class()
 
 
 class CategoryListMixin(originalviews.CategoryListMixin):

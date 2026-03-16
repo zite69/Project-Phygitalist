@@ -63,7 +63,7 @@ def send_email(email, **kwargs):
     # base_uri = kwargs.get("base_uri", get_site_base_uri())
     # kwargs['base_uri'] = base_uri
     kwargs = kwargs | ({
-        "template": "email/otp.html",
+        "template": "otp",
         "logo": False,
         "from_email": settings.DEFAULT_FROM_EMAIL,
         "subject": "Your OTP to login to our site",
@@ -83,9 +83,12 @@ def send_email(email, **kwargs):
     cc = kwargs.get("cc")
     bcc = kwargs.get("bcc")
  
-    html_content = render_to_string(template, context=kwargs)
+    html_template = "email/mjml/" + template + ".mjml"
+    txt_template = "email/" + template + ".txt"
+    html_content = render_to_string(html_template, context=kwargs)
     # return html_content
-    text_content = strip_tags(html_content)
+    #text_content = strip_tags(html_content)
+    text_content = render_to_string(txt_template, context=kwargs)
 
     message = EmailMultiAlternatives(
         subject=subject,
@@ -109,15 +112,15 @@ def send_email(email, **kwargs):
     return message.send(fail_silently=False)
 
 def send_email_otp(email, otp, **kwargs):
-    return send_email(email, otp=otp, template="email/otp.html", subject="Your OTP to login to our site", **kwargs)
+    return send_email(email, otp=otp, template="email/otp", subject="Your OTP to login to our site", **kwargs)
 
 def send_email_verification(email, otp, **kwargs):
-    return send_email(email, otp=otp, template="email/otp_sellers.html", subject="Verify your email address", **kwargs)
+    return send_email(email, otp=otp, template="email/otp_sellers", subject="Verify your email address", **kwargs)
 
 def send_email_invite(email, ctx):
     #Default context values
     def_ctx = {
-        'template': 'email/invitation.html',
+        'template': 'email/invitation',
         'subject': 'You have been invited to join our site',
         'expiry': '7 days'
     }
@@ -130,7 +133,7 @@ def send_email_invite(email, ctx):
 
 def send_email_seller_welcome(user, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/welcome_paidseller.html",
+        "template": "email/welcome_paidseller",
         "subject": "Welcome to zite69",
         } | kwargs)
     kwargs['user'] = user
@@ -139,7 +142,7 @@ def send_email_seller_welcome(user, **kwargs):
 
 def send_seller_approval(user, registration, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/approval_registration.html",
+        "template": "email/approval_registration",
         "subject": "Your Seller Registration has been approved!"
         } | kwargs)
     kwargs['user'] = user
@@ -149,7 +152,7 @@ def send_seller_approval(user, registration, **kwargs):
 
 def send_seller_rejection(user, registration, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/onboarding_rejection_pending.html",
+        "template": "email/onboarding_rejection_pending",
         "subject": "Your Seller Registration has been rejected"
         } | kwargs)
 
@@ -171,7 +174,7 @@ def send_onboarding_approval(user, seller, **kwargs):
 
 def send_onboarding_rejection(user, seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/pending_rejection.html",
+        "template": "email/pending_rejection",
         "subject": "There were some issues with your Seller onboarding"
         } | kwargs)
 
@@ -182,7 +185,7 @@ def send_onboarding_rejection(user, seller, **kwargs):
 
 def send_mail_mentor(seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/mail_mentor_seller.html",
+        "template": "email/mail_mentor_seller",
         "subject": "Welcome to your Seller Dashboard!"
         })
 
@@ -193,7 +196,7 @@ def send_mail_mentor(seller, **kwargs):
 
 def send_products_approved(seller, products, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/product_approval.html",
+        "template": "email/product_approval",
         "subject": "Your product(s) is/are approved!"
         })
     if type(products) != list:
@@ -207,7 +210,7 @@ def send_products_approved(seller, products, **kwargs):
 
 def send_order_placed_to_seller(seller, order, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/order_notification.html",
+        "template": "email/order_notification",
         "subject": "You have received a new order!"
         })
 

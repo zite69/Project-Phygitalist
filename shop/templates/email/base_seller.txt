@@ -1,0 +1,14 @@
+{% extends "email/base.txt" %}
+
+{% block footer %}
+----------------------------------------
+Help Center: https://api.whatsapp.com/send/?phone=%2B918547299569&text&type=phone_number&app_absent=0
+Privacy Policy: https://we.zite69.com/privacy-policy/
+Terms of Service: https://we.zite69.com/terms-of-use/
+
+69mm & iCommerce LLP
+#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66
+Email: support@zite69.com
+
+© 2025 ZITE69. All rights reserved.
+{% endblock %}

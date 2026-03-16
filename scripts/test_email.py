@@ -64,7 +64,7 @@ def run(*args):
                 if obj not in ctx:
                     ctx[obj] = {}
                 ctx[obj][prop] = args[2+i]
-        ctx['template'] = template_name
+        ctx['template'] = f"email/{temp}"
         if temp in MAP_TO_SUBJECT:
             ctx['subject'] = MAP_TO_SUBJECT[temp]
         else:

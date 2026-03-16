@@ -3,6 +3,7 @@ import logging
 import requests
 from django.conf import settings
 from django.core.cache import cache
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +16,15 @@ def _get_token():
     token = cache.get(_TOKEN_CACHE_KEY)
     if token:
         return token
+
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
     resp = requests.post(
         f'{SHIPROCKET_BASE_URL}/auth/login',
-        json={'email': settings.SHIPROCKET_EMAIL, 'password': settings.SHIPROCKET_PASSWORD},
+        headers = headers,
+        data=json.dumps({'email': settings.SHIPROCKET_EMAIL, 'password': settings.SHIPROCKET_PASSWORD}),
         timeout=15,
     )
     resp.raise_for_status()
@@ -116,9 +123,10 @@ def create_shiprocket_order(oscar_order):
 
     resp = requests.post(
         f'{SHIPROCKET_BASE_URL}/orders/create/adhoc',
-        json=payload,
+        data=json.dumps(payload),
         headers=_auth_headers(),
         timeout=30,
     )
+
     resp.raise_for_status()
     return resp.json()

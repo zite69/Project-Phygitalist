@@ -1,0 +1,55 @@
+{% load mjml %}
+{% load site_urls %}
+{% load static %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#f5f5f5" padding="25px">
+      <mj-column border-radius="6px">
+        <mj-text align="left" color="#222" font-size="20px" font-weight="bold">
+          Welcome Dashboard Mail
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          <strong>Subject:</strong> Hi &#128075; I am Nisha, your new zite69 business manager!
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Dear <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Wow, Congrats for completing your onboarding. We are good to go live now.<br/>
+          I am Nisha Paraman here to help you to become a successful seller on zite69.<br/>
+          I will be <strong>co-ordinating</strong> your team of managers, community exchange officers, member shoppers and of course; selling superfast!
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Feel free to connect with me anytime for help..<br/>
+          You can talk to me from your dashboard and chat.
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          See you soon!<br/>
+          And please don't forget to add your first product &#128071;
+        </mj-text>
+        <mj-image align="left" src="{{ base_url }}{% static 'img/nisha.png' %}" width="80px" border-radius="50%" border="1px solid #ccc" padding="10px 0" />
+        <mj-text align="left" color="#222" font-size="16px">
+          <strong>Yours,<br/>Nisha Paraman<br/>Chief Mentor<br/>Seller School</strong>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-button background-color="#e97676" color="#ffffff" border-radius="12px" href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}" padding="15px 20px">
+          Add Your First Product
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

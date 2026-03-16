@@ -1,0 +1,47 @@
+{% load mjml %}
+{% load site_urls %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#f5f5f5" padding="25px">
+      <mj-column border-radius="6px">
+        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+          Onboarding Rejected / Pending
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Hi <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          The status of your seller onboarding process has been updated.
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+          Status: <span style="color:#f74225;">{{ registration.get_approval_status }}</span>
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Please contact our admin via mail or customer care phone number.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Admin Note Box -->
+    <mj-section background-color="#ffeb3b" padding="15px 25px" border-left="5px solid #e74c3c">
+      <mj-column>
+        <mj-text align="left" color="#222" font-size="15px">
+          <strong>Admin Note:</strong>
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="15px">
+          <strong>{{ registration.approval_notes }}</strong>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

@@ -1,0 +1,50 @@
+{% load mjml %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#ffffff" padding="30px 20px">
+      <mj-column>
+        <mj-text align="left" color="#222" font-size="18px" font-weight="bold">
+          Mail OTP
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Hello <strong>{{ user.username }}</strong>,
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          Use the One Time Password (OTP) below to complete your action. This code is valid for the next 10 minutes.
+        </mj-text>
+        <mj-text align="center" color="#f66569" font-size="28px" font-weight="bold" font-family="'JetBrains Mono', monospace, Arial" padding="20px 0">
+          {{ otp }}
+        </mj-text>
+        <mj-text align="left" color="#222" font-size="16px">
+          If you did not request this OTP, please ignore this message or contact us immediately at
+          <a href="mailto:support@zite69.com" style="color:#f66569;">support@zite69.com</a>.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Referral Banner -->
+    <mj-section background-color="#fff5f5" padding="25px" border="2px dashed #f66569">
+      <mj-column>
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
+          Refer &amp; Earn!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Love Zite69? Invite friends and get <strong>&#8377;100 OFF</strong> your next order!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Your referral code: <strong>ZITEFRIEND100</strong>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

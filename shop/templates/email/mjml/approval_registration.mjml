@@ -1,0 +1,40 @@
+{% load mjml %}
+{% load site_urls %}
+{% mjml %}
+<mjml version="3.3.3">
+  <mj-head>
+    <mj-include path="shop/templates/email/mjml/include/head.mjml" />
+  </mj-head>
+  <mj-body background-color="#F4F4F4">
+
+    <mj-include path="shop/templates/email/mjml/include/header.mjml" />
+
+    <mj-section background-color="#f5f5f5" padding="25px">
+      <mj-column border-radius="6px">
+        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+          Your Registration is Approved!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Hi <strong>{{ user.get_full_name }}</strong>,
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          We're excited to let you know that your registration with Zite69 has been approved! You're just one step away from getting started.
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Click the button below to continue onboarding and start exploring the exciting features we have for you.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="20px">
+      <mj-column>
+        <mj-button background-color="#79c6a4" color="#ffffff" border-radius="25px" href="{% site_url SITE_SELLER 'account_login' %}?next=/dashboard/onboarding/" padding="15px 30px" width="420px">
+          Continue Onboarding
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-include path="shop/templates/email/mjml/include/footer_seller.mjml" />
+  </mj-body>
+</mjml>
+{% endmjml %}

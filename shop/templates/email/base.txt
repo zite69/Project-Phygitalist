@@ -1,0 +1,21 @@
+{% load static %}
+ZITE69
+========================================
+
+{% block header %}{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+----------------------------------------
+69mm & iCommerce LLP
+#35, 2nd Phase, Siddapura, Whitefield, Bangalore - 66
+Email: support@zite69.com
+
+Instagram: https://instagram.com/zite69
+Facebook: https://facebook.com/zite69
+Twitter: https://twitter.com/zite69
+
+© 2025 ZITE69. All rights reserved.
+{% endblock %}
