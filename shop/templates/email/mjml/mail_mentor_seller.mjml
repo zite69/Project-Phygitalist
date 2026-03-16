@@ -4,13 +4,13 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body background-color="#f4f4f4">
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
     <mj-section background-color="#f5f5f5" padding="25px">
       <mj-column border-radius="6px">
-        <mj-text align="left" color="#222" font-size="20px" font-weight="bold">
+        <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
           Welcome Dashboard Mail
         </mj-text>
         <mj-text align="left" color="#222" font-size="16px">
@@ -39,9 +39,9 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#ffffff" padding="20px">
+    <mj-section background-color="#f4f4f4" padding="20px">
       <mj-column>
-        <mj-button background-color="#e97676" color="#ffffff" border-radius="12px" href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}" padding="15px 20px">
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="12px" href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}" padding="15px 20px">
           Add Your First Product
         </mj-button>
       </mj-column>

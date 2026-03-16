@@ -7,9 +7,9 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f5f5f5" padding="25px">
+    <mj-section background-color="#f4f4f4" padding="25px">
       <mj-column border-radius="6px">
-        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="28px" font-weight="bold">
           Onboarding Rejected / Pending
         </mj-text>
         <mj-text align="center" color="#222" font-size="16px">
@@ -18,7 +18,7 @@
         <mj-text align="center" color="#222" font-size="16px">
           The status of your seller onboarding process has been updated.
         </mj-text>
-        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+        <mj-text align="center" color="#222" font-size="16px" font-weight="bold">
           Status: <span style="color:#f74225;">{{ registration.get_approval_status }}</span>
         </mj-text>
         <mj-text align="center" color="#222" font-size="16px">

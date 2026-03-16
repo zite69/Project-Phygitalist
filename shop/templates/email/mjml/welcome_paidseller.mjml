@@ -6,9 +6,9 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="30px 20px">
+    <mj-section background-color="#f4f4f4" padding="30px 20px">
       <mj-column>
-        <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="28px" font-weight="bold">
           Welcome, {{ user.name }}!
         </mj-text>
         <mj-text align="left" color="#222" font-size="16px">

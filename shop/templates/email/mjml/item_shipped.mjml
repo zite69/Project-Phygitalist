@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body background-color="#f4f4f4">
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="30px 20px">
+    <mj-section background-color="#f4f4f4" padding="30px 20px">
       <mj-column>
         <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
           Item Shipped
@@ -55,7 +55,7 @@
     </mj-section>
 
     <!-- Billing Details -->
-    <mj-section background-color="#f8f8f8" padding="20px 25px">
+    <mj-section background-color="#f4f4f4" padding="20px 25px">
       <mj-column>
         <mj-table>
           <tr>
@@ -78,19 +78,24 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#ffffff" padding="20px">
+    <mj-section background-color="#f4f4f4" padding="20px">
       <mj-column>
-        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px">
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px" width="250px">
           View Order Details
         </mj-button>
       </mj-column>
     </mj-section>
 
     <!-- Referral Banner -->
-    <mj-section background-color="#fff3e0" padding="20px 25px" border-left="5px solid #fb8c00">
+    <mj-section background-color="#fff5f5" padding="25px" border="2px dashed #f66569">
       <mj-column>
-        <mj-text align="center" color="#e65100" font-size="16px">
-          Refer a friend and get <strong>&#8377;100 OFF</strong> your next order!<br/>
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
+          Refer &amp; Earn!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
+          Love Zite69? Invite friends and get <strong>&#8377;100 OFF</strong> your next order!
+        </mj-text>
+        <mj-text align="center" color="#222" font-size="16px">
           Your referral code: <strong>ZITEFRIEND100</strong>
         </mj-text>
       </mj-column>

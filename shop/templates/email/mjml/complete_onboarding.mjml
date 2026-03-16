@@ -6,9 +6,9 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f5f5f5" padding="25px">
+    <mj-section background-color="#f4f4f4" padding="25px">
       <mj-column border-radius="6px">
-        <mj-text align="left" color="#222" font-size="20px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Complete Your Onboarding Form
         </mj-text>
         <mj-text align="left" color="#222" font-size="16px">
@@ -23,9 +23,9 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#ffffff" padding="20px">
+    <mj-section background-color="#f4f4f" padding="20px">
       <mj-column>
-        <mj-button background-color="#79c6a4" color="#ffffff" border-radius="25px" href="{{ onboarding_url }}" padding="15px 30px" width="420px">
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="25px" href="{{ onboarding_url }}" padding="15px 30px" width="250px">
           Fill Onboarding Form
         </mj-button>
       </mj-column>

@@ -6,9 +6,9 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="25px">
+    <mj-section background-color="#f4f4f4" padding="25px">
       <mj-column>
-        <mj-text align="center" color="#222" font-size="20px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Your Product is Pending / Rejected
         </mj-text>
         <mj-text align="center" color="#222" font-size="16px">

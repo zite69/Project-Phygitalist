@@ -6,21 +6,21 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="30px 20px">
+    <mj-section background-color="#f4f4f4" padding="30px 20px">
       <mj-column>
-        <mj-text align="left" color="#222" font-size="18px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Mail OTP
         </mj-text>
-        <mj-text align="left" color="#222" font-size="16px">
+        <mj-text align="center" color="#222" font-size="16px">
           Hello <strong>{{ user.username }}</strong>,
         </mj-text>
-        <mj-text align="left" color="#222" font-size="16px">
+        <mj-text align="center" color="#222" font-size="16px">
           Use the One Time Password (OTP) below to complete your action. This code is valid for the next 10 minutes.
         </mj-text>
         <mj-text align="center" color="#f66569" font-size="28px" font-weight="bold" font-family="'JetBrains Mono', monospace, Arial" padding="20px 0">
           {{ otp }}
         </mj-text>
-        <mj-text align="left" color="#222" font-size="16px">
+        <mj-text align="center" color="#222" font-size="16px">
           If you did not request this OTP, please ignore this message or contact us immediately at
           <a href="mailto:support@zite69.com" style="color:#f66569;">support@zite69.com</a>.
         </mj-text>

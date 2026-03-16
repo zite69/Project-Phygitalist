@@ -6,15 +6,15 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="20px 0">
+    <mj-section background-color="#f4f4f4" padding="20px 0">
       <mj-column>
-        <mj-text align="center" color="#003DA5" font-size="20px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Invitation to join our site
         </mj-text>
-        <mj-text align="center" color="#333333" font-size="16px">
+        <mj-text align="center" color="#222" font-size="16px">
           Please click the following link to join our site:
         </mj-text>
-        <mj-button background-color="#003DA5" color="#ffffff" border-radius="5px" href="{{ signup_url }}" padding="15px 25px">
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="{{ signup_url }}" padding="15px 25px">
           Join Now
         </mj-button>
         <mj-text align="center" color="#888888" font-size="14px">

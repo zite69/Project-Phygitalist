@@ -7,9 +7,9 @@
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="20px 0">
+    <mj-section background-color="#f4f4f4" padding="20px 0">
       <mj-column>
-        <mj-text align="center" color="#003DA5" font-size="20px" font-weight="bold">
+        <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           The status of your Seller Registration process has been updated: {{ registration.get_approval_status }}
         </mj-text>
         <mj-text align="center" color="#333333" font-size="16px">
@@ -17,10 +17,10 @@
         </mj-text>
 
         {% if registration.approval_status == 'A' %}
-        <mj-text align="center" color="#333333" font-size="14px">
+        <mj-text align="center" color="#333333" font-size="16px">
           Congratulations you have been approved. Please follow the link below to your Seller Dashboard.
         </mj-text>
-        <mj-button background-color="#79c6a4" color="#ffffff" border-radius="5px" href="{% site_url SITE_SELLER 'onboarding-wizard' %}" padding="12px 25px">
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="{% site_url SITE_SELLER 'onboarding-wizard' %}" padding="12px 25px">
           Onboarding Link
         </mj-button>
         {% endif %}
@@ -28,7 +28,7 @@
         <mj-text align="center" color="#333333" font-size="16px" font-weight="bold">
           Admin Notes:
         </mj-text>
-        <mj-text align="center" color="#333333" font-size="14px">
+        <mj-text align="center" color="#333333" font-size="16px">
           {{ registration.approval_notes }}
         </mj-text>
       </mj-column>
