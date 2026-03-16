@@ -1,0 +1,16 @@
+{% extends "email/base_seller.txt" %}
+
+{% block content %}
+Onboarding Rejected / Pending
+
+Hi {{ user.get_full_name }},
+
+The status of your seller onboarding process has been updated.
+
+Status: {{ registration.get_approval_status }}
+
+Admin Note:
+{{ registration.approval_notes }}
+
+Please contact our admin via mail or customer care phone number
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Welcome, {{ user.name }}!
+
+Thanks for creating your zite69 account. See how it can make selling and growing with zite69 even easier, online or offline & direct.
+
+Start your new success journey here with confidence & responsibility.
+
+Contact Your Account Manager: {{ whatsapp_link }}
+{% endblock %}

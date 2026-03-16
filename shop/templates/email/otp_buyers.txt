@@ -1,0 +1,16 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Mail OTP
+
+Hello abhilashchamban,
+
+Use the One Time Password (OTP) below to complete your action. This code is valid for the next 10 minutes.
+
+OTP: 496820
+
+If you did not request this OTP, please ignore this message or contact us immediately at support@zite69.com.
+
+Love Zite69? Invite friends and get Rs.100 OFF your next order!
+Your referral code: ZITEFRIEND100
+{% endblock %}

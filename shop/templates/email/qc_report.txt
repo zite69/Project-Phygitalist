@@ -1,0 +1,13 @@
+{% extends "email/base_seller.txt" %}
+
+{% block content %}
+Product QC Submission Report
+
+Hi [Seller Name],
+
+Your product has been submitted for Quality Check.
+
+We've generated a submission report. Please review the product details and take action if any edits are required.
+
+View / Edit Product: [Product QC View/Edit Link]
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Your Item Has Been Marked as Shipped
+
+Hi {{ seller.name }},
+
+The seller has updated the status of your order to "Item Shipped".
+
+You can track your order or view shipping details using the link below.
+
+Track Your Order: https://seller.zite69.com/
+{% endblock %}

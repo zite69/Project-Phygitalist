@@ -1,0 +1,27 @@
+{% extends 'email/base.txt' %}
+
+{% block content %}
+Item Shipped Mail
+
+Hello abhilashchamban,
+
+Your item has been shipped and is on its way to your delivery address.
+
+Order #: 406-4686401-5365944
+Shipping to: Rani, Kenichira/Wayanad, Kerala, India
+Estimated Arrival: Monday, March 17
+Shipping Speed: Standard Delivery
+
+Items:
+- Urban Minimalist T-Shirt | Size: M | Qty: 1 | Rs.499.00
+
+Subtotal: Rs.499.00
+Shipping: Free
+Payment Status: Pending
+Total: Rs.499.00
+
+View Order Details: #
+
+Refer a friend and get Rs.100 OFF your next order!
+Your referral code: ZITEFRIEND100
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "email/base_seller.txt" %}
+
+{% block content %}
+Your OTP for Zite69
+
+Hi {{ user.username }},
+
+Use the One-Time Password (OTP) below to complete your verification:
+
+{{ otp }}
+
+The OTP is valid for 10 minutes. Please do not share it with anyone.
+{% endblock %}

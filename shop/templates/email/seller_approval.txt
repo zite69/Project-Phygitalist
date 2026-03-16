@@ -1,0 +1,17 @@
+{% extends 'email/base.txt' %}
+{% load site_urls %}
+
+{% block content %}
+The status of your Seller Registration process has been updated: {{ registration.get_approval_status }}
+
+Please read the notes of our Seller Admin for further actions on your part:
+
+{% if registration.approval_status == 'A' %}
+Congratulations you have been approved. Please follow the link below to your Seller Dashboard:
+
+Onboarding link: {% site_url SITE_SELLER 'onboarding-wizard' %}
+{% endif %}
+
+Admin Notes:
+{{ registration.approval_notes }}
+{% endblock %}

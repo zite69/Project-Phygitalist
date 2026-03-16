@@ -1,0 +1,15 @@
+{% extends "email/base_seller.txt" %}
+
+{% block content %}
+Your Product is Approved!
+
+Hi {{ user.get_full_name }},
+
+Great news! Your submitted product(s) has passed our quality checks and is now approved on the Zite69 platform.
+
+Click the link below to view your product live on the marketplace.
+
+{% for product in products %}
+View Product: {{ product.get_absolute_url }}
+{% endfor %}
+{% endblock %}
