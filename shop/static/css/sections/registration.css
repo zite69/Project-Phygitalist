@@ -1,0 +1,186 @@
+/* ==========================================================
+   sections/registration.css — Seller registration form styles
+   Loaded in registration/base.html (seller registration flow)
+   ========================================================== */
+
+/* ---------- Autocomplete widget (jQuery UI) ---------- */
+:root,
+:root[data-theme="auto"] {
+    color-scheme: light;
+}
+
+.ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    margin: 0 0 10px 25px;
+    list-style: none;
+    background-color: #ffffff;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background-clip: padding-box;
+}
+
+.ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.ui-state-hover,
+.ui-state-active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0088cc;
+    border-radius: 0px;
+    background-image: none;
+}
+
+.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front:hover li {
+    color: #333;
+}
+
+.ui-menu-item .ui-menu-item-wrapper {
+    color: #333;
+    background-color: white;
+    opacity: 1.0;
+}
+
+.ui-menu-item .ui-menu-item-wrapper:hover {
+    border: none;
+    color: #fff;
+    background-color: blue;
+}
+
+.ui-autocomplete .ui-state-active {
+    color: white;
+    background-color: blue;
+}
+
+/* ---------- Form validation ---------- */
+.error {
+    color: red;
+}
+
+input.error {
+    border: 2px solid red;
+}
+
+input.success {
+    border: 2px solid green;
+}
+
+.registration-form input.success {
+    border: 3px solid green;
+}
+
+span.error {
+    color: red;
+}
+
+label.requiredField {
+    color: black;
+}
+
+.help-icon {
+    cursor: pointer;
+    background: #e0e0e0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-label {
+    display: flex;
+}
+
+.file-size {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: grey;
+}
+
+.errorlist {
+    list-style-type: none;
+}
+
+.errorlist li {
+    color: red;
+}
+
+li.ui-menu-item {
+    list-style-type: none;
+}
+
+/* ---------- Image upload widget ---------- */
+.iuw-root .iuw-image-preview {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------- p.error in registration forms ---------- */
+.registration-form p.error {
+    color: red;
+    font-size: 1rem;
+}
+
+/* ---------- Input link (80/20 split for inline button) ---------- */
+.input-link {
+    width: 100%;
+    padding: 5px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-link:focus-within {
+    outline: -webkit-focus-ring-color auto 1px;
+    outline: -moz-focus-ring-color auto 1px;
+}
+
+.registration-form .input-link input {
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+    box-sizing: border-box;
+}
+
+.registration-form .input-link input:focus-visible {
+    outline: none;
+}
+
+.input-link > input {
+    width: 80%;
+}
+
+.input-link > button {
+    width: 20%;
+    font-size: 0.8rem;
+}
+
+/* ---------- Hero content override (prevents home.css absolute positioning) ---------- */
+.hero-section .hero-content {
+    position: static;
+    width: auto;
+    z-index: auto;
+}

@@ -1,5 +1,6 @@
 {% load cms_tags  djangocms_forms_tags i18n sekizai_tags static %}
 {% if instance %}
+<div class="container">
 <div class="forms">
     <form id="{{ instance.form_id }}"
           class="djangocms-form-builder-ajax-form subscribe-form subscribe-form-1 validate wow fadeInDown"
@@ -29,6 +30,7 @@
 		{% endif %}
 	</div>
 </div>
+</div>
 {% endif %}
 
 {% addtoblock "css" %}
@@ -37,6 +39,21 @@
             .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
         </style>
     {% endif %}
+    <style type="text/css">
+        .invitation-controls {
+            gap: 6px;
+            width: 100%;
+        }
+        .invitation-controls .mb-3 {
+            flex: 1;
+        }
+        @media (max-width: 768px) {
+            .invitation-controls {
+                flex-direction: column;
+                max-width: 90%;
+            }
+        }
+    </style>
 {% endaddtoblock %}
 {% addtoblock "js" %}
     {% if instance.use_recaptcha %}
