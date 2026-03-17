@@ -195,6 +195,7 @@ class UserNameNumberEmail(forms.Form):
 
         first, last = name.split(" ")
         user = User(first_name=first, last_name=last, phone=phone, is_active=False)
+        user.groups.add(Group.objects.get(name='All Oscar Dashboard Permissions'))
         user.save()
         logger.debug(f"Got user: {user}")
         otp = generate_otp(user, phone = phone)
