@@ -31,14 +31,18 @@
     else if (type == 'email')
       postdata['email'] = data;
 
-    const resp = await fetch(uri, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrf
-      },
-      body: JSON.stringify(postdata)
-    });
+    try {
+        const resp = await fetch(uri, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrf
+          },
+          body: JSON.stringify(postdata)
+        });
+    } catch (err) {
+        console.log("network error during fetch");
+    }
 
     if (!resp.ok) {
         console.log("Status:", resp.status);
