@@ -70,6 +70,16 @@
     background-color: blue;
 }
 
+/* ---------- Remove Bootstrap focus ring inside registration form ---------- */
+.registration-form input:focus,
+.registration-form select:focus,
+.registration-form textarea:focus,
+.registration-form .form-control:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #ddd;
+}
+
 /* ---------- Form validation ---------- */
 .error {
     color: red;
@@ -131,6 +141,141 @@ li.ui-menu-item {
     list-style-type: none;
 }
 
+/* ---------- Congrats / onboarding complete ---------- */
+.congrats_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.succes_box {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    position: relative;
+    background: #ffffff;
+}
+
+.confetti-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.onboard-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+    width: 100%;
+}
+
+.success-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: #16a34a;
+    padding: 0 0 20px 0;
+}
+
+.success-subtitle {
+    font-size: 14px;
+    color: #4b5563;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-20px) rotate(45deg);
+    }
+    to {
+        transform: translateY(600px) rotate(1125deg);
+        opacity: 0;
+    }
+}
+
+.seller-school {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.seller-school:hover {
+    text-decoration: underline;
+}
+
+.clapping-hands {
+    font-size: 3.5rem;
+    padding-top: 20px;
+    margin-bottom: 1rem;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.congrats-text {
+    color: #2e933c;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.seller-text {
+    color: #2e933c;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* ---------- Business added success message ---------- */
+.success-message {
+    color: #22C55E;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.success-message img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin: 0 auto 10px;
+}
+
+/* ---------- Verified icon ---------- */
+.verified {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+}
+
+.img-verified {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
 /* ---------- Image upload widget ---------- */
 .iuw-root .iuw-image-preview {
     margin-left: auto;
@@ -178,9 +323,194 @@ li.ui-menu-item {
     font-size: 0.8rem;
 }
 
-/* ---------- Hero content override (prevents home.css absolute positioning) ---------- */
+/* ---------- Nav mobile menu (CSS checkbox hack) ---------- */
+#menu-toggle {
+    display: none;
+}
+
+#menu-toggle:checked ~ .mobile-menu {
+    display: flex;
+}
+
+/* ---------- Registration page hero ---------- */
+.hero-section {
+    background-color: #f66569;
+    padding: 40px 0;
+    width: 100%;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Override base_seller.css unscoped .hero-content grid styles */
 .hero-section .hero-content {
+    width: auto !important;
+    flex: 1;
+    order: unset;
     position: static;
-    width: auto;
     z-index: auto;
+    text-align: left;
+}
+
+.hero-content h1 {
+    color: #ffffff;
+    font-size: 36px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #424041;
+    margin: 0;
+}
+
+/* ---------- Registration form shell ---------- */
+.registration-form {
+    background-color: #ffffff;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.registration-form .messages {
+    font-size: 0.8rem;
+}
+
+.registration-form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Small label-style headings (GST/language steps) */
+.registration-form .gst-label,
+.gst-label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Django messages inside registration form */
+.registration-form .messages {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.registration-form .messages li.success {
+    color: #22C55E;
+    font-size: 0.9rem;
+}
+
+.registration-form p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.registration-form input:not([type="radio"]):not([type="checkbox"]),
+.registration-form .form-control {
+    width: 100%;
+    height: 48px;
+    padding: 0 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* ---------- Radio group ---------- */
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.radio-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.radio-option input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    display: block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-bottom: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-option input[type="radio"]:checked {
+    border-color: #f66569;
+}
+
+.radio-option input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #f66569;
+    border-radius: 50%;
+}
+
+.radio-option label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 0;
+}
+
+.input-link {
+    height: 48px;
+}
+
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+    }
+
+    .hero-section .hero-content {
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .registration-form {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-content h1 {
+        font-size: 32px;
+    }
+
+    .registration-form {
+        width: 350px;
+    }
 }

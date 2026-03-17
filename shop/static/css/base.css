@@ -34,7 +34,7 @@ a {
 }
 
 /* ---------- Buyer header ---------- */
-header {
+header:not(.header-area) {
     background-color: #f66569;
     padding: 15px 0;
 }
