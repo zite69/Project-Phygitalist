@@ -41,7 +41,15 @@
     });
 
     if (!resp.ok) {
-      throw new Error("Server communication failed");
+        console.log("Status:", resp.status);
+        console.log("Headers:", Object.fromEntries(resp.headers.entries()));
+        let body;
+        try {
+            body = await resp.json();   // try JSON first
+        } catch (e) {
+            body = await resp.text();   // fallback to text
+        }
+        console.log("Response body:", body);
     }
 
     const result = await resp.json();
