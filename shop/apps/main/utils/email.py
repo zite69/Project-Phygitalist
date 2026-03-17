@@ -113,15 +113,15 @@ def send_email(email, **kwargs):
     return message.send(fail_silently=False)
 
 def send_email_otp(email, otp, **kwargs):
-    return send_email(email, otp=otp, template="email/otp", subject="Your OTP to login to our site", **kwargs)
+    return send_email(email, otp=otp, template="otp", subject="Your OTP to login to our site", **kwargs)
 
 def send_email_verification(email, otp, **kwargs):
-    return send_email(email, otp=otp, template="email/otp_sellers", subject="Verify your email address", **kwargs)
+    return send_email(email, otp=otp, template="otp_sellers", subject="Verify your email address", **kwargs)
 
 def send_email_invite(email, ctx):
     #Default context values
     def_ctx = {
-        'template': 'email/invitation',
+        'template': 'invitation',
         'subject': 'You have been invited to join our site',
         'expiry': '7 days'
     }
@@ -134,7 +134,7 @@ def send_email_invite(email, ctx):
 
 def send_email_seller_welcome(user, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/welcome_paidseller",
+        "template": "welcome_paidseller",
         "subject": "Welcome to zite69",
         } | kwargs)
     kwargs['user'] = user
@@ -143,7 +143,7 @@ def send_email_seller_welcome(user, **kwargs):
 
 def send_seller_approval(user, registration, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/approval_registration",
+        "template": "approval_registration",
         "subject": "Your Seller Registration has been approved!"
         } | kwargs)
     kwargs['user'] = user
@@ -153,7 +153,7 @@ def send_seller_approval(user, registration, **kwargs):
 
 def send_seller_rejection(user, registration, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/onboarding_rejection_pending",
+        "template": "onboarding_rejection_pending",
         "subject": "Your Seller Registration has been rejected"
         } | kwargs)
 
@@ -164,7 +164,7 @@ def send_seller_rejection(user, registration, **kwargs):
 
 def send_onboarding_approval(user, seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/mjml/add_product.html",
+        "template": "add_product",
         "subject": "Your Seller Onboarding has been approved"
         } | kwargs)
 
@@ -175,7 +175,7 @@ def send_onboarding_approval(user, seller, **kwargs):
 
 def send_onboarding_rejection(user, seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/pending_rejection",
+        "template": "pending_rejection",
         "subject": "There were some issues with your Seller onboarding"
         } | kwargs)
 
@@ -186,7 +186,7 @@ def send_onboarding_rejection(user, seller, **kwargs):
 
 def send_mail_mentor(seller, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/mail_mentor_seller",
+        "template": "mail_mentor_seller",
         "subject": "Welcome to your Seller Dashboard!"
         })
 
@@ -197,7 +197,7 @@ def send_mail_mentor(seller, **kwargs):
 
 def send_products_approved(seller, products, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/product_approval",
+        "template": "product_approval",
         "subject": "Your product(s) is/are approved!"
         })
     if type(products) != list:
@@ -211,7 +211,7 @@ def send_products_approved(seller, products, **kwargs):
 
 def send_order_placed_to_seller(seller, order, **kwargs):
     kwargs = kwargs | ({
-        "template": "email/order_notification",
+        "template": "order_notification",
         "subject": "You have received a new order!"
         })
 
