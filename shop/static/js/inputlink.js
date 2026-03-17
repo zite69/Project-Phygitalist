@@ -40,24 +40,23 @@
           },
           body: JSON.stringify(postdata)
         });
+        if (!resp.ok) {
+            console.log("Status:", resp.status);
+            console.log("Headers:", Object.fromEntries(resp.headers.entries()));
+            let body;
+            try {
+                body = await resp.json();   // try JSON first
+            } catch (e) {
+                body = await resp.text();   // fallback to text
+            }
+            console.log("Response body:", body);
+        }
+
+        const result = await resp.json();
+        return result;
     } catch (err) {
         console.log("network error during fetch");
     }
-
-    if (!resp.ok) {
-        console.log("Status:", resp.status);
-        console.log("Headers:", Object.fromEntries(resp.headers.entries()));
-        let body;
-        try {
-            body = await resp.json();   // try JSON first
-        } catch (e) {
-            body = await resp.text();   // fallback to text
-        }
-        console.log("Response body:", body);
-    }
-
-    const result = await resp.json();
-    return result;
   };
 
   async function validateAndGetCode(type, getCodeUri, data, link) {
