@@ -318,9 +318,31 @@ li.ui-menu-item {
     width: 80%;
 }
 
+/* Restore input-link input — the broad .registration-form input rule (specificity
+   0,3,1) overrides .registration-form .input-link input (0,2,1), so we need a
+   rule with higher specificity to undo width/height/border/margin. */
+.registration-form .input-link input:not([type="radio"]):not([type="checkbox"]) {
+    width: 80%;
+    height: auto;
+    padding: 0;
+    margin-bottom: 0;
+    border: 0 none;
+}
+
 .input-link > button {
     width: 20%;
     font-size: 0.8rem;
+    /* Site salmon colour — overrides Bootstrap btn-success green */
+    background-color: #f66569;
+    border-color: #f66569;
+    color: #fff;
+}
+
+.input-link > button:hover,
+.input-link > button:focus {
+    background-color: #e04f53;
+    border-color: #e04f53;
+    color: #fff;
 }
 
 /* ---------- Nav mobile menu (CSS checkbox hack) ---------- */
