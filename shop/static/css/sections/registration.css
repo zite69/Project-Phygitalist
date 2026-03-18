@@ -401,7 +401,12 @@ nav {
     position: relative;
 }
 
-/* nav-links styling is inherited from base_seller.css; add active/hover colour */
+/* nav-links styling is inherited from base_seller.css; pin font-size to match
+   the live site (seller.zite69.com) and add active/hover colour */
+nav .nav-links a {
+    font-size: 14px;
+}
+
 nav .nav-links a.active {
     color: #f66569;
 }
