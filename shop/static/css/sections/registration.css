@@ -345,13 +345,141 @@ li.ui-menu-item {
     color: #fff;
 }
 
+/* ---------- Registration page two-tier header ---------- */
+
+/* Top salmon bar (logo + login) */
+header {
+    background-color: #f66569;
+    padding: 15px 0;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo-circle {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Login/Logout button sits on salmon background — needs white text */
+header .btn-login {
+    background: transparent;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+/* White secondary nav bar */
+nav {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+/* nav-links styling is inherited from base_seller.css; add active/hover colour */
+nav .nav-links a.active {
+    color: #f66569;
+}
+
+nav .nav-links a:hover {
+    color: #f66569;
+}
+
+/* Hide Sign In link inside nav on desktop (already in header) */
+nav .nav-links .btn-login {
+    display: none;
+}
+
 /* ---------- Nav mobile menu (CSS checkbox hack) ---------- */
 #menu-toggle {
     display: none;
 }
 
-#menu-toggle:checked ~ .mobile-menu {
-    display: flex;
+/* Hamburger: three-line icon, hidden on desktop */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    /* Hide nav-links by default on mobile; show when checkbox is checked */
+    nav .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #ffffff;
+        padding: 10px 0;
+        z-index: 200;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #menu-toggle:checked ~ .nav-links {
+        display: flex;
+    }
+
+    /* Show Sign In in the dropdown on mobile */
+    nav .nav-links .btn-login {
+        display: block;
+        padding: 1rem;
+        text-align: center;
+        border-top: 1px solid #ddd;
+        width: 100%;
+    }
+
+    nav .nav-links a {
+        padding: 0.75rem 20px;
+        border-top: 1px solid #f5f5f5;
+        display: block;
+        width: 100%;
+    }
 }
 
 /* ---------- Registration page hero ---------- */

@@ -20,45 +20,50 @@
 {% endblock %}
 
 {% block page_header %}
-    <input type="checkbox" id="menu-toggle">
-    <nav class="navbar" aria-label="Primary Navigation">
-        <div class="logo">
-            <a href="/"><img src="{% static 'img/zite69_shop.png' %}" alt="zite69"></a>
+    <!-- Salmon top bar: logo + login -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="/"><img src="{% static 'img/zite69_shop.png' %}" class="logo-circle" alt="zite69"></a>
+            </div>
+            <div class="login-form">
+                {% if user.is_authenticated %}
+                    <form action="{% url 'account_logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-login" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="btn btn-login" aria-label="Login">Login</a>
+                {% endif %}
+            </div>
         </div>
-        <div class="nav-links">
-            <a href="/" aria-label="Home">Home</a>
-            <a href="https://seller.zite69.com/sellerschool/" aria-label="Seller School">Seller School</a>
-            <a href="https://szine.zite69.com/" aria-label="Blog">Blog</a>
-            <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Support">Support</a>
-        </div>
-        <div class="auth-buttons">
-            {% if user.is_authenticated %}
-                <form action="{% url 'account_logout' %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-login" type="submit">Logout</button>
-                </form>
-            {% else %}
-                <a href="{% url 'account_login' %}" class="btn btn-login" aria-label="Login">Login</a>
-            {% endif %}
-        </div>
-        <label for="menu-toggle" class="hamburger">&#9776;</label>
-    </nav>
+    </header>
 
-    <!-- Mobile Menu (shown via CSS checkbox hack) -->
-    <div class="mobile-menu">
-        <a href="/" aria-label="Home">Home</a>
-        <a href="https://seller.zite69.com/sellerschool/" aria-label="Seller School">Seller School</a>
-        <a href="https://szine.zite69.com/" aria-label="Blog">Blog</a>
-        <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Support">Support</a>
-        {% if user.is_authenticated %}
-            <form action="{% url 'account_logout' %}" method="POST">
-                {% csrf_token %}
-                <button class="btn btn-login" type="submit">Logout</button>
-            </form>
-        {% else %}
-            <a class="btn btn-login" href="{% url 'account_login' %}" aria-label="Login">Sign In / Sign Up</a>
-        {% endif %}
-    </div>
+    <!-- White secondary nav: Home / Seller School / Blog / Support -->
+    <nav aria-label="Primary Navigation">
+        <div class="nav-container">
+            <input type="checkbox" id="menu-toggle">
+            <label for="menu-toggle" class="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="nav-links">
+                <a href="/" class="active" aria-label="Home">Home</a>
+                <a href="https://seller.zite69.com/sellerschool/" aria-label="Seller School">Seller School</a>
+                <a href="https://szine.zite69.com/" aria-label="Blog">Blog</a>
+                <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" aria-label="Support">Support</a>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'account_logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-login" type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'account_login' %}" class="btn btn-login" aria-label="Sign In">Sign In / Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 {% endblock %}
 
 {% block messages %}
