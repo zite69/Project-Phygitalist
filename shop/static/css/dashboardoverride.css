@@ -1,5 +1,9 @@
 .navbar.navbar-accounts .navbar-brand {
     background: url("../img/dashboard_logo.png") no-repeat scroll 0 0 transparent;
+    background-size: contain; 
+    width: 200px; 
+    height: 50px; 
+    display: block;
 }
 
 .active .icon {
