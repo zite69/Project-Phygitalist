@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#f4f4f4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f4f4f4" padding="30px 20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
           Item Shipped
@@ -21,7 +21,7 @@
     </mj-section>
 
     <!-- Shipping Status Box -->
-    <mj-section background-color="#e8f5e9" padding="25px" border-left="5px solid #f66569">
+    <mj-section mj-class="mail-body" border-left="5px solid #f66569">
       <mj-column>
         <mj-text align="left" color="#8f3a3d" font-size="16px">
           <strong>Order #:</strong> {{ order.number }}<br/>
@@ -33,7 +33,7 @@
     </mj-section>
 
     <!-- Product Items -->
-    <mj-section background-color="#ffffff" padding="20px 25px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         {% for line in order.lines.all %}
         <mj-table>
@@ -55,7 +55,7 @@
     </mj-section>
 
     <!-- Billing Details -->
-    <mj-section background-color="#f4f4f4" padding="20px 25px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-table>
           <tr>
@@ -78,7 +78,7 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#f4f4f4" padding="20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px" width="250px">
           View Order Details
@@ -87,7 +87,7 @@
     </mj-section>
 
     <!-- Referral Banner -->
-    <mj-section background-color="#fff5f5" padding="25px" border="2px dashed #f66569">
+    <mj-section mj-class="mail-body" border="2px dashed #f66569">
       <mj-column>
         <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Refer &amp; Earn!

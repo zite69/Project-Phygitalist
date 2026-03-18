@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f4f4f4" padding="40px 20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="center" color="#222" font-size="16px" line-height="150%">
           Dear friend,

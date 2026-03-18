@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f4f4f4" padding="25px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Onboarding Rejected / Pending
@@ -21,7 +21,7 @@
     </mj-section>
 
     <!-- Admin Note Box -->
-    <mj-section background-color="#ffeb3b" padding="15px 25px" border-left="5px solid #e74c3c">
+    <mj-section mj-class="mail-body" border-left="5px solid #e74c3c">
       <mj-column>
         <mj-text align="left" color="#222" font-size="15px">
           <strong>Admin Note:</strong>

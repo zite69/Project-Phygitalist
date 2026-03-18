@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#ffffff" padding="30px 20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="center" color="#f66569" font-size="28px" font-weight="bold">
           Welcome to Zite69!
@@ -39,7 +39,7 @@
     </mj-section>
 
     <!-- Referral Banner -->
-    <mj-section background-color="#fff5f5" padding="25px" border="2px dashed #f66569">
+    <mj-section mj-class="mail-body" border="2px dashed #f66569">
       <mj-column>
         <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Refer &amp; Earn!

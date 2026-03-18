@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#f4f4f4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f5f5f5" padding="25px">
+    <mj-section mj-class="mail-body">
       <mj-column border-radius="6px">
         <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Your OTP for Zite69

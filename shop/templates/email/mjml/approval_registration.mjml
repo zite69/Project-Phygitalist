@@ -3,11 +3,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f4f4f4" padding="25px">
+    <mj-section mj-class="mail-body">
       <mj-column border-radius="6px">
         <mj-text align="center" color="#f66569" font-size="20px" font-weight="bold">
           Your Registration is Approved!
@@ -24,7 +24,7 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#f4f4f4" padding="20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-button background-color="#f66569" color="#ffffff" border-radius="25px" href="{% site_url SITE_SELLER 'account_login' %}?next=/dashboard/onboarding/" padding="15px 30px" width="250px">
           Continue Onboarding

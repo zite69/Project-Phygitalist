@@ -2,11 +2,11 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#F4F4F4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f4f4f4" padding="30px 20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
           Order Summary
@@ -25,7 +25,7 @@
     </mj-section>
 
     <!-- Order Details -->
-    <mj-section background-color="#f4f4f4" padding="20px 25px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="left" color="#222" font-size="15px">
           <strong>Order #:</strong> {{ order.number }}<br/>
@@ -38,7 +38,7 @@
     </mj-section>
 
     <!-- Product Items -->
-    <mj-section background-color="#ffffff" padding="20px 25px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="left" color="#222" font-size="18px" font-weight="bold">
           Your Items
@@ -60,7 +60,7 @@
     </mj-section>
 
     <!-- Billing Summary -->
-    <mj-section background-color="#f4f4f4" padding="20px 25px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-text align="left" color="#222" font-size="18px" font-weight="bold">
           Billing Summary
@@ -86,7 +86,7 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#ffffff" padding="20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px">
           View Order Details
@@ -98,7 +98,7 @@
     </mj-section>
 
     <!-- Referral Coupon -->
-    <mj-section background-color="#f8f8f8" padding="20px 25px" border-left="5px solid #f66569">
+    <mj-section mj-class="mail-body" border-left="5px solid #f66569">
       <mj-column>
         <mj-text align="center" color="#222" font-size="16px">
           Share the Zite69 experience with friends and get <strong>&#8377;100 OFF</strong> on your next order!

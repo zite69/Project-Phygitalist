@@ -4,18 +4,12 @@
   <mj-head>
     <mj-include path="shop/templates/email/mjml/include/head.mjml" />
   </mj-head>
-  <mj-body background-color="#f4f4f4">
+  <mj-body>
 
     <mj-include path="shop/templates/email/mjml/include/header.mjml" />
 
-    <mj-section background-color="#f5f5f5" padding="25px">
+    <mj-section mj-class="mail-body">
       <mj-column border-radius="6px">
-        <mj-text align="left" color="#f66569" font-size="28px" font-weight="bold">
-          Welcome Dashboard Mail
-        </mj-text>
-        <mj-text align="left" color="#222" font-size="16px">
-          <strong>Subject:</strong> Hi &#128075; I am Nisha, your new zite69 business manager!
-        </mj-text>
         <mj-text align="left" color="#222" font-size="16px">
           Dear <strong>{{ user.get_full_name }}</strong>,
         </mj-text>
@@ -39,7 +33,7 @@
       </mj-column>
     </mj-section>
 
-    <mj-section background-color="#f4f4f4" padding="20px">
+    <mj-section mj-class="mail-body">
       <mj-column>
         <mj-button background-color="#f66569" color="#ffffff" border-radius="12px" href="{% site_url SITE_SELLER 'dashboard:catalogue-product-create' %}" padding="15px 20px">
           Add Your First Product
