@@ -13,7 +13,7 @@
         approve.addEventListener('click', evtClick => {
             const signature_verified = document.getElementById("id_signature_file_verified").checked;
             let gstpan_verified = false;
-            if (registration.gst_status == 'Y') {
+            if (registration.fields.gst_status == 'Y') {
                 gstpan_verified = document.getElementById("id_gstin_file_verified").checked;
             } else {
                 gstpan_verified = document.getElementById("id_pan_file_verified").checked;
@@ -21,7 +21,7 @@
             console.log("Approve clicked");
             console.log(signature_verified);
             console.log(gstpan_verified);
-            console.log(registration.gst_status);
+            console.log(registration.fields.gst_status);
             if (!(signature_verified && gstpan_verified)) {
                 let msg = "You must verify the signature file and the ";
                 if (registration.gst_status == 'Y')
