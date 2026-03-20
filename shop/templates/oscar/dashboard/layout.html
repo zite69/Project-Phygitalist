@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{% static "oscar/js/select2/select2.min.css" %}" />
     <link rel="stylesheet" href="{% static "oscar/css/select2-bootstrap.min.css" %}" />
     <link rel="stylesheet" href="{% static "oscar/js/bootstrap4-datetimepicker/tempusdominus-bootstrap-4.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/navbar.css" %}" />
 {% endblock %}
 
 {% block title %}
@@ -113,6 +114,7 @@
                 {% block content %}
                     {% block sidebar %}
                 <!-- <h1>Sidebar</h1> -->
+                <!--
                        <aside class="navbar-aside ps ps--active-y" id="offcanvas_aside">
         <div class="aside-top">
             <a href="index.html" class="brand-wrap">
@@ -229,7 +231,9 @@
             <br>
         </nav>
     <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 375px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 182px;"></div></div></aside>
+                -->
                     {% endblock %}
+
 
                     {% block dashboard_content %}{% endblock dashboard_content %}
                 {% endblock content %}
