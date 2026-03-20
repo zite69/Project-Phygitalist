@@ -641,6 +641,11 @@ nav .nav-links .btn-login {
     height: 48px;
 }
 
+.registration-form .btn-primary:hover {
+    background-color: #f66569;
+    border-color: #f66569;
+}
+
 @media (max-width: 768px) {
     .hero-container {
         flex-direction: column;
