@@ -17,6 +17,10 @@
             } else {
                 gstpan_verified = document.getElementById("id_pan_file_verified").checked;
             }
+            console.log("Approve clicked");
+            console.log(signature_verified);
+            console.log(gstpan_verified);
+            console.log(registration.gst_status);
             if (!(signature_verified && gstpan_verified)) {
                 let msg = "You must verify the signature file and the ";
                 if (registration.gst_status == 'Y')
