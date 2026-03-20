@@ -8,6 +8,7 @@
         const continueBtn = document.querySelector("button[name=_continue]");
         const approved = document.getElementById("id_approved");
         const action = document.getElementById("id_action");
+        console.log(registration);
 
         approve.addEventListener('click', evtClick => {
             const signature_verified = document.getElementById("id_signature_file_verified").checked;
