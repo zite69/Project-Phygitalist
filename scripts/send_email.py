@@ -68,7 +68,7 @@ def run(*args):
         if temp in MAP_TO_SUBJECT:
             ctx['subject'] = MAP_TO_SUBJECT[temp]
         else:
-            ctx['subject'] = 'Please update scripts/test_email.py to add to MAP_TO_SUBJECT'
+            ctx['subject'] = 'Please update scripts/send_email.py to add to MAP_TO_SUBJECT'
         if ',' in settings.SEND_TEST_EMAIL:
             toaddr, cc = settings.SEND_TEST_EMAIL.split(",")
         else:
