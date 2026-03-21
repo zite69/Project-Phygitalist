@@ -29,6 +29,9 @@ from collections import defaultdict
 from image_uploader_widget.widgets import ImageUploaderWidget, widgets
 from shop.apps.main.utils.email import send_email_seller_welcome
 from oscar.core.loading import get_class
+from django.core import management
+from django.core.management.commands import loaddata
+
 import logging
 
 logger = logging.getLogger("shop.apps.registration")
@@ -195,7 +198,14 @@ class UserNameNumberEmail(forms.Form):
 
         first, last = name.split(" ")
         user = User(first_name=first, last_name=last, phone=phone, is_active=False)
-        user.groups.add(Group.objects.get(name='Seller Oscar Dashboard Permissions'))
+        try:
+            group = Group.objects.get(name='Seller Oscar Dashboard Permissions')
+        except Group.DoesNotExist:
+            logger.error("Group - Seller Oscar Dashboard Permissions does not exist")
+            logger.info("Attempting to create Group")
+            management.call_command("loaddata", "--app auth.Group", "data/selleroscardashboardpermissionsgroup.json", verbosity=0)
+            group = Group.objects.get(name='Seller Oscar Dashboard Permissions')
+        user.groups.add(group)
         user.save()
         logger.debug(f"Got user: {user}")
         otp = generate_otp(user, phone = phone)
