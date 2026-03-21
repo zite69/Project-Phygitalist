@@ -254,12 +254,16 @@ input[type='radio'].form-check-input {
                                 {% twitter_share share_url product.get_title as tw_url %}
                                 {% whatsapp_share share_url product.get_title as wa_url %}
                                 <ul class="text-grey-5 d-inline-block">
-                                    <li class="social-rupees"><a href="#"><img src="{% static 'img/icons/icon-rupees.svg'%}" alt=""></a></li>
-                                    <li><strong class="mr-10">Share  &amp; Earn :</strong></li>
+                                    <li class="social-rupees"><a href="#" onclick="copyReferralLink(event, '{{ share_url }}')"><img src="{% static 'img/icons/icon-rupees.svg'%}" alt=""></a></li>
+                                    <li><strong class="mr-10"><a href="#" onclick="copyReferralLink(event, '{{ share_url }}')" style="color:inherit; text-decoration:none;">Share  &amp; Earn :</a></strong></li>
                                     <li class="social-facebook"><a href="{{ fb_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-facebook.svg' %}" alt="Facebook"></a></li>
                                     <li class="social-twitter"><a href="{{ tw_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-twitter.svg' %}" alt="X / Twitter"></a></li>
-                                    <li class="social-instagram"><a href="{{ wa_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt="WhatsApp"></a></li>
+                                    <li class="social-instagram"><a href="#" onclick="copyReferralLink(event, '{{ share_url }}')" title="Copy link to share on Instagram"><img src="{% static 'img/icons/icon-instagram.svg' %}" alt="Instagram"></a></li>
+                                    <li class="social-whatsapp"><a href="{{ wa_url }}" target="_blank" rel="noopener"><img src="{% static 'img/icons/icon-whatsapp.svg' %}" alt="WhatsApp"></a></li>
                                 </ul>
+                                <div id="instagram-copy-toast" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#333; color:#fff; padding:10px 20px; border-radius:8px; z-index:9999; font-size:14px;">
+                                    Link copied! Share it anywhere to earn referral rewards.
+                                </div>
                             </div>
                         </div>
                 </div>
@@ -465,6 +469,29 @@ You can also connect with the local CEO ( Community Exchange Officer ) for in pe
     <script src="{% static 'js/Magnifier.js' %}"></script>
     -->
   <script>
+      function copyReferralLink(event, url) {
+          event.preventDefault();
+          function showToast() {
+              const toast = document.getElementById('instagram-copy-toast');
+              toast.style.display = 'block';
+              setTimeout(function() { toast.style.display = 'none'; }, 3000);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).then(showToast);
+          } else {
+              const ta = document.createElement('textarea');
+              ta.value = url;
+              ta.style.position = 'fixed';
+              ta.style.opacity = '0';
+              document.body.appendChild(ta);
+              ta.focus();
+              ta.select();
+              document.execCommand('copy');
+              document.body.removeChild(ta);
+              showToast();
+          }
+      }
+
       function addToBasket(product_id) {
         const form = document.getElementById(`add_to_basket_form_${product_id}`);
         form.submit();

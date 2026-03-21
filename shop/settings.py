@@ -894,6 +894,9 @@ PLAUSIBLE_TAG = env.str("PLAUSIBLE_TAG", default="", multiline=True)
 SHIPROCKET_EMAIL = env.str("SHIPROCKET_EMAIL", default="system@zite69.com")
 SHIPROCKET_PASSWORD = env.str("SHIPROCKET_PASSWORD", default="")
 
+# Referrals
+REFERRAL_COOKIE_NAME = env.str("REFERRAL_COOKIE_NAME", default="zite69-referral")
+
 DOWNLOADVIEW_BACKEND = 'django_downloadview.nginx.XAccelRedirectMiddleware'
 DOWNLOADVIEW_RULES = [
     {

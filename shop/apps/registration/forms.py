@@ -268,6 +268,14 @@ class PasswordForm(FormWithRequest):
 
         login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
 
+        # Link any referral tracking cookie to this newly created seller account.
+        # (Allauth's user_signed_up signal handles the normal signup path;
+        # this path bypasses allauth so we handle it explicitly.)
+        from shop.apps.referrals.models import Referral
+        referral = Referral.for_request(self.request)
+        if referral and self.request.session.session_key:
+            referral.link_responses_to_user(user, self.request.session.session_key)
+
         return form_data
 
 class MobileAndOtp(FormWithRequest):

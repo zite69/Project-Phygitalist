@@ -68,7 +68,7 @@ class Referral(models.Model):
 
     @classmethod
     def for_request(cls, request):
-        cookie = request.COOKIES.get("pinax-referral")
+        cookie = request.COOKIES.get(settings.REFERRAL_COOKIE_NAME)
         if cookie:
             code, session_key = cookie.split(":")
             try:

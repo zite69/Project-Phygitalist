@@ -1,5 +1,5 @@
 from django import template
-from urllib.parse import quote_plus
+from urllib.parse import quote_plus, urlencode, urlparse, urlunparse, parse_qs
 
 register = template.Library()
 
@@ -16,7 +16,7 @@ def referral_share_url(context, redirect_to):
     """
     request = context.get("request")
     if not request or not request.user.is_authenticated:
-        return redirect_to
+        return request.build_absolute_uri(redirect_to) if request else redirect_to
 
     from shop.apps.referrals.models import Referral
 
@@ -25,7 +25,15 @@ def referral_share_url(context, redirect_to):
         redirect_to=redirect_to,
         label="share",
     )
-    return referral.url
+    # Build the direct product URL with ?r=<code> so the middleware sets
+    # the tracking cookie without an intermediate redirect page.
+    # Use an absolute URL so social share links (Facebook etc.) work correctly.
+    parsed = urlparse(redirect_to)
+    params = parse_qs(parsed.query)
+    params['r'] = [referral.code]
+    new_query = urlencode(params, doseq=True)
+    relative = urlunparse(parsed._replace(query=new_query))
+    return request.build_absolute_uri(relative)
 
 
 @register.simple_tag

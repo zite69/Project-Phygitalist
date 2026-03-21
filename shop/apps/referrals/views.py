@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import redirect
@@ -5,10 +6,8 @@ from django.utils import timezone
 from django.views import View
 from django.views.generic import TemplateView
 
+from shop.apps.referrals.middleware import REFERRAL_COOKIE_MAX_AGE
 from shop.apps.referrals.models import Referral, ReferralResponse, filter_responses
-
-COOKIE_NAME = "pinax-referral"
-COOKIE_MAX_AGE = 30 * 24 * 60 * 60  # 30 days
 
 
 class ProcessReferralView(View):
@@ -34,9 +33,9 @@ class ProcessReferralView(View):
 
         response = redirect(referral.redirect_to or "/")
         response.set_cookie(
-            COOKIE_NAME,
+            settings.REFERRAL_COOKIE_NAME,
             f"{referral.code}:{request.session.session_key}",
-            max_age=COOKIE_MAX_AGE,
+            max_age=REFERRAL_COOKIE_MAX_AGE,
             httponly=True,
             samesite="Lax",
         )
