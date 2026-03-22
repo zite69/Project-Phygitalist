@@ -48,7 +48,7 @@ header:not(.header-area) {
     padding: 0 20px;
 }
 
-.logo {
+header:not(.header-area) .logo {
     width: 60px;
     height: 60px;
 }
