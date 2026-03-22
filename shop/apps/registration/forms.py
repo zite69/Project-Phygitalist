@@ -120,15 +120,6 @@ class UserName(FormWithRequest):
     class Media:
         js = ("js/username.js",)
 
-    # def __init__(self, *args, request=None, **kwargs):
-    #     super().__init__(*args, request=request, **kwargs)
-    #     self.helper = FormHelper()
-    #     self.helper.form_id = 'id_form_username'
-    #     self.helper.form_method = 'post'
-    #     self.helper.include_media = False
-
-    #     self.helper.add_input(Submit(name='submit', value='Register Now', css_class="action-btn", css_id="submit-username"))
-
     def clean_username(self):
         username = self.cleaned_data['username']
         try:
@@ -149,69 +140,20 @@ class UserName(FormWithRequest):
             #this does apparently happen because clean in turns calls clean on the fields and these actions bubble
             #through
             user = User.objects.create(username=username, first_name=first, last_name=last, is_active=False)
+            try:
+                group = Group.objects.get(name='Seller Oscar Dashboard Permissions')
+            except Group.DoesNotExist:
+                logger.error("Group - Seller Oscar Dashboard Permissions does not exist")
+                logger.info("Attempting to create Group")
+                management.call_command("loaddata", "--app auth.Group", "data/selleroscardashboardpermissionsgroup.json", verbosity=0)
+                group = Group.objects.get(name='Seller Oscar Dashboard Permissions')
+            user.groups.add(group)
             user.save()
             logger.debug(f"Saved user {user}")
             self.request.session['user_id'] = user.id
             logger.debug("Saved user_id in session")
 
         return cleaned_data
-
-class UserNameNumberEmail(forms.Form):
-    name = forms.CharField(label="", max_length=255, required=True, widget=forms.TextInput(attrs={"placeholder": "Your full name"}))
-    username = forms.CharField(label="", max_length=64, required=True,
-        widget=forms.TextInput(attrs={
-            "placeholder": "Please choose your username",
-            "class": "username",
-            "data-validate": reverse_lazy("registration:username_available")
-        }))
-    #phone = PhoneNumberField(label="", region='IN', required=True, widget=forms.TextInput(attrs={"placeholder": "Mobile number"}))
-    phone = PhoneNumberField(label="", region='IN', required=True,
-        widget=InputWithJavascriptCodeLinkWidget(attrs={
-            "placeholder": "Phone number",
-            "type": "phone",
-            "getcode": reverse_lazy("registration:phone_otp")
-        }))
-
-    phone_otp = forms.CharField(label="", max_length=10, widget=forms.TextInput(attrs={"placeholder": "Mobile OTP Code"}))
-    email = forms.EmailField(label="", required=True, widget=forms.EmailInput(attrs={"placeholder": "Email address"}))
-    email_otp = forms.CharField(label="", max_length=10, widget=forms.TextInput(attrs={"placeholder": "Email OTP"}))
-
-    class Media:
-        css = {
-           "all": ["css/seller.css"]
-        }
-
-        js = ["js/seller.js"]
-
-    def clean(self):
-        form_data = super().clean()
-        phone = form_data.get('phone', None)
-        name = form_data.get('name', '')
-        if phone == None:
-            raise PhoneValidationError(_("Please enter a valid phone number"))
-        if name == '':
-            raise ValidationError(_("Please enter your name"))
-
-        logging.debug(f"Got phone: {phone} and name: {name}")
-        if User.objects.filter(phone=phone).exists():
-            raise PhoneValidationError(_("This phone number already exists in our database. Please login with the phone number and password"))
-
-        first, last = name.split(" ")
-        user = User(first_name=first, last_name=last, phone=phone, is_active=False)
-        try:
-            group = Group.objects.get(name='Seller Oscar Dashboard Permissions')
-        except Group.DoesNotExist:
-            logger.error("Group - Seller Oscar Dashboard Permissions does not exist")
-            logger.info("Attempting to create Group")
-            management.call_command("loaddata", "--app auth.Group", "data/selleroscardashboardpermissionsgroup.json", verbosity=0)
-            group = Group.objects.get(name='Seller Oscar Dashboard Permissions')
-        user.groups.add(group)
-        user.save()
-        logger.debug(f"Got user: {user}")
-        otp = generate_otp(user, phone = phone)
-        logger.debug(f"Generated otp: {otp}")
-        resp = send_phone_otp(phone = phone, otp = otp)
-        logger.debug(f"Response from send sms: {resp}")
 
 class PasswordForm(FormWithRequest):
     form_id = 'id_form_password'
