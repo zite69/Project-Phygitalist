@@ -22,7 +22,6 @@ from django.contrib import admin
 from django.urls import include, path, resolve
 from django.views.i18n import JavaScriptCatalog
 from django.views.generic import TemplateView
-from shop.apps.main.views import home
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
 from django.conf.urls import (handler404, handler500, handler403)
