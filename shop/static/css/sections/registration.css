@@ -675,6 +675,10 @@ nav .nav-links .btn-login {
     }
 }
 
+p.emoji {
+    font-size: 2rem;
+}
+
 /* ---------- Invite referral link ---------- */
 .invite-link-wrap {
     text-align: center;
