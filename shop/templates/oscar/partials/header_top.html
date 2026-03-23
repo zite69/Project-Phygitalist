@@ -147,7 +147,7 @@
                   </li>
                   -->
 
-                  {% referral_share_url "/" as header_share_url %}
+                  {% referral_share_url request.get_full_path as header_share_url %}
                   {% facebook_share header_share_url as header_fb_url %}
                   {% twitter_share header_share_url "Shop on ZITE69" as header_tw_url %}
                   {% whatsapp_share header_share_url "Shop on ZITE69" as header_wa_url %}

@@ -106,7 +106,7 @@
                 <a href="/"><img src="{% static 'img/zite69_shop.png' %}" class="logo-circle" alt="zite69"></a>
             </div>
             <div class="login-form" style="display:flex; align-items:baseline; gap:16px;">
-                {% referral_share_url "/" as reg_share_url %}
+                {% referral_share_url request.get_full_path as reg_share_url %}
                 {% facebook_share reg_share_url as reg_fb_url %}
                 {% twitter_share reg_share_url "Shop on ZITE69" as reg_tw_url %}
                 {% whatsapp_share reg_share_url "Shop on ZITE69" as reg_wa_url %}
