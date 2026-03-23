@@ -51,7 +51,13 @@
     }
 
 .header-info-right > ul {
-    align-items: baseline;
+    align-items: center;
+}
+
+.invite-menu .auth-button {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 1;
 }
 
 /* Show on hover for desktop */
@@ -174,7 +180,10 @@
                         </a>
                       </div>
                       <div class="invite-divider"></div>
-                      <a href="{% url 'referrals:dashboard' %}">About Referrals</a>
+                      {% page_url "about-referrals" as referrals_cms_url %}
+                      <a href="{% if referrals_cms_url %}{{ referrals_cms_url }}{% else %}{% site_url SITE_BUYER 'referrals:dashboard' %}{% endif %}">
+                          About Referrals
+                      </a>
                     </div>
                   </li>
 
@@ -191,7 +200,7 @@
                     <div class="account-links">
                         <a href="{% url 'customer:profile-view' %}">My Profile</a>
                         <a href="{% url 'customer:order-list' %}">My Orders</a>
-                        <a href="{% url 'referrals:dashboard' %}">My Referrals</a>
+                        <a href="{% site_url SITE_BUYER 'referrals:dashboard' %}">My Referrals</a>
                         <form id="logoutform" action="{% url 'account_logout' %}" method="post">{% csrf_token %}<a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit()">Logout</a></form>
                     </div>
                   </li>
