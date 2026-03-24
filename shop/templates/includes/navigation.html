@@ -121,13 +121,16 @@
                 <div class="row align-items-center">
                   <div class="col-auto">
                     <!-- Avatar -->
-                    <img alt="Image placeholder" src="{% static 'assets/img/team/profile-picture-5.jpg' %}"
-                      class="avatar-md rounded">
+                        {% if user.socialaccount_set.exists %}
+                            <img class="rounded-circle img-thumbnail menu_profile_picture" src="{{ user.socialaccount_set.first.extra_data.picture }}">
+                        {% else %}
+                            <i class="fi-rs-user"></i>
+                        {% endif %}
                   </div>
                   <div class="col ps-0 ms-2">
                     <div class="d-flex justify-content-between align-items-center">
                       <div>
-                        <h4 class="h6 mb-0 text-small">Bonnie Green</h4>
+                          <h4 class="h6 mb-0 text-small">{{ user.get_full_name }}</h4>
                       </div>
                       <div class="text-end">
                         <small>2 hrs ago</small>
@@ -155,10 +158,13 @@
           <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             <div class="media d-flex align-items-center">
-              <img class="avatar rounded-circle" alt="Image placeholder"
-                src="{% static 'assets/img/team/profile-picture-3.jpg' %}">
+                        {% if user.socialaccount_set.exists %}
+                            <img class="rounded-circle img-thumbnail menu_profile_picture" src="{{ user.socialaccount_set.first.extra_data.picture }}">
+                        {% else %}
+                            <i class="fi-rs-user"></i>
+                        {% endif %}
               <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                <span class="mb-0 font-small fw-bold text-gray-900">Bonnie Green</span>
+                  <span class="mb-0 font-small fw-bold text-gray-900">{{ user.get_full_name }}</span>
               </div>
             </div>
           </a>
