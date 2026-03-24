@@ -28,6 +28,7 @@ admin.site.unregister(ProductClass)
 @admin.register(Product)
 class ProductImportExportModelAdmin(ImportExportModelAdmin):
     resource_classes = [ProductResource]
+    search_fields = ["title", "upc"]
 
 @admin.register(Category)
 class CategoryImportExportModelAdmin(ImportExportModelAdmin):
