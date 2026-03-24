@@ -1,6 +1,6 @@
 from django.http.request import is_same_domain
 from django.urls import reverse
-from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductClass, AbstractProductAttribute, AbstractCategory, AbstractOption, AbstractProductCategory, AbstractAttributeOptionGroup, AbstractAttributeOption, AbstractProductRecommendation, AbstractProductImage, AbstractProductAttribute, AbstractProductAttributeValue
+from oscar.apps.catalogue.abstract_models import AbstractProduct, AbstractProductClass, AbstractProductAttribute, AbstractCategory, AbstractOption, AbstractProductCategory, AbstractAttributeOptionGroup, AbstractAttributeOption, AbstractProductRecommendation, AbstractProductImage, AbstractProductAttribute, AbstractProductAttributeValue, AbstractProductCategoryHierarchy
 from oscar.core.loading import is_model_registered
 from shop.apps.seller.models import Seller
 from django.db import models
@@ -135,5 +135,9 @@ if not is_model_registered("catalouge", "ProductImage"):
 
 if not is_model_registered("catalouge", "ProductAttributeValue"):
     class ProductAttributeValue(AbstractProductAttributeValue):
+        pass
+
+if not is_model_registered("catalogue", "ProductCategoryHierarchy"):
+    class ProductCategoryHierarchy(AbstractProductCategoryHierarchy):
         pass
 
