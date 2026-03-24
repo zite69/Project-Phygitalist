@@ -26,7 +26,7 @@
           See you soon!<br/>
           And please don't forget to add your first product &#128071;
         </mj-text>
-        <mj-image align="left" src="{{ base_url }}{% static 'img/nisha.png' %}" width="80px" border-radius="50%" border="1px solid #ccc" padding="10px 0" />
+        <mj-image align="left" src="{{ base_uri }}{% static 'img/nisha.png' %}" width="80px" border-radius="50%" border="1px solid #ccc" padding="10px 0" />
         <mj-text align="left" color="#222" font-size="16px">
           <strong>Yours,<br/>Nisha Paraman<br/>Chief Mentor<br/>Seller School</strong>
         </mj-text>
