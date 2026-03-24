@@ -31,6 +31,7 @@ from shop.apps.main.utils.email import send_email_seller_welcome
 from oscar.core.loading import get_class
 from django.core import management
 from django.core.management.commands import loaddata
+from django.contrib.auth.models import Group
 
 import logging
 
