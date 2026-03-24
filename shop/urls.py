@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, resolve
 from django.views.i18n import JavaScriptCatalog
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.http import Http404, HttpResponseRedirect
 from django.conf.urls import (handler404, handler500, handler403)
@@ -43,6 +43,7 @@ urlpatterns = i18n_patterns(
     path('select2/', include('django_select2.urls')),
     path('filer/', include('filer.urls')),
     path('accounts/login/', LoginView.as_view()),
+    path('accounts/order/<str:order_number>/', RedirectView.as_view(pattern_name='customer:order', permanent=True)),
     path('accounts/', include('allauth.urls')),
     path('messages/', include('django_messages.urls')),
     path('buyquick/', BuyQuickView.as_view(), name="buy-quick"),
