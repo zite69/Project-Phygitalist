@@ -89,7 +89,14 @@
 }
 
 .menu_profile_picture {
-    width: 38px;
+    width: 32px;
+    height: 32px;
+    padding: 0;  /* override Bootstrap img-thumbnail's 0.25rem padding */
+}
+
+.user-menu:not(.invite-menu) .auth-button {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .invite-menu .account-links {
