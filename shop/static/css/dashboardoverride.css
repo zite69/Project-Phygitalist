@@ -895,6 +895,7 @@
 .pgfx-title {
   font-size: clamp(1.5rem, 5vw, 2.5rem);
   font-weight: 700;
+  line-height: 1.2;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text; background-clip: text;
   color: transparent; padding: 0.5rem 0;
