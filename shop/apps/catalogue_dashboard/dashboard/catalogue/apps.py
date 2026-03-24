@@ -1,10 +1,11 @@
 import oscar.apps.dashboard.catalogue.apps as apps
-from django.urls import path, re_path
+from django.urls import path, re_path, reverse_lazy
 from icecream import ic
 
 class CatalogueDashboardConfig(apps.CatalogueDashboardConfig):
     name = 'shop.apps.catalogue_dashboard.dashboard.catalogue'
     label = "catalogue_dashboard"
+    login_url = reverse_lazy("account_login")
 
     def configure_permissions(self):
         super().configure_permissions()

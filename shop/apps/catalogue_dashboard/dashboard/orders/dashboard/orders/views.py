@@ -3,11 +3,30 @@ import logging
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from oscar.apps.dashboard.orders import views as core_views
+from oscar.core.loading import get_model
 
 from shop.apps.shipping.api import create_shiprocket_order
 from shop.apps.shipping.models import ShipRocketOrder
 
 logger = logging.getLogger(__name__)
+
+Order = get_model("order", "Order")
+
+
+class OrderListView(core_views.OrderListView):
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        user = request.user
+        if not user.is_superuser and not user.is_staff:
+            if hasattr(user, 'seller'):
+                self.base_queryset = self.base_queryset.filter(
+                    lines__partner__sellers=user.seller
+                ).distinct()
+            elif user.seller_admins.exists():
+                self.base_queryset = self.base_queryset.filter(
+                    lines__partner__sellers__in=user.seller_admins.all()
+                ).distinct()
+        return response
 
 
 class OrderDetailView(core_views.OrderDetailView):
