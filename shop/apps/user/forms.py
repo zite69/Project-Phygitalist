@@ -42,7 +42,16 @@ class Zite69SignupForm(SignupForm):
                 help_text="<a href='#' data-bs-toggle='tooltip' data-bs-animation='false' data-bs-html='true' data-bs-title='<ul><li>Your password can&apos;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&apos;t be a commonly used password.</li><li>Your password can&apos;t be entirely numeric.</li></ul>'>*</a>",
                 required=True
                 )
-    
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+        # PhoneNumberFormField returns a PhoneNumber object; allauth's ratelimit
+        # machinery calls .encode() on whatever is used as the cache key, so we
+        # must return a plain string here.
+        if phone:
+            return str(phone)
+        return phone
+
     def save(self, request):
         user = super().save(request)
         return user
