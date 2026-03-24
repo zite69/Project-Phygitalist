@@ -669,7 +669,7 @@ class MultiFormView(TemplateView):
                 logger.debug("At last step seller - checking if all forms are valid")
                 if self.all_forms_valid():
                     logger.debug("All forms valid redirecting to success_url")
-                    return HttpResponseRedirect(self.success_url)
+                    return HttpResponseRedirect(f"{self.success_url}?toolbar_off")
             #messages.success(self.request, f"{form_key.replace('_', ' ').title()} saved successfully!")
         else:
             # For regular forms, you might want to do something else
