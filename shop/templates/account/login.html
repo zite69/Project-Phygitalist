@@ -114,6 +114,12 @@ button.icon-button[type="submit"] {
                 <div class="col-md-12">
                     <form action="{% url 'account_login' %}" method="POST">
                         {% csrf_token %}
+                        {% if form.errors %}
+                        <div style="color:red; margin-bottom:10px; font-size:14px;">
+                            {% for error in form.non_field_errors %}{{ error }}<br>{% endfor %}
+                            {% for field in form %}{% for error in field.errors %}{{ field.label }}: {{ error }}<br>{% endfor %}{% endfor %}
+                        </div>
+                        {% endif %}
                         <div>
                             <label for="id_login">Login:</label>
                             <input id="id_login" type="text" name="login" placeholder="Username, email or phone" autocomplete="email" required="">
