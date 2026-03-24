@@ -74,6 +74,7 @@ urlpatterns = i18n_patterns(
     path('offers/', apps.get_app_config('offer').urls),
     path('dashboard/', apps.get_app_config('dashboard').urls),
     path('catalog/', apps.get_app_config('catalogue').urls),
+    path('referrals/', include('shop.apps.referrals.urls', namespace='referrals')),
     path('accounts/', apps.get_app_config('customer').urls),
     path('', include('djangocms_forms.urls')),
     path('', include('cms.urls')),
