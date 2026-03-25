@@ -1,5 +1,7 @@
 {% load static %}
+{% load cms_tags djangocms_alias_tags %}
 {% load category_tags %}
+{% load site_urls %}
 
 <div class="header-bottom header-bottom-bg-color sticky-bar">
             <div class="container">
@@ -41,233 +43,22 @@
                             <nav>
                                 <ul>
                                     <li class="position-static"><a href="{% url 'account_login' %}">DISCOVER</a>
-                      <ul class="mega-menu">
-                        <li class="sub-mega-menu sub-mega-menu-width-34">
-                          <div class="menu-banner-wrap">
-                            <a href="index.html#"><img src="{% static 'img/banner/jeans_bag.png' %}" alt="Zite69"></a>
-                            <div class="menu-banner-content">
-                              <h4>Denim Deals</h4>
-                              <h3>Yes! We Missed <br> the Jeans Bag</h3>
-                              <div class="menu-banner-price">
-                                <span class="new-price text-success">Only ₹ 400 Now</span>
-                              </div>
-                              <div class="menu-banner-btn">
-                                <a href="shttps://www.zite69.com/en/">Shop now</a>
-                              </div>
-                            </div>
-                            <div class="menu-banner-discount">
-                              <h3>
-                                <span>40%</span>
-                                off
-                              </h3>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="index.html#">Stories</a>
-                          <ul>
-                            <li><a href="https://szine.zite69.com/category/lifestyle/">Fashion & Beauty </a></li>
-                            <li><a href="https://szine.zite69.com/category/food-drinks/">Eat & Drink </a></li>
-                            <li><a href="https://szine.zite69.com/category/reset-mind-body-space/">Well with Rest</a></li>
-                            <li><a href="https://szine.zite69.com/category/travel-tourism-events-happenings/">Outdoors </a></li>
-                            <li><a href="https://szine.zite69.com/category/reset-mind-body-space/relationships/">New Romances </a></li>
-                            <li><a href="https://szine.zite69.com/category/personal-growth-and-digital-prosperity/">Tech Tech Boom!</a></li>
-                            <li><a href="https://szine.zite69.com/category/reset-mind-body-space/gifts-games/">Gifts & Games </a></li>
-                            <li><a href="https://szine.zite69.com/category/film-entertainment/">Entertainment </a></li>
-                          </ul>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="index.html#">Most Loved♡</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Vintage Footwear</a></li>
-                            <li><a href="https://www.zite69.com/en/">Green Tea Facial</a></li>
-                            <li><a href="https://www.zite69.com/en/">Casual cum Formals</a></li>
-                            <li><a href="https://www.zite69.com/en/">Momagination T Shirt</a></li>
-                            <li><a href="https://www.zite69.com/en/">Wallet Friendly Wallets</a></li>
-                            <li><a href="https://www.zite69.com/en/">Pure Caffeine Kick </a></li>
-                            <li><a href="https://www.zite69.com/en/">Buttonless Black Shirt</a></li>
-                            <li><a href="https://www.zite69.com/en/">Curry Worthy  Pickles</a></li>
-                            <li><a href="https://www.zite69.com/en/">Total Tote </a></li>
-                            <li><a href="https://www.zite69.com/en/">  Surprise Trips</a></li>
-                          </ul>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="https://www.zite69.com/en/">Today on Z69</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Member Specials</a></li>
-                            <li><a href="https://www.zite69.com/en/">₹ 30-100 Off</a></li>
-                            <li><a href="https://www.zite69.com/en/">₹  100- 250 Off</a></li>
-                            <li><a href="https://www.zite69.com/en/">Upto 60 % Off </a></li>
-                            <li><a href="https://www.zite69.com/en/">Freebies  </a></li>
-                            <li><a href="https://www.zite69.com/en/">Top Lucky Spinnings  </a></li>
-                            <li><a href="https://www.zite69.com/en/">Earn from Superlink  </a></li>
-                          </ul>
-                        </li>
-                      </ul> 
-                    </li>
-                    <li class="position-static"><a href="{% url 'account_login' %}">WATCH</a>
-                      <ul class="mega-menu">
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="https://www.zite69.com/en/">In 69 Seconds!</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Stuff you should care about</a></li>
-                            <li><a href="https://www.zite69.com/en/">Eat@Someplace Else</a></li>
-                            <li><a href="https://www.zite69.com/en/">Emily in Shop </a></li>
-                          </ul>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="https://www.zite69.com/en/">Streaming Sales Soon</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Handmade Cosmetics</a></li>
-                            <li><a href="https://www.zite69.com/en/">Factory Direct</a></li>
-                            <li><a href="https://www.zite69.com/en/">Group Sale Mega</a></li>
-                            <li><a href="https://www.zite69.com/en/">Clearance |<span class="brand_color_menu"> 80% Off</span>  </a></li>
-                          </ul>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <div class="menu-banner-wrap">
-                            <a href="index.html#">
-                              <video width="175" height="300"  controls autoplay loop><source src="{% static 'img/banner/Live.mp4' %}"  type="video/mp4"></video>
-                            </a>
-                          </div>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-34">
-                          <div class="menu-banner-wrap">
-                            <a href="index.html#"><video width="100%" height="100%" height="300" controls autoplay loop><source src="{% static 'img/banner/workshop_Naman.mp4' %}" type="video/mp4"></video></a>
-                            <div class="menu-banner-content">
-                              <h4>Live Workshop</h4>
-                              <h3>Self Massaging<br> Toe2Top</h3>
-                              <div class="menu-banner-price">
-                                <span class="menu-subtext">With Namran Jedi</span>
-                              </div>
-                              <div class="menu-banner-btn">
-                                <a href="index.html#">Members Only</a>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="position-static"><a href="{% url 'account_login' %}">SHOP</a>
-                    
-                      <ul class="mega-menu">
-                        <li class="sub-mega-menu sub-mega-menu-width-34">
-                          <div class="menu-banner-wrap">
-                            <a href="https://www.zite69.com/en/"><video style="width: 100%; height: auto;" controls autoplay loop><source src="{% static 'img/banner/Handcarved.mp4' %}" type="video/mp4"></a>
-                             <div class="menu-banner-content">
-                              <h4 class="text_menu">Silver Fashion</h4>
-                              <h3 class="text_menu">Hand Carved for <br> Your Beloved <br>Hands</h3>
-                              <div class="menu-banner-price">
-                                <span class="text-custome-made">Custom Made </span>
-                              </div>
-                              <div class="menu-banner-btn">
-                                <a href="https://www.zite69.com/en/">order</a>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="https://www.zite69.com/en/">The Edit</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Flavoured Shirts</a></li>
-                            <li><a href="https://www.zite69.com/en/">Wild Wild Tote</a></li>
-                            <li><a href="https://www.zite69.com/en/">4 in 1 Tea Bundles</a></li>
-                            <li><a href="https://www.zite69.com/en/">Gift for the Gifted  </a></li>
-                            <li><a href="https://www.zite69.com/en/">Shop the Sleep</a></li>
-                            <li><a href="https://www.zite69.com/en/">Editors’ Cart</a></li>
-                          </ul>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="https://www.zite69.com/en/">Trending</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Monkey Bag</a></li>
-                            <li><a href="https://www.zite69.com/en/">Retro Sandal</a></li>
-                            <li><a href="https://www.zite69.com/en/">Rainbow Shirt</a></li>
-                            <li><a href="https://www.zite69.com/en/">Loveshake Ring</a></li>
-                            <li><a href="https://www.zite69.com/en/">Power Bank</a></li>
-                            <li><a href="https://www.zite69.com/en/">Luxury Watch</a></li>
-                            <li><a href="https://www.zite69.com/en/">Cut Through Shirt</a></li>
-                          </ul>
-                        </li>
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="https://www.zite69.com/en/">Only One Piece</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Reboot Painting</a></li>
-                            <li><a href="https://www.zite69.com/en/">Jungle Cottage Room</a></li>
-                            <li><a href="https://www.zite69.com/en/">Goblin Doll</a></li>
-                            <li><a href="https://www.zite69.com/en/">Cactus Pillow </a></li>
-                            <li><a href="https://www.zite69.com/en/">Lemon Shirt  </a></li>
-                            <li><a href="https://www.zite69.com/en/">Brinjal Pickle  </a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="position-static"><a href="https://www.zite69.com/">+MORE</a>
-                      <ul class="mega-menu">
-                        <li class="sub-mega-menu sub-mega-menu-width-22">
-                          <a class="menu-title" href="index.html#">Pre-owned</a>
-                          <ul>
-                            <li><a href="https://www.zite69.com/en/">Books & Pen</a></li>
-                            <li><a href="https://www.zite69.com/en/">Luxury Watches</a></li>
-                            <li><a href="https://www.zite69.com/en/">Music</a></li>
-                          </ul>
-                        </br>
-                        <a class="menu-title" href="https://www.zite69.com/en/">SZINE</a>
-                        <ul>
-                          <li><a href="https://www.zite69.com/en/">Frisbee Game</a></li>
-                          <li><a href="https://www.zite69.com/en/">Alien Fashion</a></li>
-                          <li><a href="https://www.zite69.com/en/">Church Street</a></li>
-                        </ul>
-                      </li>
-
-                      <li class="sub-mega-menu sub-mega-menu-width-22">
-                        <a class="menu-title" href="https://www.zite69.com/en/">Group Buy Quote</a>
-                        <ul>
-                          <li><a href="https://www.zite69.com/en/">Jogging Shoes</a></li>
-                          <li><a href="https://www.zite69.com/en/">Team Tees</a></li>
-                          <li><a href="https://www.zite69.com/en/">100 Saree Challenge</a></li>
-                        </ul>
-                      </br>
-                      <a class="menu-title" href="https://docs.google.com/forms/d/e/1FAIpQLSe-zfHemVC3F50QJnBuudP-06XCttgxeU8fuujR8ELIyJxTZw/viewform">We are Hiring</a>
-                      <ul>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe-zfHemVC3F50QJnBuudP-06XCttgxeU8fuujR8ELIyJxTZw/viewform">1000CEO Hunt</a></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe-zfHemVC3F50QJnBuudP-06XCttgxeU8fuujR8ELIyJxTZw/viewform">Engagement Editors</a></li>
-                        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSe-zfHemVC3F50QJnBuudP-06XCttgxeU8fuujR8ELIyJxTZw/viewform">Product Curator</a></li>
-                      </ul>
-                    </li>
-                    <li class="sub-mega-menu sub-mega-menu-width-22">
-                      <a class="menu-title" href="https://www.zite69.com/en/">Auction</a>
-                      <ul>
-                        <li><a href="https://www.zite69.com/en/">Nilambur Teak Furniture</a></li>
-                        <li><a href="https://www.zite69.com/en/">Sports Bike</a></li>
-                        <li><a href="https://www.zite69.com/en/">Antique Gold</a></li>
-                      </ul>
-                    </br>
-                    <a class="menu-title" href="https://www.zite69.com/en/">Class of 2024</a>
-                    <ul>
-                      <li><a href="https://www.zite69.com/en/">Register as Mentor</a></li>
-                      <li><a href="https://www.zite69.com/en/">Submit Your Topic</a></li>
-                      <li><a href="https://www.zite69.com/en/">Join the Live</a></li>
-                    </ul>
-                  </li>
-                  <li class="sub-mega-menu sub-mega-menu-width-22">
-                    <a href="shop-product-right.html"><img src="{% static 'img/banner/Becoem_A_Member.png' %}" alt="Zite69"></a>
-                    <a href="https://www.zite69.com/en/"><video style="width: 100%; height: auto;" controls autoplay loop><source src="{% static 'img/banner/SELL_ON_ZITE69.mp4' %}" type="video/mp4"></video></a>
-                  </li>
-                </ul>
-              </li>
+                                        {% static_alias "discover" %}
+                                    </li>
+                                    <li class="position-static"><a href="{% url 'account_login' %}">WATCH</a>
+                                        {% static_alias "watch" %} 
+                                    </li>
+                                    <li class="position-static"><a href="{% url 'account_login' %}">SHOP</a>
+                                        {% static_alias "shop" %} 
+                                    </li>
+                                    <li class="position-static"><a href="{% site_url SITE_BUYER '/' %}">+MORE</a>
+                                        {% static_alias "more" %}
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     {% endif %}
-                  <!--   <div class="hotline d-none d-lg-block">
-                        
-                    </div> 
-                    <div class="hotline">
-                        <p><i class="fab fa-whatsapp"></i><span>Whatsapp</span>{{ settings.WHATSAPP_NUMBER }}</p>
-                    </div>
-                    -->
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
