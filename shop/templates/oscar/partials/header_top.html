@@ -130,6 +130,35 @@
     border-top: 1px solid rgba(0,0,0,0.12);
     margin: 4px 0;
 }
+
+.menu-section-label {
+    padding: 8px 16px 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #888;
+    display: block;
+}
+
+.account-links .menu-section-link {
+    padding-left: 28px;
+    font-size: 14px;
+}
+
+.account-links .menu-divider {
+    border-top: 1px solid #eee;
+    margin: 4px 0;
+}
+
+.account-links .logout-link {
+    color: #c0392b;
+}
+
+.account-links .logout-link:hover {
+    background-color: #fdf0ef;
+    color: #c0392b;
+}
 </style>
 
 
@@ -205,10 +234,18 @@
                         {% endif %}
                     </label>
                     <div class="account-links">
-                        <a href="{% url 'customer:profile-view' %}">My Profile</a>
-                        <a href="{% url 'customer:order-list' %}">My Orders</a>
+                        {% if user.seller %}
+                        <span class="menu-section-label">Seller</span>
+                        <a class="menu-section-link" href="{% url 'dashboard:index' %}">Dashboard</a>
+                        <a class="menu-section-link" href="{% url 'dashboard:catalogue-product-list' %}">Products</a>
+                        <a class="menu-section-link" href="{% url 'dashboard:order-list' %}">Orders</a>
+                        {% endif %}
+                        <span class="menu-section-label">Buyer</span>
+                        <a class="menu-section-link" href="{% url 'customer:profile-view' %}">Profile</a>
+                        <a class="menu-section-link" href="{% url 'customer:order-list' %}">Purchases</a>
                         <a href="{% site_url SITE_BUYER 'referrals:dashboard' %}">My Referrals</a>
-                        <form id="logoutform" action="{% url 'account_logout' %}" method="post">{% csrf_token %}<a href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit()">Logout</a></form>
+                        <div class="menu-divider"></div>
+                        <form id="logoutform" action="{% url 'account_logout' %}" method="post">{% csrf_token %}<a class="logout-link" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit()">Logout</a></form>
                     </div>
                   </li>
                   {% else %}
