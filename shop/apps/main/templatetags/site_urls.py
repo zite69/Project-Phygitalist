@@ -44,7 +44,10 @@ class SiteURLNode(URLNode):
         # {% url ... as var %} construct is used, in which case return nothing.
         url = ""
         try:
-            url = reverse(view_name, urlconf=urlconf, args=args, kwargs=kwargs, current_app=current_app)
+            if view_name in ('', '/'):
+                url = '/'
+            else:
+                url = reverse(view_name, urlconf=urlconf, args=args, kwargs=kwargs, current_app=current_app)
         except NoReverseMatch:
             if self.asvar is None:
                 raise
