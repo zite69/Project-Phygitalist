@@ -173,6 +173,7 @@
         $this.countdown(finalDate, function(event) {
             $(this).html(
                 event.strftime(''
+                    + '<span class="countdown-section"><span class="countdown-amount hover-up">%m</span><span class="countdown-period"> months </span></span>'
                     + '<span class="countdown-section"><span class="countdown-amount hover-up">%d</span><span class="countdown-period"> days </span></span>'
                     + '<span class="countdown-section"><span class="countdown-amount hover-up">%H</span><span class="countdown-period"> hours </span></span>'
                     + '<span class="countdown-section"><span class="countdown-amount hover-up">%M</span><span class="countdown-period"> mins </span></span>'
