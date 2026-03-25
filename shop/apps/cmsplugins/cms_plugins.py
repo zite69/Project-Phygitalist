@@ -1,7 +1,7 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext as _
-from shop.apps.cmsplugins.models import FeaturedProduct, FeaturedProductCollection
+from shop.apps.cmsplugins.models import FeaturedProduct, FeaturedProductCollection, GroupBuyProduct, AdaCollabProduct
 from . import forms
 
 @plugin_pool.register_plugin
@@ -31,3 +31,30 @@ class FeaturedProductPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({"instance": instance})
         return context
+
+@plugin_pool.register_plugin
+class GroupBuyProductPlugin(CMSPluginBase):
+    model = GroupBuyProduct
+    autocomplete_fields = ["product"]
+    module = _("Zite69")
+    name = _("Group Buy")
+    render_template = "cmsplugins/group_buy.html"
+    allow_children = False
+    
+    def render(self, context, instance, placeholder):
+        context.update({"instance": instance})
+        return context
+
+@plugin_pool.register_plugin
+class AdaCollabProductPlugin(CMSPluginBase):
+    model = AdaCollabProduct
+    autocomplete_fields = ["product"]
+    module = _("Zite69")
+    name = _("ADA Collabs")
+    render_template = "cmsplugins/ada_collabs.html"
+    allow_children = False
+
+    def render(self, context, instance, placeholder):
+        context.update({"instance": instance})
+        return context
+

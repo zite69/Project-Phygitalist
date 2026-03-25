@@ -75,7 +75,7 @@
         var sliderID='#'+id;
         var appendArrowsClassName = '#'+id+'-arrows'
 
-        $(sliderID).slick({
+        var slickOptions = {
             dots: false,
             infinite: true,
             speed: 1000,
@@ -111,7 +111,11 @@
             prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
             nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
             appendArrows:  (appendArrowsClassName),
-        });
+        };
+        if ($(this).find('.product-cart-wrap').length > 0) {
+            slickOptions.slide = '.product-cart-wrap';
+        }
+        $(sliderID).slick(slickOptions);
     });
 
     /*Carausel 4 columns*/
@@ -120,7 +124,7 @@
         var sliderID='#'+id;
         var appendArrowsClassName = '#'+id+'-arrows'
 
-        $(sliderID).slick({
+        var slickOptions4 = {
             dots: false,
             infinite: true,
             speed: 1000,
@@ -149,7 +153,11 @@
             prevArrow: '<span class="slider-btn slider-prev"><i class="fi-rs-angle-left"></i></span>',
             nextArrow: '<span class="slider-btn slider-next"><i class="fi-rs-angle-right"></i></span>',
             appendArrows:  (appendArrowsClassName),
-        });
+        };
+        if ($(this).find('.product-cart-wrap').length > 0) {
+            slickOptions4.slide = '.product-cart-wrap';
+        }
+        $(sliderID).slick(slickOptions4);
     });
 
     /*Fix Bootstrap 5 tab & slick slider*/
