@@ -4,6 +4,7 @@
 {% load dashboard_tags %}
 {% load i18n %}
 {% load static %}
+{% load site_urls %}
 
 {% block styles %}
     <link rel="stylesheet" type="text/css" href="{% static "oscar/css/dashboard.css" %}" />
@@ -89,7 +90,7 @@
                     {% endfor %}
                     {% block extra_dashboard_nav %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'dashboard-seller' %}" role="button">Seller Information</a>
+                            <a class="nav-link" href="{% site_url SITE_SELLER 'dashboard-seller' %}" role="button">Seller Information</a>
                         </li>
                     {% endblock %}
                 </ul>
