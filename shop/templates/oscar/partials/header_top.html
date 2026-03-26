@@ -169,12 +169,12 @@
                 <div class="header-info">
                     <ul>
                         <li><i class=""></i> <a href="https://wa.me/{{ settings.WHATSAPP_NUMBER }}" target="_blank"><img style="width:20px; height: 20px;"  src="{% static 'img/whatsapp-white.svg' %}"></a></li>
-                        <li><i class=""></i><a  href="{% site_url SITE_SELLER 'registration:home' %}" target="_blank">Start Selling</a></li>
+                        <li><i class=""></i><a  href="{% site_url SITE_SELLER 'registration:home' %}" class="text-white" target="_blank">Start Selling</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-4">
-                    <div id="news-flash" class="d-inline-block">
+            <div class="col-xl-6 col-lg-4 d-flex justify-content-center">
+                    <div id="news-flash">
                         {% static_alias "flashnews" %}
                     </div>
             </div>
@@ -196,7 +196,7 @@
 
                   <li class="user-menu invite-menu">
                     <input type="checkbox" id="invite-toggle" style="display: none;">
-                    <label for="invite-toggle" class="auth-button">
+                    <label for="invite-toggle" class="auth-button text-white">
                       Invite/Earn <i class="fi-rs-angle-small-down"></i>
                     </label>
                     <div class="account-links">
