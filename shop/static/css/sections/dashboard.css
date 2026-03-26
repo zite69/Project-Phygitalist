@@ -8,6 +8,11 @@
     background: url("../../img/dashboard_logo.png") no-repeat scroll 0 0 transparent;
 }
 
+.navbar-accounts {
+    height: 65px;
+}
+
+
 .aside-top {
     padding: 12px .5rem;
     display: flex;
@@ -488,6 +493,7 @@ body.aside-mini .navbar-aside .logo {
     color: transparent;
     padding: 0.5rem 0;
     letter-spacing: -0.02em;
+    line-height: 1.2;
 }
 
 .pgfx-subtitle {
