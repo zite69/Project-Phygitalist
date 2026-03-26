@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.views.generic import DetailView
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
 from shop.apps.seller.models import Seller
 from shop.apps.user.models import Profile
 from shop.apps.seller.forms import SellerRegistrationForm
@@ -56,3 +57,9 @@ class RegisterView(FormView):
 
 class ShopView(DetailView):
     model = Seller
+
+class SellerDetailView(DetailView):
+    model = Seller
+
+    def get_object(self, queryset=None):
+        return self.request.user.seller

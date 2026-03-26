@@ -33,6 +33,7 @@ from shop.apps.registration.forms import BankDetailsForm, SellerPickupAddressFor
 from shop.apps.seller.models import Seller
 from shop.apps.main.decorators import check_perm_404
 from shop.apps.main.views import LoginView
+from shop.apps.seller.views import SellerDetailView
 
 import logging
 from django_downloadview import ObjectDownloadView
@@ -71,6 +72,7 @@ urlpatterns = i18n_patterns(
     path('otp/', include((apps.get_app_config('otp').urls[0], 'otp'), namespace='otp')),
     path('registration/', include((apps.get_app_config('registration').urls[0], 'registration'), namespace='registration')),
     path('dashboard/welcome/', WelcomePage.as_view(), name="dashboard-welcome"),
+    path('dashboard/seller/', SellerDetailView.as_view(), name="dashboard-seller"),
     path('offers/', apps.get_app_config('offer').urls),
     path('dashboard/', apps.get_app_config('dashboard').urls),
     path('catalog/', apps.get_app_config('catalogue').urls),

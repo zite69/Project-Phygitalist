@@ -87,6 +87,11 @@
                             {% endif %}
                         </li>
                     {% endfor %}
+                    {% block extra_dashboard_nav %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'dashboard-seller' %}" role="button">Seller Information</a>
+                        </li>
+                    {% endblock %}
                 </ul>
             </div>
         </nav>
