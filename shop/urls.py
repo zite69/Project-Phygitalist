@@ -29,6 +29,10 @@ from django.contrib.sitemaps.views import sitemap
 from shop.apps.main.sitemaps import SITEMAPS
 from shop.apps.webinar.views import CreateRegistrationView
 from shop.apps.main.views import LoginView, BuyQuickView
+from shop.apps.main.decorators import check_perm_404
+from shop.apps.seller.models import Seller
+from django_downloadview import ObjectDownloadView
+from rules.contrib.views import objectgetter
 
 from shop.apps.zitepayment.views import RazorpayCallbackView
 
@@ -60,6 +64,12 @@ urlpatterns = i18n_patterns(
     path('volt/', include('admin_volt.urls')),
     prefix_default_language=False,
 )
+
+urlpatterns = [
+    path("protected/seller/<int:pk>/gstin/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="gstin_file")), name="gtstin-file-protected-view"),
+    path("protected/seller/<int:pk>/pan/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="pan_file")), name="pan-file-protected-view"),
+    path("protected/seller/<int:pk>/signature/<str:filename>", check_perm_404('seller.view_media', fn=objectgetter(Seller, 'pk'))(ObjectDownloadView.as_view(model=Seller, file_field="signature_file")), name="signature-file-protected-view"),
+] + urlpatterns
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
