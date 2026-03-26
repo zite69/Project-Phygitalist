@@ -358,7 +358,7 @@ class PincodeListJson(View, JsonRequestResponseMixin):
             pincodes = Postoffice.objects.filter(pincode=pincode_prefix).order_by('office')
             results = [ {'id': p.id, 'place': p.office} for p in pincodes ]
 
-       return JsonResponse(results, safe=False)
+        return JsonResponse(results, safe=False)
 
 class ValidatePhoneOtp(View, JsonRequestResponseMixin):
 
