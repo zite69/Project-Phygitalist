@@ -1,0 +1,53 @@
+{% extends "oscar/dashboard/layout.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>User:</td>
+                        <td>{{ object.user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>Full Name:</td>
+                        <td>{{ object.user.get_full_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Shop Name:</td>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Shop Handle:</td>
+                        <td>{{ object.handle }}</td>
+                    </tr>
+                    <tr>
+                        <td>Admin:</td>
+                        <td>{% if object.admin %}{{ object.admin.get_full_name }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>CEO: </td>
+                        <td>{% if object.ceo %}{{ object.ceo }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>GSTIN:</td>
+                        <td>{% if object.gstin %}{{ object.gstin }}{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <td>PAN:</td>
+                        <td>{% if object.pan %}{{ object.pan }}{% endif %}</td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+    </div>
+</div>
+
+{% endblock %}
