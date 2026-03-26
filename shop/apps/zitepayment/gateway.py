@@ -20,7 +20,6 @@ class RazorpayGateway:
             "payment_capture": '1'
             }
         try:
-            # order = self.client.order.create(data=data)
             order = self.client.order.create(data)
             return order
         except Exception as e:
@@ -56,12 +55,6 @@ class RazorpayGateway:
         try:
             payment = self.client.payment.fetch(payment_id)
             print("in verify_payment")
-            # ic(payment_authorized)
-            # ic(type(payment_authorized['amount']))
-            # payment = self.client.payment.capture(payment_id, {
-            #     'amount': int(payment_authorized['amount']),
-            #     'currency': 'INR'
-            # })
             ic(payment)
             if payment['order_id'] == order_id and payment['status'] == 'captured':
                 print("returning True")

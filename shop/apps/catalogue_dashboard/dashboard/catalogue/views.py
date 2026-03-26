@@ -109,7 +109,6 @@ class ProductListView(originalviews.ProductListView):
     form_class = ProductSearchForm
 
     def get(self, request, *args, **kwargs):
-        # ic("inside catalogue dashboard")
         if not (request.user.is_superuser or request.user.groups.filter(name='Seller Admin').exists()):
             if not hasattr(request.user, 'seller'):
                 return redirect('/dashboard/onboarding/')
@@ -126,9 +125,6 @@ class ProductListView(originalviews.ProductListView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx['seller'] = 'Main Seller'
-        # ic("Inside get_context_data")
-        # ic(ctx)
-        # ic(ctx['products'])
         return ctx
 
     def apply_search(self, queryset):
@@ -186,9 +182,6 @@ class ProductCreateUpdateView(originalviews.ProductCreateUpdateView, PermissionR
         if not self.request.user.has_perm('products.can_edit_product', obj):
             raise PermissionDenied
         return obj
-
-    # def get_permission_object(self):
-    #     return self.get_object()
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
@@ -259,46 +252,6 @@ class ProductClassCreateUpdateView(originalviews.ProductClassCreateUpdateView):
 
 class ProductClassCreateView(originalviews.ProductClassCreateView):
     pass
-    # form_class = ProductClassForm
-
-    # def __init__(self, *args, **kwargs):
-    #     ic("Inside __init__")
-    #     ic(*args)
-    #     ic(**kwargs)
-    #     super().__init__(*args, **kwargs)
-
-    # def get_form(self, form_class=None):
-    #     form = super().get_form(form_class)
-    #     user = self.request.user
-    #     if user.is_superuser:
-    #         pass
-    #     elif hasattr(user, 'seller_admins') and user.seller_admins.exists():
-    #         form.fields['seller'].queryset = user.seller_admins.all()
-    #     elif hasattr(user, 'seller'):
-    #         form.fields.pop('seller', None)
-
-    #     return form
-
-    # def form_valid(self, form):
-    #     user = self.request.user
-
-    #     if hasattr(user, 'seller'):
-    #         form.instance.seller = user.seller
-
-    #     return super().form_valid(form)
-
-    # def get(self, request, *args, **kwargs):
-    #     ic("inside get")
-    #     ic(*args)
-    #     ic(**kwargs)
-    #     return super().get(request, *args, **kwargs)
-
-    # def get_context_data(self, *args, **kwargs):
-    #     ctx = super().get_context_data(*args, **kwargs)
-    #     ic("inside get_context_data")
-    #     ic(self.form_class.__module__)
-    #     ic(ctx)
-    #     return ctx
 
 
 
@@ -308,19 +261,6 @@ class ProductClassUpdateView(originalviews.ProductClassUpdateView):
 
 class ProductClassListView(originalviews.ProductClassListView):
     pass
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
-    #     ic(self.request.user)
-    #     # if user is superuser then don't filter any of the Product Classes
-    #     if self.request.user.is_superuser or self.request.user.groups.filter(name='Seller Admin').exists():
-    #         return qs
-    #     if hasattr(self.request.user, 'seller'):
-    #         qs.filter(Q(seller__id=1) | Q(seller__id=self.request.user.seller.id))
-    #         return qs
-    #     if self.request.user.seller_admins.count() > 0:
-    #         qs.filter(Q(seller__id=1) | Q(seller__admin=self.request.user))
-    #         return qs
-    #     return qs.none()
 
 
 class ProductClassDeleteView(originalviews.ProductClassDeleteView):

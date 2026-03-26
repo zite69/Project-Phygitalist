@@ -20,7 +20,6 @@ class FeaturedProductCollectionPlugin(CMSPluginBase):
 @plugin_pool.register_plugin
 class FeaturedProductPlugin(CMSPluginBase):
     model = FeaturedProduct
-    # form = forms.FeaturedProductForm
     autocomplete_fields = ["product"]
     module = _("Zite69")
     name = _("Featured Product")

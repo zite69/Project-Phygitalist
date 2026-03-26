@@ -12,6 +12,4 @@ class SellerRegistrationForm(UserCreationForm):
     upi = forms.CharField(label=_("UPI ID"))
     tin = forms.CharField(label=_("TIN"), max_length=11)
 
-    #class Meta:
-    #    model = User
-    #    fields = ['username', 'password1', 'password2', 'email', 'phone', 'gstin', 'pan', 'upi', 'tin']
+

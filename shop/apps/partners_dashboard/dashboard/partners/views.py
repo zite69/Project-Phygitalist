@@ -16,11 +16,6 @@ class PartnerListView(originalviews.PartnerListView):
         if hasattr(user, 'sellers'):
             return qs.filter(sellers__in=[user.seller])
 
-        #An admin for one or more Seller sees the list of all Sellers that they
-        #are an admin for
-        # if user.seller_admins.exists() and not user.is_superuser:
-        #     return qs.filter(seller__in=user.seller_admins.all())
-
         if data['seller']:
             if self._is_seller_admin() and not user.seller_admins.filter(seller=data['seller']).exists():
                 return qs.filter(sellers__in=[user.seller_admins.all()])

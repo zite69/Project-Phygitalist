@@ -229,25 +229,3 @@ class SocialAccountAdapter(DefaultSocialAccountAdapter):
         return serialize_instance(instance)
 
 
-    # def populate_user(self, request, sociallogin, data):
-    #     user = super().populate_user(request, sociallogin, data)
-    #     logger.debug("Inside populate_user")
-    #     logger.debug(dir(sociallogin))
-    #     extra_data = sociallogin.account.extra_data
-    #     logger.debug(extra_data)
-    #     logger.debug(data)
-    #     logger.debug("token:")
-    #     logger.debug(sociallogin.token)
-    #     headers = {
-    #         "Authorization": f"Bearer {sociallogin.token}"
-    #     }
-    #     params = {
-    #         "personFields": "phoneNumbers"
-    #     }
-    #     response = requests.get("https://people.googleapis.com/v1/people/me", headers=headers, params=params)
-    #     if response.status_code == 200:
-    #         logger.debug(response.json())
-    #     else:
-    #         logger.debug(response.status_code)
-    #         logger.debug(response.text)
-    #     return user

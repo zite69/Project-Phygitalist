@@ -101,9 +101,6 @@ class User(AbstractUser):
             ),
         ]
 
-    # def __init__(self, *args, **kwargs):
-    #     logger.debug(f"We are being called to create a User object: {args} {kwargs}")
-    #     super().__init__(*args, **kwargs)
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}"

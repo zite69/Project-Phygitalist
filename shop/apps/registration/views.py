@@ -133,45 +133,6 @@ class SellerRegistrationWizard(SessionWizardView):
             # form refreshed, change current step
             self.storage.current_step = form_current_step
         logger.debug(f"form_current_step: {form_current_step}")
-        # if settings.DEBUG and settings.DEBUG_WIZARD_FORM_STEP == form_current_step:
-        #     self.errors = {"error": f"Failed to get step: {self.steps.current}"}
-        #     ts = datetime.now().strftime("%Y-%m-%d:%H:%M:%S")
-        #     trace_filename = f"{ts}.log"
-        #     pickle_forms_filename = f"{ts}-forms.pkl"
-        #     pickle_condition_filename = f"{ts}-condition.pkl"
-        #     pickle_result_filename = f"{ts}-result.pkl"
-        #     logger.debug(f"Got a 500 error in the wizard and self.request.user: {self.request.user}")
-        #     user_id = self.request.session.get('user_id', -1)
-        #     if user_id != -1:
-        #         user = User.objects.get(id=user_id)
-        #     else:
-        #         user = None
-        #     if self.request.user and self.request.user.username:
-        #        trace_filename = f"{self.request.user.username}-{trace_filename}"
-        #        pickle_forms_filename = f"{self.request.user.username}-{pickle_forms_filename}"
-        #        pickle_condition_filename = f"{self.request.user.username}-{pickle_condition_filename}"
-        #        pickle_result_filename = f"{self.request.user.username}-{pickle_result_filename}"
-        #     elif user:
-        #         user_id = self.request.session.get('user_id', -1)
-        #         trace_filename = f"{user.username}-{trace_filename}"
-        #         pickle_forms_filename = f"{user.username}-{pickle_forms_filename}"
-        #         pickle_condition_filename = f"{user.username}-{pickle_condition_filename}"
-        #         pickle_result_filename = f"{user.username}-{pickle_result_filename}"
-
-        #     forms_list, condition_list, result_list = self._get_debug_form_list()
-        #     import dill as pickle
-        #     with open(os.path.join(settings.LOG_DIR, pickle_forms_filename), "wb") as fp:
-        #         pickle.dump(forms_list, fp)
-        #     with open(os.path.join(settings.LOG_DIR, pickle_condition_filename), "wb") as fp:
-        #         pickle.dump(condition_list, fp)
-        #     with open(os.path.join(settings.LOG_DIR, pickle_result_filename), "wb") as fp:
-        #         pickle.dump(result_list, fp)
-        #     with open(os.path.join(settings.LOG_DIR, trace_filename), "w") as f:
-        #         f.write("".join(traceback.format_stack()))
-
-        #     return self.render_goto_step('error', user=user)
-
-        # get the form for the current step
         try:
             form = self.get_form(data=self.request.POST, files=self.request.FILES)
         except KeyError as e:
@@ -251,14 +212,6 @@ class SellerRegistrationWizard(SessionWizardView):
         return form_class(**kwargs)
 
     def done(self, form_list, **kwargs):
-        # from shop.apps.main.utils.email import send_email_seller_welcome
-        # from shop.apps.registration.models import SellerRegistration
-        # logger.debug(f"Completed the wizard: form_list {form_list}")
-        # if self.request.user.seller_registration.approval_status == SellerRegistration.STATUS_IN_PROGRESS:
-        #     send_email_seller_welcome(self.request.user)
-        #     self.request.user.seller_registration.approval_status = SellerRegistration.STATUS_PENDING
-        #     self.request.user.seller_registration.save()
-        # return super().done(form_list, **kwargs)
         url = get_site_base_uri(site_id=settings.DEFAULT_SITE_ID)
         return HttpResponseRedirect(url)
 
@@ -268,23 +221,6 @@ class SellerRegistrationWizard(SessionWizardView):
         if not self.request.user.email_verified:
             return 'email'
         return 'business'
-
-    # def get_form(self, step=None, data=None, files=None):
-    #     logger.debug("Inside get_form")
-    #     if self.request.user.is_authenticated and (step is None or int(step) < 4):
-    #         logger.debug("User is authenticated")
-    #         step = self.get_auth_next_step(step)
-
-    #     if step is None:
-    #         step = self.steps.current
-    #         logger.debug(f"Step was none, now it is set to {step}")
-    #         #logger.debug(f"{type(step)}")
-
-    #     step = 'business'
-    #     #logger.debug(dir(self))
-    #     logger.debug(f"We are sending some step: {step} ")
-
-    #     return super().get_form(step, data, files)
 
 class UsernameAvailableJson(View):
    def post(self, request, *args, **kwargs):
@@ -422,9 +358,7 @@ class PincodeListJson(View, JsonRequestResponseMixin):
             pincodes = Postoffice.objects.filter(pincode=pincode_prefix).order_by('office')
             results = [ {'id': p.id, 'place': p.office} for p in pincodes ]
 
-        #data = [p.pincode for p in results]
-        #data = serializers.serialize('json', results)
-        return JsonResponse(results, safe=False)
+       return JsonResponse(results, safe=False)
 
 class ValidatePhoneOtp(View, JsonRequestResponseMixin):
 
@@ -485,10 +419,6 @@ class MultiFormView(TemplateView):
         for k, form_class in self.form_classes.items():
             # Try to get existing instance for ModelForms
             instance = self.get_existing_instance(form_class, k)
-            # logger.debug(f"Key: {k}")
-            # logger.debug("Instance")
-            # logger.debug(instance)
-
             # Initialize form with potential instance
             form_kwargs = {
                 'prefix': k,
@@ -661,16 +591,12 @@ class MultiFormView(TemplateView):
             elif form_key == 'tnc':
                 messages.success(self.request, "Thank you for completing your onboarding with us. You may start adding products to your store catalogue. You will be notified via email when your Seller account is fully functional.")
 
-            # if form_key == 'tnc':
-            #     instance.save(force_update=True)
-            # else:
             instance.save()
             if form_key == 'tnc':
                 logger.debug("At last step seller - checking if all forms are valid")
                 if self.all_forms_valid():
                     logger.debug("All forms valid redirecting to success_url")
                     return HttpResponseRedirect(f"{self.success_url}?toolbar_off")
-            #messages.success(self.request, f"{form_key.replace('_', ' ').title()} saved successfully!")
         else:
             # For regular forms, you might want to do something else
             # This could be overridden in a subclass

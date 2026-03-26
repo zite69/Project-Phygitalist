@@ -231,39 +231,13 @@ class MobileAndOtp(FormWithRequest):
         "type": "phone",
         "getcode": reverse_lazy("registration:phone_otp")
     }))
-    # phone = PhoneNumberField(label="", region='IN', required=True)
     otp = forms.CharField(label=_("Enter OTP sent to your mobile number"), max_length=10)
 
-    # class Media:
-    #     js = ("js/otpverify.js",)
-
-    # def __init__(self, *args, request=None, **kwargs):
-    #     super().__init__(*args, request=request, **kwargs)
-
-    #     self.helper = FormHelper()
-    #     self.helper.form_id = 'form-id-mobile'
-    #     self.helper.form_method = 'post'
-    #     self.helper.include_media = False
-
-    #     self.helper.add_input(Submit(name='submit', value="Verify Phone OTP", css_class="action-btn"))
-    # def __init__(self, *args, request=None, **kwargs):
-    #     super().__init__(*args, request=request, **kwargs)
-    #     self.helper.layout = Layout(
-    #         AppendedText('phone', mark_safe('<a href="#" class="get-code">get code</a>'), placeholder="Your Mobile Number", active=True),
-    #         'otp'
-    #     )
 
     def clean(self):
         form_data = super().clean()
-        # user_id = self.request.session.get('user_id', -1)
-        # if user_id == -1:
-        #     raise ValidationError(_("System failure user not found in session"))
-
-        # try:
-        #     user = User.objects.get(id=user_id)
-        # except User.DoesNotExist:
-        #     raise ValidationError(_("System failure wrong user id passed in session"))
         user = self.get_user()
+
         if not user:
             #We should have already raised a validation error from within
             #Really we should never be called
@@ -302,16 +276,6 @@ class EmailAndOtp(FormWithRequest):
     }))
     otp = forms.CharField(label=_("Enter OTP sent to your email ID"), max_length=10, widget=forms.TextInput(attrs={"placeholder": "Please enter OTP"}))
 
-    # def __init__(self, *args, request=None, **kwargs):
-    #     super().__init__(*args, request=request, **kwargs)
-
-    #     self.helper = FormHelper()
-    #     self.helper.form_id = 'form-id-email'
-    #     self.helper.form_method = 'post'
-    #     self.helper.include_media = False
-
-    #     self.helper.add_input(Submit(name='submit', value="Verify your email ID", css_class="action-btn"))
-
     def clean(self):
         form_data = super().clean()
 
@@ -342,120 +306,12 @@ class EmailAndOtp(FormWithRequest):
 
         return form_data
 
-class EmailOtp(FormWithRequest):
-    otp = forms.CharField(label=_("Enter OTP code"), max_length=10)
-
-
 class AddBusiness(FormWithRequest):
     form_id = 'id_form_addbusiness'
     form_name = 'addbusiness'
     submit_label = 'Add Business'
 
-class GstPan(FormWithRequest):
-    STATUS_CHOICES = [
-        ('Y', 'I have GST'),
-        ('N', "I don't have GST"),
-        ('E', 'I am expemted'),
-        ('L', 'I will add later')
-    ]
-    form_id = 'id_form_gst'
-    form_name = 'gst'
-    submit_label = 'Sell Now'
-
-    class Media:
-        css = {
-            "all": ["css/gst.css",],
-        }
-
-        js = ["js/gst.js",]
-
-    gstin = forms.CharField(label=_("GST Number"), max_length=15, required=False, widget=forms.TextInput(attrs={
-        "placeholder": "GST Number - PIN code should match your selected GST PIN code",
-    }))
-    pan = INPANCardNumberFormField(label="", required=False, widget=forms.TextInput(attrs={
-        "placeholder": "Please enter your registered PAN number",
-        "class": "hide"
-    }))
-    gst_status = forms.ChoiceField(choices=STATUS_CHOICES, widget=forms.RadioSelect())
-
-    def clean_gstin(self):
-        gst = self.cleaned_data.get('gstin', '')
-
-        if gst != "":
-            try:
-                Profile.objects.get(gstin=gst)
-                raise ValidationError(_("This GST already exists in our database. If you have another account please login with it"))
-            except Profile.DoesNotExist:
-                pass
-
-            try:
-                SellerRegistration.objects.get(gstin=gst)
-                raise ValidationError(_("This GST already exists in our database. If you have another account please login with it"))
-            except SellerRegistration.DoesNotExist:
-                pass
-
-        logger.debug(f"Inside clean_gstin: returning gst: {gst}")
-        return gst
-
-    def clean_pan(self):
-        pan = self.cleaned_data.get('pan', '')
-
-        logger.debug(f"Inside clean_pan: {pan}")
-        if pan != "":
-            try:
-                Profile.objects.get(pan=pan)
-                raise ValidationError(_("This PAN already exists in our database. If you have another account please login with it"))
-            except Profile.DoesNotExist:
-                pass
-
-            try:
-                SellerRegistration.objects.get(pan=pan)
-                raise ValidationError(_("This PAN already exists in our database. If you have another account please login with it"))
-            except SellerRegistration.DoesNotExist:
-                pass
-
-        logger.debug(f"Inside clean_pan: {pan}")
-
-        return pan
-
-    def clean(self):
-        form_data = super().clean()
-
-        user = self.get_user()
-        if not user:
-            raise ValidationError(_("User is not being set this session"))
-
-        gst = form_data.get('gstin', '')
-        pan = form_data.get('pan', '')
-        if gst == '' and pan == '':
-            logger.debug(f"Form errors: {self._errors}")
-            raise ValidationError(_("You must specify either GST or PAN"))
-
-        SellerRegistration.objects.create(
-            name = user.get_full_name(),
-            phone = user.phone,
-            email = user.email,
-            gstin = gst,
-            pan = pan,
-            user = user
-        )
-        Profile.objects.create(
-            user = user,
-            type = Profile.TYPE_BUYER,
-            level = 1,
-            gstin = gst,
-            pan = pan,
-        )
-
-        return form_data
-
 class GstCrispy(FormWithRequest):
-    # STATUS_CHOICES = [
-    #     ('Y', 'I have GST'),
-    #     ('N', "I don't have GST"),
-    #     ('E', 'I am expemted'),
-    #     ('L', 'I will add later')
-    # ]
     form_id = 'id_form_gst'
     form_name = 'gst'
     submit_label = 'Sell Now'
@@ -512,14 +368,7 @@ class GstCrispy(FormWithRequest):
         return gst
 
     def _clean_pan(self, pan):
-        # pan = self.cleaned_data.get('pan', '')
-        # gst_status = self.cleaned_data.get('gst_status', 'Y')
-
         logger.debug(f"pan: {pan}")
-        # logger.debug(f"gst_status: {gst_status}")
-
-        # if gst_status == 'Y':
-        #     return pan
 
         if pan != "":
             try:
@@ -707,12 +556,6 @@ class ShopDetails(FormWithRequest):
         "data-editted": False
     }))
 
-    # short_handle = forms.CharField(label="", max_length=12, required=False, widget=forms.TextInput(attrs={
-    #     "placeholder": "Shop short handle",
-    #     "readonly": True,
-    #     "id": "shop-short-handle"
-    # }))
-
     def __init__(self, *args, request=None, **kwargs):
         super().__init__(*args, request=request, **kwargs)
         self.helper.layout = Layout(
@@ -749,26 +592,6 @@ class ShopDetails(FormWithRequest):
 
         return handle
 
-    # def clean_short_handle(self):
-    #     short_handle = self.cleaned_data.get('short_handle')
-
-    #     if not short_handle:
-    #         raise ValidationError(_("Short Handle is required."))
-
-    #     try:
-    #         SellerRegistration.objects.get(shop_handle__startswith=short_handle)
-    #         raise ValidationError(_("Please select another handle, this handle is very similar to another seller's handle"))
-    #     except SellerRegistration.DoesNotExist:
-    #         pass
-
-    #     try:
-    #         Seller.objects.get(handle__startswith=short_handle)
-    #         raise ValidationError(_("Please select another handle, this handle is very similar to another seller's handle"))
-    #     except Seller.DoesNotExist:
-    #         pass
-
-    #     return short_handle
-
     def clean(self):
         form_data = super().clean()
 
@@ -783,8 +606,6 @@ class ShopDetails(FormWithRequest):
 
         handle = form_data.get('handle', '')
         logger.debug(f"handle: {handle}")
-        # short_handle = form_data.get('short_handle')
-        # logger.debug(f"short_handle: {short_handle}")
         if handle != '' and not self.errors:
             user.seller_registration.shop_name = shop_name
             user.seller_registration.shop_handle = handle
@@ -797,10 +618,6 @@ class AddProduct(FormWithRequest, forms.ModelForm):
     form_name = 'product'
     submit_label = 'Add +'
     file_upload = True
-
-    # image = forms.ImageField(label=_("Product Image"))
-    # name = forms.CharField(label=_("Product/Service Name"), max_length=64)
-    # image = forms.ImageField(label=_("Product Image"), widget=ImageUploaderWidget())
 
     class Meta:
         model = SellerProduct
@@ -817,8 +634,6 @@ class AddProduct(FormWithRequest, forms.ModelForm):
 
     def __init__(self, *args, request=None, **kwargs):
         super().__init__(*args, request=request, **kwargs)
-        # self.fields['image'].widget = ImageUploaderWidget()
-        # logger.warning(f"Setting field image widget: {self.fields['image'].widget}")
         self.helper.layout = Layout(
             Div(
                 HTML('<label>Product Image*</label>'),
@@ -828,12 +643,6 @@ class AddProduct(FormWithRequest, forms.ModelForm):
                 css_class="col-md-12 mb-0 iuw-light"
             )
          )
-
-    # def form_valid(self, form):
-    #     logger.warning("Being called in form_valid")
-    #     logger.warning(f"{form}")
-    #     form.save()
-    #     return super().form_valid(form)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -953,12 +762,6 @@ class SellerPickupAddressForm(OnboardingFormMixin):
 
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.request = request
-        # self.helper = FormHelper()
-        # self.helper.form_id = self.__class__.form_id
-        # self.helper.attrs = {
-        #         'data-status': 'init'
-        #         }
         self.helper.layout = Layout(
                 MultiField(
                     'Pickup Address',
@@ -973,7 +776,6 @@ class SellerPickupAddressForm(OnboardingFormMixin):
         self.helper.add_input(Submit(name="pickup", value="Save", css_class="btn btn-primary"))
 
 class PickupAddressForm(forms.Form):
-    # building = forms.CharField(label=_("Building number/name"), max_length=255, blank=False)
     street = forms.CharField(label=_("Street, Road, Local Area"), max_length=255, required=True)
     line2 = forms.CharField(label=_("Address Line 2"), max_length=255, required=False)
     landmark = forms.CharField(label=_("Landmark"), max_length=255, required=False)
@@ -1007,8 +809,6 @@ class BankDetailsForm(OnboardingFormMixin):
 
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.request = request
-        # self.helper = FormHelper()
         self.helper.layout = Layout(
                 Fieldset(
                    'Bank Details',
@@ -1036,8 +836,6 @@ class SellerRemainingForm(OnboardingFormMixin):
 
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.request = request
-        # self.helper = FormHelper()
         self.helper.include_media = False
         self.fields['shipping_preference'].choices = Seller.SHIPPING_CHOICES
         self.fields['shipping_preference'].initial = Seller.SHIPPING_SELF

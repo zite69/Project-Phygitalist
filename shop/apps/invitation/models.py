@@ -9,8 +9,6 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import Permission
 
-#from pinax.invitations import models as pimodels
-#from account.models import SignupCodeResult
 from phonenumber_field.modelfields import PhoneNumberField
 from typing import Self
 from shop.apps.invitation.signals import signup_code_used, signup_code_sent, invite_sent, invite_accepted, joined_independently

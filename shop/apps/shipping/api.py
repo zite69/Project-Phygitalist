@@ -3,7 +3,6 @@ import logging
 import requests
 from django.conf import settings
 from django.core.cache import cache
-import json
 
 logger = logging.getLogger(__name__)
 
@@ -17,14 +16,9 @@ def _get_token():
     if token:
         return token
 
-    headers = {
-        'Content-Type': 'application/json'
-    }
-
     resp = requests.post(
         f'{SHIPROCKET_BASE_URL}/auth/login',
-        headers = headers,
-        data=json.dumps({'email': settings.SHIPROCKET_EMAIL, 'password': settings.SHIPROCKET_PASSWORD}),
+        json={'email': settings.SHIPROCKET_EMAIL, 'password': settings.SHIPROCKET_PASSWORD},
         timeout=15,
     )
     resp.raise_for_status()
@@ -70,9 +64,9 @@ def create_shiprocket_order(oscar_order):
             'name': line.title,
             'sku': line.partner_sku or str(line.id),
             'units': line.quantity,
-            'selling_price': str(line.unit_price_incl_tax),
-            'discount': '',
-            'tax': '',
+            'selling_price': float(line.unit_price_incl_tax),
+            'discount': 0,
+            'tax': 0,
             'hsn': '',
         }
         for line in oscar_order.lines.all()
@@ -92,9 +86,10 @@ def create_shiprocket_order(oscar_order):
         'billing_state': addr.state if addr else '',
         'billing_country': country_name(addr),
         'billing_email': oscar_order.email or '',
-        'billing_phone': str(addr.phone_number) if addr and addr.phone_number else '',
+        #'billing_phone': str(addr.phone_number) if addr and addr.phone_number else '',
+        'billing_phone': addr.phone_number.as_national.replace(" ", "").lstrip("0"),
 
-        'shipping_is_billing': 1 if shipping_is_billing else 0,
+        'shipping_is_billing': shipping_is_billing,
         'shipping_customer_name': s_first,
         'shipping_last_name': s_last,
         'shipping_address': shipping.line1 if shipping else '',
@@ -121,12 +116,14 @@ def create_shiprocket_order(oscar_order):
         'weight': getattr(settings, 'SHIPROCKET_DEFAULT_WEIGHT', 0.5),
     }
 
+    logger.debug(payload)
     resp = requests.post(
         f'{SHIPROCKET_BASE_URL}/orders/create/adhoc',
-        data=json.dumps(payload),
+        json=payload,
         headers=_auth_headers(),
         timeout=30,
     )
 
+    logger.debug(resp.text)
     resp.raise_for_status()
     return resp.json()

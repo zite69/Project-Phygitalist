@@ -54,7 +54,7 @@ class RegistrationConfig(OscarConfig):
 
     def get_urls(self):
         from shop.apps.registration.forms import  (
-            AddBusiness, EmailAndOtp, GstPan, MobileAndOtp, UserName, PincodeForm, LanguagePreference, ShopDetails, AddProduct,
+            AddBusiness, EmailAndOtp, MobileAndOtp, UserName, PincodeForm, LanguagePreference, ShopDetails, AddProduct,
             SELLER_REGISTRATION_FORMS
         )
         from shop.apps.registration.models import SellerRegistration

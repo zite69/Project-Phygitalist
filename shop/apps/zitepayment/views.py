@@ -33,15 +33,6 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
         logger.debug(self.request.basket)
         logger.debug(self.request.strategy)
         basket = self.request.basket
-        # logger.debug(dir(ctx))
-        # logger.debug(dir(ctx['basket']))
-        # line = ctx['basket'].lines.all()[0]
-        # logger.debug(dir(line))
-        # logger.debug(line)
-        # logger.debug(line.product)
-        # logger.debug(dir(line.product))
-        # logger.debug(line.product.primary_image())
-        # logger.debug(dir(line.product.primary_image()))
         logger.debug(basket)
         logger.debug(basket.strategy)
         basket.strategy = strategy.Default()
@@ -76,7 +67,6 @@ class RazorPaymentDetailsView(CorePaymentDetailsView):
         ctx['options'] = options
 
         if self.preview:
-            #ctx['form'] = RazorpayForm(self.request.POST)
             ctx['order_total_paise'] = ( ctx['order_total'].incl_tax * 100 ).to_integral_value()
         else:
             ctx['amount'] = ( ctx['order_total'].incl_tax * 100 ).to_integral_value()

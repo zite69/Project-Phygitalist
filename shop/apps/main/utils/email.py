@@ -5,7 +5,6 @@ from django.utils.html import strip_tags
 from email.mime.image import MIMEImage
 from django.contrib.staticfiles import finders
 from functools import lru_cache
-#from .urls import get_site_base_uri
 import logging
 
 def reset_template_cache():
@@ -47,21 +46,11 @@ def send_waitlist_welcome(email):
 
     message.mixed_subtype = 'related'
     message.attach_alternative(html_content, "text/html")
-    # message.attach(logo_data())
 
     #returns the number of messages sent. in this case should be either 1 or 0
     return message.send(fail_silently=False)
 
 def send_email(email, **kwargs):
-    # template = kwargs.get("template", "email/otp.html")
-    # logo = kwargs.get("logo", False)
-    # from_email = kwargs.get("from_email", settings.DEFAULT_FROM_EMAIL)
-    # subject = kwargs.get("subject", "Your OTP to login to our site")
-    # images = kwargs.get("images", {})
-    # cc = kwargs.get("cc", [])
-    # bcc = kwargs.get("bcc", [])
-    # base_uri = kwargs.get("base_uri", get_site_base_uri())
-    # kwargs['base_uri'] = base_uri
     kwargs = kwargs | ({
         "template": "otp",
         "logo": False,
@@ -87,8 +76,6 @@ def send_email(email, **kwargs):
     txt_template = "email/" + template + ".txt"
     print(html_template)
     html_content = render_to_string(html_template, context=kwargs)
-    # return html_content
-    #text_content = strip_tags(html_content)
     text_content = render_to_string(txt_template, context=kwargs)
 
     message = EmailMultiAlternatives(

@@ -36,7 +36,6 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
-    #return request.META.get(settings.IP_ADDRESS_META_FIELD, "HTTP_X_FORWARDED_FOR")
 
 class Referral(models.Model):
 

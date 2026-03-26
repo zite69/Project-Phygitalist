@@ -10,7 +10,6 @@ from django.views.generic import TemplateView
 from shop.apps.seller.models import Seller
 from shop.apps.user.models import Profile
 from shop.apps.seller.forms import SellerRegistrationForm
-#from pinax.referrals.models import Referral
 import logging
 from django_downloadview import ObjectDownloadView
 
