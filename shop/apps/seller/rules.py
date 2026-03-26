@@ -13,4 +13,4 @@ def is_superuser(user):
 def is_selleradmin(user):
     return user.groups.filter(name='Seller Admin').exists()
 
-rules.add_perm('seller.view_media', is_seller_account | is_selleradmin)
+rules.add_perm('seller.view_media', is_seller_account | is_selleradmin | is_superuser)
