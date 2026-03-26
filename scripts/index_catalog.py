@@ -62,15 +62,15 @@ def run(*args):
             # print(sql_response)
             # drop_resp = utilsApi.sql(SQL['DROP_PRODUCTS_SQL'])
             # print('drop_resp: ', drop_resp)
-            api_resp = searchApi.search({"table": "products", "query": {"query_string": "Pink", "in": {"any(categories)": [1]}}})
-            print("search response: ", api_resp)
+            #api_resp = searchApi.search({"table": "products", "query": {"query_string": "Pink", "in": {"any(categories)": [1]}}})
+            #print("search response: ", api_resp)
             # print(api_resp.hits)
             # print(api_resp.hits.total)
             # print(api_resp.hits.hits)
             # print(api_resp.hits.hits[0].source)
             # print(dir(api_resp.hits.hits[0]))
-            hit = api_resp.hits.hits[0]
-            print(hit.id, hit.score, hit.source, hit.source['title'])
+            #hit = api_resp.hits.hits[0]
+            #print(hit.id, hit.score, hit.source, hit.source['title'])
         except ApiException as e:
             print("Exception calling API method")
             print(e)
