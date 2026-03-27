@@ -66,6 +66,65 @@ update `pip` using `pip install -U pip` before running the
     ```
 7. Now go to http://www.z69.local:8000/ and you will be asked to login and create the CMS page for the home page. Create that, and then do the same with http://seller.z69.local:8000/ and create that CMS page as well.
 
+# Git Commit Message Guide
+
+Commits in this project use two formats depending on the nature of the change.
+
+## 1. Conventional Commits (preferred for structured changes)
+
+```
+type(scope): short description
+
+Optional longer body explaining the why, not the what.
+
+Refs: #123
+```
+
+**Types:**
+
+| Type | When to use |
+|------|-------------|
+| `feat` | New feature or user-facing capability |
+| `fix` | Bug fix |
+| `style` | CSS / visual changes only, no logic change |
+| `refactor` | Code restructure with no behaviour change |
+| `chore` | Migrations, dependency bumps, build config |
+| `test` | Adding or updating tests |
+| `docs` | README, comments, docstrings |
+
+**Examples:**
+```
+feat(referrals): add ?r= param tracking and share links
+fix(css): scope .logo size to non-CMS header only
+chore(migrations): add schema migrations for shipping
+style(navbar): increase profile photo size
+```
+
+## 2. Plain English (for simpler or UI-only changes)
+
+```
+<Verb> <what> for <context or issue>
+```
+
+Start with a capital verb: **Added**, **Fixed**, **Removed**, **Changed**, **Updated**.
+Keep it under 72 characters. If it fixes a GitHub issue, append the issue number.
+
+**Examples:**
+```
+Added Seller Information page to the dashboard
+Fixed form layout to match design
+Removed Google social auth from signup
+Fix for issue #296
+Fixes for issues #297 #298 #299
+```
+
+## Rules that apply to both formats
+
+- First line ≤ 72 characters
+- Use present or past tense consistently — this project uses past tense for plain style (`Added`, `Fixed`) and present tense imperatives for conventional style (`add`, `fix`)
+- Reference GitHub issues with `#NNN` either inline or on a `Refs:` line
+- Do not end the subject line with a period
+
 # Payment Testing
 Use following credit cards for testing razorpay payment gateway - https://razorpay.com/docs/payments/payments/test-card-details/
 
