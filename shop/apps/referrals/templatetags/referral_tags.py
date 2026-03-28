@@ -20,14 +20,13 @@ def referral_share_url(context, redirect_to):
 
     from shop.apps.referrals.models import Referral
 
-    referral = Referral.create(
+    # One persistent code per user — keyed on user+label only so the same
+    # code is reused regardless of which URL is being shared.
+    referral, _ = Referral.objects.get_or_create(
         user=request.user,
-        redirect_to=redirect_to,
-        label="share",
+        label="personal",
+        defaults={"redirect_to": "/"},
     )
-    # Build the direct product URL with ?r=<code> so the middleware sets
-    # the tracking cookie without an intermediate redirect page.
-    # Use an absolute URL so social share links (Facebook etc.) work correctly.
     parsed = urlparse(redirect_to)
     params = parse_qs(parsed.query)
     params['r'] = [referral.code]
