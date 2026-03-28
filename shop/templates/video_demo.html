@@ -1,0 +1,28 @@
+{% extends 'oscar/layout.html' %}
+
+
+{% block head %}
+{{ block.super }}
+<script src='https://meet.jit.si/external_api.js'></script>
+{% endblock %}
+
+{% block content %}
+<h1>Video Demo</h1>
+<div id="meet">
+&nbsp;
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+<script>
+    const domain = 'meet.jit.si';
+    const options = {
+        roomName: 'Zite69SellerBuyerVideoDemo',
+        width: 700,
+        height: 700,
+        parentNode: document.querySelector('#meet'),
+        allow: 'camera; microphone; fullscreen; display-capture; autoplay',
+    };
+    const api = new JitsiMeetExternalAPI(domain, options);
+</script>
+{% endblock %}
