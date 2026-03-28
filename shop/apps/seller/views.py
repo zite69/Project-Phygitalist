@@ -61,4 +61,7 @@ class SellerDetailView(DetailView):
     model = Seller
 
     def get_object(self, queryset=None):
-        return self.request.user.seller
+        if hasattr(self.request.user, 'seller'):
+            return self.request.user.seller
+        else:
+            return None
