@@ -30,7 +30,7 @@ class CatalogueView(ListView):
         return qs
 
 class ProductCategoryView(ListView):
-    paginate_by = 1
+    paginate_by = 9
     template_name = 'oscar/catalogue/category.html'
     context_object_name = 'products'
 
