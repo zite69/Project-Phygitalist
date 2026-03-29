@@ -10,7 +10,14 @@ configuration = manticoresearch.Configuration(
         )
 
 def hits_to_products(hits):
-    return [{"score": x.score, "product": Product.objects.get(id=x.id)} for x in hits]
+    products = []
+    for x in hits:
+        try:
+            product.append({"score": x.score,
+             "product": Product.objects.get(id=x,id)})
+        except Product.DoesNotExist:
+            pass
+    return products
 
 class SearchView(TemplateView):
     template_name = 'search/result.html'
