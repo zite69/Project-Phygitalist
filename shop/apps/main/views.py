@@ -4,6 +4,7 @@ from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
+from django.conf import settings
 from .utils.email import send_email_otp
 import logging
 from allauth.account.views import LoginView as OGLoginView
