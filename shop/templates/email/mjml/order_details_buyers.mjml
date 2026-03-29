@@ -88,7 +88,7 @@
 
     <mj-section mj-class="mail-body">
       <mj-column>
-        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/en/" padding="12px 25px">
+        <mj-button background-color="#f66569" color="#ffffff" border-radius="5px" href="https://www.zite69.com/" padding="12px 25px">
           View Order Details
         </mj-button>
         <mj-text align="left" color="#222" font-size="15px">
