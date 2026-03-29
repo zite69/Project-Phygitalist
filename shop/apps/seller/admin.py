@@ -6,6 +6,7 @@ from shop.apps.seller.models import Seller
 from shop.apps.user.models import User
 from image_uploader_widget.widgets import ImageUploaderWidget
 from shop.apps.main.utils.email import send_onboarding_approval, send_onboarding_rejection
+from shop.apps.shipping.api import create_pickup_location
 
 import logging
 
@@ -64,6 +65,13 @@ class SellerAdmin(admin.ModelAdmin):
                 if not obj.user.is_staff:
                     obj.user.is_staff = True
                     obj.user.save()
+                try:
+                    sr_resp = create_pickup_location(obj)
+                    logger.info("Shiprocket pickup location created for seller %s: %s", obj.handle, sr_resp)
+                except ValueError as e:
+                    logger.warning("Skipping Shiprocket pickup location for seller %s: %s", obj.handle, e)
+                except Exception as e:
+                    logger.error("Failed to create Shiprocket pickup location for seller %s: %s", obj.handle, e, exc_info=True)
             elif action == 'rejected':
                 resp = send_onboarding_rejection(obj.user, obj)
                 logger.debug(f"sent onboarding rejection email. got response: {resp}")
