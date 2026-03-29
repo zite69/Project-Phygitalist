@@ -92,7 +92,7 @@
                         <p>Join as a founding member now &amp; get offers.</p>
                     </div>
                     <div class="coupon-footer">
-                        <div class="coupon-code"><a href="account_login">Join</a></div>
+                        <div class="coupon-code"><a href="{% url 'account_login' %}">Join</a></div>
                         <div class="status">
                             <span>Active</span>
                         </div>
@@ -203,7 +203,7 @@
         <div class="detail-extralink">
             <div class="product-extra-link2">
                 <button type="Personalisation" class="button button-custom" data-bs-toggle="tooltip" title="Coming Soon">Add Personalisation</button>
-                <button type="video" class="button button-custom" data-bs-toggle="tooltip" title="Coming Soon">Video Call Shop</button>
+                <button type="video" class="button button-custom" onclick="window.location.href='{% url 'video-demo' %}'" title="Video Call Shop">Video Call Shop</button>
                 <button type="live" class="button button-custom" data-bs-toggle="tooltip" title="Coming Soon">Join Live Sales</button>  
             </div>
         </div>
