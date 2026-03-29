@@ -86,7 +86,7 @@ class User(AbstractUser):
     class Meta:
         constraints = [
             models.CheckConstraint(
-                check=Q(email__isnull=False) | Q(username__isnull=False) | Q(phone__isnull=False),
+                condition=Q(email__isnull=False) | Q(username__isnull=False) | Q(phone__isnull=False),
                 name='not_all_null'
             ),
             models.UniqueConstraint(
