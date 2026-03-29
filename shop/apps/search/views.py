@@ -14,7 +14,7 @@ def hits_to_products(hits):
     for x in hits:
         try:
             product.append({"score": x.score,
-             "product": Product.objects.get(id=x,id)})
+             "product": Product.objects.get(id=x.id)})
         except Product.DoesNotExist:
             pass
     return products
