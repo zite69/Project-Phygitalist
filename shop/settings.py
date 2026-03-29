@@ -44,6 +44,11 @@ DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=[])
 
+# urls.W005: Oscar registers the 'dashboard' namespace both via its URLconf
+# module attribute and the include() call — a known Oscar/Django interaction
+# that doesn't cause functional issues.
+SILENCED_SYSTEM_CHECKS = ['urls.W005', 'templates.W003']
+
 # Application definition
 
 
@@ -281,6 +286,11 @@ TEMPLATES = [
             'loaders': default_loaders if DEBUG else cached_loaders,
             # 'loader': default_loaders if DEBUG else cached_loaders,
             # 'environment': 'shop.apps.main.jinja2.environment'
+            'libraries': {
+                # Resolve conflict between easy_thumbnails and sorl.thumbnail
+                # both registering a 'thumbnail' template tag library
+                'thumbnail': 'sorl.thumbnail.templatetags.thumbnail',
+            },
         },
     },
 ]
