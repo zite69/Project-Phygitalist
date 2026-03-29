@@ -901,6 +901,11 @@ PLAUSIBLE_TAG = env.str("PLAUSIBLE_TAG", default="", multiline=True)
 
 # Shipping
 
+# JaaS (Jitsi as a Service) — https://jaas.8x8.vc
+JAAS_APP_ID = env.str("JAAS_APP_ID", default="")
+JAAS_API_KEY = env.str("JAAS_API_KEY", default="")
+JAAS_PRIVATE_KEY_PATH = env.str("JAAS_PRIVATE_KEY_PATH", default=str(BASE_DIR / "jaas-private.pem"))
+
 SHIPROCKET_EMAIL = env.str("SHIPROCKET_EMAIL", default="system@zite69.com")
 SHIPROCKET_PASSWORD = env.str("SHIPROCKET_PASSWORD", default="")
 

@@ -4,6 +4,7 @@ anyascii==0.3.2
 asgiref==3.11.1
 asttokens==2.4.1
 attrs==24.2.0
+authlib==1.6.9
 babel==2.17.0
 beautifulsoup4==4.12.3
 billiard==4.2.1

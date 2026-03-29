@@ -1,6 +1,7 @@
 from django.db.models.functions import Sign
 from django.shortcuts import render
 from django.views.generic.edit import FormView
+from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from .utils.email import send_email_otp
@@ -13,6 +14,7 @@ from shop.apps.user.forms import Zite69SignupForm
 from shop.apps.otp.forms import EmailPhoneOtpRequestForm, OtpVerificationForm
 from shop.apps.catalogue.models import Product
 from shop.apps.main.forms import BuyQuickForm
+from shop.apps.main.utils.jaas_jwt import JaaSJwtBuilder
 
 logger = logging.getLogger("shop.apps.main")
 
@@ -53,6 +55,35 @@ class BuyQuickView(FormView):
         self.request.basket.add_product(product, 1)
         logger.debug(self.success_url)
         return HttpResponseRedirect(self.success_url)
+
+class VideoDemoView(TemplateView):
+    template_name = "video_demo.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        with open(settings.JAAS_PRIVATE_KEY_PATH, 'r') as f:
+            private_key = f.read()
+
+        # Sellers and staff join as moderators; buyers join as participants
+        is_moderator = user.is_authenticated and (user.is_staff or hasattr(user, 'seller'))
+
+        token = JaaSJwtBuilder() \
+            .withDefaults() \
+            .withApiKey(settings.JAAS_API_KEY) \
+            .withAppID(settings.JAAS_APP_ID) \
+            .withUserName(user.get_full_name() or user.email if user.is_authenticated else 'Guest') \
+            .withUserEmail(user.email if user.is_authenticated else '') \
+            .withUserAvatar('') \
+            .withModerator(is_moderator) \
+            .signWith(private_key)
+
+        # authlib jwt.encode() returns bytes
+        ctx['jwt_token'] = token.decode('utf-8') if isinstance(token, bytes) else token
+        ctx['jaas_app_id'] = settings.JAAS_APP_ID
+        return ctx
+
 
 def home(request):
     context = {}
